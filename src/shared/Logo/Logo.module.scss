@@ -1,0 +1,36 @@
+@import "@/shared/styles/_vars";
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logoImg {
+  width: rem(58);
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  margin-top: rem(8);
+}
+.text {
+  font-weight: 600;
+  font-size: rem(14);
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+}
+.text2 {
+  font-size: rem(8);
+  opacity: 0.6;
+  letter-spacing: 0.05em;
+  color: #fff;
+  text-transform: uppercase;
+  white-space: nowrap;
+}

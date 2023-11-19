@@ -1,0 +1,14 @@
+@import "@/shared/styles/_vars";
+
+.rotateUp {
+  transform: rotate(-90deg);
+  @include gilroy(300);
+  font-size: rem(14);
+  line-height: 1;
+}
+.rotateDown {
+  transform: rotate(90deg);
+  @include gilroy(300);
+  font-size: rem(14);
+  line-height: 1;
+}
