@@ -1,3 +1,5 @@
+"use client";
+
 import { IClaim } from "@/types/IClaim";
 import styles from "./AdminClaim.module.scss";
 import { FC, useState } from "react";
@@ -21,13 +23,12 @@ const copy = (event: any, value: string) => {
 
 const AdminClaim: FC<AdminClaimProps> = ({ propsClaim }) => {
   const defaultClime = propsClaim;
-  // TODO: подтверждение удаление щаявки
+  // TODO: подтверждение удаление заявки
   const [claim, setClaim] = useState(propsClaim);
   const [isEdit, setIsEdit] = useState(false);
 
   const deleteClaim = async (id: string) => {
     const response = await ClaimService.deleteClaim(id);
-    console.log(response);
     if (response.status === 200) {
       setClaim({} as IClaim);
     }

@@ -1,51 +1,36 @@
 "use client";
 
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import styles from "./AdminPage.module.scss";
-import { Context } from "./layout";
-import { observer } from "mobx-react-lite";
 import Link from "next/link";
 import AdminSidebar from "@/widgets/AdminSidebar/AdminSidebar";
 import MiniLoading from "@/shared/MiniLoading";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { checkAuth } from "@/store/user.slice";
 
 const AdminPage = () => {
-  const { store } = useContext(Context);
+  const store = useAppSelector((store) => store.user);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      store.checkAuth();
+      dispatch(checkAuth());
     }
   }, []);
-
-  if (store.isLoading) {
-    return (
-      <div className={styles.adminPage}>
-        <div className={styles.container}>
-          <MiniLoading className={styles.preloader} />
-        </div>
-      </div>
-    );
-  }
-
-  if (!store.isLoading && !store.isAuth) {
-    return (
-      <div className={styles.adminPage}>
-        <div className={styles.container}>
-          <Link className={styles.signInButton} href={"/admin/login"}>
-            Войти
-          </Link>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className={styles.adminPage}>
       <div className={styles.container}>
-        <AdminSidebar store={store} />
+        {store.isAuth && <AdminSidebar store={store} />}
+        {store.isLoading && <MiniLoading className={styles.preloader} />}
+        {!store.isLoading && !store.isAuth && (
+          <Link className={styles.signInButton} href={"/admin/login"}>
+            Войти
+          </Link>
+        )}
       </div>
     </div>
   );
 };
 
-export default observer(AdminPage);
+export default AdminPage;

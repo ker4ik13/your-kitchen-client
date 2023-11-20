@@ -1,42 +1,27 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useEffect } from "react";
 import styles from "./Claims.module.scss";
 import MiniLoading from "@/shared/MiniLoading";
-import { Context } from "../layout";
-import ClaimService from "@/services/ClaimService";
-import { IClaim } from "@/types/IClaim";
 import AdminClaim from "@/widgets/AdminClaim/AdminClaim";
+import AdminSidebar from "@/widgets/AdminSidebar/AdminSidebar";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { checkAuth } from "@/store/user.slice";
+import { getClaims } from "@/store/claims.slice";
 
 const ClaimsPage = () => {
-  const { store } = useContext(Context);
-  const [claims, setClaims] = useState<IClaim[]>([]);
+  const claimsStore = useAppSelector((store) => store.claims);
+  const userStore = useAppSelector((store) => store.user);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      store.checkAuth();
+      dispatch(checkAuth());
+      dispatch(getClaims());
     }
-    const asyncGet = async () => {
-      const claims = await getClaims();
-      if (claims) {
-        setClaims(claims);
-      }
-    };
-    asyncGet();
   }, []);
 
-  const getClaims = async () => {
-    try {
-      const response = await ClaimService.getClaims();
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {}, []);
-
-  if (store.isLoading) {
+  if (claimsStore.isLoading) {
     return (
       <div className={styles.adminPage}>
         <div className={styles.container}>
@@ -46,11 +31,11 @@ const ClaimsPage = () => {
     );
   }
 
-  if (!store.isLoading && claims.length === 0) {
+  if (!userStore.isLoading && claimsStore.claims.length === 0) {
     return (
       <div className={styles.claimsPage}>
         <div className={styles.container}>
-          <p>{`Ошибка, авторизируйтесь`}</p>
+          <p className={styles.authText}>{`Ошибка, авторизируйтесь`}</p>
         </div>
       </div>
     );
@@ -58,11 +43,12 @@ const ClaimsPage = () => {
 
   return (
     <div className={styles.claimsPage}>
+      {userStore.isAuth && <AdminSidebar store={userStore} />}
       <div className={styles.container}>
         <div className={styles.claims}>
-          {!store.isLoading &&
-            claims &&
-            claims
+          {!claimsStore.isLoading &&
+            claimsStore.claims &&
+            claimsStore.claims
               .slice()
               .reverse()
               .map((claim, index) => (

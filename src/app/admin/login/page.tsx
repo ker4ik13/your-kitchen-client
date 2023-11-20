@@ -1,10 +1,10 @@
 "use client";
+
 import styles from "./LoginPage.module.scss";
 import { type SubmitHandler, useForm } from "react-hook-form";
-import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useContext, useEffect } from "react";
-import { Context } from "../layout";
+import { useAppDispatch } from "@/store/hooks";
+import { login } from "@/store/user.slice";
 
 interface TInputs {
   email: string;
@@ -18,13 +18,18 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm<TInputs>();
 
-  const { store } = useContext(Context);
+  const dispatch = useAppDispatch();
 
   const router = useRouter();
 
   const onSubmit: SubmitHandler<TInputs> = async (data) => {
-    const response = await store.login(data.email, data.password);
-    if (response?.status === 200) {
+    const response = await dispatch(
+      login({
+        email: data.email,
+        password: data.password,
+      }),
+    );
+    if (response.payload) {
       router.push("/admin");
     }
   };

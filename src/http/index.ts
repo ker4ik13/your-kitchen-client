@@ -1,6 +1,7 @@
 import type { AuthResponse } from "@/types/response/AuthResponse";
 import axios from "axios";
 
+
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 // Базовый путь
@@ -10,12 +11,6 @@ const $api = axios.create({
 })
 
 // Настройка куки
-$api.interceptors.request.use((config) => {
-  config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
-  return config;
-})
-
-// Настройка refresh токена
 $api.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
     return config;

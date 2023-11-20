@@ -2,23 +2,26 @@ import Logo from "@/shared/Logo/Logo";
 import styles from "./AdminSidebar.module.scss";
 import type { FC } from "react";
 import Link from "next/link";
-import Store from "@/store/store";
 import { useRouter } from "next/navigation";
 import Icon from "@/shared/IconsComponents/Icon";
 import { Icons } from "@/shared/IconsComponents/Icons";
+import { useAppDispatch } from "@/store/hooks";
+import { logout } from "@/store/user.slice";
+import type { IUserStore } from "@/store/store.d";
 
 interface AdminSidebarProps {
-  store: Store;
+  store: IUserStore;
 }
 
 const AdminSidebar: FC<AdminSidebarProps> = ({ store }) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   return (
     <div className={styles.adminSidebar}>
       <div className={styles.upper}>
         <Logo />
-        <h2 className={styles.name}>{store.user.email}</h2>
+        <h2 className={styles.name}>{store.user ? store.user.email : ""}</h2>
         <div className={styles.links}>
           <Link href={"/admin/claims"} className={styles.link}>
             <Icon icon={Icons.docs(styles.icon)} />
@@ -42,8 +45,8 @@ const AdminSidebar: FC<AdminSidebarProps> = ({ store }) => {
         type='button'
         className={styles.logout}
         onClick={() => {
-          store.logout();
-          router.push("/admin");
+          dispatch(logout());
+          router.push("/admin/login");
         }}
       >
         Выйти
