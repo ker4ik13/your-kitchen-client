@@ -5,6 +5,9 @@
   padding-top: rem(100);
   background-color: #433a31;
 }
+.preloader {
+  width: rem(100);
+}
 .container {
   @include container();
   padding-left: rem(320);

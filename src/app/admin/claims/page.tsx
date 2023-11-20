@@ -31,7 +31,11 @@ const ClaimsPage = () => {
     );
   }
 
-  if (!userStore.isLoading && claimsStore.claims.length === 0) {
+  if (
+    !userStore.isLoading &&
+    !userStore.isAuth &&
+    claimsStore.claims.length === 0
+  ) {
     return (
       <div className={styles.claimsPage}>
         <div className={styles.container}>
