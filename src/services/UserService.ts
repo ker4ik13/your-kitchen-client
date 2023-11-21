@@ -4,7 +4,7 @@ import type { AxiosResponse } from "axios";
 
 export default class UserService {
   static async getUsers (): Promise<AxiosResponse<IUser[]>> {
-    return $api.get<IUser[]>('/users');
+    return await $api.get<IUser[]>('/users');
   }
 
 }

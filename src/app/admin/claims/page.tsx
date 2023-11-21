@@ -49,6 +49,7 @@ const ClaimsPage = () => {
     <div className={styles.claimsPage}>
       {userStore.isAuth && <AdminSidebar store={userStore} />}
       <div className={styles.container}>
+        <h2 className={styles.title}>Заявки</h2>
         <div className={styles.claims}>
           {!claimsStore.isLoading &&
             claimsStore.claims &&

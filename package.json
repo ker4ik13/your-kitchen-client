@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "author": "ker4ik13 <kireev.kirill2004@mail.ru>",
+  "proxy": "http://locahost:5000/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

@@ -1,12 +1,19 @@
 @import "@/shared/styles/_vars";
 
 .claimsPage {
-  height: 100vh;
-  padding-top: rem(100);
+  min-height: 100vh;
+  padding-top: rem(50);
   background-color: #433a31;
+  padding-bottom: rem(50);
 }
 .preloader {
   width: rem(100);
+}
+.title {
+  font-size: rem(42);
+  color: #fff;
+  @include gilroy(400);
+  margin-bottom: rem(30);
 }
 .container {
   @include container();

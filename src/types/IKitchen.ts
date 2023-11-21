@@ -1,12 +1,12 @@
-import type { StaticImageData } from "next/image";
-import { KitchensOptions } from "./KitchenOptions";
+import type { IOption } from "./IOption";
 
 export interface IKitchen {
   _id: string;
   title: string;
   description: string;
   price: number;
-  options: KitchensOptions[];
-  photos: StaticImageData[];
+  style: IOption;
+  type?: IOption;
+  photos: string[] | undefined[];
   term: string;
 }

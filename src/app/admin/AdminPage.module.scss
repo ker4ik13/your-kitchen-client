@@ -1,9 +1,10 @@
 @import "@/shared/styles/_vars";
 
 .adminPage {
-  height: 100vh;
-  padding-top: rem(100);
+  min-height: 100vh;
+  padding-top: rem(50);
   background-color: #433a31;
+  padding-bottom: rem(50);
 }
 .container {
   @include container();
