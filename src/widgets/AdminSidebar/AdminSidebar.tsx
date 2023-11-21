@@ -8,6 +8,7 @@ import { Icons } from "@/shared/IconsComponents/Icons";
 import { useAppDispatch } from "@/store/hooks";
 import { logout } from "@/store/user.slice";
 import type { IUserStore } from "@/store/store.d";
+import Unavailable from "@/shared/Unavailable/Unavailable";
 
 interface AdminSidebarProps {
   store: IUserStore;
@@ -36,18 +37,20 @@ const AdminSidebar: FC<AdminSidebarProps> = ({ store }) => {
             <Icon icon={Icons.kitchen(styles.icon)} />
             <p>Кухни</p>
           </Link>
-          <Link href={"/admin/reviews"} className={isActive("reviews")}>
-            <Icon icon={Icons.reviews(styles.icon)} />
-            <p>Отзывы</p>
-          </Link>
-          <Link href={"/admin/team"} className={isActive("team")}>
-            <Icon icon={Icons.team(styles.icon)} />
-            <p>Команда</p>
-          </Link>
-          <Link href={"/admin/admins"} className={isActive("admins")}>
-            <Icon icon={Icons.team(styles.icon)} />
-            <p>Администраторы</p>
-          </Link>
+          <Unavailable>
+            <Link href={"/admin/reviews"} className={isActive("reviews")}>
+              <Icon icon={Icons.reviews(styles.icon)} />
+              <p>Отзывы</p>
+            </Link>
+            <Link href={"/admin/team"} className={isActive("team")}>
+              <Icon icon={Icons.team(styles.icon)} />
+              <p>Команда</p>
+            </Link>
+            <Link href={"/admin/admins"} className={isActive("admins")}>
+              <Icon icon={Icons.team(styles.icon)} />
+              <p>Администраторы</p>
+            </Link>
+          </Unavailable>
         </div>
       </div>
       <button
