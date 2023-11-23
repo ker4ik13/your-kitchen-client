@@ -7,8 +7,11 @@ import AdminSidebar from "@/widgets/AdminSidebar/AdminSidebar";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { checkAuth } from "@/store/user.slice";
 import Link from "next/link";
-import { getKitchens } from "@/store/kitchens.slice";
+import { deleteKitchen, getKitchens } from "@/store/kitchens.slice";
 import Kitchen from "@/widgets/Kitchen/Kitchen";
+import Icon from "@/shared/IconsComponents/Icon";
+import { Icons } from "@/shared/IconsComponents/Icons";
+import KitchenService from "@/services/KitchenService";
 
 const KitchensPage = () => {
   const userStore = useAppSelector((store) => store.user);
@@ -21,6 +24,12 @@ const KitchensPage = () => {
       dispatch(getKitchens());
     }
   }, []);
+
+  const removeKitchen = async (id: string) => {
+    if (localStorage.getItem("token")) {
+      dispatch(deleteKitchen(id));
+    }
+  };
 
   if (kitchenStore.isLoading) {
     return (
@@ -59,13 +68,21 @@ const KitchensPage = () => {
               .slice(0)
               .reverse()
               .map((kitchen, index) => (
-                <Link
-                  href={`/admin/kitchens/${kitchen._id}`}
-                  className={styles.kitchenLink}
-                  key={index}
-                >
-                  <Kitchen kitchen={kitchen} />
-                </Link>
+                <div className={styles.kitchenLink} key={index}>
+                  <button
+                    type='button'
+                    className={styles.removeButton}
+                    onClick={() => removeKitchen(kitchen._id)}
+                  >
+                    <Icon icon={Icons.remove(styles.removeIcon)} />
+                  </button>
+                  {kitchen.onMainPage && (
+                    <p className={styles.kitchenOption}>На главной</p>
+                  )}
+                  <Link href={`/admin/kitchens/${kitchen._id}`}>
+                    <Kitchen kitchen={kitchen} />
+                  </Link>
+                </div>
               ))}
         </div>
       </div>

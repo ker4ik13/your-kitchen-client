@@ -60,21 +60,11 @@ interface TInputs {
   photos: ImageData[];
   type: unknown | IReadonlySelectOptions;
   term: string;
+  onMainPage: boolean;
 }
 
 const NewKitchenPage = () => {
   const path = useParams();
-
-  if (!path || !path.id) {
-    return (
-      <div className={styles.kitchensPage}>
-        <div className={styles.container}>
-          <p className={styles.title}>Кухня не найдена</p>
-          <Link href='/admin/kitchens'>Назад</Link>
-        </div>
-      </div>
-    );
-  }
 
   const { register, handleSubmit, control, reset, setValue } =
     useForm<TInputs>();
@@ -104,6 +94,29 @@ const NewKitchenPage = () => {
 
   const [kitchen, setKitchen] = useState<IKitchen>({} as IKitchen);
 
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      dispatch(checkAuth());
+    }
+  }, []);
+
+  useEffect(() => {
+    if (path && typeof path.id === "string") {
+      getProduct(path.id);
+    }
+  }, []);
+
+  if (!path || !path.id) {
+    return (
+      <div className={styles.kitchensPage}>
+        <div className={styles.container}>
+          <p className={styles.title}>Кухня не найдена</p>
+          <Link href='/admin/kitchens'>Назад</Link>
+        </div>
+      </div>
+    );
+  }
+
   const getProduct = async (id: string) => {
     const kitchenById = kitchenStore.kitchens.find(
       (kitchen) => kitchen._id === path.id,
@@ -117,6 +130,9 @@ const NewKitchenPage = () => {
       setValue("description", kitchenById.description);
       setValue("price", kitchenById.price);
       setValue("style", kitchenById.style);
+      if (kitchenById.onMainPage) {
+        setValue("onMainPage", kitchenById.onMainPage);
+      }
       setValue("term", kitchenById.term);
       setValue("type", kitchenById.type);
     } else {
@@ -131,6 +147,9 @@ const NewKitchenPage = () => {
           setValue("description", kitchenPayload.description);
           setValue("price", kitchenPayload.price);
           setValue("style", kitchenPayload.style);
+          if (kitchenPayload.onMainPage) {
+            setValue("onMainPage", kitchenPayload.onMainPage);
+          }
           setValue("term", kitchenPayload.term);
           setValue("type", kitchenPayload.type);
         } catch (error) {
@@ -142,18 +161,6 @@ const NewKitchenPage = () => {
       }
     }
   };
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      dispatch(checkAuth());
-    }
-  }, []);
-
-  useEffect(() => {
-    if (typeof path.id === "string") {
-      getProduct(path.id);
-    }
-  }, []);
 
   // Обработка нажатия enter в select
   const handleKeyDown: KeyboardEventHandler = (event) => {
@@ -199,20 +206,20 @@ const NewKitchenPage = () => {
   }
 
   // Обработчик фото
-  const getPhotosFromFiles = (event: any, files: any[]) => {
-    const photos: any[] = [];
+  // const getPhotosFromFiles = (event: any, files: any[]) => {
+  //   const photos: any[] = [];
 
-    files.map((file) => {
-      let photo = {
-        title: file.name,
-        src: URL.createObjectURL(file),
-      };
+  //   files.map((file) => {
+  //     let photo = {
+  //       title: file.name,
+  //       src: URL.createObjectURL(file),
+  //     };
 
-      photos.push(photo);
-    });
+  //     photos.push(photo);
+  //   });
 
-    setPhotos(photos);
-  };
+  //   setPhotos(photos);
+  // };
 
   // Обработчики
   // const dragStartHandler = (event: any) => {
@@ -259,6 +266,7 @@ const NewKitchenPage = () => {
     form.append("description", data.description);
     form.append("price", data.price.toString());
     form.append("style", JSON.stringify(data.style));
+    form.append("onMainPage", JSON.stringify(data.onMainPage));
     form.append("type", JSON.stringify(data.type));
     form.append("term", data.term);
 
@@ -278,6 +286,7 @@ const NewKitchenPage = () => {
         price: 0,
         style: "",
         term: "",
+        onMainPage: false,
         title: "",
         type: "",
       });
@@ -300,9 +309,9 @@ const NewKitchenPage = () => {
       {userStore.isAuth && <AdminSidebar store={userStore} />}
       <div className={styles.container}>
         <div className={styles.string}>
-          <h2 className={styles.title}>Добавить кухню</h2>
+          <h2 className={styles.title}>Изменить кухню</h2>
           <button type='submit' form='kitchenForm' className={styles.addButton}>
-            Добавить
+            Изменить
           </button>
         </div>
         <div className={styles.string}>
@@ -344,6 +353,19 @@ const NewKitchenPage = () => {
                   required: true,
                 })}
                 className={styles.textInput}
+              />
+            </div>
+
+            {/* На главной */}
+            <div className={styles.inputWrapper}>
+              <label htmlFor='onMainPage' className={styles.label}>
+                На главной странице
+              </label>
+              <input
+                type='checkbox'
+                {...register("onMainPage")}
+                id='onMainPage'
+                className={styles.checkboxInput}
               />
             </div>
           </div>

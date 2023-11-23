@@ -7,6 +7,7 @@ export interface IKitchen {
   price: number;
   style: IOption;
   type?: IOption;
+  onMainPage?: boolean;
   photos: string[] | undefined[];
   term: string;
 }

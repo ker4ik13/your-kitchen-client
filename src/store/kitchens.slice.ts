@@ -45,6 +45,7 @@ const kitchensSlice = createSlice({
       state.isLoading = false;
 			state.error = error;
 		});
+		
     // Get kitchen
 		builder.addCase(getKitchen.pending, (state) => {
 			state.isLoading = true;
@@ -56,6 +57,30 @@ const kitchensSlice = createSlice({
       state.isLoading = false;
 		});
 		builder.addCase(getKitchen.rejected, (state, action) => {
+			const error: any = action.payload;
+      state.isLoading = false;
+			state.error = error;
+		});
+
+    // Delete kitchen
+		builder.addCase(deleteKitchen.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(deleteKitchen.fulfilled, (state, action) => {
+      if(action.payload) {
+				const kitchens = [...state.kitchens];
+
+				kitchens.forEach(function(kitchen, i) {
+					if (kitchen._id == action.payload?._id){
+						kitchens.splice(i, 1);
+					}
+				})
+
+        state.kitchens = kitchens;
+      }
+      state.isLoading = false;
+		});
+		builder.addCase(deleteKitchen.rejected, (state, action) => {
 			const error: any = action.payload;
       state.isLoading = false;
 			state.error = error;
@@ -79,6 +104,16 @@ async (id: string) => {
    try {
       const response = await KitchenService.getKitchen(id);
 			return response;
+    } catch (error) {
+      console.log(error);
+    }
+});
+export const deleteKitchen = createAsyncThunk(
+  'claims/deleteKitchen',
+async (id: string) => {
+   try {
+      const response = await KitchenService.deleteKitchen(id);
+			return response.data;
     } catch (error) {
       console.log(error);
     }

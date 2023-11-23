@@ -55,6 +55,7 @@ interface TInputs {
   photos: ImageData[];
   type: unknown | IReadonlySelectOptions;
   term: string;
+  onMainPage: boolean;
 }
 
 const NewKitchenPage = () => {
@@ -197,6 +198,7 @@ const NewKitchenPage = () => {
     files.forEach((file) => {
       form.append(`files`, file);
     });
+    form.append("onMainPage", JSON.stringify(data.onMainPage));
     form.append("type", JSON.stringify(data.type));
     form.append("term", data.term);
 
@@ -217,6 +219,7 @@ const NewKitchenPage = () => {
         style: "",
         term: "",
         title: "",
+        onMainPage: false,
         type: "",
       });
       setFiles([]);
@@ -280,6 +283,19 @@ const NewKitchenPage = () => {
                   required: true,
                 })}
                 className={styles.textInput}
+              />
+            </div>
+
+            {/* На главной */}
+            <div className={styles.inputWrapper}>
+              <label htmlFor='onMainPage' className={styles.label}>
+                На главной странице
+              </label>
+              <input
+                type='checkbox'
+                {...register("onMainPage")}
+                id='onMainPage'
+                className={styles.checkboxInput}
               />
             </div>
           </div>

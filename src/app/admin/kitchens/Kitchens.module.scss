@@ -230,4 +230,49 @@
 .kitchenLink {
   width: 100%;
   max-width: rem(460);
+  position: relative;
+}
+.removeButton {
+  background-color: #fff;
+  padding: rem(10);
+  border-radius: rem(8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1/1;
+  position: absolute;
+  top: rem(20);
+  right: rem(20);
+  z-index: 2;
+}
+.removeIcon {
+  position: relative;
+  z-index: 3;
+  max-width: rem(20);
+  width: 100%;
+  color: transparent;
+  fill: #000;
+}
+.kitchenOption {
+  padding: rem(10);
+  font-size: rem(16);
+  background-color: #fff;
+  border-radius: rem(8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  z-index: 2;
+  top: rem(20);
+  left: rem(20);
+  opacity: 1;
+}
+.checkboxInput {
+  max-width: rem(40);
+  width: 100%;
+  aspect-ratio: 1/1;
+  height: 100%;
+  border-radius: rem(8);
+  margin-left: rem(20);
 }
