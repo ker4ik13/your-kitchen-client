@@ -22,7 +22,11 @@ body.blur {
   }
 }
 html {
-  scroll-behavior: smooth;
+  scroll-padding-top: 70px;
+
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+  }
 }
 
 .my-container {

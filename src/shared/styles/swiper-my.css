@@ -5,11 +5,24 @@
 
 .swiper-button-next {
   color: #fff;
-  right: 30px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
 }
 .swiper-button-prev {
   color: #fff;
-  left: 30px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+@media (max-width: 28.125em) {
+  .swiper-button-next {
+    right: 0px;
+  }
+  .swiper-button-prev {
+    left: 0px;
+  }
 }
 .swiper-pagination-bullet {
   background-color: #fff;

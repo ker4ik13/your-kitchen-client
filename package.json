@@ -2,7 +2,11 @@
   "name": "your-kitchen",
   "version": "1.0.0",
   "private": true,
-  "author": "ker4ik13 <kireev.kirill2004@mail.ru>",
+  "author": {
+    "name": "Кирилл Киреев",
+    "email": "kireev.kirill2004@mail.ru",
+    "url": "https://t.me/ker4ik13"
+  },
   "proxy": "http://locahost:5000/",
   "scripts": {
     "dev": "next dev",

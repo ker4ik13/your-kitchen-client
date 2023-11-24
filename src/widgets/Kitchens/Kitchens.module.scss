@@ -123,6 +123,18 @@
     grid-template-areas:
       "one"
       "two";
+
+    & > div {
+      &:nth-child(3n) {
+        display: none;
+      }
+      &:nth-child(4n) {
+        display: none;
+      }
+      &:last-child {
+        display: none;
+      }
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 @import "@/shared/styles/_vars";
 
 .reviewsPage {
-  padding-top: rem(100);
+  padding-top: rem(150);
   padding-bottom: rem(50);
   background: linear-gradient(
     180deg,
@@ -27,7 +27,7 @@
   -webkit-text-fill-color: transparent;
   font-size: rem(260);
   position: absolute;
-  top: rem(-100);
+  top: rem(-50);
   white-space: nowrap;
   left: 50%;
   transform: translate(-50%, 0);
@@ -285,6 +285,10 @@
   align-items: center;
   gap: rem(8);
   overflow-x: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   @media (max-width: $max-1300) {
     max-width: rem(270);
