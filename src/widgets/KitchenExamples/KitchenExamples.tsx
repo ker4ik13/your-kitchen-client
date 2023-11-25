@@ -46,9 +46,8 @@ const kitchensTypes: ISelectOptions[] = [
 const KitchenExamples = () => {
   const kitchenState = useAppSelector((store) => store.kitchens);
   const dispatch = useAppDispatch();
-  const [sliceNumber, setSliceNumber] = useState(
-    window.innerWidth > 768 ? 4 : 2,
-  );
+
+  const [sliceNumber, setSliceNumber] = useState(4);
 
   const [scopeKitchens, setSkopeKitchens] = useState<IKitchen[]>([]);
   const [styleValue, setStyleValue] = useState<ISelectOptions>(
@@ -61,9 +60,13 @@ const KitchenExamples = () => {
   const [termValue, setTermValue] = useState<IDaysOption>(kitchensDays[1]);
 
   const getKitchens = async () => {
-    const response = await KitchenService.getKitchens();
-    setSkopeKitchens(response);
-    dispatch(setKitchens(response));
+    try {
+      const response = await KitchenService.getKitchens();
+      setSkopeKitchens(response);
+      dispatch(setKitchens(response));
+    } catch (error) {
+      console.log(error);
+    }
   };
   const sortKitchens = (kitchens: IKitchen[]): IKitchen[] => {
     const timeKitchens = [...kitchens];
@@ -260,6 +263,7 @@ const KitchenExamples = () => {
               </Listbox>
             </div>
           </div>
+          {/* Кухни */}
           <div className={styles.allKitchens}>
             {scopeKitchens
               .slice(-sliceNumber)
@@ -269,10 +273,13 @@ const KitchenExamples = () => {
                   <Kitchen kitchen={kitchen} />
                 </div>
               ))}
-            {kitchenState.isLoading && kitchenState.kitchens.length === 0 && (
-              <MiniLoading className={styles.loading} />
-            )}
-            {!kitchenState.isLoading &&
+            {kitchenState &&
+              kitchenState.isLoading &&
+              kitchenState.kitchens.length === 0 && (
+                <MiniLoading className={styles.loading} />
+              )}
+            {kitchenState &&
+              !kitchenState.isLoading &&
               scopeKitchens.length === 0 &&
               kitchenState.kitchens.length !== 0 && (
                 <p className={styles.noKitchens}>{noKitchensText}</p>
