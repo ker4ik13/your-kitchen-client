@@ -72,6 +72,7 @@ const Review = ({ review }: ReviewProps) => {
           <Swiper
             className={styles.reviewSlider}
             modules={[Navigation, Thumbs]}
+            allowTouchMove={window.innerWidth > 768 ? false : true}
             navigation={true}
             thumbs={{
               swiper:

@@ -34,15 +34,15 @@ const Nav = () => {
           <Logo />
           <div className={styles.burgerWrapper} ref={burgerWrapper}>
             <div className={styles.pages}>
-              <Link href={"#how-we-work"} className={styles.link}>
+              <Link href={"/#how-we-work"} className={styles.link}>
                 Как мы работаем
               </Link>
-              <Link href={"#kitchens"} className={styles.link}>
+              <Link href={"/#kitchens"} className={styles.link}>
                 Наши кухни
               </Link>
-              {/* <Link to={"/portfolio"} className={styles.link}>
+              <Link href={"/portfolio"} className={styles.link}>
                 Портфолио
-              </Link> */}
+              </Link>
               <Link href={"#reviews"} className={styles.link}>
                 Отзывы
               </Link>

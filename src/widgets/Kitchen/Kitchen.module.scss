@@ -23,17 +23,22 @@
   &:last-child {
     grid-area: five;
   }
+}
+.betweenWrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: rem(4);
+}
+.tags {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(10);
 
-  @media (max-width: $max-850) {
-    &:nth-child(3n) {
-      display: none;
-    }
-    &:nth-child(4n) {
-      display: none;
-    }
-    &:last-child {
-      display: none;
-    }
+  @media (max-width: $max-450) {
+    flex-direction: column;
+    align-items: flex-end;
   }
 }
 .content {
@@ -46,12 +51,17 @@
   z-index: 2;
   color: #fff;
   letter-spacing: rem(0.4);
+
+  @media (max-width: $max-450) {
+    padding: 0 rem(40);
+  }
 }
 .name {
   @include gilroy(700);
   font-size: rem(16);
   line-height: 1.5;
   cursor: text;
+  text-wrap: balance;
 }
 .description {
   @include gilroy(400);
@@ -66,6 +76,11 @@
   align-items: center;
   margin-top: rem(14);
   gap: rem(20);
+
+  @media (max-width: $max-450) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 .price {
   @include noto(400);
@@ -75,13 +90,18 @@
 
   & span {
     font-size: rem(16);
+
+    &.brown {
+      color: #73655b;
+      margin-right: rem(5);
+    }
   }
 }
 .tag {
   @include gilroy(700);
   font-size: rem(7);
   text-transform: uppercase;
-  padding: rem(5) rem(16);
+  padding: rem(5) rem(12);
   border-radius: rem(50);
   display: flex;
   justify-content: center;
@@ -91,6 +111,8 @@
   letter-spacing: rem(0.7);
   position: relative;
   z-index: 5;
+  white-space: nowrap;
+  background-color: rgba(40, 34, 26, 0.6);
 
   &:before {
     content: "";
@@ -100,11 +122,7 @@
     z-index: 0;
     width: 100%;
     height: 100%;
-    background-color: #9d9387;
     border-radius: rem(50);
-    -webkit-backdrop-filter: opacity(0.25);
-    backdrop-filter: opacity(0.25);
-    opacity: 0.25;
   }
 }
 
@@ -122,18 +140,18 @@
   user-select: none;
   -webkit-mask-image: linear-gradient(
     0deg,
-    rgba(40, 35, 32, 0.4) 0%,
-    rgba(40, 35, 32, 0.5) 25%,
-    rgba(40, 35, 32, 0.7) 50%,
-    rgba(40, 35, 32, 0.8) 75%,
-    rgba(40, 35, 32, 0.4) 100%
+    rgb(40, 35, 32, 0.1) 0%,
+    rgba(40, 35, 32, 0.3) 25%,
+    rgba(40, 35, 32, 0.8) 50%,
+    rgba(40, 35, 32, 0.75) 75%,
+    rgba(40, 35, 32, 0.9) 100%
   );
   mask-image: linear-gradient(
     0deg,
-    rgba(40, 35, 32, 0.4) 0%,
-    rgba(40, 35, 32, 0.5) 25%,
-    rgba(40, 35, 32, 0.7) 50%,
-    rgba(40, 35, 32, 0.8) 75%,
-    rgba(40, 35, 32, 0.4) 100%
+    rgb(40, 35, 32, 0.1) 0%,
+    rgba(40, 35, 32, 0.3) 25%,
+    rgba(40, 35, 32, 0.8) 50%,
+    rgba(40, 35, 32, 0.75) 75%,
+    rgba(40, 35, 32, 0.9) 100%
   );
 }

@@ -11,7 +11,6 @@ import { deleteKitchen, getKitchens } from "@/store/kitchens.slice";
 import Kitchen from "@/widgets/Kitchen/Kitchen";
 import Icon from "@/shared/IconsComponents/Icon";
 import { Icons } from "@/shared/IconsComponents/Icons";
-import KitchenService from "@/services/KitchenService";
 
 const KitchensPage = () => {
   const userStore = useAppSelector((store) => store.user);
