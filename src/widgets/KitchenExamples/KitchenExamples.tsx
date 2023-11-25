@@ -116,6 +116,7 @@ const KitchenExamples = () => {
     const sortedKitchens = sortKitchens(kitchenState.kitchens);
     setSkopeKitchens(sortedKitchens);
     handleShowMore();
+    console.log(scopeKitchens);
   }, [styleValue, typeValue, budgetValue, termValue]);
 
   return (
@@ -265,14 +266,15 @@ const KitchenExamples = () => {
           </div>
           {/* Кухни */}
           <div className={styles.allKitchens}>
-            {scopeKitchens
-              .slice(-sliceNumber)
-              .toReversed()
-              .map((kitchen, i) => (
-                <div className={styles.kitchenWrapper} key={i}>
-                  <Kitchen kitchen={kitchen} />
-                </div>
-              ))}
+            {scopeKitchens.length !== 0 &&
+              scopeKitchens
+                .slice(-sliceNumber)
+                .toReversed()
+                .map((kitchen, i) => (
+                  <div className={styles.kitchenWrapper} key={i}>
+                    <Kitchen kitchen={kitchen} />
+                  </div>
+                ))}
             {kitchenState &&
               kitchenState.isLoading &&
               kitchenState.kitchens.length === 0 && (
