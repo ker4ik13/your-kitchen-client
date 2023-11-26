@@ -116,7 +116,6 @@ const KitchenExamples = () => {
     const sortedKitchens = sortKitchens(kitchenState.kitchens);
     setSkopeKitchens(sortedKitchens);
     handleShowMore();
-    console.log(scopeKitchens);
   }, [styleValue, typeValue, budgetValue, termValue]);
 
   return (
