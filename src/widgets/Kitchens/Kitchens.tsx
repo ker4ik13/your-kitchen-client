@@ -5,7 +5,7 @@ import styles from "./Kitchens.module.scss";
 import Kitchen from "../Kitchen/Kitchen";
 import { useEffect, useState } from "react";
 import { IKitchen } from "@/types/IKitchen";
-import KitchenService from "@/services/KitchenService";
+import { UserKitchenService } from "@/services/UserKitchenService";
 
 // enum ThisKitchensOptions {
 //   all = "all",
@@ -51,7 +51,7 @@ const Kitchens = ({ setIsOpen }: KitchenProps) => {
   //   setSelect(value);
   // };
   const getKitchens = async () => {
-    const response = await KitchenService.getMainKitchens();
+    const response = await UserKitchenService.getMainKitchens();
     setKitchens(response);
   };
 
@@ -82,7 +82,7 @@ const Kitchens = ({ setIsOpen }: KitchenProps) => {
         </div> */}
         <div className={styles.kitchens}>
           {kitchens.map((kitchen, index) => (
-            <Kitchen kitchen={kitchen} key={index} />
+            <Kitchen kitchen={kitchen} key={index} isPreview />
           ))}
         </div>
         <div className={styles.linkWrapper}>

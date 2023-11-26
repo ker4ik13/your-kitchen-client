@@ -89,10 +89,10 @@ const Review = ({ review }: ReviewProps) => {
         {/* Слайдер карточки предпросмотра */}
         <Swiper
           modules={[Thumbs]}
-          watchSlidesProgress={true}
           onSwiper={handleThumbs}
           spaceBetween={8}
           className={styles.previewSlider}
+          watchSlidesProgress={true}
           slidesPerView={3}
           breakpoints={{
             800: {
