@@ -93,7 +93,6 @@ export const getKitchens = createAsyncThunk(
 async () => {
    try {
       const response = await KitchenService.getKitchens();
-			console.log(response);
 			return response;
     } catch (error) {
       console.log(error);

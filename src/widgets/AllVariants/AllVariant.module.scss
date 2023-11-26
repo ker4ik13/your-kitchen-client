@@ -87,7 +87,7 @@
 
   @media (max-width: $max-900) {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr rem(450) rem(400) rem(400);
+    grid-template-rows: 1fr rem(500) rem(400) rem(450);
     grid-template-areas:
       "one"
       "two"
