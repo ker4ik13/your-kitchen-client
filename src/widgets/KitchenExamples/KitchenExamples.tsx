@@ -16,11 +16,11 @@ import { Listbox } from "@headlessui/react";
 import { ChevronDirection, Icons } from "@/shared/IconsComponents/Icons";
 import Icon from "@/shared/IconsComponents/Icon";
 import { IKitchen } from "@/types/IKitchen";
-import KitchenService from "@/services/KitchenService";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setKitchens } from "@/store/kitchens.slice";
 import Kitchen from "@/widgets/Kitchen/Kitchen";
 import MiniLoading from "@/shared/MiniLoading";
+import { UserKitchenService } from "@/services/UserKitchenService";
 
 interface ISelectOptions {
   value: string;
@@ -61,7 +61,7 @@ const KitchenExamples = () => {
 
   const getKitchens = async () => {
     try {
-      const response = await KitchenService.getKitchens();
+      const response = await UserKitchenService.getKitchens();
       setSkopeKitchens(response);
       dispatch(setKitchens(response));
     } catch (error) {
@@ -271,7 +271,7 @@ const KitchenExamples = () => {
                 .toReversed()
                 .map((kitchen, i) => (
                   <div className={styles.kitchenWrapper} key={i}>
-                    <Kitchen kitchen={kitchen} />
+                    <Kitchen kitchen={kitchen} isPreview />
                   </div>
                 ))}
             {kitchenState &&

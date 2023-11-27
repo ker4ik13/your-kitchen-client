@@ -37,11 +37,8 @@ const Nav = () => {
               <Link href={"/#how-we-work"} className={styles.link}>
                 Как мы работаем
               </Link>
-              <Link href={"/#kitchens"} className={styles.link}>
-                Наши кухни
-              </Link>
               <Link href={"/portfolio"} className={styles.link}>
-                Портфолио
+                Наши кухни
               </Link>
               <Link href={"#reviews"} className={styles.link}>
                 Отзывы

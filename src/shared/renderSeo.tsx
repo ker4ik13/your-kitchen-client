@@ -14,18 +14,18 @@ export const renderSeo = ({
   if (description) {
     if (keywords) {
       return {
-        title: `${title} | Твоя кухня`,
+        title: title,
         description: description,
         keywords: keywords,
       };
     }
     return {
-      title: `${title} | Твоя кухня`,
+      title: title,
       description: description,
     };
   } else {
     return {
-      title: `${title} | Твоя кухня`,
+      title: title,
       robots: "noindex",
     };
   }

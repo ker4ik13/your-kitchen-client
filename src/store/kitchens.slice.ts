@@ -2,19 +2,21 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { IKitchen } from '@/types/IKitchen';
 import KitchenService from '@/services/KitchenService';
 
-const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL || '';
-
 
 type initialStateType = {
   kitchens: IKitchen[],
 	kitchen: IKitchen,
+	isOpen: boolean;
 	isLoading: boolean;
 	error: null | string,
 };
 
 const initialState: initialStateType = {
   kitchens: [],
-	kitchen: {} as IKitchen,
+	kitchen: {
+		photos: ['https://youkuhnya.ru/images/2023-11-23T16-22-17.049Zkit1.jpg', 'https://youkuhnya.ru/images/2023-11-23T16-22-17.051Zkit2.jpg']
+	} as IKitchen,
+	isOpen: false,
 	isLoading: false,
 	error: null,
 };
@@ -24,9 +26,15 @@ const kitchensSlice = createSlice({
 	name: 'kitchens',
 	initialState,
 	reducers: {
-    setKitchens (state, action: {payload: IKitchen[], type: string}) {
+    setKitchens (state, action: { payload: IKitchen[], type: string }) {
       state.kitchens = action.payload;
     },
+		setKitchen (state, action: { payload: IKitchen, type: string }) {
+			state.kitchen = action.payload;
+		},
+		setIsOpen (state, action: { payload: boolean, type: string }) {
+			state.isOpen = action.payload;
+		},
 	},
 	extraReducers: (builder) => {
 
@@ -119,6 +127,6 @@ async (id: string) => {
     }
 });
 
-export const { setKitchens } = kitchensSlice.actions;
+export const { setKitchens, setKitchen, setIsOpen } = kitchensSlice.actions;
 
 export const kitchensReducer = kitchensSlice.reducer;
