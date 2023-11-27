@@ -54,17 +54,17 @@ export const kitchensBudget: IBudgetOption[] = [
   {
     label: 'до 300 000',
     max: 300000,
-    min: 200000,
+    min: 0,
   },
   {
     label: 'до 500 000',
     max: 500000,
-    min: 300000,
+    min: 0,
   },
   {
     label: 'до 800 000',
     max: 800000,
-    min: 500000,
+    min: 0,
   },
   {
     label: 'от 800 000',
@@ -77,21 +77,21 @@ export const kitchensDays: IDaysOption[] = [
   {
     label: 'до 14 дней',
     max: 14,
-    min: 10,
+    min: 0,
   },
   {
     label: 'до 20 дней',
     max: 20,
-    min: 14,
+    min: 0,
   },
   {
     label: 'до 30 дней',
     max: 30,
-    min: 20,
+    min: 0,
   },
   {
     label: 'до 40 дней',
     max: 40,
-    min: 30,
+    min: 0,
   },
 ]
