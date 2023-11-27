@@ -70,6 +70,7 @@ const PreviewPhotos = () => {
           watchSlidesProgress={true}
           slideActiveClass={styles.activeSlide}
           slidesPerView={5}
+          centerInsufficientSlides
           slidesPerGroup={5}
           spaceBetween={10}
           breakpoints={{

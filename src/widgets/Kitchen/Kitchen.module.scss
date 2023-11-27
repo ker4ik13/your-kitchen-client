@@ -8,6 +8,7 @@
   height: 100%;
   position: relative;
   cursor: pointer;
+  max-width: rem(460);
 
   &:first-child {
     grid-area: one;

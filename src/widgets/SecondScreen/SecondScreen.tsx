@@ -26,14 +26,24 @@ const SecondScreen = () => {
               />
             </svg>
             <p className={styles.cardAsk}>?</p>
-            <Image src={kitchen1} alt='Kitchen 1' className={styles.cardImg} />
+            <Image
+              src={kitchen1}
+              alt='Kitchen 1'
+              className={styles.cardImg}
+              draggable={false}
+            />
             <p className={styles.cardText}>
               Понимаете, какую хотите кухню, <span>но без деталей</span>
             </p>
           </div>
         </div>
         {/* Center */}
-        <Image src={woman1} alt='Woman' className={styles.woman} />
+        <Image
+          src={woman1}
+          alt='Woman'
+          className={styles.woman}
+          draggable={false}
+        />
         {/* Right side */}
         <div className={styles.card2}>
           <p className={styles.text2}>Либо:</p>
@@ -49,7 +59,12 @@ const SecondScreen = () => {
               />
             </svg>
             <p className={styles.cardAsk}>?</p>
-            <Image src={kitchen2} alt='Kitchen 1' className={styles.card2Img} />
+            <Image
+              src={kitchen2}
+              alt='Kitchen 1'
+              className={styles.card2Img}
+              draggable={false}
+            />
             <p className={styles.cardText}>
               Ничего не подходит, <span>не знаете, какую кухню хотите</span>
             </p>

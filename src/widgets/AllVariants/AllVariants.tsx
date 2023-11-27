@@ -1,7 +1,7 @@
 import Icon from "@/shared/IconsComponents/Icon";
 import styles from "./AllVariant.module.scss";
 import { Icons } from "@/shared/IconsComponents/Icons";
-import logoWithoutText from "@/data/images/logo.svg";
+import logoWithoutText from "@/data/images/logo.png";
 import materials from "@/data/images/materials1.png";
 import phone from "@/data/images/phone1.png";
 import man from "@/data/images/man1.png";
@@ -52,6 +52,7 @@ const AllVariants = ({ setIsOpen }: AllVariantProps) => {
               src={materials}
               alt='Материалы'
               className={styles.variantImg}
+              draggable={false}
             />
           </div>
           <div className={`${styles.variant} ${styles.two}`}>
@@ -64,7 +65,12 @@ const AllVariants = ({ setIsOpen }: AllVariantProps) => {
               вопросы
             </p>
             <p className={styles.variantNumber}>02</p>
-            <Image src={phone} alt='Телефон' className={styles.variantImg} />
+            <Image
+              src={phone}
+              alt='Телефон'
+              className={styles.variantImg}
+              draggable={false}
+            />
           </div>
           <div className={styles.logo}>
             <Image
@@ -80,7 +86,12 @@ const AllVariants = ({ setIsOpen }: AllVariantProps) => {
               решение. Время не ограничено
             </p>
             <p className={styles.variantNumber}>03</p>
-            <Image src={work} alt='Материалы' className={styles.variantImg} />
+            <Image
+              src={work}
+              alt='Материалы'
+              className={styles.variantImg}
+              draggable={false}
+            />
           </div>
           <div className={`${styles.variant} ${styles.four}`}>
             <p className={styles.variantTitle}>
@@ -91,7 +102,12 @@ const AllVariants = ({ setIsOpen }: AllVariantProps) => {
               только материалы и работа по производству
             </p>
             <p className={styles.variantNumber}>04</p>
-            <Image src={man} alt='Рабочий' className={styles.variantImg} />
+            <Image
+              src={man}
+              alt='Рабочий'
+              className={styles.variantImg}
+              draggable={false}
+            />
             <p className={styles.price}>
               0<span>₽</span>
             </p>

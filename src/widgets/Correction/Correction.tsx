@@ -45,7 +45,12 @@ const Correction = ({ setIsOpen, setIsOpenVideo }: CorrectionProps) => {
             </div>
 
             {/* Center side */}
-            <Image src={pages} className={styles.centerImg} alt='Чертеж' />
+            <Image
+              src={pages}
+              className={styles.centerImg}
+              alt='Чертеж'
+              draggable={false}
+            />
 
             {/* Right side */}
             <div className={styles.rightSide}>
@@ -94,7 +99,12 @@ const Correction = ({ setIsOpen, setIsOpenVideo }: CorrectionProps) => {
             </div>
 
             {/* Center side */}
-            <Image src={colors} className={styles.centerImg} alt='Цвета' />
+            <Image
+              src={colors}
+              className={styles.centerImg}
+              alt='Цвета'
+              draggable={false}
+            />
 
             {/* Right side */}
             <div className={styles.rightSideCard2}>
@@ -125,7 +135,12 @@ const Correction = ({ setIsOpen, setIsOpenVideo }: CorrectionProps) => {
                 — Что, если кухня, которая мне понравится, не войдет в мой
                 бюджет?
               </p>
-              <Image src={money} className={styles.woman} alt='Девушка' />
+              <Image
+                src={money}
+                className={styles.woman}
+                alt='Девушка'
+                draggable={false}
+              />
             </div>
 
             {/* Center side */}
@@ -167,11 +182,13 @@ const Correction = ({ setIsOpen, setIsOpenVideo }: CorrectionProps) => {
                   className={styles.rightSideCard3Img1}
                   src={acril1}
                   alt='Акрил'
+                  draggable={false}
                 />
                 <Image
                   className={styles.rightSideCard3Img2}
                   src={acril2}
                   alt='Акрил'
+                  draggable={false}
                 />
               </div>
             </div>
