@@ -1,5 +1,5 @@
-import logoWithText from "@/data/images/logoWithText.svg";
-import styles from "./Logo.module.scss";
+import logoWithoutText from "@/data/images/logo.svg";
+import styles from "./LogoWithoutText.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,7 +7,7 @@ const Logo = () => {
   return (
     <Link href={"/"} className={styles.logo}>
       <Image
-        src={logoWithText}
+        src={logoWithoutText}
         alt='Твоя кухня'
         draggable={false}
         priority

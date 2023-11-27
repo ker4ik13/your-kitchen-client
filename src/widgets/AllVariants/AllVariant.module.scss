@@ -248,11 +248,16 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  transform: scale(2.5);
+  max-width: rem(250);
+  aspect-ratio: 1/1;
+  transform: scale(1.2);
 
   @media (max-width: $max-900) {
     display: none;
   }
+}
+.logo_img {
+  width: 100%;
 }
 
 .variant {

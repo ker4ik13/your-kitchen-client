@@ -30,13 +30,19 @@ interface ISelectOptions {
 const noKitchensText = "Кухни по таким параметрам не найдены.";
 
 const kitchensStyles: ISelectOptions[] = [
+  { value: "Все", label: "Все" },
   { value: KitchensOptions.chalet, label: kitchensTranslate.chalet },
   { value: KitchensOptions.classic, label: kitchensTranslate.classic },
   { value: KitchensOptions.hightech, label: kitchensTranslate.hightech },
   { value: KitchensOptions.loft, label: kitchensTranslate.loft },
   { value: KitchensOptions.minimalism, label: kitchensTranslate.minimalism },
+  { value: "Модерн", label: "Модерн" },
+  { value: "Современный", label: "Современный" },
+  { value: "Прованс", label: "Прованс" },
+  { value: "Скандинавский", label: "Скандинавский" },
 ];
 const kitchensTypes: ISelectOptions[] = [
+  { value: "Все", label: "Все" },
   { value: KitchensStyles.straight, label: kitchensStylesTranslate.straight },
   { value: KitchensStyles.corner, label: kitchensStylesTranslate.corner },
   { value: KitchensStyles.UShaped, label: kitchensStylesTranslate.UShaped },
@@ -47,17 +53,17 @@ const KitchenExamples = () => {
   const kitchenState = useAppSelector((store) => store.kitchens);
   const dispatch = useAppDispatch();
 
-  const [sliceNumber, setSliceNumber] = useState(4);
+  const [sliceNumber, setSliceNumber] = useState(8);
 
   const [scopeKitchens, setSkopeKitchens] = useState<IKitchen[]>([]);
   const [styleValue, setStyleValue] = useState<ISelectOptions>(
-    kitchensStyles[3],
+    kitchensStyles[0],
   );
-  const [typeValue, setTypeValue] = useState<ISelectOptions>(kitchensTypes[1]);
+  const [typeValue, setTypeValue] = useState<ISelectOptions>(kitchensTypes[0]);
   const [budgetValue, setBudgetValue] = useState<IBudgetOption>(
-    kitchensBudget[1],
+    kitchensBudget[0],
   );
-  const [termValue, setTermValue] = useState<IDaysOption>(kitchensDays[1]);
+  const [termValue, setTermValue] = useState<IDaysOption>(kitchensDays[0]);
 
   const getKitchens = async () => {
     try {
@@ -73,12 +79,20 @@ const KitchenExamples = () => {
 
     // 1. Сортировка по стилю
     const styleSortedKitchens = timeKitchens.filter((kitchen) => {
-      return kitchen.style.value === styleValue.value;
+      if (styleValue.value === "Все") {
+        return kitchen;
+      } else {
+        return kitchen.style.value === styleValue.value;
+      }
     });
 
     // 2. Сортировка по типу
     const typeSortedKitchens = styleSortedKitchens.filter((kitchen) => {
-      return kitchen.type?.value === typeValue.value;
+      if (typeValue.value === "Все") {
+        return kitchen;
+      } else {
+        return kitchen.type?.value === typeValue.value;
+      }
     });
 
     // 3. Сортировка по цене
@@ -99,6 +113,7 @@ const KitchenExamples = () => {
       );
     });
 
+    setSliceNumber(8);
     return termSortedKitchens;
   };
 
@@ -108,7 +123,7 @@ const KitchenExamples = () => {
 
   const handleShowMore = () => {
     if (sliceNumber < scopeKitchens.length) {
-      setSliceNumber((prev) => prev + 4);
+      setSliceNumber((prev) => prev + 8);
     }
   };
 
@@ -171,7 +186,9 @@ const KitchenExamples = () => {
                     <Listbox.Button className={styles.listButton}>
                       <div className={styles.leftSide}>
                         <span>Бюджет: </span>
-                        {`${budgetValue.label}₽`}
+                        {budgetValue.label === "Все"
+                          ? budgetValue.label
+                          : `${budgetValue.label}₽`}
                       </div>
                       <Icon
                         icon={Icons.chevron(

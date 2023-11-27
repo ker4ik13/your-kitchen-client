@@ -1,7 +1,7 @@
 import Icon from "@/shared/IconsComponents/Icon";
 import styles from "./AllVariant.module.scss";
 import { Icons } from "@/shared/IconsComponents/Icons";
-import logo from "@/data/images/logo.svg";
+import logoWithoutText from "@/data/images/logo.svg";
 import materials from "@/data/images/materials1.png";
 import phone from "@/data/images/phone1.png";
 import man from "@/data/images/man1.png";
@@ -68,7 +68,7 @@ const AllVariants = ({ setIsOpen }: AllVariantProps) => {
           </div>
           <div className={styles.logo}>
             <Image
-              src={logo}
+              src={logoWithoutText}
               className={styles.logo_img}
               draggable={false}
               alt='Лого'

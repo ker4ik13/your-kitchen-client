@@ -33,6 +33,10 @@ const kitchensStyles: ISelectOptions[] = [
   { value: KitchensOptions.hightech, label: kitchensTranslate.hightech },
   { value: KitchensOptions.loft, label: kitchensTranslate.loft },
   { value: KitchensOptions.minimalism, label: kitchensTranslate.minimalism },
+  { value: "Модерн", label: "Модерн" },
+  { value: "Современный", label: "Современный" },
+  { value: "Прованс", label: "Прованс" },
+  { value: "Скандинавский", label: "Скандинавский" },
 ];
 const kitchensTypes: ISelectOptions[] = [
   { value: KitchensStyles.straight, label: kitchensStylesTranslate.straight },

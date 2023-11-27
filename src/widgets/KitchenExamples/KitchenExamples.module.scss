@@ -151,6 +151,10 @@
       0px 0px 12px #f28c6b,
       0px 0px 19px #f28c6b;
   }
+
+  @media (max-width: $max-900) {
+    width: 100%;
+  }
 }
 .allKitchens {
   margin: 0 auto;

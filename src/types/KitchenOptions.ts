@@ -1,7 +1,5 @@
 // Стили кухни
 
-import { IOption } from "./IOption";
-
 export enum KitchensOptions {
   loft = "loft",
   classic = "classic",
@@ -47,6 +45,11 @@ export interface IDaysOption {
 
 export const kitchensBudget: IBudgetOption[] = [
   {
+    label: 'Все',
+    max: 999_999_999,
+    min: 0,
+  },
+  {
     label: 'до 200 000',
     max: 200000,
     min: 0,
@@ -74,6 +77,11 @@ export const kitchensBudget: IBudgetOption[] = [
 ];
 
 export const kitchensDays: IDaysOption[] = [
+  {
+    label: 'Все',
+    max: 1000,
+    min: 0,
+  },
   {
     label: 'до 14 дней',
     max: 14,
