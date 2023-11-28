@@ -4,7 +4,7 @@ process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
 
 import { Provider } from "react-redux";
 import store from "@/store/store";
-import Script from "next/script";
+// import Script from "next/script";
 export default function RootLayout({
   children,
 }: {
@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <Provider store={store}>
-      <Script
+      {/* <Script
         id='metrikaScript'
         dangerouslySetInnerHTML={{
           __html: `(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -30,7 +30,7 @@ export default function RootLayout({
    
    `,
         }}
-      />
+      /> */}
       <html lang='ru'>{children}</html>
     </Provider>
   );
