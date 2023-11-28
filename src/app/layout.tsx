@@ -1,5 +1,7 @@
 "use client";
 
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
+
 import { Provider } from "react-redux";
 import store from "@/store/store";
 export default function RootLayout({
