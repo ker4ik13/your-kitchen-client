@@ -50,7 +50,7 @@ export default class KitchenService {
     return returnKitchen;
   }
 
-  static async addKitchen (body: object, files: any[]): Promise<AxiosResponse<IKitchen>> {
+  static async addKitchen (body: object): Promise<AxiosResponse<IKitchen>> {
     return await $api.post<IKitchen>(`/kitchens`, body);
   }
 

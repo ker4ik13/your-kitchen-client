@@ -9,6 +9,11 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { checkAuth } from "@/store/user.slice";
 import { getClaims } from "@/store/claims.slice";
 
+// Тексты
+const texts = {
+  title: "Заявки",
+};
+
 const ClaimsPage = () => {
   const claimsStore = useAppSelector((store) => store.claims);
   const userStore = useAppSelector((store) => store.user);
@@ -49,7 +54,9 @@ const ClaimsPage = () => {
     <div className={styles.claimsPage}>
       {userStore.isAuth && <AdminSidebar store={userStore} />}
       <div className={styles.container}>
-        <h2 className={styles.title}>Заявки</h2>
+        <h2 className={styles.title}>
+          {texts.title} ({claimsStore.claims.length})
+        </h2>
         <div className={styles.claims}>
           {!claimsStore.isLoading &&
             claimsStore.claims &&

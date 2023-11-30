@@ -1,10 +1,8 @@
-import type { StaticImageData } from "next/image";
-
 export interface IReview {
   _id: string;
-  photo?: StaticImageData | string;
+  photo?: string;
   firstName: string;
   lastName?: string;
   text: string;
-  photos: StaticImageData[];
+  photos: string[];
 }

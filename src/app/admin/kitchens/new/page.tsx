@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "../Kitchens.module.scss";
+import styles from "../../Page.module.scss";
 
 import { type KeyboardEventHandler, useEffect, useState } from "react";
 import MiniLoading from "@/shared/MiniLoading";
@@ -62,6 +62,16 @@ interface TInputs {
   onMainPage: boolean;
 }
 
+// Тексты
+const texts = {
+  notFoundText: "Кухня не найдена",
+  buttonText: "Добавить",
+  titleText: "Добавить кухню",
+  addOrChangeErrorText: "Ошибка добавления кухни. Попробуйте еще раз",
+  errorText: "Что-то пошло не так. Попробуйте еще раз",
+  successText: "Кухня успешно добавлена",
+};
+
 const NewKitchenPage = () => {
   const { register, handleSubmit, control, reset } = useForm<TInputs>();
   const userStore = useAppSelector((store) => store.user);
@@ -119,7 +129,7 @@ const NewKitchenPage = () => {
 
   if (userStore.isLoading) {
     return (
-      <div className={styles.kitchensPage}>
+      <div className={styles.page}>
         <div className={styles.container}>
           <MiniLoading className={styles.preloader} />
         </div>
@@ -129,7 +139,7 @@ const NewKitchenPage = () => {
 
   if (!userStore.isLoading && !userStore.isAuth) {
     return (
-      <div className={styles.kitchensPage}>
+      <div className={styles.page}>
         <div className={styles.container}>
           <p className={styles.authText}>{`Ошибка, авторизируйтесь`}</p>
         </div>
@@ -214,7 +224,7 @@ const NewKitchenPage = () => {
     if (response.status === 201) {
       setError({
         error: false,
-        value: "Кухня успешно добавлена",
+        value: texts.successText,
       });
       reset({
         description: "",
@@ -231,7 +241,7 @@ const NewKitchenPage = () => {
     } else {
       setError({
         error: true,
-        value: "Что-то пошло не так. Попробуйте еще раз",
+        value: texts.addOrChangeErrorText,
       });
     }
   };
@@ -241,13 +251,13 @@ const NewKitchenPage = () => {
   };
 
   return (
-    <div className={styles.kitchensPage}>
+    <div className={styles.page}>
       {userStore.isAuth && <AdminSidebar store={userStore} />}
       <div className={styles.container}>
         <div className={styles.string}>
-          <h2 className={styles.title}>Добавить кухню</h2>
+          <h2 className={styles.title}>{texts.titleText}</h2>
           <button type='submit' form='kitchenForm' className={styles.addButton}>
-            Добавить
+            {texts.buttonText}
           </button>
         </div>
         <div className={styles.string}>

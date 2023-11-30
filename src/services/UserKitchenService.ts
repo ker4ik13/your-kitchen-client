@@ -34,7 +34,7 @@ export class UserKitchenService {
     const response = await fetch(`${NEXT_PUBLIC_API_URL}/api/kitchens`, {
       method: 'GET',
       next: {
-        revalidate: 30,
+        revalidate: 10,
       },
     });
 

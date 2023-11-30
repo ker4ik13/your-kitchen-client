@@ -1,38 +1,10 @@
 "use client";
 
 import styles from "./Kitchens.module.scss";
-
 import Kitchen from "../Kitchen/Kitchen";
 import { useEffect, useState } from "react";
 import { IKitchen } from "@/types/IKitchen";
 import { UserKitchenService } from "@/services/UserKitchenService";
-
-// enum ThisKitchensOptions {
-//   all = "all",
-//   loft = "loft",
-//   classic = "classic",
-//   minimalism = "minimalism",
-//   hightech = "hightech",
-//   chalet = "chalet",
-// }
-
-// const kitchensTranslate = {
-//   all: "Все кухни",
-//   loft: "Лофт",
-//   classic: "Классика",
-//   minimalism: "Минимализм",
-//   hightech: "Хай-тек",
-//   chalet: "Шале",
-// };
-
-// const kitchensArray = [
-//   ThisKitchensOptions.all,
-//   ThisKitchensOptions.loft,
-//   ThisKitchensOptions.classNameic,
-//   ThisKitchensOptions.minimalism,
-//   ThisKitchensOptions.hightech,
-//   ThisKitchensOptions.chalet,
-// ];
 
 interface KitchenProps {
   setIsOpen: (isOpen: boolean) => void;

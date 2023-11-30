@@ -1,43 +1,42 @@
 "use client";
 
-import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import styles from "../Page.module.scss";
+import { useEffect } from "react";
+import { checkAuth } from "@/store/user.slice";
+import { deleteReview, getReviews } from "@/store/reviews.slice";
 import MiniLoading from "@/shared/MiniLoading";
 import AdminSidebar from "@/widgets/AdminSidebar/AdminSidebar";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { checkAuth } from "@/store/user.slice";
 import Link from "next/link";
-import { deleteKitchen, getKitchens } from "@/store/kitchens.slice";
-import Kitchen from "@/widgets/Kitchen/Kitchen";
 import Icon from "@/shared/IconsComponents/Icon";
 import { Icons } from "@/shared/IconsComponents/Icons";
+import Review from "@/widgets/Reviews/Review";
 
 // Тексты
 const texts = {
-  buttonText: "+ Добавить кухню",
-  titleText: "Кухни",
-  onMainPageText: "На главной",
+  buttonText: "+ Добавить отзыв",
+  titleText: "Отзывы",
 };
 
-const KitchensPage = () => {
+const ReviewsPage = () => {
   const userStore = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
-  const kitchenStore = useAppSelector((store) => store.kitchens);
+  const reviewStore = useAppSelector((store) => store.reviews);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       dispatch(checkAuth());
-      dispatch(getKitchens());
+      dispatch(getReviews());
     }
   }, []);
 
-  const removeKitchen = async (id: string) => {
+  const removeReview = async (id: string) => {
     if (localStorage.getItem("token")) {
-      dispatch(deleteKitchen(id));
+      dispatch(deleteReview(id));
     }
   };
 
-  if (kitchenStore.isLoading) {
+  if (reviewStore.isLoading) {
     return (
       <div className={styles.page}>
         <div className={styles.container}>
@@ -63,33 +62,28 @@ const KitchensPage = () => {
       <div className={styles.container}>
         <div className={styles.string}>
           <h2 className={styles.title}>
-            {texts.titleText} ({kitchenStore.kitchens.length})
+            {texts.titleText} ({reviewStore.reviews.length})
           </h2>
-          <Link href={"/admin/kitchens/new"} className={styles.addButton}>
+          <Link href={"/admin/reviews/new"} className={styles.addButton}>
             {texts.buttonText}
           </Link>
         </div>
-        <div className={styles.kitchens}>
-          {kitchenStore.kitchens &&
-            kitchenStore.kitchens
+        <div className={styles.reviews}>
+          {reviewStore.reviews &&
+            reviewStore.reviews
               .slice(0)
               .reverse()
-              .map((kitchen, index) => (
-                <div className={styles.kitchenLink} key={index}>
+              .map((review, index) => (
+                <div className={styles.reviewLink} key={index}>
                   <button
                     type='button'
-                    className={styles.removeButton}
-                    onClick={() => removeKitchen(kitchen._id)}
+                    className={styles.removeReviewButton}
+                    onClick={() => removeReview(review._id)}
                   >
                     <Icon icon={Icons.remove(styles.removeIcon)} />
                   </button>
-                  {kitchen.onMainPage && (
-                    <p className={styles.kitchenOption}>
-                      {texts.onMainPageText}
-                    </p>
-                  )}
-                  <Link href={`/admin/kitchens/${kitchen._id}`}>
-                    <Kitchen kitchen={kitchen} />
+                  <Link href={`/admin/reviews/${review._id}`}>
+                    <Review review={review} />
                   </Link>
                 </div>
               ))}
@@ -99,4 +93,4 @@ const KitchensPage = () => {
   );
 };
 
-export default KitchensPage;
+export default ReviewsPage;

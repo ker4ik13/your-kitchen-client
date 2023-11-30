@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "../Kitchens.module.scss";
+import styles from "../../Page.module.scss";
 
 import { type KeyboardEventHandler, useEffect, useState } from "react";
 import MiniLoading from "@/shared/MiniLoading";
@@ -19,7 +19,6 @@ import CreatableSelect from "react-select/creatable";
 import $api from "@/http";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { getKitchen } from "@/store/kitchens.slice";
 import { IKitchen } from "@/types/IKitchen";
 import KitchenService from "@/services/KitchenService";
 
@@ -68,6 +67,16 @@ interface TInputs {
   onMainPage: boolean;
 }
 
+// Тексты
+const texts = {
+  notFoundText: "Кухня не найдена",
+  buttonText: "Изменить",
+  titleText: "Изменить кухню",
+  addOrChangeErrorText: "Ошибка изменения кухни. Попробуйте еще раз",
+  errorText: "Что-то пошло не так. Попробуйте еще раз",
+  successText: "Кухня успешно изменена",
+};
+
 const NewKitchenPage = () => {
   const path = useParams();
 
@@ -115,7 +124,7 @@ const NewKitchenPage = () => {
     return (
       <div className={styles.kitchensPage}>
         <div className={styles.container}>
-          <p className={styles.title}>Кухня не найдена</p>
+          <p className={styles.title}>{texts.notFoundText}</p>
           <Link href='/admin/kitchens'>Назад</Link>
         </div>
       </div>
@@ -160,7 +169,7 @@ const NewKitchenPage = () => {
         } catch (error) {
           setError({
             error: true,
-            value: "Ошибка получения кухни. Попробуйте еще раз",
+            value: texts.addOrChangeErrorText,
           });
         }
       }
@@ -192,7 +201,7 @@ const NewKitchenPage = () => {
 
   if (userStore.isLoading) {
     return (
-      <div className={styles.kitchensPage}>
+      <div className={styles.page}>
         <div className={styles.container}>
           <MiniLoading className={styles.preloader} />
         </div>
@@ -202,68 +211,13 @@ const NewKitchenPage = () => {
 
   if (!userStore.isLoading && !userStore.isAuth) {
     return (
-      <div className={styles.kitchensPage}>
+      <div className={styles.page}>
         <div className={styles.container}>
           <p className={styles.authText}>{`Ошибка, авторизируйтесь`}</p>
         </div>
       </div>
     );
   }
-
-  // Обработчик фото
-  // const getPhotosFromFiles = (event: any, files: any[]) => {
-  //   const photos: any[] = [];
-
-  //   files.map((file) => {
-  //     let photo = {
-  //       title: file.name,
-  //       src: URL.createObjectURL(file),
-  //     };
-
-  //     photos.push(photo);
-  //   });
-
-  //   setPhotos(photos);
-  // };
-
-  // Обработчики
-  // const dragStartHandler = (event: any) => {
-  //   event.preventDefault();
-  //   setDrag(true);
-  // };
-  // const dragLeaveHandler = (event: any) => {
-  //   event.preventDefault();
-  //   setDrag(false);
-  // };
-  // const dropHandler = (event: any) => {
-  //   event.preventDefault();
-  //   setDrag(false);
-  //   let files = [...event.dataTransfer.files];
-  //   setFiles(files);
-
-  //   if (files && files.length > 0) {
-  //     getPhotosFromFiles(event, files);
-  //   }
-  // };
-  // const changeHandler = (event: any) => {
-  //   event.preventDefault();
-  //   let files = [...event.target.files];
-  //   setFiles(files);
-
-  //   if (files && files.length > 0) {
-  //     getPhotosFromFiles(event, files);
-  //   }
-  // };
-
-  // Удаление фоток
-  // const deleteImage = (photoTitle: number) => {
-  //   const images = [...photos];
-
-  //   const result = images.filter((image) => photoTitle !== image.title);
-
-  //   setPhotos(result);
-  // };
-
   const onSubmit: SubmitHandler<TInputs> = async (data) => {
     const form = new FormData();
 
@@ -283,7 +237,7 @@ const NewKitchenPage = () => {
     if (response.status === 200) {
       setError({
         error: false,
-        value: "Кухня успешно изменена",
+        value: texts.successText,
       });
       reset({
         description: "",
@@ -300,7 +254,7 @@ const NewKitchenPage = () => {
     } else {
       setError({
         error: true,
-        value: "Что-то пошло не так. Попробуйте еще раз",
+        value: texts.errorText,
       });
     }
   };
@@ -310,13 +264,13 @@ const NewKitchenPage = () => {
   };
 
   return (
-    <div className={styles.kitchensPage}>
+    <div className={styles.page}>
       {userStore.isAuth && <AdminSidebar store={userStore} />}
       <div className={styles.container}>
         <div className={styles.string}>
-          <h2 className={styles.title}>Изменить кухню</h2>
+          <h2 className={styles.title}>{texts.titleText}</h2>
           <button type='submit' form='kitchenForm' className={styles.addButton}>
-            Изменить
+            {texts.buttonText}
           </button>
         </div>
         <div className={styles.string}>

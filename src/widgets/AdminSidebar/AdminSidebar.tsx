@@ -37,11 +37,11 @@ const AdminSidebar: FC<AdminSidebarProps> = ({ store }) => {
             <Icon icon={Icons.kitchen(styles.icon)} />
             <p>Кухни</p>
           </Link>
+          <Link href={"/admin/reviews"} className={isActive("reviews")}>
+            <Icon icon={Icons.reviews(styles.icon)} />
+            <p>Отзывы</p>
+          </Link>
           <Unavailable>
-            <Link href={"/admin/reviews"} className={isActive("reviews")}>
-              <Icon icon={Icons.reviews(styles.icon)} />
-              <p>Отзывы</p>
-            </Link>
             <Link href={"/admin/team"} className={isActive("team")}>
               <Icon icon={Icons.team(styles.icon)} />
               <p>Команда</p>

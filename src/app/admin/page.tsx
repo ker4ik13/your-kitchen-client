@@ -8,6 +8,10 @@ import MiniLoading from "@/shared/MiniLoading";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { checkAuth } from "@/store/user.slice";
 
+const texts = {
+  buttonText: "Войти",
+};
+
 const AdminPage = () => {
   const store = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
@@ -25,7 +29,7 @@ const AdminPage = () => {
         {store.isLoading && <MiniLoading className={styles.preloader} />}
         {!store.isLoading && !store.isAuth && (
           <Link className={styles.signInButton} href={"/admin/login"}>
-            Войти
+            {texts.buttonText}
           </Link>
         )}
       </div>
