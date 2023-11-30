@@ -19,7 +19,6 @@ import CreatableSelect from "react-select/creatable";
 import $api from "@/http";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { getKitchen } from "@/store/kitchens.slice";
 import { IKitchen } from "@/types/IKitchen";
 import KitchenService from "@/services/KitchenService";
 
@@ -68,6 +67,16 @@ interface TInputs {
   onMainPage: boolean;
 }
 
+// Тексты
+const texts = {
+  notFoundText: "Кухня не найдена",
+  buttonText: "Изменить",
+  titleText: "Изменить кухню",
+  addOrChangeErrorText: "Ошибка изменения кухни. Попробуйте еще раз",
+  errorText: "Что-то пошло не так. Попробуйте еще раз",
+  successText: "Кухня успешно изменена",
+};
+
 const NewKitchenPage = () => {
   const path = useParams();
 
@@ -115,7 +124,7 @@ const NewKitchenPage = () => {
     return (
       <div className={styles.kitchensPage}>
         <div className={styles.container}>
-          <p className={styles.title}>Кухня не найдена</p>
+          <p className={styles.title}>{texts.notFoundText}</p>
           <Link href='/admin/kitchens'>Назад</Link>
         </div>
       </div>
@@ -160,7 +169,7 @@ const NewKitchenPage = () => {
         } catch (error) {
           setError({
             error: true,
-            value: "Ошибка получения кухни. Попробуйте еще раз",
+            value: texts.addOrChangeErrorText,
           });
         }
       }
@@ -228,7 +237,7 @@ const NewKitchenPage = () => {
     if (response.status === 200) {
       setError({
         error: false,
-        value: "Кухня успешно изменена",
+        value: texts.successText,
       });
       reset({
         description: "",
@@ -245,7 +254,7 @@ const NewKitchenPage = () => {
     } else {
       setError({
         error: true,
-        value: "Что-то пошло не так. Попробуйте еще раз",
+        value: texts.errorText,
       });
     }
   };
@@ -259,9 +268,9 @@ const NewKitchenPage = () => {
       {userStore.isAuth && <AdminSidebar store={userStore} />}
       <div className={styles.container}>
         <div className={styles.string}>
-          <h2 className={styles.title}>Изменить кухню</h2>
+          <h2 className={styles.title}>{texts.titleText}</h2>
           <button type='submit' form='kitchenForm' className={styles.addButton}>
-            Изменить
+            {texts.buttonText}
           </button>
         </div>
         <div className={styles.string}>

@@ -233,10 +233,10 @@
   }
 }
 .reviewSlider {
-  position: absolute;
+  position: absolute !important;
   bottom: 0;
   right: 0;
-  z-index: 2;
+  z-index: 2 !important;
   max-width: rem(550);
   max-height: rem(350);
   border-radius: rem(6);
@@ -275,9 +275,9 @@
   }
 }
 .previewSlider {
-  position: absolute;
+  position: absolute !important;
   left: 0;
-  bottom: 0;
+  bottom: 0 !important;
   z-index: 0;
   max-width: rem(300);
   width: 100%;
@@ -300,8 +300,18 @@
 .previewImgWrapper {
   width: rem(80);
   height: rem(80);
+  max-height: rem(80);
   overflow: hidden;
   border-radius: rem(6);
+}
+.errorText {
+  color: #fff;
+  text-align: center;
+  @include noto(400);
+  margin-top: rem(50);
+  font-size: rem(40);
+  position: relative;
+  z-index: 10;
 }
 .previewImg {
   -o-object-fit: cover;

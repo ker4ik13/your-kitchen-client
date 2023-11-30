@@ -12,6 +12,13 @@ import Kitchen from "@/widgets/Kitchen/Kitchen";
 import Icon from "@/shared/IconsComponents/Icon";
 import { Icons } from "@/shared/IconsComponents/Icons";
 
+// Тексты
+const texts = {
+  buttonText: "+ Добавить кухню",
+  titleText: "Кухни",
+  onMainPageText: "На главной",
+};
+
 const KitchensPage = () => {
   const userStore = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
@@ -55,10 +62,11 @@ const KitchensPage = () => {
       {userStore.isAuth && <AdminSidebar store={userStore} />}
       <div className={styles.container}>
         <div className={styles.string}>
-          <h2 className={styles.title}>Кухни</h2>
+          <h2 className={styles.title}>
+            {texts.titleText} ({kitchenStore.kitchens.length})
+          </h2>
           <Link href={"/admin/kitchens/new"} className={styles.addButton}>
-            <span>+</span>
-            Добавить кухню
+            {texts.buttonText}
           </Link>
         </div>
         <div className={styles.kitchens}>
@@ -76,7 +84,9 @@ const KitchensPage = () => {
                     <Icon icon={Icons.remove(styles.removeIcon)} />
                   </button>
                   {kitchen.onMainPage && (
-                    <p className={styles.kitchenOption}>На главной</p>
+                    <p className={styles.kitchenOption}>
+                      {texts.onMainPageText}
+                    </p>
                   )}
                   <Link href={`/admin/kitchens/${kitchen._id}`}>
                     <Kitchen kitchen={kitchen} />

@@ -11,6 +11,12 @@ interface TInputs {
   password: string;
 }
 
+// Тексты
+const texts = {
+  buttonText: "Войти",
+  titleText: "Войти в админ панель",
+};
+
 const LoginPage = () => {
   const {
     register,
@@ -37,7 +43,7 @@ const LoginPage = () => {
   return (
     <div className={styles.loginPage}>
       <div className={styles.container}>
-        <h2 className={styles.title}>Войти в админ панель</h2>
+        <h2 className={styles.title}>{texts.titleText}</h2>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <input
             type='text'
@@ -54,7 +60,7 @@ const LoginPage = () => {
             })}
           />
           <button type='submit' className={styles.button}>
-            Войти
+            {texts.buttonText}
           </button>
         </form>
       </div>

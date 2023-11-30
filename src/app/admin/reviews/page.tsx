@@ -12,6 +12,12 @@ import Icon from "@/shared/IconsComponents/Icon";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import Review from "@/widgets/Reviews/Review";
 
+// Тексты
+const texts = {
+  buttonText: "+ Добавить отзыв",
+  titleText: "Отзывы",
+};
+
 const ReviewsPage = () => {
   const userStore = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
@@ -55,10 +61,11 @@ const ReviewsPage = () => {
       {userStore.isAuth && <AdminSidebar store={userStore} />}
       <div className={styles.container}>
         <div className={styles.string}>
-          <h2 className={styles.title}>Отзывы</h2>
+          <h2 className={styles.title}>
+            {texts.titleText} ({reviewStore.reviews.length})
+          </h2>
           <Link href={"/admin/reviews/new"} className={styles.addButton}>
-            <span>+</span>
-            Добавить отзыв
+            {texts.buttonText}
           </Link>
         </div>
         <div className={styles.reviews}>
@@ -70,7 +77,7 @@ const ReviewsPage = () => {
                 <div className={styles.reviewLink} key={index}>
                   <button
                     type='button'
-                    className={styles.removeButton}
+                    className={styles.removeReviewButton}
                     onClick={() => removeReview(review._id)}
                   >
                     <Icon icon={Icons.remove(styles.removeIcon)} />

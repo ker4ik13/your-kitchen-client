@@ -7,9 +7,13 @@ import MiniLoading from "@/shared/MiniLoading";
 import AdminSidebar from "@/widgets/AdminSidebar/AdminSidebar";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { checkAuth } from "@/store/user.slice";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm, set } from "react-hook-form";
 
 import $api from "@/http";
+import { useParams } from "next/navigation";
+import type { IReview } from "@/types/IReview";
+import Link from "next/link";
+import { ReviewService } from "@/services/ReviewService";
 
 // Поля формы
 interface TInputs {
@@ -23,17 +27,20 @@ interface TInputs {
 // Тексты
 const texts = {
   notFoundText: "Отзыв не найден",
-  buttonText: "Добавить",
-  titleText: "Добавить отзыв",
-  addOrChangeErrorText: "Ошибка добавления отзыва. Попробуйте еще раз",
+  buttonText: "Изменить",
+  titleText: "Изменить отзыв",
+  addOrChangeErrorText: "Ошибка изменения отзыва. Попробуйте еще раз",
   errorText: "Что-то пошло не так. Попробуйте еще раз",
-  successText: "Отзыв успешно добавлен",
+  successText: "Отзыв успешно изменен",
 };
 
 const NewKitchenPage = () => {
-  const { register, handleSubmit, reset } = useForm<TInputs>();
+  const path = useParams();
+
+  const { register, handleSubmit, reset, setValue } = useForm<TInputs>();
   const userStore = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
+  const reviewStore = useAppSelector((store) => store.reviews);
 
   const [photos, setPhotos] = useState<any[]>([]);
   const [photo, setPhoto] = useState<any>();
@@ -44,12 +51,73 @@ const NewKitchenPage = () => {
 
   // Ошибка
   const [error, setError] = useState<any>({});
+  const [review, setReview] = useState<IReview>({} as IReview);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       dispatch(checkAuth());
     }
   }, []);
+
+  useEffect(() => {
+    if (path && typeof path.id === "string") {
+      getProduct(path.id);
+    }
+  }, []);
+
+  if (!path || !path.id) {
+    return (
+      <div className={styles.kitchensPage}>
+        <div className={styles.container}>
+          <p className={styles.title}>{texts.notFoundText}</p>
+          <Link href='/admin/kitchens'>Назад</Link>
+        </div>
+      </div>
+    );
+  }
+
+  const getProduct = async (id: string) => {
+    const reviewById = reviewStore.reviews.find(
+      (review) => review._id === path.id,
+    );
+
+    if (reviewById) {
+      setPhotos(reviewById.photos);
+      if (reviewById.photo) {
+        setPhoto(reviewById.photo);
+      }
+      setReview(reviewById);
+
+      setValue("firstName", reviewById.firstName);
+      if (reviewById.lastName) {
+        setValue("lastName", reviewById.lastName);
+      }
+      setValue("text", reviewById.text);
+    } else {
+      if (typeof path.id === "string") {
+        try {
+          const reviewPayload = await ReviewService.getReview(path.id);
+
+          setReview(reviewPayload);
+          setPhotos(reviewPayload.photos);
+          if (reviewPayload.photo) {
+            setPhoto(reviewPayload.photo);
+          }
+
+          setValue("firstName", reviewPayload.firstName);
+          if (reviewPayload.lastName) {
+            setValue("lastName", reviewPayload.lastName);
+          }
+          setValue("text", reviewPayload.text);
+        } catch (error) {
+          setError({
+            error: true,
+            value: texts.addOrChangeErrorText,
+          });
+        }
+      }
+    }
+  };
 
   if (userStore.isLoading) {
     return (
@@ -153,18 +221,6 @@ const NewKitchenPage = () => {
     }
   };
 
-  // Удаление фоток
-  const deleteImage = (photoTitle: number) => {
-    const images = [...photos];
-
-    const result = images.filter((image) => photoTitle !== image.title);
-
-    setPhotos(result);
-  };
-  const deleteImage2 = () => {
-    setPhoto({});
-  };
-
   const onSubmit: SubmitHandler<TInputs> = async (data) => {
     const form = new FormData();
 
@@ -174,23 +230,14 @@ const NewKitchenPage = () => {
       form.append("lastName", data.lastName);
     }
 
-    if (file.name) {
-      form.append("photo", JSON.stringify(true));
-      form.append("files", file);
-    }
-
-    // Добавление всех фото
-    files.forEach((file) => {
-      form.append(`files`, file);
-    });
     form.append("text", data.text);
 
-    const response = await $api.post("/reviews", form, {
+    const response = await $api.patch(`/reviews/${path.id}`, form, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
-    if (response.status === 201) {
+    if (response.status === 200) {
       setError({
         error: false,
         value: texts.successText,
@@ -293,19 +340,8 @@ const NewKitchenPage = () => {
           {photo !== undefined && (
             <div className={styles.photosPreview}>
               <div className={styles.photo}>
-                <img
-                  src={photo.src}
-                  alt={photo.src}
-                  className={styles.previewPhoto}
-                />
-                <button
-                  type='button'
-                  className={styles.deleteButton}
-                  onClick={deleteImage2}
-                >
-                  ×
-                </button>
-                <p className={styles.photoTitle}>{photo.title}</p>
+                <img src={photo} alt={photo} className={styles.previewPhoto} />
+                <p className={styles.photoTitle}>{photo}</p>
               </div>
             </div>
           )}
@@ -331,13 +367,11 @@ const NewKitchenPage = () => {
               id='photos'
               type='file'
               {...register("photos", {
-                required: true,
                 value: photos,
               })}
               accept='image/png, image/jpeg, image/jpg, image/webp'
               multiple
               className={styles.inputPhotos}
-              required
               onChange={(event) => changeHandler(event)}
               onDragStart={(event) => dragStartHandler(event)}
               onDragLeave={(event) => dragLeaveHandler(event)}
@@ -357,18 +391,11 @@ const NewKitchenPage = () => {
               {photos.map((photo, index) => (
                 <div className={styles.photo} key={index}>
                   <img
-                    src={photo.src}
+                    src={photo}
                     alt={`Фото ${index + 1}`}
                     className={styles.previewPhoto}
                   />
-                  <button
-                    type='button'
-                    className={styles.deleteButton}
-                    onClick={() => deleteImage(photo.title)}
-                  >
-                    ×
-                  </button>
-                  <p className={styles.photoTitle}>{photo.title}</p>
+                  <p className={styles.photoTitle}>{photo}</p>
                 </div>
               ))}
             </div>
