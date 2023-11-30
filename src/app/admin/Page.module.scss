@@ -1,6 +1,6 @@
 @import "@/shared/styles/_vars";
 
-.kitchensPage {
+.page {
   min-height: 100vh;
   padding-top: rem(50);
   background-color: #433a31;
@@ -226,6 +226,15 @@
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
   gap: rem(30);
+}
+.reviews {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.reviewLink {
+  width: auto;
+  display: flex;
 }
 .kitchenLink {
   width: 100%;

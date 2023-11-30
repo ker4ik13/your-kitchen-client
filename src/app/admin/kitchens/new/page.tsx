@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "../Kitchens.module.scss";
+import styles from "../../Page.module.scss";
 
 import { type KeyboardEventHandler, useEffect, useState } from "react";
 import MiniLoading from "@/shared/MiniLoading";
@@ -119,7 +119,7 @@ const NewKitchenPage = () => {
 
   if (userStore.isLoading) {
     return (
-      <div className={styles.kitchensPage}>
+      <div className={styles.page}>
         <div className={styles.container}>
           <MiniLoading className={styles.preloader} />
         </div>
@@ -129,7 +129,7 @@ const NewKitchenPage = () => {
 
   if (!userStore.isLoading && !userStore.isAuth) {
     return (
-      <div className={styles.kitchensPage}>
+      <div className={styles.page}>
         <div className={styles.container}>
           <p className={styles.authText}>{`Ошибка, авторизируйтесь`}</p>
         </div>
@@ -241,7 +241,7 @@ const NewKitchenPage = () => {
   };
 
   return (
-    <div className={styles.kitchensPage}>
+    <div className={styles.page}>
       {userStore.isAuth && <AdminSidebar store={userStore} />}
       <div className={styles.container}>
         <div className={styles.string}>

@@ -10,9 +10,8 @@ import "@/shared/styles/swiper-my.css";
 import Icon from "@/shared/IconsComponents/Icon";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import { useEffect, useState } from "react";
-import { IReview } from "@/types/IReview";
+import type { IReview } from "@/types/IReview";
 import typeSwiper from "swiper";
-import Image from "next/image";
 
 interface ReviewProps {
   review: IReview;
@@ -43,7 +42,7 @@ const Review = ({ review }: ReviewProps) => {
             <Icon icon={Icons.quotes(styles.quotes)} />
             <div className={styles.personInfo}>
               {review.photo && (
-                <Image
+                <img
                   src={review.photo}
                   className={styles.personPhoto}
                   alt={`${review.firstName}`}
@@ -81,7 +80,7 @@ const Review = ({ review }: ReviewProps) => {
           >
             {review.photos.map((photo, index) => (
               <SwiperSlide key={index} className={styles.reviewSlide}>
-                <Image src={photo} alt={`Фото ${index + 1}`} />
+                <img src={photo} alt={`Фото ${index + 1}`} />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -105,7 +104,7 @@ const Review = ({ review }: ReviewProps) => {
         >
           {review.photos.map((photo, index) => (
             <SwiperSlide className={styles.previewImgWrapper} key={index}>
-              <Image
+              <img
                 src={photo}
                 className={styles.previewImg}
                 alt={`Фото ${index + 1}`}
