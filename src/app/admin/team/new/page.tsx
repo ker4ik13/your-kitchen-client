@@ -13,21 +13,21 @@ import $api from "@/http";
 
 // Поля формы
 interface TInputs {
-  photo?: ImageData;
+  photo: ImageData;
   firstName: string;
-  lastName?: string;
-  text: string;
-  photos: ImageData[];
+  lastName: string;
+  jobTitle: string;
+  experience: string;
 }
 
 // Тексты
 const texts = {
-  notFoundText: "Отзыв не найден",
+  notFoundText: "Работник не найден",
   buttonText: "Добавить",
-  titleText: "Добавить отзыв",
-  addOrChangeErrorText: "Ошибка добавления отзыва. Попробуйте еще раз",
+  titleText: "Добавить работника",
+  addOrChangeErrorText: "Ошибка добавления работника. Попробуйте еще раз",
   errorText: "Что-то пошло не так. Попробуйте еще раз",
-  successText: "Отзыв успешно добавлен",
+  successText: "Работник успешно добавлен",
 };
 
 const NewKitchenPage = () => {
@@ -35,12 +35,9 @@ const NewKitchenPage = () => {
   const userStore = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
 
-  const [photos, setPhotos] = useState<any[]>([]);
   const [photo, setPhoto] = useState<any>();
-  const [files, setFiles] = useState<File[]>([]);
   const [file, setFile] = useState<File>({} as File);
   const [drag, setDrag] = useState(false);
-  const [drag2, setDrag2] = useState(false);
 
   // Ошибка
   const [error, setError] = useState<any>({});
@@ -72,21 +69,6 @@ const NewKitchenPage = () => {
   }
 
   // Обработчик фото
-  const getPhotosFromFiles = (event: any, files: any[]) => {
-    const photos: any[] = [];
-
-    files.map((file) => {
-      let photo = {
-        title: file.name,
-        src: URL.createObjectURL(file),
-      };
-
-      photos.push(photo);
-    });
-
-    setPhotos(photos);
-  };
-
   const getPhotoFromFiles = (event: any, file: any) => {
     let photo = {
       title: file.name,
@@ -97,45 +79,17 @@ const NewKitchenPage = () => {
   };
 
   // Обработчики
-  const dragStartHandler = (event: any) => {
+  const dragStartHandler2 = (event: any) => {
     event.preventDefault();
     setDrag(true);
   };
-  const dragLeaveHandler = (event: any) => {
-    event.preventDefault();
-    setDrag(false);
-  };
-  const dropHandler = (event: any) => {
-    event.preventDefault();
-    setDrag(false);
-    let files = [...event.dataTransfer.files];
-    setFiles(files);
-
-    if (files && files.length > 0) {
-      getPhotosFromFiles(event, files);
-    }
-  };
-  const changeHandler = (event: any) => {
-    event.preventDefault();
-    let files = [...event.target.files];
-    setFiles(files);
-
-    if (files && files.length > 0) {
-      getPhotosFromFiles(event, files);
-    }
-  };
-  // 2
-  const dragStartHandler2 = (event: any) => {
-    event.preventDefault();
-    setDrag2(true);
-  };
   const dragLeaveHandler2 = (event: any) => {
     event.preventDefault();
-    setDrag2(false);
+    setDrag(false);
   };
   const dropHandler2 = (event: any) => {
     event.preventDefault();
-    setDrag2(false);
+    setDrag(false);
     let file = event.dataTransfer.files[0];
     setFile(file);
 
@@ -153,15 +107,7 @@ const NewKitchenPage = () => {
     }
   };
 
-  // Удаление фоток
-  const deleteImage = (photoTitle: number) => {
-    const images = [...photos];
-
-    const result = images.filter((image) => photoTitle !== image.title);
-
-    setPhotos(result);
-  };
-  const deleteImage2 = () => {
+  const deleteImage = () => {
     setPhoto({});
   };
 
@@ -169,23 +115,12 @@ const NewKitchenPage = () => {
     const form = new FormData();
 
     form.append("firstName", data.firstName);
+    form.append("lastName", data.lastName);
+    form.append("jobTitle", data.jobTitle);
+    form.append("experience", data.experience);
+    form.append("file", file);
 
-    if (data.lastName) {
-      form.append("lastName", data.lastName);
-    }
-
-    if (file.name) {
-      form.append("photo", JSON.stringify(true));
-      form.append("files", file);
-    }
-
-    // Добавление всех фото
-    files.forEach((file) => {
-      form.append(`files`, file);
-    });
-    form.append("text", data.text);
-
-    const response = await $api.post("/reviews", form, {
+    const response = await $api.post("/workers", form, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -196,16 +131,14 @@ const NewKitchenPage = () => {
         value: texts.successText,
       });
       reset({
-        photos: [],
         firstName: "",
         lastName: "",
         photo: {},
-        text: "",
+        experience: "",
+        jobTitle: "",
       });
-      setFiles([]);
       setFile({} as File);
       setPhoto(undefined);
-      setPhotos([]);
     } else {
       setError({
         error: true,
@@ -262,9 +195,45 @@ const NewKitchenPage = () => {
               type='text'
               id='lastName'
               placeholder='Иванов'
-              {...register("lastName")}
+              {...register("lastName", {
+                required: true,
+              })}
               className={`${styles.textInput} ${styles.fullInput}`}
             />
+          </div>
+
+          <div className={styles.string}>
+            {/* Должность */}
+            <div className={styles.inputWrapper}>
+              <label htmlFor='jobTitle' className={styles.label}>
+                Должность
+              </label>
+              <input
+                type='text'
+                id='jobTitle'
+                placeholder='Менеджер'
+                {...register("jobTitle", {
+                  required: true,
+                })}
+                className={styles.textInput}
+              />
+            </div>
+
+            {/* Опыт работы */}
+            <div className={styles.inputWrapper}>
+              <label htmlFor='experience' className={styles.label}>
+                Опыт работы
+              </label>
+              <input
+                type='text'
+                id='experience'
+                placeholder='15 лет'
+                {...register("experience", {
+                  required: true,
+                })}
+                className={styles.textInput}
+              />
+            </div>
           </div>
 
           {/* Фото профиля */}
@@ -275,7 +244,9 @@ const NewKitchenPage = () => {
               type='file'
               {...register("photo", {
                 value: photo,
+                required: true,
               })}
+              required
               accept='image/png, image/jpeg, image/jpg, image/webp'
               className={styles.inputPhotos}
               onChange={(event) => changeHandler2(event)}
@@ -303,77 +274,12 @@ const NewKitchenPage = () => {
                 <button
                   type='button'
                   className={styles.deleteButton}
-                  onClick={deleteImage2}
+                  onClick={deleteImage}
                 >
                   ×
                 </button>
                 <p className={styles.photoTitle}>{photo.title}</p>
               </div>
-            </div>
-          )}
-
-          {/* Текст */}
-          <div className={styles.inputWrapper}>
-            <label htmlFor='text' className={styles.label}>
-              Текст отзыва
-            </label>
-            <textarea
-              id='text'
-              placeholder='Текст отзыва'
-              {...register("text", {
-                required: true,
-              })}
-              className={styles.textArea}
-            />
-          </div>
-
-          {/* Фото */}
-          <div className={styles.inputWrapper}>
-            <label className={styles.label}>Фото отзыва</label>
-            <input
-              id='photos'
-              type='file'
-              {...register("photos", {
-                required: true,
-                value: photos,
-              })}
-              accept='image/png, image/jpeg, image/jpg, image/webp'
-              multiple
-              className={styles.inputPhotos}
-              required
-              onChange={(event) => changeHandler(event)}
-              onDragStart={(event) => dragStartHandler(event)}
-              onDragLeave={(event) => dragLeaveHandler(event)}
-              onDragOver={(event) => dragStartHandler(event)}
-              onDrop={(event) => dropHandler(event)}
-            />
-            <label htmlFor='photos' className={styles.labelPhotos}>
-              {!drag
-                ? "Нажмите или перетащите изображения"
-                : "Отпустите изображения"}
-            </label>
-          </div>
-
-          {/* Предпросмотр фото */}
-          {photos.length > 0 && (
-            <div className={styles.photosPreview}>
-              {photos.map((photo, index) => (
-                <div className={styles.photo} key={index}>
-                  <img
-                    src={photo.src}
-                    alt={`Фото ${index + 1}`}
-                    className={styles.previewPhoto}
-                  />
-                  <button
-                    type='button'
-                    className={styles.deleteButton}
-                    onClick={() => deleteImage(photo.title)}
-                  >
-                    ×
-                  </button>
-                  <p className={styles.photoTitle}>{photo.title}</p>
-                </div>
-              ))}
             </div>
           )}
         </form>

@@ -278,6 +278,7 @@ const NewKitchenPage = () => {
             <input
               type='text'
               id='title'
+              placeholder='Название кухни'
               {...register("title", {
                 required: true,
               })}
@@ -293,6 +294,7 @@ const NewKitchenPage = () => {
               <input
                 type='number'
                 id='price'
+                placeholder='249999'
                 {...register("price", {
                   required: true,
                 })}
@@ -321,6 +323,7 @@ const NewKitchenPage = () => {
             </label>
             <textarea
               id='description'
+              placeholder='Описание'
               {...register("description", {
                 required: true,
               })}

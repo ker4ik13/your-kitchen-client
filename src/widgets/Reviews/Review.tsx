@@ -9,7 +9,7 @@ import "swiper/css/scrollbar";
 import "@/shared/styles/swiper-my.css";
 import Icon from "@/shared/IconsComponents/Icon";
 import { Icons } from "@/shared/IconsComponents/Icons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { IReview } from "@/types/IReview";
 import typeSwiper from "swiper";
 
@@ -29,8 +29,6 @@ const Review = ({ review }: ReviewProps) => {
 
   const handleThumbs = (swiper: typeSwiper) => setThumbsSwiper(swiper);
   const handleOpen = () => (!isOpen ? setIsOpen(true) : setIsOpen(false));
-
-  useEffect(() => {}, []);
 
   return (
     <>

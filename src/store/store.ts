@@ -3,6 +3,7 @@ import { userReducer } from './user.slice';
 import { claimsReducer } from './claims.slice';
 import { kitchensReducer } from './kitchens.slice';
 import { reviewReducer } from './reviews.slice';
+import { workerReducer } from './worker.slice';
 
 const store = configureStore({
 	reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     claims: claimsReducer,
     kitchens: kitchensReducer,
     reviews: reviewReducer,
+    workers: workerReducer,
 	},
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

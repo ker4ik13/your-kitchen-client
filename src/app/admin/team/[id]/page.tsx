@@ -11,27 +11,28 @@ import { type SubmitHandler, useForm } from "react-hook-form";
 
 import $api from "@/http";
 import { useParams } from "next/navigation";
-import type { IReview } from "@/types/IReview";
 import Link from "next/link";
 import { ReviewService } from "@/services/ReviewService";
+import { IWorker } from "@/types/IWorker";
+import { WorkerService } from "@/services/WorkerService";
 
 // Поля формы
 interface TInputs {
-  photo?: ImageData;
+  photo: ImageData;
   firstName: string;
-  lastName?: string;
-  text: string;
-  photos: ImageData[];
+  lastName: string;
+  jobTitle: string;
+  experience: string;
 }
 
 // Тексты
 const texts = {
-  notFoundText: "Отзыв не найден",
+  notFoundText: "Работник не найден",
   buttonText: "Изменить",
-  titleText: "Изменить отзыв",
-  addOrChangeErrorText: "Ошибка изменения отзыва. Попробуйте еще раз",
+  titleText: "Изменить карточку",
+  addOrChangeErrorText: "Ошибка изменения карточки. Попробуйте еще раз",
   errorText: "Что-то пошло не так. Попробуйте еще раз",
-  successText: "Отзыв успешно изменен",
+  successText: "Карточка работника успешно изменена",
 };
 
 const NewKitchenPage = () => {
@@ -40,16 +41,14 @@ const NewKitchenPage = () => {
   const { register, handleSubmit, reset, setValue } = useForm<TInputs>();
   const userStore = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
-  const reviewStore = useAppSelector((store) => store.reviews);
+  const workerStore = useAppSelector((store) => store.workers);
 
-  const [photos, setPhotos] = useState<any[]>([]);
   const [photo, setPhoto] = useState<any>();
-  const [files, setFiles] = useState<File[]>([]);
   const [file, setFile] = useState<File>({} as File);
 
   // Ошибка
   const [error, setError] = useState<any>({});
-  const [review, setReview] = useState<IReview>({} as IReview);
+  const [worker, setWorker] = useState<IWorker>({} as IWorker);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -68,45 +67,37 @@ const NewKitchenPage = () => {
       <div className={styles.kitchensPage}>
         <div className={styles.container}>
           <p className={styles.title}>{texts.notFoundText}</p>
-          <Link href='/admin/reviews'>Назад</Link>
+          <Link href='/admin/team'>Назад</Link>
         </div>
       </div>
     );
   }
 
   const getProduct = async (id: string) => {
-    const reviewById = reviewStore.reviews.find(
-      (review) => review._id === path.id,
+    const workerById = workerStore.workers.find(
+      (worker) => worker._id === path.id,
     );
 
-    if (reviewById) {
-      setPhotos(reviewById.photos);
-      if (reviewById.photo) {
-        setPhoto(reviewById.photo);
-      }
-      setReview(reviewById);
+    if (workerById) {
+      setPhoto(workerById.photo);
+      setWorker(workerById);
 
-      setValue("firstName", reviewById.firstName);
-      if (reviewById.lastName) {
-        setValue("lastName", reviewById.lastName);
-      }
-      setValue("text", reviewById.text);
+      setValue("firstName", workerById.firstName);
+      setValue("lastName", workerById.lastName);
+      setValue("experience", workerById.experience);
+      setValue("jobTitle", workerById.jobTitle);
     } else {
       if (typeof path.id === "string") {
         try {
-          const reviewPayload = await ReviewService.getReview(path.id);
+          const workerPayload = await WorkerService.getWorker(path.id);
 
-          setReview(reviewPayload);
-          setPhotos(reviewPayload.photos);
-          if (reviewPayload.photo) {
-            setPhoto(reviewPayload.photo);
-          }
+          setWorker(workerPayload);
+          setPhoto(workerPayload.photo);
 
-          setValue("firstName", reviewPayload.firstName);
-          if (reviewPayload.lastName) {
-            setValue("lastName", reviewPayload.lastName);
-          }
-          setValue("text", reviewPayload.text);
+          setValue("firstName", workerPayload.firstName);
+          setValue("lastName", workerPayload.lastName);
+          setValue("experience", workerPayload.experience);
+          setValue("jobTitle", workerPayload.jobTitle);
         } catch (error) {
           setError({
             error: true,
@@ -137,34 +128,15 @@ const NewKitchenPage = () => {
     );
   }
 
-  // Обработчик фото
-  const getPhotosFromFiles = (event: any, files: any[]) => {
-    const photos: any[] = [];
-
-    files.map((file) => {
-      let photo = {
-        title: file.name,
-        src: URL.createObjectURL(file),
-      };
-
-      photos.push(photo);
-    });
-
-    setPhotos(photos);
-  };
-
   const onSubmit: SubmitHandler<TInputs> = async (data) => {
     const form = new FormData();
 
     form.append("firstName", data.firstName);
+    form.append("lastName", data.lastName);
+    form.append("jobTitle", data.jobTitle);
+    form.append("experience", data.experience);
 
-    if (data.lastName) {
-      form.append("lastName", data.lastName);
-    }
-
-    form.append("text", data.text);
-
-    const response = await $api.patch(`/reviews/${path.id}`, form, {
+    const response = await $api.patch(`/workers/${path.id}`, form, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -175,16 +147,14 @@ const NewKitchenPage = () => {
         value: texts.successText,
       });
       reset({
-        photos: [],
         firstName: "",
         lastName: "",
         photo: {},
-        text: "",
+        experience: "",
+        jobTitle: "",
       });
-      setFiles([]);
       setFile({} as File);
       setPhoto(undefined);
-      setPhotos([]);
     } else {
       setError({
         error: true,
@@ -241,17 +211,51 @@ const NewKitchenPage = () => {
               type='text'
               id='lastName'
               placeholder='Иванов'
-              {...register("lastName")}
+              {...register("lastName", {
+                required: true,
+              })}
               className={`${styles.textInput} ${styles.fullInput}`}
             />
           </div>
 
-          {/* Фото профиля */}
-          {review.photo && (
+          <div className={styles.string}>
+            {/* Должность */}
             <div className={styles.inputWrapper}>
-              <label className={styles.label}>Фото профиля</label>
+              <label htmlFor='jobTitle' className={styles.label}>
+                Должность
+              </label>
+              <input
+                type='text'
+                id='jobTitle'
+                placeholder='Менеджер'
+                {...register("jobTitle", {
+                  required: true,
+                })}
+                className={styles.textInput}
+              />
             </div>
-          )}
+
+            {/* Опыт работы */}
+            <div className={styles.inputWrapper}>
+              <label htmlFor='experience' className={styles.label}>
+                Опыт работы
+              </label>
+              <input
+                type='text'
+                id='experience'
+                placeholder='15 лет'
+                {...register("experience", {
+                  required: true,
+                })}
+                className={styles.textInput}
+              />
+            </div>
+          </div>
+
+          {/* Фото профиля */}
+          <div className={styles.inputWrapper}>
+            <label className={styles.label}>Фото профиля</label>
+          </div>
 
           {/* Предпросмотр фото */}
           {photo !== undefined && (
@@ -260,42 +264,6 @@ const NewKitchenPage = () => {
                 <img src={photo} alt={photo} className={styles.previewPhoto} />
                 <p className={styles.photoTitle}>{photo}</p>
               </div>
-            </div>
-          )}
-
-          {/* Текст */}
-          <div className={styles.inputWrapper}>
-            <label htmlFor='text' className={styles.label}>
-              Текст отзыва
-            </label>
-            <textarea
-              id='text'
-              placeholder='Текст отзыва'
-              {...register("text", {
-                required: true,
-              })}
-              className={styles.textArea}
-            />
-          </div>
-
-          {/* Фото */}
-          <div className={styles.inputWrapper}>
-            <label className={styles.label}>Фото отзыва</label>
-          </div>
-
-          {/* Предпросмотр фото */}
-          {photos.length > 0 && (
-            <div className={styles.photosPreview}>
-              {photos.map((photo, index) => (
-                <div className={styles.photo} key={index}>
-                  <img
-                    src={photo}
-                    alt={`Фото ${index + 1}`}
-                    className={styles.previewPhoto}
-                  />
-                  <p className={styles.photoTitle}>{photo}</p>
-                </div>
-              ))}
             </div>
           )}
         </form>

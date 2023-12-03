@@ -10,7 +10,7 @@ export const team: IWorker[] = [
     lastName: 'Совянин',
     jobTitle: 'Мастер',
     experience: '13 лет',
-    photo: team1,
+    photo: team1.src,
   },
   {
     _id: '2',
@@ -18,7 +18,7 @@ export const team: IWorker[] = [
     lastName: 'Лебедева',
     jobTitle: 'Главный дизайнер',
     experience: '6 лет',
-    photo: team2,
+    photo: team2.src,
   },
   {
     _id: '3',
@@ -26,7 +26,7 @@ export const team: IWorker[] = [
     lastName: 'Самойлов',
     jobTitle: 'Менеджер',
     experience: '5 лет',
-    photo: team3,
+    photo: team3.src,
   },
   {
     _id: '4',
@@ -34,7 +34,7 @@ export const team: IWorker[] = [
     lastName: 'Совянин',
     jobTitle: 'Мастер',
     experience: '13 лет',
-    photo: team1,
+    photo: team1.src,
   },
   {
     _id: '5',
@@ -42,7 +42,7 @@ export const team: IWorker[] = [
     lastName: 'Лебедева',
     jobTitle: 'Главный дизайнер',
     experience: '6 лет',
-    photo: team2,
+    photo: team2.src,
   },
   {
     _id: '6',
@@ -50,6 +50,6 @@ export const team: IWorker[] = [
     lastName: 'Самойлов',
     jobTitle: 'Менеджер',
     experience: '5 лет',
-    photo: team3,
+    photo: team3.src,
   },
 ]

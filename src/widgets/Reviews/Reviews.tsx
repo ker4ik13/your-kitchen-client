@@ -8,15 +8,16 @@ import "@/shared/styles/swiper-my.css";
 import Icon from "@/shared/IconsComponents/Icon";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import Review from "./Review";
-import { UserReviewsService } from "@/services/UserReviewsService";
+import { reviews } from "@/data/reviews/reviews";
+// import { UserReviewsService } from "@/services/UserReviewsService";
 
-const getReviews = async () => {
-  const reviews = await UserReviewsService.getReviews();
-  return reviews;
-};
+// const getReviews = async () => {
+//   const reviews = await UserReviewsService.getReviews();
+//   return reviews;
+// };
 
 const Reviews = async () => {
-  const reviews = await getReviews();
+  // const reviews = await getReviews();
   return (
     <div className={styles.reviewsPage} id='reviews'>
       <p className={styles.bgText}>Отзывы</p>

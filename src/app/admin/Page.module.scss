@@ -233,6 +233,12 @@
   width: 100%;
   gap: rem(50);
 }
+.workers {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  gap: rem(30);
+}
 .reviewLink {
   display: flex;
   position: relative;
@@ -244,6 +250,11 @@
   max-width: rem(460);
   position: relative;
   max-height: rem(500);
+}
+.workerLink {
+  max-width: rem(370);
+  width: 100%;
+  position: relative;
 }
 .removeButton {
   background-color: #fff;
@@ -269,6 +280,19 @@
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 10;
+}
+.removeWorkerButton {
+  background-color: #fff;
+  padding: rem(10);
+  border-radius: rem(8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1/1;
+  position: absolute;
+  top: rem(10);
+  right: rem(20);
   z-index: 10;
 }
 .removeIcon {

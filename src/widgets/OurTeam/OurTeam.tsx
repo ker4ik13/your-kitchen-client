@@ -2,9 +2,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./OurTeam.module.scss";
 import { team } from "@/data/team/team";
 import { EffectCoverflow, Navigation } from "swiper/modules";
-import Image from "next/image";
 
 import "swiper/css/navigation";
+import Worker from "../Worker/Worker";
 
 const OurTeam = () => {
   return (
@@ -50,20 +50,7 @@ const OurTeam = () => {
               className={`${styles.worker} workerSlide`}
               key={worker._id}
             >
-              <Image
-                src={worker.photo}
-                alt={worker.firstName}
-                className={styles.img}
-              />
-              <div className={styles.info}>
-                <p className={styles.name}>
-                  {worker.firstName} {worker.lastName}
-                </p>
-                <p className={styles.workerInfo}>
-                  {worker.jobTitle} / Опыт работы:{" "}
-                  <span>{worker.experience}</span>
-                </p>
-              </div>
+              <Worker worker={worker} />
             </SwiperSlide>
           ))}
         </Swiper>
