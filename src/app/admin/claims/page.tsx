@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Claims.module.scss";
 import MiniLoading from "@/shared/MiniLoading";
 import AdminClaim from "@/widgets/AdminClaim/AdminClaim";
@@ -18,6 +18,7 @@ const ClaimsPage = () => {
   const claimsStore = useAppSelector((store) => store.claims);
   const userStore = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (localStorage.getItem("token")) {

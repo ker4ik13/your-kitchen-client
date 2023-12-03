@@ -1,8 +1,6 @@
-import type { StaticImageData } from "next/image";
-
 export interface IWorker {
   _id: string;
-  photo: StaticImageData;
+  photo: string;
   firstName: string;
   lastName: string;
   jobTitle: string;
