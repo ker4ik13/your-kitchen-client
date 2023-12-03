@@ -18,14 +18,14 @@ export class UserReviewsService {
 
     const returnReviews = [...jsonReviews];
     const reviewsWithPhotos: IReview[] = returnReviews.map((review) => {
-      const kitchenPhotos = review.photos.map((file) => {
+      const reviewPhotos = review.photos.map((file) => {
         return `${NEXT_PUBLIC_API_URL}/images/${file}`;
       });
       if(review.photo){
         review.photo = `${NEXT_PUBLIC_API_URL}/images/${review.photo}`;
       }
       
-      review.photos = kitchenPhotos;
+      review.photos = reviewPhotos;
       return review;
     })
 

@@ -8,16 +8,23 @@ import "@/shared/styles/swiper-my.css";
 import Icon from "@/shared/IconsComponents/Icon";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import Review from "./Review";
-import { reviews } from "@/data/reviews/reviews";
 // import { UserReviewsService } from "@/services/UserReviewsService";
+// import { useEffect, useState } from "react";
+// import type { IReview } from "@/types/IReview";
+import { reviews } from "@/data/reviews/reviews";
 
-// const getReviews = async () => {
-//   const reviews = await UserReviewsService.getReviews();
-//   return reviews;
-// };
+const Reviews = () => {
+  // const [reviews, setReviews] = useState<IReview[]>([]);
 
-const Reviews = async () => {
-  // const reviews = await getReviews();
+  // const getReviews = async () => {
+  //   const reviews = await UserReviewsService.getReviews();
+  //   setReviews(reviews);
+  // };
+
+  // useEffect(() => {
+  //   getReviews();
+  // });
+
   return (
     <div className={styles.reviewsPage} id='reviews'>
       <p className={styles.bgText}>Отзывы</p>

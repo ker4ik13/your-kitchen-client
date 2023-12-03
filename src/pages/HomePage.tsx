@@ -14,14 +14,12 @@ import store from "@/store/store";
 import dynamic from "next/dynamic";
 import MiniLoading from "@/shared/MiniLoading";
 import styles from "./HomePage.module.scss";
+import Reviews from "@/widgets/Reviews/Reviews";
 
 const DynamicModal1 = dynamic(() => import("@/widgets/Modals/Modal1"), {
   loading: () => <MiniLoading className={styles.loading} />,
 });
 const DynamicModal2 = dynamic(() => import("@/widgets/Modals/Modal2"), {
-  loading: () => <MiniLoading className={styles.loading} />,
-});
-const DynamicReviews = dynamic(() => import("@/widgets/Reviews/Reviews"), {
   loading: () => <MiniLoading className={styles.loading} />,
 });
 const DynamicOurTeam = dynamic(() => import("@/widgets/OurTeam/OurTeam"), {
@@ -80,7 +78,7 @@ const HomePage = () => {
         setIsOpen={setIsOpenSecond}
         setIsOpenThanks={setIsOpenThanks}
       />
-      <DynamicReviews />
+      <Reviews />
       <DynamicOurTeam />
       <DynamicLeaveRequest />
       <DynamicWhatsNext />
