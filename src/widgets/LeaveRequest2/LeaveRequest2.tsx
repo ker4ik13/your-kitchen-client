@@ -43,13 +43,14 @@ const LeaveRequest2 = ({
     if (result?.ok) {
       resetField("firstName");
       setValue("mobilePhone", "");
-      if (isModal && setIsOpen && setIsOpenThanks) {
-        setIsOpenThanks(true);
-        setIsOpen(false);
-      }
-      if (!isModal && setIsOpenThanks) {
-        setIsOpenThanks(true);
-      }
+    }
+
+    if (isModal && setIsOpen && setIsOpenThanks) {
+      setIsOpenThanks(true);
+      setIsOpen(false);
+    }
+    if (!isModal && setIsOpenThanks) {
+      setIsOpenThanks(true);
     }
   };
 

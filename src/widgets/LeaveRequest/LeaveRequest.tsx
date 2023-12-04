@@ -60,14 +60,13 @@ const LeaveRequest = ({
           "https://drive.google.com/file/d/1MGjzCrXvgawfzvztEZu-CNawy-E4K-Jn/view?usp=drive_link",
         );
       }
-
-      if (isModal && setIsOpen && setIsOpenThanks) {
-        setIsOpenThanks(true);
-        setIsOpen(false);
-      }
-      if (!isModal && setIsOpenThanks) {
-        setIsOpenThanks(true);
-      }
+    }
+    if (isModal && setIsOpen && setIsOpenThanks) {
+      setIsOpenThanks(true);
+      setIsOpen(false);
+    }
+    if (!isModal && setIsOpenThanks) {
+      setIsOpenThanks(true);
     }
   };
 
