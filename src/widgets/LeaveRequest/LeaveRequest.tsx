@@ -65,6 +65,9 @@ const LeaveRequest = ({
         setIsOpenThanks(true);
         setIsOpen(false);
       }
+      if (!isModal && setIsOpenThanks) {
+        setIsOpenThanks(true);
+      }
     }
   };
 

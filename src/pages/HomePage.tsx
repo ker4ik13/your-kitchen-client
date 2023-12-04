@@ -80,10 +80,10 @@ const HomePage = () => {
       />
       <Reviews />
       <DynamicOurTeam />
-      <DynamicLeaveRequest />
+      <DynamicLeaveRequest setIsOpenThanks={setIsOpenThanks} />
       <DynamicWhatsNext />
       <DynamicResults />
-      <DynamicLeaveRequest2 />
+      <DynamicLeaveRequest2 setIsOpenThanks={setIsOpenThanks} />
       {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <ModalVideo
         isOpen={isOpenVideo}
