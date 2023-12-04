@@ -118,6 +118,8 @@
   transition: border 0.2s linear;
   text-decoration: none;
   cursor: pointer;
+  position: relative;
+  z-index: 4;
 
   &:hover {
     border-color: rgba(255, 255, 255, 0.6);
