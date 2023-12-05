@@ -26,6 +26,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <meta name='msapplication-TileColor' content='#da532c' />
         <meta name='theme-color' content='#433A31' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <meta name='yandex-verification' content='8cb11033a13960f6' />
         <title>Админ панель | Твоя Кухня</title>
       </head>
       <body className='grid grid-rows-[auto_1fr_auto] grid-cols-1 min-h-screen font-gilroy'>
