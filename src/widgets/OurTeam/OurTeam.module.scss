@@ -73,6 +73,10 @@
   @include position-center();
   white-space: nowrap;
   text-transform: uppercase;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   @media (max-width: $max-600) {
     font-size: rem(70);
@@ -81,4 +85,12 @@
 .slider {
   width: 100%;
   margin-top: rem(40);
+}
+.error {
+  @include gilroy(400);
+  font-size: rem(24);
+  text-align: center;
+  color: #fff;
+  margin-top: rem(50);
+  position: relative;
 }

@@ -4,11 +4,14 @@ import type { AxiosResponse } from "axios";
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
-export class WorkerService {
+export class UserWorkerService {
 
   static async getWorkers (): Promise<IWorker[]> {
     const response = await fetch(`${NEXT_PUBLIC_API_URL}/api/workers`, {
       method: 'GET',
+      next: {
+        revalidate: 30,
+      },
     });
     const jsonWorkers: IWorker[] = await response.json();
     
