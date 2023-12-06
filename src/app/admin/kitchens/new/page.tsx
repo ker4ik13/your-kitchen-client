@@ -17,6 +17,9 @@ import {
 import { components } from "react-select";
 import CreatableSelect from "react-select/creatable";
 import $api from "@/http";
+import { isUserHaveRights } from "@/features/isUserHaveRights";
+import { UserRoles } from "@/types/UserRoles";
+import { IError } from "@/types/IError";
 
 interface ISelectOptions {
   value: string;
@@ -93,7 +96,7 @@ const NewKitchenPage = () => {
   >([]);
 
   // Ошибка
-  const [error, setError] = useState<any>({});
+  const [error, setError] = useState<IError>({ isError: false, value: "" });
 
   // Срок
   const [termValue, setTermValue] = useState("");
@@ -126,6 +129,15 @@ const NewKitchenPage = () => {
       dispatch(checkAuth());
     }
   }, []);
+
+  useEffect(() => {
+    if (!isUserHaveRights(userStore.user, UserRoles.Admin)) {
+      setError({
+        isError: true,
+        value: "У вас нет прав на просмотр этой страницы",
+      });
+    }
+  }, [userStore.user]);
 
   if (userStore.isLoading) {
     return (
@@ -223,7 +235,7 @@ const NewKitchenPage = () => {
     });
     if (response.status === 201) {
       setError({
-        error: false,
+        isError: false,
         value: texts.successText,
       });
       reset({
@@ -240,214 +252,223 @@ const NewKitchenPage = () => {
       setPhotos([]);
     } else {
       setError({
-        error: true,
+        isError: true,
         value: texts.addOrChangeErrorText,
       });
     }
   };
 
-  const isSuccess = (error: any) => {
-    return error.error === true ? styles.error : styles.success;
+  const isSuccess = (error: IError) => {
+    return error.isError === true ? styles.error : styles.success;
   };
 
   return (
     <div className={styles.page}>
       {userStore.isAuth && <AdminSidebar store={userStore} />}
       <div className={styles.container}>
-        <div className={styles.string}>
-          <h2 className={styles.title}>{texts.titleText}</h2>
-          <button type='submit' form='kitchenForm' className={styles.addButton}>
-            {texts.buttonText}
-          </button>
-        </div>
+        {isUserHaveRights(userStore.user, UserRoles.Admin) && (
+          <div className={styles.string}>
+            <h2 className={styles.title}>{texts.titleText}</h2>
+            <button
+              type='submit'
+              form='kitchenForm'
+              className={styles.addButton}
+            >
+              {texts.buttonText}
+            </button>
+          </div>
+        )}
         <div className={styles.string}>
           <p className={isSuccess(error)}>{error.value}</p>
         </div>
-
-        {/* Форма */}
-        <form
-          className={styles.addForm}
-          id='kitchenForm'
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          {/* Заголовок */}
-          <div className={styles.inputWrapper}>
-            <label htmlFor='title' className={styles.label}>
-              Название
-            </label>
-            <input
-              type='text'
-              id='title'
-              placeholder='Название кухни'
-              {...register("title", {
-                required: true,
-              })}
-              className={`${styles.textInput} ${styles.fullInput}`}
-            />
-          </div>
-          <div className={styles.string}>
-            {/* Цена */}
-            <div className={styles.inputWrapper}>
-              <label htmlFor='price' className={styles.label}>
-                Цена
-              </label>
-              <input
-                type='number'
-                id='price'
-                placeholder='249999'
-                {...register("price", {
-                  required: true,
-                })}
-                className={styles.textInput}
-              />
-            </div>
-
-            {/* На главной */}
-            <div className={styles.inputWrapper}>
-              <label htmlFor='onMainPage' className={styles.label}>
-                На главной странице
-              </label>
-              <input
-                type='checkbox'
-                {...register("onMainPage")}
-                id='onMainPage'
-                className={styles.checkboxInput}
-              />
-            </div>
-          </div>
-
-          {/* Описание */}
-          <div className={styles.inputWrapper}>
-            <label htmlFor='description' className={styles.label}>
-              Описание
-            </label>
-            <textarea
-              id='description'
-              placeholder='Описание'
-              {...register("description", {
-                required: true,
-              })}
-              className={styles.textArea}
-            />
-          </div>
-
-          {/* Срок */}
-          <div className={styles.inputWrapper}>
-            <label htmlFor='term' className={styles.label}>
-              Срок
-            </label>
-            <input
-              type='text'
-              placeholder='21 день'
-              id='term'
-              {...register("term", {
-                required: true,
-                onChange: (event) => {
-                  setTermValue(event.target.value);
-                },
-              })}
-              className={styles.textInput}
-            />
-            <div className={styles.clue}>
-              <p>Будет отображаться так:</p>
-              <p>Срок {`${termValue}`}</p>
-            </div>
-          </div>
-
-          {/* Стиль кухни */}
-          <div className={styles.inputWrapper}>
-            <label className={styles.label}>Стиль кухни</label>
-            <Controller
-              control={control}
-              name='style'
-              render={({ field }) => (
-                <CreatableSelect
-                  className={styles.select}
-                  components={components}
-                  options={kitchensStyles}
-                  value={field.value}
-                  isSearchable
-                  onChange={(newValue) => field.onChange(newValue)}
-                  onInputChange={(newValue) => setInputValue(newValue)}
-                  onKeyDown={handleKeyDown}
-                  placeholder='Стиль кухни'
+        {isUserHaveRights(userStore.user, UserRoles.Admin) && (
+          <>
+            {/* Форма */}
+            <form
+              className={styles.addForm}
+              id='kitchenForm'
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              {/* Заголовок */}
+              <div className={styles.inputWrapper}>
+                <label htmlFor='title' className={styles.label}>
+                  Название
+                </label>
+                <input
+                  type='text'
+                  id='title'
+                  placeholder='Название кухни'
+                  {...register("title", {
+                    required: true,
+                  })}
+                  className={`${styles.textInput} ${styles.fullInput}`}
                 />
-              )}
-            />
-          </div>
-
-          {/* Тип кухни */}
-          <div className={styles.inputWrapper}>
-            <label className={styles.label}>Тип кухни</label>
-            <Controller
-              control={control}
-              name='type'
-              render={({ field }) => (
-                <CreatableSelect
-                  className={styles.select}
-                  components={components}
-                  options={kitchensTypes}
-                  value={field.value}
-                  isSearchable
-                  onChange={(newValue) => field.onChange(newValue)}
-                  onInputChange={(newValue) => setInputValue2(newValue)}
-                  onKeyDown={handleKeyDown2}
-                  placeholder='Тип кухни'
-                />
-              )}
-            />
-          </div>
-
-          {/* Фото */}
-          <div className={styles.inputWrapper}>
-            <label className={styles.label}>Фото</label>
-            <input
-              id='photos'
-              type='file'
-              {...register("photos", {
-                required: true,
-                value: photos,
-              })}
-              accept='image/png, image/jpeg, image/jpg, image/webp'
-              multiple
-              className={styles.inputPhotos}
-              required
-              onChange={(event) => changeHandler(event)}
-              onDragStart={(event) => dragStartHandler(event)}
-              onDragLeave={(event) => dragLeaveHandler(event)}
-              onDragOver={(event) => dragStartHandler(event)}
-              onDrop={(event) => dropHandler(event)}
-            />
-            <label htmlFor='photos' className={styles.labelPhotos}>
-              {!drag
-                ? "Нажмите или перетащите изображения"
-                : "Отпустите изображения"}
-            </label>
-          </div>
-
-          {/* Предпросмотр фото */}
-          {photos.length > 0 && (
-            <div className={styles.photosPreview}>
-              {photos.map((photo, index) => (
-                <div className={styles.photo} key={index}>
-                  <img
-                    src={photo.src}
-                    alt={`Фото ${index + 1}`}
-                    className={styles.previewPhoto}
+              </div>
+              <div className={styles.string}>
+                {/* Цена */}
+                <div className={styles.inputWrapper}>
+                  <label htmlFor='price' className={styles.label}>
+                    Цена
+                  </label>
+                  <input
+                    type='number'
+                    id='price'
+                    placeholder='249999'
+                    {...register("price", {
+                      required: true,
+                    })}
+                    className={styles.textInput}
                   />
-                  <button
-                    type='button'
-                    className={styles.deleteButton}
-                    onClick={() => deleteImage(photo.title)}
-                  >
-                    ×
-                  </button>
-                  <p className={styles.photoTitle}>{photo.title}</p>
                 </div>
-              ))}
-            </div>
-          )}
-        </form>
+
+                {/* На главной */}
+                <div className={styles.inputWrapper}>
+                  <label htmlFor='onMainPage' className={styles.label}>
+                    На главной странице
+                  </label>
+                  <input
+                    type='checkbox'
+                    {...register("onMainPage")}
+                    id='onMainPage'
+                    className={styles.checkboxInput}
+                  />
+                </div>
+              </div>
+
+              {/* Описание */}
+              <div className={styles.inputWrapper}>
+                <label htmlFor='description' className={styles.label}>
+                  Описание
+                </label>
+                <textarea
+                  id='description'
+                  placeholder='Описание'
+                  {...register("description", {
+                    required: true,
+                  })}
+                  className={styles.textArea}
+                />
+              </div>
+
+              {/* Срок */}
+              <div className={styles.inputWrapper}>
+                <label htmlFor='term' className={styles.label}>
+                  Срок
+                </label>
+                <input
+                  type='text'
+                  placeholder='21 день'
+                  id='term'
+                  {...register("term", {
+                    required: true,
+                    onChange: (event) => {
+                      setTermValue(event.target.value);
+                    },
+                  })}
+                  className={styles.textInput}
+                />
+                <div className={styles.clue}>
+                  <p>Будет отображаться так:</p>
+                  <p>Срок {`${termValue}`}</p>
+                </div>
+              </div>
+
+              {/* Стиль кухни */}
+              <div className={styles.inputWrapper}>
+                <label className={styles.label}>Стиль кухни</label>
+                <Controller
+                  control={control}
+                  name='style'
+                  render={({ field }) => (
+                    <CreatableSelect
+                      className={styles.select}
+                      components={components}
+                      options={kitchensStyles}
+                      value={field.value}
+                      isSearchable
+                      onChange={(newValue) => field.onChange(newValue)}
+                      onInputChange={(newValue) => setInputValue(newValue)}
+                      onKeyDown={handleKeyDown}
+                      placeholder='Стиль кухни'
+                    />
+                  )}
+                />
+              </div>
+
+              {/* Тип кухни */}
+              <div className={styles.inputWrapper}>
+                <label className={styles.label}>Тип кухни</label>
+                <Controller
+                  control={control}
+                  name='type'
+                  render={({ field }) => (
+                    <CreatableSelect
+                      className={styles.select}
+                      components={components}
+                      options={kitchensTypes}
+                      value={field.value}
+                      isSearchable
+                      onChange={(newValue) => field.onChange(newValue)}
+                      onInputChange={(newValue) => setInputValue2(newValue)}
+                      onKeyDown={handleKeyDown2}
+                      placeholder='Тип кухни'
+                    />
+                  )}
+                />
+              </div>
+
+              {/* Фото */}
+              <div className={styles.inputWrapper}>
+                <label className={styles.label}>Фото</label>
+                <input
+                  id='photos'
+                  type='file'
+                  {...register("photos", {
+                    required: true,
+                    value: photos,
+                  })}
+                  accept='image/png, image/jpeg, image/jpg, image/webp'
+                  multiple
+                  className={styles.inputPhotos}
+                  required
+                  onChange={(event) => changeHandler(event)}
+                  onDragStart={(event) => dragStartHandler(event)}
+                  onDragLeave={(event) => dragLeaveHandler(event)}
+                  onDragOver={(event) => dragStartHandler(event)}
+                  onDrop={(event) => dropHandler(event)}
+                />
+                <label htmlFor='photos' className={styles.labelPhotos}>
+                  {!drag
+                    ? "Нажмите или перетащите изображения"
+                    : "Отпустите изображения"}
+                </label>
+              </div>
+
+              {/* Предпросмотр фото */}
+              {photos.length > 0 && (
+                <div className={styles.photosPreview}>
+                  {photos.map((photo, index) => (
+                    <div className={styles.photo} key={index}>
+                      <img
+                        src={photo.src}
+                        alt={`Фото ${index + 1}`}
+                        className={styles.previewPhoto}
+                      />
+                      <button
+                        type='button'
+                        className={styles.deleteButton}
+                        onClick={() => deleteImage(photo.title)}
+                      >
+                        ×
+                      </button>
+                      <p className={styles.photoTitle}>{photo.title}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </form>
+          </>
+        )}
       </div>
     </div>
   );

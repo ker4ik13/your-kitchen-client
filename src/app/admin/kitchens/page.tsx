@@ -11,6 +11,8 @@ import { deleteKitchen, getKitchens } from "@/store/kitchens.slice";
 import Kitchen from "@/widgets/Kitchen/Kitchen";
 import Icon from "@/shared/IconsComponents/Icon";
 import { Icons } from "@/shared/IconsComponents/Icons";
+import { isUserHaveRights } from "@/features/isUserHaveRights";
+import { UserRoles } from "@/types/UserRoles";
 
 // Тексты
 const texts = {
@@ -32,7 +34,10 @@ const KitchensPage = () => {
   }, []);
 
   const removeKitchen = async (id: string) => {
-    if (localStorage.getItem("token")) {
+    if (
+      localStorage.getItem("token") &&
+      isUserHaveRights(userStore.user, UserRoles.Admin)
+    ) {
       dispatch(deleteKitchen(id));
     }
   };
@@ -65,9 +70,11 @@ const KitchensPage = () => {
           <h2 className={styles.title}>
             {texts.titleText} ({kitchenStore.kitchens.length})
           </h2>
-          <Link href={"/admin/kitchens/new"} className={styles.addButton}>
-            {texts.buttonText}
-          </Link>
+          {isUserHaveRights(userStore.user, UserRoles.Admin) && (
+            <Link href={"/admin/kitchens/new"} className={styles.addButton}>
+              {texts.buttonText}
+            </Link>
+          )}
         </div>
         <div className={styles.kitchens}>
           {kitchenStore.kitchens &&
@@ -76,18 +83,21 @@ const KitchensPage = () => {
               .reverse()
               .map((kitchen, index) => (
                 <div className={styles.kitchenLink} key={index}>
-                  <button
-                    type='button'
-                    className={styles.removeButton}
-                    onClick={() => removeKitchen(kitchen._id)}
-                  >
-                    <Icon icon={Icons.remove(styles.removeIcon)} />
-                  </button>
+                  {isUserHaveRights(userStore.user, UserRoles.Admin) && (
+                    <button
+                      type='button'
+                      className={styles.removeButton}
+                      onClick={() => removeKitchen(kitchen._id)}
+                    >
+                      <Icon icon={Icons.remove(styles.removeIcon)} />
+                    </button>
+                  )}
                   {kitchen.onMainPage && (
                     <p className={styles.kitchenOption}>
                       {texts.onMainPageText}
                     </p>
                   )}
+
                   <Link href={`/admin/kitchens/${kitchen._id}`}>
                     <Kitchen kitchen={kitchen} />
                   </Link>

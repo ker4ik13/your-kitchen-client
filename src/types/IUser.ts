@@ -1,5 +1,12 @@
+import { UserRoles } from "./UserRoles";
+
 export interface IUser {
   email: string;
   isActivated: boolean;
-  id: string;
+  _id: string;
+  role: {
+    value: UserRoles,
+    label: string;
+  };
+  activationLink: string;
 }

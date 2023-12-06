@@ -17,6 +17,13 @@
   height: 100%;
   gap: rem(50);
 }
+.error {
+  font-size: rem(20);
+  color: red;
+  margin-bottom: rem(20);
+  cursor: text;
+  text-align: center;
+}
 .title {
   @include gilroy(400);
   font-size: rem(28);

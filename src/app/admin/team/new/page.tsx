@@ -10,6 +10,9 @@ import { checkAuth } from "@/store/user.slice";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import $api from "@/http";
+import { IError } from "@/types/IError";
+import { isUserHaveRights } from "@/features/isUserHaveRights";
+import { UserRoles } from "@/types/UserRoles";
 
 // Поля формы
 interface TInputs {
@@ -40,13 +43,22 @@ const NewKitchenPage = () => {
   const [drag, setDrag] = useState(false);
 
   // Ошибка
-  const [error, setError] = useState<any>({});
+  const [error, setError] = useState<IError>({ isError: false, value: "" });
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       dispatch(checkAuth());
     }
   }, []);
+
+  useEffect(() => {
+    if (!isUserHaveRights(userStore.user, UserRoles.Admin)) {
+      setError({
+        isError: true,
+        value: "У вас нет прав на просмотр этой страницы",
+      });
+    }
+  }, [userStore.user]);
 
   if (userStore.isLoading) {
     return (
@@ -127,7 +139,7 @@ const NewKitchenPage = () => {
     });
     if (response.status === 201) {
       setError({
-        error: false,
+        isError: false,
         value: texts.successText,
       });
       reset({
@@ -141,148 +153,156 @@ const NewKitchenPage = () => {
       setPhoto(undefined);
     } else {
       setError({
-        error: true,
+        isError: true,
         value: texts.errorText,
       });
     }
   };
 
-  const isSuccess = (error: any) => {
-    return error.error === true ? styles.error : styles.success;
+  const isSuccess = (error: IError) => {
+    return error.isError === true ? styles.error : styles.success;
   };
 
   return (
     <div className={styles.page}>
       {userStore.isAuth && <AdminSidebar store={userStore} />}
       <div className={styles.container}>
-        <div className={styles.string}>
-          <h2 className={styles.title}>{texts.titleText}</h2>
-          <button type='submit' form='kitchenForm' className={styles.addButton}>
-            {texts.buttonText}
-          </button>
-        </div>
+        {isUserHaveRights(userStore.user, UserRoles.Admin) && (
+          <div className={styles.string}>
+            <h2 className={styles.title}>{texts.titleText}</h2>
+            <button
+              type='submit'
+              form='kitchenForm'
+              className={styles.addButton}
+            >
+              {texts.buttonText}
+            </button>
+          </div>
+        )}
         <div className={styles.string}>
           <p className={isSuccess(error)}>{error.value}</p>
         </div>
 
         {/* Форма */}
-        <form
-          className={styles.addForm}
-          id='kitchenForm'
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          {/* Имя */}
-          <div className={styles.inputWrapper}>
-            <label htmlFor='firstName' className={styles.label}>
-              Имя
-            </label>
-            <input
-              type='text'
-              id='firstName'
-              placeholder='Иван'
-              {...register("firstName", {
-                required: true,
-              })}
-              className={`${styles.textInput} ${styles.fullInput}`}
-            />
-          </div>
-          {/* Фамилия */}
-          <div className={styles.inputWrapper}>
-            <label htmlFor='lastName' className={styles.label}>
-              Фамилия
-            </label>
-            <input
-              type='text'
-              id='lastName'
-              placeholder='Иванов'
-              {...register("lastName", {
-                required: true,
-              })}
-              className={`${styles.textInput} ${styles.fullInput}`}
-            />
-          </div>
-
-          <div className={styles.string}>
-            {/* Должность */}
+        {isUserHaveRights(userStore.user, UserRoles.Admin) && (
+          <form
+            className={styles.addForm}
+            id='kitchenForm'
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            {/* Имя */}
             <div className={styles.inputWrapper}>
-              <label htmlFor='jobTitle' className={styles.label}>
-                Должность
+              <label htmlFor='firstName' className={styles.label}>
+                Имя
               </label>
               <input
                 type='text'
-                id='jobTitle'
-                placeholder='Менеджер'
-                {...register("jobTitle", {
+                id='firstName'
+                placeholder='Иван'
+                {...register("firstName", {
                   required: true,
                 })}
-                className={styles.textInput}
+                className={`${styles.textInput} ${styles.fullInput}`}
               />
             </div>
-
-            {/* Опыт работы */}
+            {/* Фамилия */}
             <div className={styles.inputWrapper}>
-              <label htmlFor='experience' className={styles.label}>
-                Опыт работы
+              <label htmlFor='lastName' className={styles.label}>
+                Фамилия
               </label>
               <input
                 type='text'
-                id='experience'
-                placeholder='15 лет'
-                {...register("experience", {
+                id='lastName'
+                placeholder='Иванов'
+                {...register("lastName", {
                   required: true,
                 })}
-                className={styles.textInput}
+                className={`${styles.textInput} ${styles.fullInput}`}
               />
             </div>
-          </div>
 
-          {/* Фото профиля */}
-          <div className={styles.inputWrapper}>
-            <label className={styles.label}>Фото профиля</label>
-            <input
-              id='photo'
-              type='file'
-              {...register("photo", {
-                value: photo,
-                required: true,
-              })}
-              required
-              accept='image/png, image/jpeg, image/jpg, image/webp'
-              className={styles.inputPhotos}
-              onChange={(event) => changeHandler2(event)}
-              onDragStart={(event) => dragStartHandler2(event)}
-              onDragLeave={(event) => dragLeaveHandler2(event)}
-              onDragOver={(event) => dragStartHandler2(event)}
-              onDrop={(event) => dropHandler2(event)}
-            />
-            <label htmlFor='photo' className={styles.labelPhotos}>
-              {!drag
-                ? "Нажмите или перетащите изображения"
-                : "Отпустите изображения"}
-            </label>
-          </div>
-
-          {/* Предпросмотр фото */}
-          {photo !== undefined && (
-            <div className={styles.photosPreview}>
-              <div className={styles.photo}>
-                <img
-                  src={photo.src}
-                  alt={photo.src}
-                  className={styles.previewPhoto}
+            <div className={styles.string}>
+              {/* Должность */}
+              <div className={styles.inputWrapper}>
+                <label htmlFor='jobTitle' className={styles.label}>
+                  Должность
+                </label>
+                <input
+                  type='text'
+                  id='jobTitle'
+                  placeholder='Менеджер'
+                  {...register("jobTitle", {
+                    required: true,
+                  })}
+                  className={styles.textInput}
                 />
-                <button
-                  type='button'
-                  className={styles.deleteButton}
-                  onClick={deleteImage}
-                >
-                  ×
-                </button>
-                <p className={styles.photoTitle}>{photo.title}</p>
+              </div>
+
+              {/* Опыт работы */}
+              <div className={styles.inputWrapper}>
+                <label htmlFor='experience' className={styles.label}>
+                  Опыт работы
+                </label>
+                <input
+                  type='text'
+                  id='experience'
+                  placeholder='15 лет'
+                  {...register("experience", {
+                    required: true,
+                  })}
+                  className={styles.textInput}
+                />
               </div>
             </div>
-          )}
-        </form>
+
+            {/* Фото профиля */}
+            <div className={styles.inputWrapper}>
+              <label className={styles.label}>Фото профиля</label>
+              <input
+                id='photo'
+                type='file'
+                {...register("photo", {
+                  value: photo,
+                  required: true,
+                })}
+                required
+                accept='image/png, image/jpeg, image/jpg, image/webp'
+                className={styles.inputPhotos}
+                onChange={(event) => changeHandler2(event)}
+                onDragStart={(event) => dragStartHandler2(event)}
+                onDragLeave={(event) => dragLeaveHandler2(event)}
+                onDragOver={(event) => dragStartHandler2(event)}
+                onDrop={(event) => dropHandler2(event)}
+              />
+              <label htmlFor='photo' className={styles.labelPhotos}>
+                {!drag
+                  ? "Нажмите или перетащите изображения"
+                  : "Отпустите изображения"}
+              </label>
+            </div>
+
+            {/* Предпросмотр фото */}
+            {photo !== undefined && (
+              <div className={styles.photosPreview}>
+                <div className={styles.photo}>
+                  <img
+                    src={photo.src}
+                    alt={photo.src}
+                    className={styles.previewPhoto}
+                  />
+                  <button
+                    type='button'
+                    className={styles.deleteButton}
+                    onClick={deleteImage}
+                  >
+                    ×
+                  </button>
+                  <p className={styles.photoTitle}>{photo.title}</p>
+                </div>
+              </div>
+            )}
+          </form>
+        )}
       </div>
     </div>
   );

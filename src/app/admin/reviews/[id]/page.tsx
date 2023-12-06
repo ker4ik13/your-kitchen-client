@@ -14,6 +14,7 @@ import { useParams } from "next/navigation";
 import type { IReview } from "@/types/IReview";
 import Link from "next/link";
 import { ReviewService } from "@/services/ReviewService";
+import type { IError } from "@/types/IError";
 
 // Поля формы
 interface TInputs {
@@ -48,7 +49,7 @@ const NewKitchenPage = () => {
   const [file, setFile] = useState<File>({} as File);
 
   // Ошибка
-  const [error, setError] = useState<any>({});
+  const [error, setError] = useState<IError>({ isError: false, value: "" });
   const [review, setReview] = useState<IReview>({} as IReview);
 
   useEffect(() => {
@@ -109,7 +110,7 @@ const NewKitchenPage = () => {
           setValue("text", reviewPayload.text);
         } catch (error) {
           setError({
-            error: true,
+            isError: true,
             value: texts.addOrChangeErrorText,
           });
         }
@@ -171,7 +172,7 @@ const NewKitchenPage = () => {
     });
     if (response.status === 200) {
       setError({
-        error: false,
+        isError: false,
         value: texts.successText,
       });
       reset({
@@ -187,14 +188,13 @@ const NewKitchenPage = () => {
       setPhotos([]);
     } else {
       setError({
-        error: true,
+        isError: true,
         value: texts.errorText,
       });
     }
   };
-
-  const isSuccess = (error: any) => {
-    return error.error === true ? styles.error : styles.success;
+  const isSuccess = (error: IError) => {
+    return error.isError === true ? styles.error : styles.success;
   };
 
   return (

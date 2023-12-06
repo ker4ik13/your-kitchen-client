@@ -1,6 +1,7 @@
 import Nav from "@/widgets/Nav/Nav";
 import Footer from "@/widgets/Footer/Footer";
 import "../styles";
+import Script from "next/script";
 
 export default function RootLayout({
   children,
@@ -33,7 +34,7 @@ export default function RootLayout({
         <meta name='theme-color' content='#433A31' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <meta name='yandex-verification' content='8cb11033a13960f6' />
-        {/* <Script
+        <Script
           id='metrikaScript'
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -42,7 +43,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7HCN6P');`,
           }}
-        /> */}
+        />
       </head>
       <body className='grid grid-rows-[auto_1fr_auto] grid-cols-1 min-h-screen font-gilroy'>
         <Nav />

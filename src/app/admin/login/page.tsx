@@ -5,6 +5,8 @@ import { type SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/store/hooks";
 import { login } from "@/store/user.slice";
+import { useState } from "react";
+import { IError } from "@/types/IError";
 
 interface TInputs {
   email: string;
@@ -15,6 +17,7 @@ interface TInputs {
 const texts = {
   buttonText: "Войти",
   titleText: "Войти в админ панель",
+  errorText: "Неправильные данные",
 };
 
 const LoginPage = () => {
@@ -23,6 +26,7 @@ const LoginPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<TInputs>();
+  const [error, setError] = useState<IError>({ isError: false, value: "" });
 
   const dispatch = useAppDispatch();
 
@@ -35,7 +39,17 @@ const LoginPage = () => {
         password: data.password,
       }),
     );
+    if (!response.payload) {
+      setError({
+        isError: true,
+        value: "Неправильные данные",
+      });
+    }
     if (response.payload) {
+      setError({
+        isError: false,
+        value: "",
+      });
       router.push("/admin");
     }
   };
@@ -44,6 +58,7 @@ const LoginPage = () => {
     <div className={styles.loginPage}>
       <div className={styles.container}>
         <h2 className={styles.title}>{texts.titleText}</h2>
+        {error.isError && <p className={styles.error}>{texts.errorText}</p>}
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <input
             type='text'

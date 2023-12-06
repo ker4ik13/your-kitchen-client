@@ -10,6 +10,9 @@ import { checkAuth } from "@/store/user.slice";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import $api from "@/http";
+import { isUserHaveRights } from "@/features/isUserHaveRights";
+import { UserRoles } from "@/types/UserRoles";
+import { IError } from "@/types/IError";
 
 // Поля формы
 interface TInputs {
@@ -43,13 +46,22 @@ const NewKitchenPage = () => {
   const [drag2, setDrag2] = useState(false);
 
   // Ошибка
-  const [error, setError] = useState<any>({});
+  const [error, setError] = useState<IError>({ isError: false, value: "" });
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
       dispatch(checkAuth());
     }
   }, []);
+
+  useEffect(() => {
+    if (!isUserHaveRights(userStore.user, UserRoles.Admin)) {
+      setError({
+        isError: true,
+        value: "У вас нет прав на просмотр этой страницы",
+      });
+    }
+  }, [userStore.user]);
 
   if (userStore.isLoading) {
     return (
@@ -192,7 +204,7 @@ const NewKitchenPage = () => {
     });
     if (response.status === 201) {
       setError({
-        error: false,
+        isError: false,
         value: texts.successText,
       });
       reset({
@@ -208,175 +220,183 @@ const NewKitchenPage = () => {
       setPhotos([]);
     } else {
       setError({
-        error: true,
+        isError: true,
         value: texts.errorText,
       });
     }
   };
 
-  const isSuccess = (error: any) => {
-    return error.error === true ? styles.error : styles.success;
+  const isSuccess = (error: IError) => {
+    return error.isError === true ? styles.error : styles.success;
   };
 
   return (
     <div className={styles.page}>
       {userStore.isAuth && <AdminSidebar store={userStore} />}
       <div className={styles.container}>
-        <div className={styles.string}>
-          <h2 className={styles.title}>{texts.titleText}</h2>
-          <button type='submit' form='kitchenForm' className={styles.addButton}>
-            {texts.buttonText}
-          </button>
-        </div>
+        {isUserHaveRights(userStore.user, UserRoles.Admin) && (
+          <div className={styles.string}>
+            <h2 className={styles.title}>{texts.titleText}</h2>
+            <button
+              type='submit'
+              form='kitchenForm'
+              className={styles.addButton}
+            >
+              {texts.buttonText}
+            </button>
+          </div>
+        )}
         <div className={styles.string}>
           <p className={isSuccess(error)}>{error.value}</p>
         </div>
 
         {/* Форма */}
-        <form
-          className={styles.addForm}
-          id='kitchenForm'
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          {/* Имя */}
-          <div className={styles.inputWrapper}>
-            <label htmlFor='firstName' className={styles.label}>
-              Имя
-            </label>
-            <input
-              type='text'
-              id='firstName'
-              placeholder='Иван'
-              {...register("firstName", {
-                required: true,
-              })}
-              className={`${styles.textInput} ${styles.fullInput}`}
-            />
-          </div>
-          {/* Фамилия */}
-          <div className={styles.inputWrapper}>
-            <label htmlFor='lastName' className={styles.label}>
-              Фамилия
-            </label>
-            <input
-              type='text'
-              id='lastName'
-              placeholder='Иванов'
-              {...register("lastName")}
-              className={`${styles.textInput} ${styles.fullInput}`}
-            />
-          </div>
-
-          {/* Фото профиля */}
-          <div className={styles.inputWrapper}>
-            <label className={styles.label}>Фото профиля</label>
-            <input
-              id='photo'
-              type='file'
-              {...register("photo", {
-                value: photo,
-              })}
-              accept='image/png, image/jpeg, image/jpg, image/webp'
-              className={styles.inputPhotos}
-              onChange={(event) => changeHandler2(event)}
-              onDragStart={(event) => dragStartHandler2(event)}
-              onDragLeave={(event) => dragLeaveHandler2(event)}
-              onDragOver={(event) => dragStartHandler2(event)}
-              onDrop={(event) => dropHandler2(event)}
-            />
-            <label htmlFor='photo' className={styles.labelPhotos}>
-              {!drag
-                ? "Нажмите или перетащите изображения"
-                : "Отпустите изображения"}
-            </label>
-          </div>
-
-          {/* Предпросмотр фото */}
-          {photo !== undefined && (
-            <div className={styles.photosPreview}>
-              <div className={styles.photo}>
-                <img
-                  src={photo.src}
-                  alt={photo.src}
-                  className={styles.previewPhoto}
-                />
-                <button
-                  type='button'
-                  className={styles.deleteButton}
-                  onClick={deleteImage2}
-                >
-                  ×
-                </button>
-                <p className={styles.photoTitle}>{photo.title}</p>
-              </div>
+        {isUserHaveRights(userStore.user, UserRoles.Admin) && (
+          <form
+            className={styles.addForm}
+            id='kitchenForm'
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            {/* Имя */}
+            <div className={styles.inputWrapper}>
+              <label htmlFor='firstName' className={styles.label}>
+                Имя
+              </label>
+              <input
+                type='text'
+                id='firstName'
+                placeholder='Иван'
+                {...register("firstName", {
+                  required: true,
+                })}
+                className={`${styles.textInput} ${styles.fullInput}`}
+              />
             </div>
-          )}
+            {/* Фамилия */}
+            <div className={styles.inputWrapper}>
+              <label htmlFor='lastName' className={styles.label}>
+                Фамилия
+              </label>
+              <input
+                type='text'
+                id='lastName'
+                placeholder='Иванов'
+                {...register("lastName")}
+                className={`${styles.textInput} ${styles.fullInput}`}
+              />
+            </div>
 
-          {/* Текст */}
-          <div className={styles.inputWrapper}>
-            <label htmlFor='text' className={styles.label}>
-              Текст отзыва
-            </label>
-            <textarea
-              id='text'
-              placeholder='Текст отзыва'
-              {...register("text", {
-                required: true,
-              })}
-              className={styles.textArea}
-            />
-          </div>
+            {/* Фото профиля */}
+            <div className={styles.inputWrapper}>
+              <label className={styles.label}>Фото профиля</label>
+              <input
+                id='photo'
+                type='file'
+                {...register("photo", {
+                  value: photo,
+                })}
+                accept='image/png, image/jpeg, image/jpg, image/webp'
+                className={styles.inputPhotos}
+                onChange={(event) => changeHandler2(event)}
+                onDragStart={(event) => dragStartHandler2(event)}
+                onDragLeave={(event) => dragLeaveHandler2(event)}
+                onDragOver={(event) => dragStartHandler2(event)}
+                onDrop={(event) => dropHandler2(event)}
+              />
+              <label htmlFor='photo' className={styles.labelPhotos}>
+                {!drag
+                  ? "Нажмите или перетащите изображения"
+                  : "Отпустите изображения"}
+              </label>
+            </div>
 
-          {/* Фото */}
-          <div className={styles.inputWrapper}>
-            <label className={styles.label}>Фото отзыва</label>
-            <input
-              id='photos'
-              type='file'
-              {...register("photos", {
-                required: true,
-                value: photos,
-              })}
-              accept='image/png, image/jpeg, image/jpg, image/webp'
-              multiple
-              className={styles.inputPhotos}
-              required
-              onChange={(event) => changeHandler(event)}
-              onDragStart={(event) => dragStartHandler(event)}
-              onDragLeave={(event) => dragLeaveHandler(event)}
-              onDragOver={(event) => dragStartHandler(event)}
-              onDrop={(event) => dropHandler(event)}
-            />
-            <label htmlFor='photos' className={styles.labelPhotos}>
-              {!drag
-                ? "Нажмите или перетащите изображения"
-                : "Отпустите изображения"}
-            </label>
-          </div>
-
-          {/* Предпросмотр фото */}
-          {photos.length > 0 && (
-            <div className={styles.photosPreview}>
-              {photos.map((photo, index) => (
-                <div className={styles.photo} key={index}>
+            {/* Предпросмотр фото */}
+            {photo !== undefined && (
+              <div className={styles.photosPreview}>
+                <div className={styles.photo}>
                   <img
                     src={photo.src}
-                    alt={`Фото ${index + 1}`}
+                    alt={photo.src}
                     className={styles.previewPhoto}
                   />
                   <button
                     type='button'
                     className={styles.deleteButton}
-                    onClick={() => deleteImage(photo.title)}
+                    onClick={deleteImage2}
                   >
                     ×
                   </button>
                   <p className={styles.photoTitle}>{photo.title}</p>
                 </div>
-              ))}
+              </div>
+            )}
+
+            {/* Текст */}
+            <div className={styles.inputWrapper}>
+              <label htmlFor='text' className={styles.label}>
+                Текст отзыва
+              </label>
+              <textarea
+                id='text'
+                placeholder='Текст отзыва'
+                {...register("text", {
+                  required: true,
+                })}
+                className={styles.textArea}
+              />
             </div>
-          )}
-        </form>
+
+            {/* Фото */}
+            <div className={styles.inputWrapper}>
+              <label className={styles.label}>Фото отзыва</label>
+              <input
+                id='photos'
+                type='file'
+                {...register("photos", {
+                  required: true,
+                  value: photos,
+                })}
+                accept='image/png, image/jpeg, image/jpg, image/webp'
+                multiple
+                className={styles.inputPhotos}
+                required
+                onChange={(event) => changeHandler(event)}
+                onDragStart={(event) => dragStartHandler(event)}
+                onDragLeave={(event) => dragLeaveHandler(event)}
+                onDragOver={(event) => dragStartHandler(event)}
+                onDrop={(event) => dropHandler(event)}
+              />
+              <label htmlFor='photos' className={styles.labelPhotos}>
+                {!drag
+                  ? "Нажмите или перетащите изображения"
+                  : "Отпустите изображения"}
+              </label>
+            </div>
+
+            {/* Предпросмотр фото */}
+            {photos.length > 0 && (
+              <div className={styles.photosPreview}>
+                {photos.map((photo, index) => (
+                  <div className={styles.photo} key={index}>
+                    <img
+                      src={photo.src}
+                      alt={`Фото ${index + 1}`}
+                      className={styles.previewPhoto}
+                    />
+                    <button
+                      type='button'
+                      className={styles.deleteButton}
+                      onClick={() => deleteImage(photo.title)}
+                    >
+                      ×
+                    </button>
+                    <p className={styles.photoTitle}>{photo.title}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </form>
+        )}
       </div>
     </div>
   );

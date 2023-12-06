@@ -21,6 +21,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { IKitchen } from "@/types/IKitchen";
 import KitchenService from "@/services/KitchenService";
+import { IError } from "@/types/IError";
 
 interface ISelectOptions {
   value: string;
@@ -101,7 +102,7 @@ const NewKitchenPage = () => {
     readonly IReadonlySelectOptions[] | unknown[]
   >([]);
   // Ошибка
-  const [error, setError] = useState<any>({});
+  const [error, setError] = useState<IError>({ isError: false, value: "" });
 
   // Срок
   const [termValue, setTermValue] = useState("");
@@ -168,7 +169,7 @@ const NewKitchenPage = () => {
           setValue("type", kitchenPayload.type);
         } catch (error) {
           setError({
-            error: true,
+            isError: true,
             value: texts.addOrChangeErrorText,
           });
         }
@@ -236,7 +237,7 @@ const NewKitchenPage = () => {
     });
     if (response.status === 200) {
       setError({
-        error: false,
+        isError: false,
         value: texts.successText,
       });
       reset({
@@ -253,14 +254,14 @@ const NewKitchenPage = () => {
       setPhotos([]);
     } else {
       setError({
-        error: true,
+        isError: true,
         value: texts.errorText,
       });
     }
   };
 
-  const isSuccess = (error: any) => {
-    return error.error === true ? styles.error : styles.success;
+  const isSuccess = (error: IError) => {
+    return error.isError === true ? styles.error : styles.success;
   };
 
   return (

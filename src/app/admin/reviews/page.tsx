@@ -11,6 +11,8 @@ import Link from "next/link";
 import Icon from "@/shared/IconsComponents/Icon";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import Review from "@/widgets/Reviews/Review";
+import { isUserHaveRights } from "@/features/isUserHaveRights";
+import { UserRoles } from "@/types/UserRoles";
 
 // Тексты
 const texts = {
@@ -31,7 +33,10 @@ const ReviewsPage = () => {
   }, []);
 
   const removeReview = async (id: string) => {
-    if (localStorage.getItem("token")) {
+    if (
+      localStorage.getItem("token") &&
+      isUserHaveRights(userStore.user, UserRoles.Admin)
+    ) {
       dispatch(deleteReview(id));
     }
   };
@@ -64,9 +69,11 @@ const ReviewsPage = () => {
           <h2 className={styles.title}>
             {texts.titleText} ({reviewStore.reviews.length})
           </h2>
-          <Link href={"/admin/reviews/new"} className={styles.addButton}>
-            {texts.buttonText}
-          </Link>
+          {isUserHaveRights(userStore.user, UserRoles.Admin) && (
+            <Link href={"/admin/reviews/new"} className={styles.addButton}>
+              {texts.buttonText}
+            </Link>
+          )}
         </div>
         <div className={styles.reviews}>
           {reviewStore.reviews &&
@@ -75,13 +82,15 @@ const ReviewsPage = () => {
               .reverse()
               .map((review, index) => (
                 <div className={styles.reviewLink} key={index}>
-                  <button
-                    type='button'
-                    className={styles.removeReviewButton}
-                    onClick={() => removeReview(review._id)}
-                  >
-                    <Icon icon={Icons.remove(styles.removeIcon)} />
-                  </button>
+                  {isUserHaveRights(userStore.user, UserRoles.Admin) && (
+                    <button
+                      type='button'
+                      className={styles.removeReviewButton}
+                      onClick={() => removeReview(review._id)}
+                    >
+                      <Icon icon={Icons.remove(styles.removeIcon)} />
+                    </button>
+                  )}
                   <Link href={`/admin/reviews/${review._id}`}>
                     <Review review={review} />
                   </Link>

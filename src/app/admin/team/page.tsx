@@ -12,6 +12,8 @@ import { Icons } from "@/shared/IconsComponents/Icons";
 import Review from "@/widgets/Reviews/Review";
 import { deleteWorker, getWorkers } from "@/store/worker.slice";
 import Worker from "@/widgets/Worker/Worker";
+import { isUserHaveRights } from "@/features/isUserHaveRights";
+import { UserRoles } from "@/types/UserRoles";
 
 // Тексты
 const texts = {
@@ -32,7 +34,10 @@ const TeamPage = () => {
   }, []);
 
   const removeWorker = async (id: string) => {
-    if (localStorage.getItem("token")) {
+    if (
+      localStorage.getItem("token") &&
+      isUserHaveRights(userStore.user, UserRoles.Admin)
+    ) {
       dispatch(deleteWorker(id));
     }
   };
@@ -65,9 +70,11 @@ const TeamPage = () => {
           <h2 className={styles.title}>
             {texts.titleText} ({workersStore.workers.length})
           </h2>
-          <Link href={"/admin/team/new"} className={styles.addButton}>
-            {texts.buttonText}
-          </Link>
+          {isUserHaveRights(userStore.user, UserRoles.Admin) && (
+            <Link href={"/admin/team/new"} className={styles.addButton}>
+              {texts.buttonText}
+            </Link>
+          )}
         </div>
         <div className={styles.workers}>
           {workersStore.workers &&
@@ -76,13 +83,15 @@ const TeamPage = () => {
               .reverse()
               .map((worker, index) => (
                 <div className={styles.workerLink} key={index}>
-                  <button
-                    type='button'
-                    className={styles.removeWorkerButton}
-                    onClick={() => removeWorker(worker._id)}
-                  >
-                    <Icon icon={Icons.remove(styles.removeIcon)} />
-                  </button>
+                  {isUserHaveRights(userStore.user, UserRoles.Admin) && (
+                    <button
+                      type='button'
+                      className={styles.removeWorkerButton}
+                      onClick={() => removeWorker(worker._id)}
+                    >
+                      <Icon icon={Icons.remove(styles.removeIcon)} />
+                    </button>
+                  )}
                   <Link href={`/admin/team/${worker._id}`}>
                     <Worker worker={worker} />
                   </Link>

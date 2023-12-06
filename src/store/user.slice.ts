@@ -1,8 +1,11 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
 import type { IUser } from '@/types/IUser';
 import AuthService from '@/services/AuthService';
 import axios from 'axios';
 import type { AuthResponse } from '@/types/response/AuthResponse';
+import AdminService from '@/services/AdminService';
+import { useAppSelector } from './hooks';
+import { UserRoles } from '@/types/UserRoles';
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
@@ -15,15 +18,22 @@ interface TInitialState {
   user: IUser,
   isAuth: boolean,
   isLoading: boolean,
+  users: IUser[];
 	error: null | string,
 };
 
 const initialState: TInitialState = {
 	user: {
     email: '',
-    id: '',
+    _id: '',
     isActivated: false,
+    role: {
+      value: UserRoles.User,
+      label: 'Пользователь'
+    },
+    activationLink: '',
   },
+  users: [],
   isAuth: false,
   isLoading: false,
 	error: null,
@@ -42,6 +52,12 @@ const userSlice = createSlice({
     setLoading (state, action: {payload: boolean, type: string}) {
       state.isLoading = action.payload;
     },
+    setUsers (state, action: { payload: IUser[], type: string }) {
+      state.users = action.payload;
+    },
+    addNewUser (state, action: { payload: IUser, type: string }) {
+      state.users.push(action.payload);
+    },
 	},
 	extraReducers: (builder) => {
 
@@ -53,6 +69,7 @@ const userSlice = createSlice({
       if(action.payload) {
         state.user = action.payload;
         state.isAuth = true;
+        state.isLoading = false;
       }
       state.isLoading = false;
 		});
@@ -70,6 +87,7 @@ const userSlice = createSlice({
       if(action.payload) {
         state.user = action.payload;
         state.isAuth = true;
+        state.isLoading = false;
       }
       state.isLoading = false;
 		});
@@ -87,6 +105,7 @@ const userSlice = createSlice({
       if(action.payload) {
         state.user = action.payload;
         state.isAuth = true;
+        state.isLoading = false;
       }
       state.isLoading = false;
 		});
@@ -96,7 +115,7 @@ const userSlice = createSlice({
 			state.isLoading = false;
 		});
 
-    // Check auth
+    // Logout
 		builder.addCase(logout.pending, (state) => {
 			state.isLoading = true;
 		});
@@ -106,6 +125,44 @@ const userSlice = createSlice({
       state.isLoading = false;
 		});
 		builder.addCase(logout.rejected, (state, action) => {
+			const error: any = action.payload;
+			state.error = error;
+			state.isLoading = false;
+		});
+
+    // Get users
+		builder.addCase(getUsers.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(getUsers.fulfilled, (state, action) => {
+      if(action.payload){
+        const myUser = action.payload.find(user => current(state.user)._id === user._id);
+
+        if(myUser){
+          const usersWithoutMe = action.payload.filter(user => user._id !== myUser._id);
+          state.users = [myUser, ...usersWithoutMe];
+        } else {
+          state.users = action.payload;
+        }
+      }
+      state.isLoading = false;
+		});
+		builder.addCase(getUsers.rejected, (state, action) => {
+			const error: any = action.payload;
+			state.error = error;
+			state.isLoading = false;
+		});
+
+    // Delete user
+		builder.addCase(deleteUser.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(deleteUser.fulfilled, (state, action) => {
+      const newUsers = state.users.filter(user => user._id !== action.payload?._id);
+      state.users = newUsers;
+      state.isLoading = false;
+		});
+		builder.addCase(deleteUser.rejected, (state, action) => {
 			const error: any = action.payload;
 			state.error = error;
 			state.isLoading = false;
@@ -120,8 +177,35 @@ async ({email, password}: ILogin) => {
       const response = await AuthService.login(email, password);
 
       localStorage.setItem('token', response.data.accessToken);
-
       return response.data.user;
+    } catch (error) {
+      console.log(error);
+    }
+});
+
+export const getUsers = createAsyncThunk(
+  'user/getUsers',
+async (user: IUser) => {
+    try {
+
+      if(user.role.value !== UserRoles.Admin){
+        console.log('У вас нет прав администратора');
+        return;
+      }
+
+      const response = await AdminService.getUsers();
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+});
+
+export const deleteUser = createAsyncThunk(
+  'user/deleteUser',
+async (id: string) => {
+    try {
+      const response = await AdminService.deleteUser(id);
+      return response.data;
     } catch (error) {
       console.log(error);
     }
@@ -160,9 +244,7 @@ export const checkAuth = createAsyncThunk('user/checkAuth', async () => {
       withCredentials: true,
     });
 
-
     localStorage.setItem('token', response.data.accessToken);
-
     return response.data.user;
   } catch (error) {
     console.log(error);

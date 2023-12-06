@@ -27,6 +27,8 @@
 .error {
   font-size: rem(20);
   color: red;
+  margin-top: rem(20);
+  cursor: text;
 }
 .success {
   font-size: rem(20);
@@ -325,4 +327,61 @@
   height: 100%;
   border-radius: rem(8);
   margin-left: rem(20);
+}
+.admins {
+  display: flex;
+  flex-direction: column;
+  gap: rem(20);
+  margin-top: rem(30);
+}
+.adminWrapper {
+  position: relative;
+}
+.admin {
+  background-color: #fff;
+  padding: rem(10) rem(20);
+  border-radius: rem(6);
+  display: flex;
+  align-items: center;
+  gap: rem(10);
+  position: relative;
+}
+.adminRole {
+  @include gilroy(400);
+  font-size: rem(18);
+  padding: 0;
+  cursor: pointer;
+
+  &.isAdmin {
+    color: #f11111;
+  }
+
+  &.isEditor {
+    color: #18b018;
+  }
+}
+.adminText {
+  @include gilroy(400);
+  font-size: rem(16);
+  color: #000;
+  cursor: pointer;
+}
+.removeAdminButton {
+  background-color: #fff;
+  padding: rem(10);
+  border-radius: rem(8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1/1;
+  position: absolute;
+  top: 50%;
+  right: rem(20);
+  transform: translate(0, -50%);
+  z-index: 10;
+  border: 1px solid #000;
+}
+.adminValue {
+  font-size: rem(20);
+  color: #fff;
 }

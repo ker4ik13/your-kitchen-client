@@ -9,6 +9,8 @@ import { useAppDispatch } from "@/store/hooks";
 import { logout } from "@/store/user.slice";
 import type { IUserStore } from "@/store/store.d";
 import Unavailable from "@/shared/Unavailable/Unavailable";
+import { UserRoles } from "@/types/UserRoles";
+import { isUserHaveRights } from "@/features/isUserHaveRights";
 
 interface AdminSidebarProps {
   store: IUserStore;
@@ -29,10 +31,12 @@ const AdminSidebar: FC<AdminSidebarProps> = ({ store }) => {
         <Logo />
         <h2 className={styles.name}>{store.user ? store.user.email : ""}</h2>
         <div className={styles.links}>
-          <Link href={"/admin/claims"} className={isActive("claims")}>
-            <Icon icon={Icons.docs(styles.icon)} />
-            <p>Заявки</p>
-          </Link>
+          {isUserHaveRights(store.user, UserRoles.Admin) && (
+            <Link href={"/admin/claims"} className={isActive("claims")}>
+              <Icon icon={Icons.docs(styles.icon)} />
+              <p>Заявки</p>
+            </Link>
+          )}
           <Link href={"/admin/kitchens"} className={isActive("kitchens")}>
             <Icon icon={Icons.kitchen(styles.icon)} />
             <p>Кухни</p>
@@ -45,12 +49,12 @@ const AdminSidebar: FC<AdminSidebarProps> = ({ store }) => {
             <Icon icon={Icons.team(styles.icon)} />
             <p>Команда</p>
           </Link>
-          <Unavailable>
+          {isUserHaveRights(store.user, UserRoles.Admin) && (
             <Link href={"/admin/admins"} className={isActive("admins")}>
               <Icon icon={Icons.team(styles.icon)} />
               <p>Администраторы</p>
             </Link>
-          </Unavailable>
+          )}
         </div>
       </div>
       <button
