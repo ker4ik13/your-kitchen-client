@@ -10,6 +10,8 @@ import { logout } from "@/store/user.slice";
 import type { IUserStore } from "@/store/store.d";
 import { UserRoles } from "@/types/UserRoles";
 import { isUserHaveRights } from "@/features/isUserHaveRights";
+import { IoMdPhotos } from "react-icons/io";
+import { MdArticle, MdOutlineRateReview } from "react-icons/md";
 
 interface AdminSidebarProps {
   store: IUserStore;
@@ -41,7 +43,7 @@ const AdminSidebar: FC<AdminSidebarProps> = ({ store }) => {
             <p>Кухни</p>
           </Link>
           <Link href={"/admin/reviews"} className={isActive("reviews")}>
-            <Icon icon={Icons.reviews(styles.icon)} />
+            <MdOutlineRateReview />
             <p>Отзывы</p>
           </Link>
           <Link href={"/admin/team"} className={isActive("team")}>
@@ -54,9 +56,13 @@ const AdminSidebar: FC<AdminSidebarProps> = ({ store }) => {
               <p>Администраторы</p>
             </Link>
           )}
-          <Link href={"/admin/articles"} className={isActive("team")}>
-            <Icon icon={Icons.reviews(styles.icon)} />
+          <Link href={"/admin/articles"} className={isActive("articles")}>
+            <MdArticle />
             <p>Статьи</p>
+          </Link>
+          <Link href={"/admin/gallery"} className={isActive("gallery")}>
+            <IoMdPhotos />
+            <p>Галерея</p>
           </Link>
         </div>
       </div>

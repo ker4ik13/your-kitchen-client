@@ -4,6 +4,7 @@ import { claimsReducer } from './claims.slice';
 import { kitchensReducer } from './kitchens.slice';
 import { reviewReducer } from './reviews.slice';
 import { workerReducer } from './worker.slice';
+import { photoReducer } from './photo.slice';
 
 const store = configureStore({
 	reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     kitchens: kitchensReducer,
     reviews: reviewReducer,
     workers: workerReducer,
+    photos: photoReducer,
 	},
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

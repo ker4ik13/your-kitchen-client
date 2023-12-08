@@ -6,7 +6,8 @@
   gap: rem(6);
   margin-bottom: rem(10);
   padding: rem(6);
-  border-radius: rem(12);
+  padding-bottom: rem(6);
+  border-bottom: rem(2) solid rgba(0, 0, 0, 0.2);
 
   & button {
     padding: rem(4);

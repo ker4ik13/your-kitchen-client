@@ -187,6 +187,21 @@
     }
   }
 }
+.photoHeader {
+  height: 100%;
+  width: 100%;
+  scroll-snap-align: start;
+  border-radius: rem(8);
+  position: relative;
+  aspect-ratio: 1/1.3;
+  overflow: hidden;
+
+  &:hover {
+    .photoTitle {
+      transform: translate(0);
+    }
+  }
+}
 .previewPhoto {
   height: 100%;
   width: 100%;
@@ -206,6 +221,33 @@
   padding: rem(10);
   line-height: 0.5;
   border-radius: rem(8);
+}
+.copyButton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  color: #fff;
+  @include gilroy(400);
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: rem(30);
+  padding: rem(10);
+  max-width: rem(36);
+  aspect-ratio: 1/1;
+  width: 100%;
+  line-height: 0.5;
+  border-radius: rem(8);
+
+  & svg {
+    width: 100%;
+    height: 100%;
+    transition: 0.2s;
+  }
+
+  &.success {
+    color: green;
+  }
 }
 .photoTitle {
   position: absolute;
@@ -392,6 +434,7 @@
   min-height: rem(500);
   border-radius: rem(6);
   padding-top: rem(10);
+  margin-top: rem(50);
 
   & div:last-child {
     height: 100%;
@@ -399,7 +442,6 @@
     padding: rem(10);
     min-height: rem(400);
     cursor: text;
-    background-color: #efefef;
     border-radius: rem(6);
 
     outline: none;
@@ -501,4 +543,22 @@
 }
 .bulletList {
   color: red;
+}
+.photos {
+  display: flex;
+  gap: rem(30);
+  flex-wrap: wrap;
+  margin-top: rem(30);
+}
+.photoPreview {
+  flex: 0 0 30%;
+  border-radius: rem(8);
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    .photoTitle {
+      transform: translate(0);
+    }
+  }
 }
