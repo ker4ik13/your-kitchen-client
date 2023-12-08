@@ -8,7 +8,6 @@ import { Icons } from "@/shared/IconsComponents/Icons";
 import { useAppDispatch } from "@/store/hooks";
 import { logout } from "@/store/user.slice";
 import type { IUserStore } from "@/store/store.d";
-import Unavailable from "@/shared/Unavailable/Unavailable";
 import { UserRoles } from "@/types/UserRoles";
 import { isUserHaveRights } from "@/features/isUserHaveRights";
 
@@ -55,6 +54,10 @@ const AdminSidebar: FC<AdminSidebarProps> = ({ store }) => {
               <p>Администраторы</p>
             </Link>
           )}
+          <Link href={"/admin/articles"} className={isActive("team")}>
+            <Icon icon={Icons.reviews(styles.icon)} />
+            <p>Статьи</p>
+          </Link>
         </div>
       </div>
       <button
