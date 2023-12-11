@@ -13,7 +13,7 @@ import { IError } from "@/types/IError";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Image as EditorImage } from "@tiptap/extension-image";
-import EditorButtons from "@/widgets/AdminSidebar/EditorButtons/EditorButtons";
+import EditorButtons from "@/widgets/EditorButtons/EditorButtons";
 import { Link as EditorLink } from "@tiptap/extension-link";
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
@@ -23,6 +23,7 @@ import $api from "@/http";
 interface TInputs {
   title: string;
   preview: string;
+  onMainPage: boolean;
 }
 
 // Тексты
@@ -158,21 +159,17 @@ const NewArticlePage = () => {
   const onSubmit: SubmitHandler<TInputs> = async (data) => {
     const form = new FormData();
 
-    console.log({
-      title: data.title,
-      preview: data.preview,
-      content: editor.getHTML(),
-    });
-
     form.append("title", data.title);
-    form.append("file", data.preview);
+    form.append("files", file);
     form.append("content", editor.getHTML());
+    form.append("onMainPage", JSON.stringify(data.onMainPage));
 
     const response = await $api.post("/articles", form, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
+    console.log(response);
     if (response.status === 201) {
       setError({
         isError: false,
@@ -204,9 +201,6 @@ const NewArticlePage = () => {
 
   const isSuccess = (error: IError) => {
     return error.isError === true ? styles.error : styles.success;
-  };
-  const getEditorValue = () => {
-    console.log(editor?.getHTML());
   };
 
   return (
@@ -270,6 +264,19 @@ const NewArticlePage = () => {
                 ? "Нажмите или перетащите изображения"
                 : "Отпустите изображения"}
             </label>
+          </div>
+
+          {/* На главной */}
+          <div className={styles.inputWrapper}>
+            <label htmlFor='onMainPage' className={styles.label}>
+              На главной странице
+            </label>
+            <input
+              type='checkbox'
+              {...register("onMainPage")}
+              id='onMainPage'
+              className={styles.checkboxInput}
+            />
           </div>
 
           {/* Предпросмотр фото */}
