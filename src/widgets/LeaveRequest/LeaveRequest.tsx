@@ -116,8 +116,9 @@ const LeaveRequest = ({
             </div>
           </div>
           <p className={styles.text}>
-            чтобы договориться о выезде на замер кухни. Выезд{" "}
-            <span>бесплатный</span> и возможен в этот же день
+            чтобы <span>рассчитать стоимость кухни</span> по телефону или
+            договориться о выезде на замер кухни.
+            <br /> Выезд <span>бесплатный</span> и возможен в этот же день
           </p>
           <form className={styles.formWrapper}>
             <div className={styles.inputsWrapper}>
@@ -196,7 +197,7 @@ const LeaveRequest = ({
               className={styles.button}
               onClick={handleSubmit(onSubmitLeaveRequest)}
             >
-              {buttonText || "Получить 3D проект и скидку"}
+              {buttonText || "Рассчитать стоимость"}
             </button>
           </div>
         </div>
@@ -239,8 +240,9 @@ const LeaveRequest = ({
             </div>
           </div>
           <p className={styles.text}>
-            чтобы договориться о выезде на замер кухни. Выезд{" "}
-            <span>бесплатный</span> и возможен в этот же день
+            чтобы <span>рассчитать стоимость кухни</span> по телефону или
+            договориться о выезде на замер кухни.
+            <br /> Выезд <span>бесплатный</span> и возможен в этот же день
           </p>
           <form className={styles.formWrapper}>
             <div className={styles.inputsWrapper}>
@@ -319,7 +321,7 @@ const LeaveRequest = ({
               className={styles.button}
               onClick={handleSubmit(onSubmitLeaveRequest)}
             >
-              {buttonText || "Получить 3D проект и скидку"}
+              {buttonText || "Рассчитать стоимость"}
             </button>
           </div>
         </div>
