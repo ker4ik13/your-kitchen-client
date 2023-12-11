@@ -33,7 +33,7 @@ const HelloScreen = ({ setIsOpen }: HelloScreenProps) => {
             document.body.classList.add("overflow");
           }}
         >
-          Получить 3D проект и скидку
+          Рассчитать стоимость
         </button>
       </div>
     </div>
