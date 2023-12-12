@@ -22,7 +22,7 @@ const Reviews = () => {
 
   useEffect(() => {
     getReviews();
-  });
+  }, []);
 
   return (
     <div className={styles.reviewsPage} id='reviews'>
