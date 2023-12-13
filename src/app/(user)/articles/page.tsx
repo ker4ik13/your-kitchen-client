@@ -1,7 +1,7 @@
-import ArticlesPage from "@/pages/ArticlesPage";
 import UserArticleService from "@/services/UserArticleService";
+import { LeaveRequestBlock } from "@/shared/LeaveRequestBlock";
 import { renderSeo } from "@/shared/renderSeo";
-import { type IArticle } from "@/types/IArticle";
+import Articles from "@/widgets/Articles/Articles";
 
 export const metadata = renderSeo({
   title: "Статьи",
@@ -9,13 +9,19 @@ export const metadata = renderSeo({
   keywords: "Статьи",
 });
 
-const getArticles = async (): Promise<IArticle[]> => {
-  return await UserArticleService.getArticles();
+const getArticles = async () => {
+  const result = await UserArticleService.getArticles();
+  return result;
 };
 
 const page = async () => {
   const articles = await getArticles();
-  return <ArticlesPage articles={articles} />;
+  return (
+    <>
+      <Articles articles={articles} />
+      <LeaveRequestBlock />
+    </>
+  );
 };
 
 export default page;

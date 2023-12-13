@@ -1,15 +1,23 @@
+"use client";
+
 import { type IArticle } from "@/types/IArticle";
 import styles from "./Articles.module.scss";
 import ArticleCard from "./ArticleCard";
 import Icon from "@/shared/IconsComponents/Icon";
 import { ChevronDirection, Icons } from "@/shared/IconsComponents/Icons";
+import { useState } from "react";
 
 type Props = {
   articles: IArticle[];
-  onMainPage?: boolean;
 };
 
-const Articles = ({ articles, onMainPage }: Props) => {
+const Articles = ({ articles }: Props) => {
+  const [articlesPerPage, setArticlePerPage] = useState(9);
+
+  const showMore = () => {
+    setArticlePerPage((prev) => prev + 9);
+  };
+
   return (
     <div className={styles.articlesPage}>
       <div className={styles.container}>
@@ -21,10 +29,14 @@ const Articles = ({ articles, onMainPage }: Props) => {
             актуальных тем и публикуем полезную информацию.
           </h2>
         </div>
-        {articles && articles.length > 0 && (
+        {articles && articles.length !== 0 && (
           <div className={styles.articles}>
-            {articles.map((article) => (
-              <ArticleCard article={article} key={article._id} />
+            {articles.slice(0, articlesPerPage).map((article) => (
+              <ArticleCard
+                article={article}
+                href={`/articles/${article._id}`}
+                key={article._id}
+              />
             ))}
           </div>
         )}
@@ -32,16 +44,18 @@ const Articles = ({ articles, onMainPage }: Props) => {
           (articles.length === 0 && (
             <p className={styles.error}>Статей пока нет</p>
           ))}
-        {/* {sliceNumber < articles.length && (
-          <button
-            type='button'
-            className={styles.moreButton}
-            onClick={handleShowMore}
-          >
-            Показать еще
-            <Icon icon={Icons.chevron(ChevronDirection.Down)} />
-          </button>
-        )} */}
+        {articles.length > articlesPerPage && (
+          <div className={styles.buttonWrapper}>
+            <button
+              type='button'
+              className={styles.orangeButton}
+              onClick={showMore}
+            >
+              Показать еще
+              <Icon icon={Icons.chevron(ChevronDirection.Down)} />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

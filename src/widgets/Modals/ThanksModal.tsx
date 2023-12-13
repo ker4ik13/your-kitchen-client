@@ -19,7 +19,7 @@ const ThanksModal = ({ setIsOpen }: ThanksModalProps) => {
           onClick={(event) => event.stopPropagation()}
         >
           <button
-            type="button"
+            type='button'
             className={styles.closeButton2}
             onClick={() => {
               setIsOpen(false);

@@ -115,7 +115,6 @@ const NewPhotosPage = () => {
   const onSubmit = async () => {
     const form = new FormData();
 
-    console.log("here");
     // Добавление всех фото
     files.forEach((file) => {
       form.append(`files`, file);

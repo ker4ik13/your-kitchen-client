@@ -482,23 +482,23 @@
   }
 
   & h2 {
-    font-size: rem(34);
+    font-size: rem(36);
   }
 
   & h3 {
-    font-size: rem(28);
+    font-size: rem(32);
   }
 
   & h4 {
-    font-size: ren(24);
+    font-size: rem(28);
   }
 
   & h5 {
-    font-size: rem(20);
+    font-size: rem(24);
   }
 
   & h6 {
-    font-size: rem(18);
+    font-size: rem(22);
   }
 
   & code {
@@ -526,8 +526,16 @@
   }
 
   & img {
-    max-width: 100%;
-    height: auto;
+    margin: rem(50) auto;
+    max-width: rem(720);
+    width: 100%;
+    max-height: rem(300);
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+    border-radius: rem(6);
   }
 
   & blockquote {

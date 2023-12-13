@@ -1,16 +1,18 @@
 import { type IArticle } from "@/types/IArticle";
 import styles from "./Articles.module.scss";
 import Image from "next/image";
-import Link from "next/link";
 import { VscEye } from "react-icons/vsc";
+import { FiArrowUpRight } from "react-icons/fi";
+import Link from "next/link";
 
 type Props = {
   article: IArticle;
+  href: string;
 };
 
-const ArticleCard = ({ article }: Props) => {
+const ArticleCard = ({ article, href }: Props) => {
   return (
-    <Link href={`/articles/${article._id}`} className={styles.articleCard}>
+    <Link href={href} target='_blank' className={styles.articleLink}>
       <div className={styles.imageWrapper}>
         <Image
           src={article.preview}
@@ -20,21 +22,17 @@ const ArticleCard = ({ article }: Props) => {
           className={styles.image}
         />
         <div className={styles.viewCount}>
-          <p className={styles.viewCountNumber}>
-            {article.viewCount}
+          <p className={styles.viewCountNumber}>{article.viewCount || 0}</p>
+          <div>
             <VscEye />
-          </p>
+          </div>
         </div>
       </div>
-      <div className={styles.content}>
+      <div className={styles.cardTitleWrapper}>
         <h3 className={styles.cardTitle}>{article.title}</h3>
-        <div
-          className={styles.cardDescription}
-          dangerouslySetInnerHTML={{
-            __html: article.content,
-          }}
-        ></div>
+        <FiArrowUpRight />
       </div>
+      <p className={styles.cardDescription}>{article.description}</p>
     </Link>
   );
 };

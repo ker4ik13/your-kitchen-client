@@ -18,34 +18,41 @@ import { Link as EditorLink } from "@tiptap/extension-link";
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
 import $api from "@/http";
+import { useParams } from "next/navigation";
+import Link from "next/link";
+import { type IArticle } from "@/types/IArticle";
+import ArticleService from "@/services/ArticleService";
 
 // Поля формы
 interface TInputs {
   title: string;
   description: string;
-  preview: string;
   onMainPage: boolean;
-  viewCount: number;
 }
 
 // Тексты
 const texts = {
   notFoundText: "Статья не найдена",
-  buttonText: "Добавить",
-  titleText: "Добавить статью",
-  addOrChangeErrorText: "Ошибка добавления статьи. Попробуйте еще раз",
+  buttonText: "Изменить",
+  titleText: "Изменить статью",
+  addOrChangeErrorText: "Ошибка изменения статьи. Попробуйте еще раз",
   errorText: "Что-то пошло не так. Попробуйте еще раз",
-  successText: "Статья успешно добавлена",
+  successText: "Статья успешно изменена",
 };
 
-const NewArticlePage = () => {
-  const { register, handleSubmit, reset } = useForm<TInputs>();
+const ArticlePage = () => {
+  const path = useParams();
+
+  const { register, handleSubmit, reset, setValue } = useForm<TInputs>();
   const userStore = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
+  const articleStore = useAppSelector((store) => store.articles);
 
   const [photo, setPhoto] = useState<any>();
+  const [files, setFiles] = useState<File[]>([]);
   const [file, setFile] = useState<File>({} as File);
-  const [drag, setDrag] = useState(false);
+
+  const [article, setArticle] = useState<IArticle>({} as IArticle);
 
   const editor = useEditor({
     extensions: [
@@ -63,7 +70,7 @@ const NewArticlePage = () => {
         types: ["heading", "paragraph"],
       }),
     ],
-    content: `<h1>Контент</h1>`,
+    content: article.content || articleStore.article.content,
   });
 
   // Ошибка
@@ -74,6 +81,16 @@ const NewArticlePage = () => {
       dispatch(checkAuth());
     }
   }, []);
+
+  useEffect(() => {
+    if (path && typeof path.id === "string") {
+      getProduct(path.id);
+    }
+  }, []);
+
+  useEffect(() => {
+    editor?.commands.setContent(article.content);
+  }, [editor, article.content]);
 
   const setLink = useCallback(() => {
     const previousUrl = editor?.getAttributes("link").href;
@@ -100,43 +117,61 @@ const NewArticlePage = () => {
       .run();
   }, [editor]);
 
-  if (!editor) {
-    return null;
+  if (!path || !path.id) {
+    return (
+      <div className={styles.kitchensPage}>
+        <div className={styles.container}>
+          <p className={styles.title}>{texts.notFoundText}</p>
+          <Link href='/admin/articles'>Назад</Link>
+        </div>
+      </div>
+    );
   }
 
-  // Обработчик фото
-  const getPhotoFromFiles = (event: any, file: any) => {
-    let photo = {
-      title: file.name,
-      src: URL.createObjectURL(file),
-    };
+  const getProduct = async (id: string) => {
+    const articleById = articleStore.articles.find(
+      (article) => article._id === path.id,
+    );
 
-    setPhoto(photo);
-  };
+    if (articleById) {
+      setArticle(articleById);
+      setPhoto(articleById.preview);
 
-  // Обработчики
-  const dragStartHandler2 = (event: any) => {
-    event.preventDefault();
-    setDrag(true);
-  };
-  const dragLeaveHandler2 = (event: any) => {
-    event.preventDefault();
-    setDrag(false);
-  };
-  const dropHandler2 = (event: any) => {
-    event.preventDefault();
-    setDrag(false);
-    let file = event.dataTransfer.files[0];
-    setFile(file);
+      setValue("title", articleById.title);
+      setValue("description", articleById.description);
+      // setValue("viewCount", articleById.viewCount);
 
-    if (file !== undefined) {
-      getPhotoFromFiles(event, file);
+      setValue("onMainPage", articleById.onMainPage);
+
+      editor?.commands.setContent(articleById.content);
+    } else {
+      if (typeof path.id === "string") {
+        try {
+          const articlePayload = await ArticleService.getArticle(path.id);
+
+          setArticle(articlePayload);
+          setPhoto(articlePayload.preview);
+
+          setValue("title", articlePayload.title);
+          setValue("description", articlePayload.description);
+          // setValue("viewCount", articlePayload.viewCount);
+
+          setValue("onMainPage", articlePayload.onMainPage);
+
+          editor?.commands.setContent(articlePayload.content);
+        } catch (error) {
+          setError({
+            isError: true,
+            value: texts.addOrChangeErrorText,
+          });
+        }
+      }
     }
   };
 
-  const deleteImage = () => {
-    setPhoto({});
-  };
+  if (!editor) {
+    return null;
+  }
 
   if (userStore.isLoading) {
     return (
@@ -159,33 +194,26 @@ const NewArticlePage = () => {
   }
 
   const onSubmit: SubmitHandler<TInputs> = async (data) => {
-    const form = new FormData();
-
-    form.append("title", data.title);
-    form.append("description", data.description);
-    form.append("files", file);
-    form.append("content", editor.getHTML());
-    form.append("onMainPage", JSON.stringify(data.onMainPage));
-    form.append("viewCount", JSON.stringify(data.viewCount));
-    form.append("author", userStore.user.email);
+    const newArticle = {
+      title: data.title,
+      content: editor.getHTML(),
+      description: data.description,
+      onMainPage: data.onMainPage,
+    };
 
     try {
-      const response = await $api.post("/articles", form, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await $api.patch(`/articles/${article._id}`, newArticle);
       setError({
         isError: false,
         value: texts.successText,
       });
       reset({
-        preview: "",
         title: "",
-        viewCount: 0,
+        // viewCount: 0,
         onMainPage: false,
         description: "",
       });
+      editor.commands.setContent("");
       setFile({} as File);
       setPhoto(undefined);
     } catch (error) {
@@ -193,16 +221,6 @@ const NewArticlePage = () => {
         isError: true,
         value: texts.errorText,
       });
-    }
-  };
-
-  const changeHandler = (event: any) => {
-    event.preventDefault();
-    let file = event.target.files[0];
-    setFile(file);
-
-    if (file !== undefined) {
-      getPhotoFromFiles(event, file);
     }
   };
 
@@ -265,9 +283,9 @@ const NewArticlePage = () => {
           </div>
 
           {/* Количество просмотров */}
-          <div className={styles.inputWrapper}>
+          {/* <div className={styles.inputWrapper}>
             <label htmlFor='title' className={styles.label}>
-              Изначально кол-во просмотров
+              Кол-во просмотров
             </label>
             <input
               type='number'
@@ -276,31 +294,22 @@ const NewArticlePage = () => {
               {...register("viewCount")}
               className={styles.textInput}
             />
-          </div>
+          </div> */}
 
           {/* Обложка */}
           <div className={styles.inputWrapper}>
             <label className={styles.label}>Обложка</label>
-            <input
-              id='photo'
-              type='file'
-              {...register("preview", {
-                value: photo,
-              })}
-              accept='image/png, image/jpeg, image/jpg, image/webp'
-              className={styles.inputPhotos}
-              onChange={(event) => changeHandler(event)}
-              onDragStart={(event) => dragStartHandler2(event)}
-              onDragLeave={(event) => dragLeaveHandler2(event)}
-              onDragOver={(event) => dragStartHandler2(event)}
-              onDrop={(event) => dropHandler2(event)}
-            />
-            <label htmlFor='photo' className={styles.labelPhotos}>
-              {!drag
-                ? "Нажмите или перетащите изображения"
-                : "Отпустите изображения"}
-            </label>
           </div>
+
+          {/* Предпросмотр фото */}
+          {photo && (
+            <div className={styles.photosPreview}>
+              <div className={styles.photoHeader}>
+                <img src={photo} alt={photo} className={styles.previewPhoto} />
+                <p className={styles.photoTitle}>{photo}</p>
+              </div>
+            </div>
+          )}
 
           {/* На главной */}
           <div className={styles.inputWrapper}>
@@ -314,27 +323,6 @@ const NewArticlePage = () => {
               className={styles.checkboxInput}
             />
           </div>
-
-          {/* Предпросмотр фото */}
-          {photo && (
-            <div className={styles.photosPreview}>
-              <div className={styles.photoHeader}>
-                <img
-                  src={photo.src}
-                  alt={photo.src}
-                  className={styles.previewPhoto}
-                />
-                <button
-                  type='button'
-                  className={styles.deleteButton}
-                  onClick={deleteImage}
-                >
-                  ×
-                </button>
-                <p className={styles.photoTitle}>{photo.title}</p>
-              </div>
-            </div>
-          )}
         </form>
 
         <EditorContent editor={editor} className={styles.editor}>
@@ -346,4 +334,4 @@ const NewArticlePage = () => {
   );
 };
 
-export default NewArticlePage;
+export default ArticlePage;

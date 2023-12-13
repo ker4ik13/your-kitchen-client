@@ -3,7 +3,13 @@
 .editorButtons {
   display: flex;
   flex-wrap: wrap;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 10;
   gap: rem(6);
+  background-color: #fff;
   margin-bottom: rem(10);
   padding: rem(6);
   padding-bottom: rem(6);
