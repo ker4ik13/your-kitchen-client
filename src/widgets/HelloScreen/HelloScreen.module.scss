@@ -6,10 +6,7 @@
   max-height: rem(1400);
   background-color: #433a31;
   padding-top: rem(160);
-  background-image: url("../../data/images/bg.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
+  position: relative;
 
   @media (max-width: $max-1400) {
     min-height: rem(800);
@@ -22,11 +19,31 @@
   }
   @media (max-width: $max-1000) {
     min-height: rem(700);
-    background-position: right;
   }
   @media (max-width: $max-700) {
     min-height: rem(600);
-    background-position: 75%;
+  }
+}
+.bgImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+
+  @media (max-width: $max-1000) {
+    -o-object-position: right;
+    object-position: right;
+  }
+
+  @media (max-width: $max-700) {
+    -o-object-position: 75%;
+    object-position: 75%;
   }
 }
 .container {
@@ -35,6 +52,8 @@
   @media (min-width: $max-700) {
     padding-left: rem(56);
   }
+  position: relative;
+  z-index: 2;
 }
 .title {
   @include noto(300);

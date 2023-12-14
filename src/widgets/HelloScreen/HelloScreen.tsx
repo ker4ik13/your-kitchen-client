@@ -3,6 +3,8 @@
 import Icon from "@/shared/IconsComponents/Icon";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import styles from "./HelloScreen.module.scss";
+import Image from "next/image";
+import bgImage from "@/data/images/bg.png";
 
 interface HelloScreenProps {
   setIsOpen: (isOpen: boolean) => void;
@@ -11,6 +13,7 @@ interface HelloScreenProps {
 const HelloScreen = ({ setIsOpen }: HelloScreenProps) => {
   return (
     <div className={styles.helloScreen}>
+      <Image src={bgImage} className={styles.bgImage} alt='Фон' />
       <div className={styles.container}>
         <h1 className={styles.title}>
           Кухни напрямую с фабрики с десятилетней гарантией, в срок от 10 дней
@@ -33,7 +36,7 @@ const HelloScreen = ({ setIsOpen }: HelloScreenProps) => {
             document.body.classList.add("overflow");
           }}
         >
-          Получить 3D проект и скидку
+          Рассчитать стоимость
         </button>
       </div>
     </div>

@@ -36,12 +36,7 @@
   justify-content: space-between;
   gap: rem(40);
   position: relative;
-
-  // TODO: убрать после добавления портфолио и моя команда
-  @media (min-width: $max-1100) {
-    width: 100%;
-    margin-left: 15vw;
-  }
+  width: 100%;
 
   @media (max-width: $max-1100) {
     flex-direction: column;
@@ -71,6 +66,12 @@
   justify-content: center;
   align-self: center;
   gap: rem(28);
+
+  @media (min-width: $max-1100) {
+    position: relative;
+    left: 40%;
+    transform: translate(-50%, 0);
+  }
 
   @media (max-width: $max-1100) {
     flex-direction: column;
