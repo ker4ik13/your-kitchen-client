@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./PreviewPhotos.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";

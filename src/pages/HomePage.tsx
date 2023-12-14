@@ -15,13 +15,11 @@ import dynamic from "next/dynamic";
 import MiniLoading from "@/shared/MiniLoading";
 import styles from "./HomePage.module.scss";
 import Reviews from "@/widgets/Reviews/Reviews";
+import Modal1 from "@/widgets/Modals/Modal1";
+import Modal2 from "@/widgets/Modals/Modal2";
+import { LeaveRequestBlock } from "@/shared/LeaveRequestBlock";
+import { LeaveRequestBlock2 } from "@/shared/LeaveRequestBlock2";
 
-const DynamicModal1 = dynamic(() => import("@/widgets/Modals/Modal1"), {
-  loading: () => <MiniLoading className={styles.loading} />,
-});
-const DynamicModal2 = dynamic(() => import("@/widgets/Modals/Modal2"), {
-  loading: () => <MiniLoading className={styles.loading} />,
-});
 const DynamicOurTeam = dynamic(() => import("@/widgets/OurTeam/OurTeam"), {
   loading: () => <MiniLoading className={styles.loading} />,
 });
@@ -62,28 +60,28 @@ const HomePage = () => {
       <AllVariants setIsOpen={setIsOpenFirst} />
       <PreviewPhotos />
       <Kitchens setIsOpen={setIsOpenCatalog} />
-      <DynamicModal1
+      <Modal1
         isOpen={isOpenFirst}
         setIsOpen={setIsOpenFirst}
         setIsOpenThanks={setIsOpenThanks}
       />
-      <DynamicModal1
+      <Modal1
         isOpen={isOpenCatalog}
         setIsOpen={setIsOpenCatalog}
         setIsOpenThanks={setIsOpenThanks}
         buttonText='Получить каталог'
       />
-      <DynamicModal2
+      <Modal2
         isOpen={isOpenSecond}
         setIsOpen={setIsOpenSecond}
         setIsOpenThanks={setIsOpenThanks}
       />
       <Reviews />
       <DynamicOurTeam />
-      <DynamicLeaveRequest setIsOpenThanks={setIsOpenThanks} />
+      <LeaveRequestBlock />
       <DynamicWhatsNext />
       <DynamicResults />
-      <DynamicLeaveRequest2 setIsOpenThanks={setIsOpenThanks} />
+      <LeaveRequestBlock2 />
       {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <ModalVideo
         isOpen={isOpenVideo}

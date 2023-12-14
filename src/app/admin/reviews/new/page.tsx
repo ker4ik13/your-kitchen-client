@@ -39,8 +39,8 @@ const NewKitchenPage = () => {
   const dispatch = useAppDispatch();
 
   const [photos, setPhotos] = useState<any[]>([]);
-  const [photo, setPhoto] = useState<any>();
   const [files, setFiles] = useState<File[]>([]);
+  const [photo, setPhoto] = useState<any>();
   const [file, setFile] = useState<File>({} as File);
   const [drag, setDrag] = useState(false);
   const [drag2, setDrag2] = useState(false);

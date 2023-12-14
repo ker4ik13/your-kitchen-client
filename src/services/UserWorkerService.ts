@@ -1,6 +1,4 @@
-import $api from "@/http";
 import type { IWorker } from "@/types/IWorker";
-import type { AxiosResponse } from "axios";
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
@@ -24,25 +22,4 @@ export class UserWorkerService {
 
     return workerWithPhotos;
   };
-
-   static async getWorker (id: string): Promise<IWorker> {
-    const response = await $api.get<IWorker>(`/workers/${id}`);
-
-    const returnWorker = {...response.data};
-    returnWorker.photo = `${NEXT_PUBLIC_API_URL}/images/${returnWorker.photo}`
-
-    return returnWorker;
-  }
-
-  static async addWorker (body: object): Promise<AxiosResponse<IWorker>> {
-    return await $api.post<IWorker>(`/workers`, body);
-  }
-
-  static async deleteWorker (id: string): Promise<AxiosResponse<IWorker>> {
-    return await $api.delete<IWorker>(`/workers/${id}`);
-  }
-
-  static async updateWorker (id: string, body: object): Promise<AxiosResponse<IWorker>> {
-    return await $api.patch<IWorker>(`/workers/${id}`, body);
-  }
 }
