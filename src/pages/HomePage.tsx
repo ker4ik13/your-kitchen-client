@@ -19,22 +19,11 @@ import Modal1 from "@/widgets/Modals/Modal1";
 import Modal2 from "@/widgets/Modals/Modal2";
 import { LeaveRequestBlock } from "@/shared/LeaveRequestBlock";
 import { LeaveRequestBlock2 } from "@/shared/LeaveRequestBlock2";
+import MainArticles from "@/widgets/MainArticles/MainArticles";
 
 const DynamicOurTeam = dynamic(() => import("@/widgets/OurTeam/OurTeam"), {
   loading: () => <MiniLoading className={styles.loading} />,
 });
-const DynamicLeaveRequest = dynamic(
-  () => import("@/widgets/LeaveRequest/LeaveRequest"),
-  {
-    loading: () => <MiniLoading className={styles.loading} />,
-  },
-);
-const DynamicLeaveRequest2 = dynamic(
-  () => import("@/widgets/LeaveRequest2/LeaveRequest2"),
-  {
-    loading: () => <MiniLoading className={styles.loading} />,
-  },
-);
 const DynamicWhatsNext = dynamic(
   () => import("@/widgets/WhatsNext/WhatsNext"),
   {
@@ -78,6 +67,7 @@ const HomePage = () => {
       />
       <Reviews />
       <DynamicOurTeam />
+      {/* <MainArticles /> */}
       <LeaveRequestBlock />
       <DynamicWhatsNext />
       <DynamicResults />

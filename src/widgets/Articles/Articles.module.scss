@@ -215,6 +215,10 @@
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0);
 
+  & p {
+    font-size: rem(20);
+  }
+
   &:hover {
     border: 1px solid rgba(255, 255, 255, 0.6);
   }
