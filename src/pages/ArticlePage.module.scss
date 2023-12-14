@@ -431,3 +431,13 @@
     border: 1px solid rgba(255, 255, 255, 0.6);
   }
 }
+.loaderWrapper {
+  height: 100%;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loader {
+  width: rem(100);
+}

@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "@/pages/ArticlePage.module.scss";
 import ArticleService from "@/services/ArticleService";
 import Icon from "@/shared/IconsComponents/Icon";
@@ -8,31 +10,40 @@ import Image from "next/image";
 import Link from "next/link";
 import { VscEye } from "react-icons/vsc";
 import { IoIosArrowBack } from "react-icons/io";
+import { useEffect, useState } from "react";
+import { type IArticle } from "@/types/IArticle";
+import { useParams } from "next/navigation";
+import MiniLoading from "@/shared/MiniLoading";
 
 const CLIENT_URL = "https://youkuhnya.ru";
 
-export const dynamicParams = true;
-export const revalidate = 30;
+const ArticlePage = () => {
+  const path = useParams();
 
-const getArticle = async (id: string) => {
-  return await ArticleService.getArticle(id);
-};
+  const [article, setArticle] = useState<IArticle>({} as IArticle);
+  const [moreArticles, setMoreArticles] = useState<IArticle[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
-const getMoreArticles = async () => {
-  return await ArticleService.getArticles();
-};
+  useEffect(() => {
+    const getArticle = async (id: string) => {
+      setLoading(true);
+      try {
+        const article = await ArticleService.getArticle(id);
+        const moreArticles = await ArticleService.getArticles();
+        setArticle(article);
+        setMoreArticles(moreArticles);
+        ArticleService.viewArticle(id);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    };
 
-export const generateStaticParams = async () => {
-  const articles = await ArticleService.getArticles();
-
-  return articles.map((article) => ({
-    id: article._id,
-  }));
-};
-
-const ArticlePage = async ({ params }: { params: { id: string } }) => {
-  const article = await getArticle(params.id);
-  const moreArticles = await getMoreArticles();
+    if (path && typeof path.id === "string") {
+      getArticle(path.id);
+    }
+  }, []);
 
   return (
     <>
@@ -51,68 +62,81 @@ const ArticlePage = async ({ params }: { params: { id: string } }) => {
       <meta property='og:description' content={article.description} />
       <meta property='og:site_name' content='Твоя Кухня' />
 
-      <div className={styles.articlePage}>
-        <div className={styles.container}>
-          <div className={styles.prevPage}>
-            <Link href={"/articles"} className={styles.prevButton}>
-              <IoIosArrowBack />
-              <p>Назад</p>
-            </Link>
-            <p className={styles.nameText}>
-              <Link href={`/articles`}>Статьи</Link>
-              <span>/</span>
-              <span className={`${styles.nameText} ${styles.articleName}`}>
-                {article.title}
-              </span>
-            </p>
-          </div>
-          <h1 className={styles.title}>{article.title}</h1>
-          <div className={styles.previewWrapper}>
-            <Image
-              src={article.preview}
-              alt={article.title}
-              width={1060}
-              height={460}
-              className={styles.previewPhoto}
-            />
-            <div className={styles.viewCount}>
-              <p className={styles.viewCountNumber}>{article.viewCount || 0}</p>
-              <div>
-                <VscEye />
-              </div>
+      {loading && (
+        <main className={styles.articlePage}>
+          <div className={styles.container}>
+            <div className={styles.loaderWrapper}>
+              <MiniLoading className={styles.loader} />
             </div>
           </div>
-          <article
-            className={styles.content}
-            dangerouslySetInnerHTML={{
-              __html: `<h6>${article.description}</h6> <br/> ${article.content}`,
-            }}
-          ></article>
-        </div>
-        <div className={styles.readMore}>
-          <p className={styles.line}></p>
-          <p className={styles.readMoreText}>Читать другие статьи</p>
-          <p className={styles.line}></p>
-        </div>
-        <div className={styles.container}>
-          <div className={styles.articles}>
-            {moreArticles.slice(0, 3).map((article) => (
-              <ArticleCard
-                article={article}
-                key={article._id}
-                href={`/articles/${article._id}`}
+        </main>
+      )}
+      {!loading && article.content && (
+        <main className={styles.articlePage}>
+          <div className={styles.container}>
+            <div className={styles.prevPage}>
+              <Link href={"/articles"} className={styles.prevButton}>
+                <IoIosArrowBack />
+                <p>Назад</p>
+              </Link>
+              <p className={styles.nameText}>
+                <Link href={`/articles`}>Статьи</Link>
+                <span>/</span>
+                <span className={`${styles.nameText} ${styles.articleName}`}>
+                  {article.title}
+                </span>
+              </p>
+            </div>
+            <h1 className={styles.title}>{article.title}</h1>
+            <div className={styles.previewWrapper}>
+              <Image
+                src={article.preview}
+                alt={article.title}
+                width={1060}
+                height={460}
+                className={styles.previewPhoto}
               />
-            ))}
+              <div className={styles.viewCount}>
+                <p className={styles.viewCountNumber}>
+                  {article.viewCount || 0}
+                </p>
+                <div>
+                  <VscEye />
+                </div>
+              </div>
+            </div>
+            <article
+              className={styles.content}
+              dangerouslySetInnerHTML={{
+                __html: `<h6>${article.description}</h6> <br/> ${article.content}`,
+              }}
+            ></article>
           </div>
-          <div className={styles.buttonWrapper}>
-            <Link href={"/articles"} className={styles.orangeButton}>
-              Показать еще
-              <Icon icon={Icons.chevron(ChevronDirection.Down)} />
-            </Link>
+          <div className={styles.readMore}>
+            <p className={styles.line}></p>
+            <p className={styles.readMoreText}>Читать другие статьи</p>
+            <p className={styles.line}></p>
           </div>
-        </div>
-        <LeaveRequestBlock2 />
-      </div>
+          <div className={styles.container}>
+            <div className={styles.articles}>
+              {moreArticles.slice(0, 3).map((article) => (
+                <ArticleCard
+                  article={article}
+                  key={article._id}
+                  href={`/articles/${article._id}`}
+                />
+              ))}
+            </div>
+            <div className={styles.buttonWrapper}>
+              <Link href={"/articles"} className={styles.orangeButton}>
+                Показать еще
+                <Icon icon={Icons.chevron(ChevronDirection.Down)} />
+              </Link>
+            </div>
+          </div>
+          <LeaveRequestBlock2 />
+        </main>
+      )}
     </>
   );
 };
