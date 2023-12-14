@@ -1,10 +1,10 @@
-import ArticleService from "@/services/ArticleService";
+import UserArticleService from "@/services/UserArticleService";
 
 const URL = "https://youkuhnya.ru";
 const siteRoutes = ["", "/portfolio", "/articles"];
 
 const getArticlesInfo = async () => {
-  const articles = await ArticleService.getArticles();
+  const articles = await UserArticleService.getArticles();
   const articlesId = articles.map((article) => {
     return {
       id: article._id,
