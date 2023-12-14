@@ -1,4 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow: /admin/
-Sitemap: https://youkuhnya.ru/sitemap.xml

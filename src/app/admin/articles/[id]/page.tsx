@@ -199,6 +199,7 @@ const ArticlePage = () => {
       content: editor.getHTML(),
       description: data.description,
       onMainPage: data.onMainPage,
+      updatedAt: new Date().toISOString(),
     };
 
     try {

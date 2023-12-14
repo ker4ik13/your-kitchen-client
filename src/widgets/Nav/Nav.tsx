@@ -43,9 +43,9 @@ const Nav = () => {
               <Link href={"#reviews"} className={styles.link}>
                 Отзывы
               </Link>
-              <Link href={"/articles"} className={styles.link}>
+              {/* <Link href={"/articles"} className={styles.link}>
                 Статьи
-              </Link>
+              </Link> */}
               {/* <div className={styles.menuWrapper}>
                 <Menu>
                   <div className={styles.dropdownButtonWrapper}>
