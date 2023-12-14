@@ -138,22 +138,6 @@ const NewKitchenPage = () => {
     );
   }
 
-  // Обработчик фото
-  const getPhotosFromFiles = (event: any, files: any[]) => {
-    const photos: any[] = [];
-
-    files.map((file) => {
-      let photo = {
-        title: file.name,
-        src: URL.createObjectURL(file),
-      };
-
-      photos.push(photo);
-    });
-
-    setPhotos(photos);
-  };
-
   const onSubmit: SubmitHandler<TInputs> = async (data) => {
     const form = new FormData();
 

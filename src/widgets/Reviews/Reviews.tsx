@@ -1,3 +1,5 @@
+"use client";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./Reviews.module.scss";
 import { Scrollbar } from "swiper/modules";

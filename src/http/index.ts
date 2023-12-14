@@ -1,5 +1,5 @@
 import type { AuthResponse } from "@/types/response/AuthResponse";
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL || '';

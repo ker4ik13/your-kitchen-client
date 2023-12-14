@@ -1,31 +1,14 @@
 import Logo from "@/shared/Logo/Logo";
 import Icon from "@/shared/IconsComponents/Icon";
-// import { ChevronDirection, Icons } from "@/shared/IconsComponents/Icons";
-// import { Menu } from "@headlessui/react";
-// import { useState } from "react";
+
 import styles from "./Footer.module.scss";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import { links } from "@/data/links";
 import Link from "next/link";
 
-// const teamLinks = [
-//   { href: "/team/designers", label: "Дизайнеры" },
-//   { href: "/team/masters", label: "Мастера" },
-//   { href: "/team/managers", label: "Менеджеры" },
-// ];
-
 const Footer = () => {
-  // const [rotate, setRotate] = useState<ChevronDirection>(ChevronDirection.Up);
-
-  // const handleRotate = () => {
-  //   if (rotate === ChevronDirection.Up) {
-  //     setRotate(ChevronDirection.Down);
-  //   } else {
-  //     setRotate(ChevronDirection.Up);
-  //   }
-  // };
   return (
-    <div className={styles.footer}>
+    <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.upperWrapper}>
           <Logo />
@@ -39,6 +22,9 @@ const Footer = () => {
             <Link href={"#reviews"} className={styles.link}>
               Отзывы
             </Link>
+            {/* <Link href={"/articles"} className={styles.link}>
+              Статьи
+            </Link> */}
             {/* <Menu>
               <div className={styles.menuRelative}>
                 <div className={styles.menuFlex}>
@@ -104,7 +90,7 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </div>
+    </footer>
   );
 };
 

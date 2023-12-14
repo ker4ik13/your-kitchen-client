@@ -10,7 +10,7 @@ export class UserReviewsService {
     const response = await fetch(`${NEXT_PUBLIC_API_URL}/api/reviews`, {
       method: 'GET',
       next: {
-        revalidate: 10,
+        revalidate: 30,
       },
     });
 
