@@ -7,4 +7,6 @@ export interface IArticle {
   onMainPage: boolean;
   viewCount: number;
   author: string;
+  createdAt: string;
+  updatedAt?: string;
 }

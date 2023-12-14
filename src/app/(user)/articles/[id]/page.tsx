@@ -71,6 +71,17 @@ const ArticlePage = () => {
           </div>
         </main>
       )}
+      {!loading && !article._id && (
+        <main className={styles.articlePage}>
+          <div className={styles.container}>
+            <div className={styles.loaderWrapper}>
+              <p className={styles.title}>
+                Ошибка получения статьи. Повторите еще раз
+              </p>
+            </div>
+          </div>
+        </main>
+      )}
       {!loading && article.content && (
         <main className={styles.articlePage}>
           <div className={styles.container}>

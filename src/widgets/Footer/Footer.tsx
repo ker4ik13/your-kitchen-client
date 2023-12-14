@@ -22,6 +22,9 @@ const Footer = () => {
             <Link href={"#reviews"} className={styles.link}>
               Отзывы
             </Link>
+            {/* <Link href={"/articles"} className={styles.link}>
+              Статьи
+            </Link> */}
             {/* <Menu>
               <div className={styles.menuRelative}>
                 <div className={styles.menuFlex}>

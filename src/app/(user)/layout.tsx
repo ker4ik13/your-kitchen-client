@@ -34,7 +34,7 @@ export default function RootLayout({
         <meta name='theme-color' content='#433A31' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <meta name='yandex-verification' content='8cb11033a13960f6' />
-        {/* <script defer src='https://af.click.ru/af.js?id=12257'></script> */}
+        <script defer src='https://af.click.ru/af.js?id=12257'></script>
         {/* TODO: не забывать про метрику */}
         {/* <Script
           id='warn'
@@ -42,7 +42,7 @@ export default function RootLayout({
             __html: `console.warn('Включи метрику перед коммитом');`,
           }}
         /> */}
-        {/* <Script
+        <Script
           id='metrikaScript'
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -51,7 +51,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-T7HCN6P');`,
           }}
-        /> */}
+        />
       </head>
       <body className='grid grid-rows-[auto_1fr_auto] grid-cols-1 min-h-screen font-gilroy'>
         <Nav />
