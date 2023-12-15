@@ -1,6 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./OurTeam.module.scss";
-import { team } from "@/data/team/team";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 
 import "swiper/css/navigation";
