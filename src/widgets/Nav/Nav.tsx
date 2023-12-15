@@ -3,7 +3,6 @@
 import Logo from "@/shared/Logo/Logo";
 import Icon from "@/shared/IconsComponents/Icon";
 import { Icons } from "@/shared/IconsComponents/Icons";
-// import { Menu } from "@headlessui/react";
 import styles from "./Nav.module.scss";
 import { handleNav } from "./handleNav";
 import { useRef } from "react";
