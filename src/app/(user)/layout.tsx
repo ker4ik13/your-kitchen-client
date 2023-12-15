@@ -35,7 +35,7 @@ export default function RootLayout({
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <meta name='yandex-verification' content='8cb11033a13960f6' />
         <script defer src='https://af.click.ru/af.js?id=12257'></script>
-        {/* TODO: не забывать про метрику */}
+        {/* TODO:  не забывать про метрику */}
         {/* <Script
           id='warn'
           dangerouslySetInnerHTML={{
