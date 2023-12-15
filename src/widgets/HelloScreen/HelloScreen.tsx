@@ -4,7 +4,7 @@ import Icon from "@/shared/IconsComponents/Icon";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import styles from "./HelloScreen.module.scss";
 import Image from "next/image";
-import bgImage from "@/data/images/bg.png";
+import bgImage from "@/data/images/bg.webp";
 
 interface HelloScreenProps {
   setIsOpen: (isOpen: boolean) => void;

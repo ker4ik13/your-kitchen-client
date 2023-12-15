@@ -1,7 +1,7 @@
 import styles from "./Results.module.scss";
-import design from "@/data/images/design.png";
-import offer from "@/data/images/offer.png";
-import install from "@/data/images/install.png";
+import design from "@/data/images/design.webp";
+import offer from "@/data/images/offer.webp";
+import install from "@/data/images/install.webp";
 import Image from "next/image";
 
 const Results = () => {

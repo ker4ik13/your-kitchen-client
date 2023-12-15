@@ -1,6 +1,6 @@
-import woman1 from "@/data/images/woman1.png";
-import kitchen1 from "@/data/images/kitchen1.png";
-import kitchen2 from "@/data/images/kitchen2.png";
+import woman1 from "@/data/images/woman1.webp";
+import kitchen1 from "@/data/images/kitchen1.webp";
+import kitchen2 from "@/data/images/kitchen2.webp";
 import styles from "./SecondScreen.module.scss";
 import Image from "next/image";
 

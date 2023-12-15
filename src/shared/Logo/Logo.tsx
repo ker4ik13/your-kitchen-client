@@ -1,4 +1,4 @@
-import logoWithText from "@/data/images/logoWithText.png";
+import logoWithText from "@/data/images/logoWithText.webp";
 import styles from "./Logo.module.scss";
 import Image from "next/image";
 import Link from "next/link";

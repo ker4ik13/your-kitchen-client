@@ -1,7 +1,7 @@
 import styles from "./LeaveRequest.module.scss";
-import phone from "@/data/images/phoneHand.png";
-import designer from "@/data/team/team2.png";
-import miniLogo from "@/data/images/logo.png";
+import phone from "@/data/images/phoneHand.webp";
+import designer from "@/data/team/team2.webp";
+import miniLogo from "@/data/images/logo.webp";
 import Icon from "@/shared/IconsComponents/Icon";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import { links } from "@/data/links";

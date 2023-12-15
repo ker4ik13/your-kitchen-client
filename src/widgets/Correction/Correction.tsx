@@ -1,10 +1,10 @@
-import pages from "@/data/images/pages.png";
+import pages from "@/data/images/pages.webp";
 import Icon from "@/shared/IconsComponents/Icon";
 import { Icons } from "@/shared/IconsComponents/Icons";
-import money from "@/data/images/woman-money.png";
-import colors from "@/data/images/colors.png";
-import acril1 from "@/data/images/acril1.png";
-import acril2 from "@/data/images/acril2.png";
+import money from "@/data/images/woman-money.webp";
+import colors from "@/data/images/colors.webp";
+import acril1 from "@/data/images/acril1.webp";
+import acril2 from "@/data/images/acril2.webp";
 import styles from "./Correction.module.scss";
 import Image from "next/image";
 

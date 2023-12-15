@@ -1,9 +1,9 @@
 import styles from "./WhatsNext.module.scss";
-import man from "@/data/images/working-man.png";
-import gazeel from "@/data/images/gazeel.png";
-import three from "@/data/images/three.png";
-import floor from "@/data/images/floor.png";
-import phone from "@/data/images/phone.png";
+import man from "@/data/images/working-man.webp";
+import gazeel from "@/data/images/gazeel.webp";
+import three from "@/data/images/three.webp";
+import floor from "@/data/images/floor.webp";
+import phone from "@/data/images/phone.webp";
 import Image from "next/image";
 
 const cardTexts = [
