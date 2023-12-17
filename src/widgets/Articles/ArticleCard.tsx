@@ -1,6 +1,5 @@
 import { type IArticle } from "@/types/IArticle";
 import styles from "./Articles.module.scss";
-import Image from "next/image";
 import { VscEye } from "react-icons/vsc";
 import { FiArrowUpRight } from "react-icons/fi";
 import Link from "next/link";
@@ -14,11 +13,9 @@ const ArticleCard = ({ article, href }: Props) => {
   return (
     <Link href={href} target='_blank' className={styles.articleLink}>
       <div className={styles.imageWrapper}>
-        <Image
+        <img
           src={article.preview}
           alt={article.title}
-          width={390}
-          height={240}
           className={styles.image}
         />
         <div className={styles.viewCount}>

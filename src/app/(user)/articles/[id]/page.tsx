@@ -6,7 +6,6 @@ import Icon from "@/shared/IconsComponents/Icon";
 import { ChevronDirection, Icons } from "@/shared/IconsComponents/Icons";
 import { LeaveRequestBlock2 } from "@/shared/LeaveRequestBlock2";
 import ArticleCard from "@/widgets/Articles/ArticleCard";
-import Image from "next/image";
 import Link from "next/link";
 import { VscEye } from "react-icons/vsc";
 import { IoIosArrowBack } from "react-icons/io";
@@ -100,11 +99,9 @@ const ArticlePage = () => {
             </div>
             <h1 className={styles.title}>{article.title}</h1>
             <div className={styles.previewWrapper}>
-              <Image
+              <img
                 src={article.preview}
                 alt={article.title}
-                width={1060}
-                height={460}
                 className={styles.previewPhoto}
               />
               <div className={styles.viewCount}>

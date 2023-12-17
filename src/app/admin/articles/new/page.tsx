@@ -63,7 +63,7 @@ const NewArticlePage = () => {
         types: ["heading", "paragraph"],
       }),
     ],
-    content: `<h1>Контент</h1>`,
+    content: `<h4>Здесь должен быть контент статьи</h4>`,
   });
 
   // Ошибка
@@ -160,6 +160,14 @@ const NewArticlePage = () => {
 
   const onSubmit: SubmitHandler<TInputs> = async (data) => {
     const form = new FormData();
+
+    if (!file.name) {
+      setError({
+        isError: true,
+        value: "Добавьте обложку!",
+      });
+      return;
+    }
 
     form.append("title", data.title);
     form.append("description", data.description);
