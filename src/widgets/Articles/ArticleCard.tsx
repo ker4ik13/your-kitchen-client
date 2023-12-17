@@ -14,11 +14,9 @@ const ArticleCard = ({ article, href }: Props) => {
   return (
     <Link href={href} target='_blank' className={styles.articleLink}>
       <div className={styles.imageWrapper}>
-        <Image
+        <img
           src={article.preview}
           alt={article.title}
-          width={390}
-          height={240}
           className={styles.image}
         />
         <div className={styles.viewCount}>

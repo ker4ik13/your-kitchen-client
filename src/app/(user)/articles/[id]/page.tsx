@@ -100,11 +100,9 @@ const ArticlePage = () => {
             </div>
             <h1 className={styles.title}>{article.title}</h1>
             <div className={styles.previewWrapper}>
-              <Image
+              <img
                 src={article.preview}
                 alt={article.title}
-                width={1060}
-                height={460}
                 className={styles.previewPhoto}
               />
               <div className={styles.viewCount}>
