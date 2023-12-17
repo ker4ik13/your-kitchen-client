@@ -1,6 +1,5 @@
 import { type IArticle } from "@/types/IArticle";
 import styles from "./Articles.module.scss";
-import Image from "next/image";
 import { VscEye } from "react-icons/vsc";
 import { FiArrowUpRight } from "react-icons/fi";
 import Link from "next/link";

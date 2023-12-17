@@ -6,7 +6,6 @@ import Icon from "@/shared/IconsComponents/Icon";
 import { ChevronDirection, Icons } from "@/shared/IconsComponents/Icons";
 import { LeaveRequestBlock2 } from "@/shared/LeaveRequestBlock2";
 import ArticleCard from "@/widgets/Articles/ArticleCard";
-import Image from "next/image";
 import Link from "next/link";
 import { VscEye } from "react-icons/vsc";
 import { IoIosArrowBack } from "react-icons/io";
