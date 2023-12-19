@@ -207,6 +207,17 @@ $light-black: #212121;
   }
 }
 
+@mixin container-mini() {
+  max-width: rem(800);
+  padding: 0 20px;
+  width: 100%;
+  margin: 0 auto;
+
+  @media (max-width: $max-768) {
+    padding: 0 15px;
+  }
+}
+
 @mixin position-center() {
   position: absolute;
   top: 50%;

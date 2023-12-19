@@ -22,6 +22,13 @@
   display: flex;
   justify-content: center;
 }
+.error {
+  @include noto(400);
+  font-size: rem(24);
+  color: #fff;
+  text-align: center;
+  width: 100%;
+}
 .title {
   @include noto(400);
   font-size: rem(40);

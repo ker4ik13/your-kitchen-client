@@ -40,11 +40,15 @@ const Kitchen = ({ kitchen, isPreview }: KitchenProps) => {
         loop={true}
         modules={[Navigation, Pagination]}
         onClick={openPreview}
+        itemScope
+        itemType='https://schema.org/Product'
       >
         <div className={styles.content}>
           <div className={styles.betweenWrapper}>
-            <p className={styles.name}>{kitchen.title}</p>
-            <div className={styles.tags}>
+            <p className={styles.name} itemProp='name'>
+              {kitchen.title}
+            </p>
+            <div className={styles.tags} itemProp='keywords'>
               <div className={styles.tag}>
                 <p>{kitchen.style.label}</p>
               </div>
@@ -55,7 +59,9 @@ const Kitchen = ({ kitchen, isPreview }: KitchenProps) => {
               )}
             </div>
           </div>
-          <p className={styles.description}>{kitchen.description}</p>
+          <p className={styles.description} itemProp='description'>
+            {kitchen.description}
+          </p>
           <div className={styles.contentWrapper}>
             <p className={styles.price}>
               <span className={styles.brown}>От </span>
@@ -75,6 +81,7 @@ const Kitchen = ({ kitchen, isPreview }: KitchenProps) => {
               className={styles.img}
               draggable={false}
               alt={`${kitchen.title}`}
+              itemProp='image'
             />
           </SwiperSlide>
         ))}

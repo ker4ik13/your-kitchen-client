@@ -67,7 +67,7 @@ const HomePage = () => {
       />
       <Reviews />
       <DynamicOurTeam />
-      {/* <MainArticles /> */}
+      <MainArticles />
       <LeaveRequestBlock />
       <DynamicWhatsNext />
       <DynamicResults />

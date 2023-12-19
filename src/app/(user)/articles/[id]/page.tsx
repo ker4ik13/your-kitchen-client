@@ -6,7 +6,6 @@ import Icon from "@/shared/IconsComponents/Icon";
 import { ChevronDirection, Icons } from "@/shared/IconsComponents/Icons";
 import { LeaveRequestBlock2 } from "@/shared/LeaveRequestBlock2";
 import ArticleCard from "@/widgets/Articles/ArticleCard";
-import Image from "next/image";
 import Link from "next/link";
 import { VscEye } from "react-icons/vsc";
 import { IoIosArrowBack } from "react-icons/io";
@@ -22,7 +21,7 @@ const ArticlePage = () => {
 
   const [article, setArticle] = useState<IArticle>({} as IArticle);
   const [moreArticles, setMoreArticles] = useState<IArticle[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const getArticle = async (id: string) => {
@@ -52,17 +51,25 @@ const ArticlePage = () => {
       <meta name='description' content={article.description} />
       <meta property='og:type' content='article' />
       <meta property='og:title' content={article.title} />
+      <meta property='article:published_time' content={article.createdAt} />
+      {article.updatedAt && (
+        <meta property='article:modified_time' content={article.updatedAt} />
+      )}
       <meta
         property='og:url'
-        content={`${CLIENT_URL}/articles/${article._id}`}
+        content={`${CLIENT_URL}/articles/${article.link}`}
       />
       <meta property='og:image' content={article.preview} />
       <meta property='og:image:width' content='1060' />
       <meta property='og:image:height' content='430' />
       <meta property='og:description' content={article.description} />
       <meta property='og:site_name' content='Твоя Кухня' />
+      <link
+        rel='canonical'
+        href={`https://youkuhnya.ru/articles/${article.link}`}
+      />
 
-      {loading && (
+      {loading && !article._id && (
         <main className={styles.articlePage}>
           <div className={styles.container}>
             <div className={styles.loaderWrapper}>
@@ -71,6 +78,7 @@ const ArticlePage = () => {
           </div>
         </main>
       )}
+
       {!loading && !article._id && (
         <main className={styles.articlePage}>
           <div className={styles.container}>
@@ -82,8 +90,13 @@ const ArticlePage = () => {
           </div>
         </main>
       )}
+
       {!loading && article.content && (
-        <main className={styles.articlePage}>
+        <article
+          className={styles.articlePage}
+          itemScope
+          itemType='http://schema.org/Article'
+        >
           <div className={styles.container}>
             <div className={styles.prevPage}>
               <Link href={"/articles"} className={styles.prevButton}>
@@ -98,14 +111,15 @@ const ArticlePage = () => {
                 </span>
               </p>
             </div>
-            <h1 className={styles.title}>{article.title}</h1>
+            <h1 className={styles.title} itemProp='name'>
+              {article.title}
+            </h1>
             <div className={styles.previewWrapper}>
-              <Image
+              <img
                 src={article.preview}
                 alt={article.title}
-                width={1060}
-                height={460}
                 className={styles.previewPhoto}
+                itemProp='image'
               />
               <div className={styles.viewCount}>
                 <p className={styles.viewCountNumber}>
@@ -116,12 +130,13 @@ const ArticlePage = () => {
                 </div>
               </div>
             </div>
-            <article
+            <div
               className={styles.content}
+              itemProp='articleBody'
               dangerouslySetInnerHTML={{
                 __html: `<h6>${article.description}</h6> <br/> ${article.content}`,
               }}
-            ></article>
+            ></div>
           </div>
           <div className={styles.readMore}>
             <p className={styles.line}></p>
@@ -130,13 +145,16 @@ const ArticlePage = () => {
           </div>
           <div className={styles.container}>
             <div className={styles.articles}>
-              {moreArticles.slice(0, 3).map((article) => (
-                <ArticleCard
-                  article={article}
-                  key={article._id}
-                  href={`/articles/${article._id}`}
-                />
-              ))}
+              {moreArticles
+                .filter((item) => item._id !== article._id)
+                .slice(0, 3)
+                .map((article) => (
+                  <ArticleCard
+                    article={article}
+                    key={article._id}
+                    href={`/articles/${article.link}`}
+                  />
+                ))}
             </div>
             <div className={styles.buttonWrapper}>
               <Link href={"/articles"} className={styles.orangeButton}>
@@ -146,7 +164,7 @@ const ArticlePage = () => {
             </div>
           </div>
           <LeaveRequestBlock2 />
-        </main>
+        </article>
       )}
     </>
   );
