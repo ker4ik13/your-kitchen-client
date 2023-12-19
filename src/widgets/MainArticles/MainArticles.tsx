@@ -27,15 +27,21 @@ const MainArticles = () => {
         <div className={styles.titleWrapper}>
           <h3 className={styles.title}>Статьи и полезные материалы</h3>
         </div>
-        <div className={styles.articles}>
-          {articles.map((article) => (
-            <ArticleCard
-              href={`/articles/${article._id}`}
-              article={article}
-              key={article._id}
-            />
+        {!articles ||
+          (articles.length === 0 && (
+            <p className={styles.error}>Статей пока нет</p>
           ))}
-        </div>
+        {articles && articles.length !== 0 && (
+          <div className={styles.articles}>
+            {articles.map((article) => (
+              <ArticleCard
+                href={`/articles/${article._id}`}
+                article={article}
+                key={article._id}
+              />
+            ))}
+          </div>
+        )}
         <div className={styles.buttonWrapper}>
           <Link href={"/articles"} className={styles.orangeButton}>
             Показать еще

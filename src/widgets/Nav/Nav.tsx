@@ -42,9 +42,9 @@ const Nav = () => {
               <Link href={"#reviews"} className={styles.link}>
                 Отзывы
               </Link>
-              {/* <Link href={"/articles"} className={styles.link}>
+              <Link href={"/articles"} className={styles.link}>
                 Статьи
-              </Link> */}
+              </Link>
               {/* <div className={styles.menuWrapper}>
                 <Menu>
                   <div className={styles.dropdownButtonWrapper}>
@@ -82,7 +82,9 @@ const Nav = () => {
               </Link> */}
               <Link href='tel:+74959885528' className={styles.contactsWrapper}>
                 <Icon icon={Icons.phone(styles.personIcon)} />
-                <p className={styles.contactsText}>+7 (495) 988-55-28</p>
+                <p className={styles.contactsText} itemProp='telephone'>
+                  +7 (495) 988-55-28
+                </p>
               </Link>
             </div>
           </div>
