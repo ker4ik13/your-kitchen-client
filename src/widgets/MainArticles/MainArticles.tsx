@@ -35,7 +35,7 @@ const MainArticles = () => {
           <div className={styles.articles}>
             {articles.map((article) => (
               <ArticleCard
-                href={`/articles/${article._id}`}
+                href={`/articles/${article.link}`}
                 article={article}
                 key={article._id}
               />
