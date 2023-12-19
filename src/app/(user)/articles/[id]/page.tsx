@@ -57,7 +57,7 @@ const ArticlePage = () => {
       )}
       <meta
         property='og:url'
-        content={`${CLIENT_URL}/articles/${article._id}`}
+        content={`${CLIENT_URL}/articles/${article.link}`}
       />
       <meta property='og:image' content={article.preview} />
       <meta property='og:image:width' content='1060' />
@@ -66,7 +66,7 @@ const ArticlePage = () => {
       <meta property='og:site_name' content='Твоя Кухня' />
       <link
         rel='canonical'
-        href={`https://youkuhnya.ru/articles/${article._id}`}
+        href={`https://youkuhnya.ru/articles/${article.link}`}
       />
 
       {loading && !article._id && (
