@@ -78,11 +78,16 @@
 .articleLink {
   max-width: rem(390);
   width: 100%;
-}
-.articleCard {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+
+  @media (hover: hover) {
+    &:hover {
+      .cardTitle {
+        text-decoration: underline;
+        color: #fff;
+        text-underline-offset: rem(6);
+      }
+    }
+  }
 }
 .imageWrapper {
   max-width: rem(390);
@@ -95,6 +100,7 @@
   -o-object-position: center;
   object-position: center;
   position: relative;
+  z-index: 2;
 
   @media (max-width: $max-768) {
     height: rem(200);
@@ -155,6 +161,7 @@
   flex-direction: row;
   justify-content: space-between;
   margin-top: rem(20);
+  transition: 0.1s;
 
   @media (max-width: $max-768) {
     margin-top: rem(32);

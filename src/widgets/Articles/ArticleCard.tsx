@@ -11,12 +11,18 @@ type Props = {
 
 const ArticleCard = ({ article, href }: Props) => {
   return (
-    <Link href={href} target='_blank' className={styles.articleLink}>
+    <Link
+      href={href}
+      className={styles.articleLink}
+      itemScope
+      itemType='http://schema.org/Article'
+    >
       <div className={styles.imageWrapper}>
         <img
           src={article.preview}
           alt={article.title}
           className={styles.image}
+          itemProp='image'
         />
         <div className={styles.viewCount}>
           <p className={styles.viewCountNumber}>{article.viewCount || 0}</p>
@@ -26,10 +32,14 @@ const ArticleCard = ({ article, href }: Props) => {
         </div>
       </div>
       <div className={styles.cardTitleWrapper}>
-        <h3 className={styles.cardTitle}>{article.title}</h3>
+        <h3 className={styles.cardTitle} itemProp='name'>
+          {article.title}
+        </h3>
         <FiArrowUpRight />
       </div>
-      <p className={styles.cardDescription}>{article.description}</p>
+      <p className={styles.cardDescription} itemProp='description'>
+        {article.description}
+      </p>
     </Link>
   );
 };

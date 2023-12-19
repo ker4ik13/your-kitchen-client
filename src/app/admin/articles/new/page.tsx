@@ -26,6 +26,7 @@ interface TInputs {
   preview: string;
   onMainPage: boolean;
   viewCount: number;
+  link: string;
 }
 
 // Тексты
@@ -136,6 +137,7 @@ const NewArticlePage = () => {
 
   const deleteImage = () => {
     setPhoto({});
+    setFile({} as File);
   };
 
   if (userStore.isLoading) {
@@ -172,6 +174,7 @@ const NewArticlePage = () => {
     form.append("title", data.title);
     form.append("description", data.description);
     form.append("files", file);
+    form.append("link", data.link.split(" ").join("-"));
     form.append("content", editor.getHTML());
     form.append("onMainPage", JSON.stringify(data.onMainPage));
     form.append("viewCount", JSON.stringify(data.viewCount));
@@ -193,6 +196,7 @@ const NewArticlePage = () => {
         viewCount: 0,
         onMainPage: false,
         description: "",
+        link: "",
       });
       setFile({} as File);
       setPhoto(undefined);
@@ -241,6 +245,22 @@ const NewArticlePage = () => {
           id='kitchenForm'
           onSubmit={handleSubmit(onSubmit)}
         >
+          {/* Ссылка на статью */}
+          <div className={styles.inputWrapper}>
+            <label htmlFor='link' className={styles.label}>
+              Ссылка
+            </label>
+            <input
+              type='text'
+              id='link'
+              placeholder='Ссылка на статью, например (best-kitchens), пусто = автоматический id'
+              {...register("link", {
+                required: true,
+              })}
+              className={`${styles.textInput} ${styles.fullInput}`}
+            />
+          </div>
+
           {/* Заголовок */}
           <div className={styles.inputWrapper}>
             <label htmlFor='title' className={styles.label}>
@@ -324,7 +344,7 @@ const NewArticlePage = () => {
           </div>
 
           {/* Предпросмотр фото */}
-          {photo && (
+          {photo && photo.src && (
             <div className={styles.photosPreview}>
               <div className={styles.photoHeader}>
                 <img

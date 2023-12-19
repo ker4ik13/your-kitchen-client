@@ -5,18 +5,18 @@ const siteRoutes = ["", "/portfolio", "/articles"];
 
 const getArticlesInfo = async () => {
   const articles = await UserArticleService.getArticles();
-  const articlesId = articles.map((article) => {
+  const articlesLinks = articles.map((article) => {
     return {
-      id: article._id,
+      link: article.link,
       lastModify: article.updatedAt || article.updatedAt,
     };
   });
 
-  return articlesId;
+  return articlesLinks;
 };
 
 export default async function sitemap() {
-  const articlesId = await getArticlesInfo();
+  const articlesLinks = await getArticlesInfo();
 
   // Все страницы
   const routes = siteRoutes.map((route) => ({
@@ -26,8 +26,8 @@ export default async function sitemap() {
   }));
 
   // Статьи
-  const articles = articlesId.map((article) => ({
-    url: `${URL}/articles/${article.id}`,
+  const articles = articlesLinks.map((article) => ({
+    url: `${URL}/articles/${article.link}`,
     lastModified: article.lastModify,
   }));
 

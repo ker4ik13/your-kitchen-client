@@ -141,10 +141,14 @@ const NewAdminPage = () => {
   }
 
   const onSubmit: SubmitHandler<TInputs> = async (data) => {
-    const newUser = {
-      password: data.password,
+    const newUser: any = {
       role: userRole,
     };
+
+    if (data.password) {
+      newUser.password = data.password;
+    }
+
     const response = await AdminService.updateUser(user._id, newUser);
 
     if (response.status === 200) {

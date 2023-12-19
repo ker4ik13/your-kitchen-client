@@ -76,11 +76,9 @@ const ArticlesPage = () => {
           <h2 className={styles.title}>
             {texts.title} ({articleStore.articles.length})
           </h2>
-          {isUserHaveRights(userStore.user, UserRoles.Admin) && (
-            <Link href={"/admin/articles/new"} className={styles.addButton}>
-              {texts.buttonText}
-            </Link>
-          )}
+          <Link href={"/admin/articles/new"} className={styles.addButton}>
+            {texts.buttonText}
+          </Link>
         </div>
         <div className={styles.kitchens}>
           {articleStore.articles &&
@@ -98,7 +96,7 @@ const ArticlesPage = () => {
                 )}
                 <ArticleCard
                   article={article}
-                  href={`/admin/articles/${article._id}`}
+                  href={`/admin/articles/${article.link}`}
                 />
               </div>
             ))}
