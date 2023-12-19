@@ -1,5 +1,6 @@
 export interface IArticle {
   _id: string;
+  link: string;
   title: string;
   description: string;
   preview: string;

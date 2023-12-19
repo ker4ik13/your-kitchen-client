@@ -40,6 +40,8 @@ const Reviews = () => {
             className={styles.slider}
             slidesPerView={1.6}
             spaceBetween={50}
+            itemScope
+            itemType='https://schema.org/reviews'
             breakpoints={{
               1400: {
                 slidesPerView: 1.6,

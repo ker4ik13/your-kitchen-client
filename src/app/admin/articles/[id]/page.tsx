@@ -28,6 +28,7 @@ interface TInputs {
   title: string;
   description: string;
   onMainPage: boolean;
+  link: string;
 }
 
 // Тексты
@@ -139,6 +140,11 @@ const ArticlePage = () => {
 
       setValue("title", articleById.title);
       setValue("description", articleById.description);
+
+      if (articleById.link) {
+        setValue("link", articleById.link);
+      }
+
       // setValue("viewCount", articleById.viewCount);
 
       setValue("onMainPage", articleById.onMainPage);
@@ -151,6 +157,10 @@ const ArticlePage = () => {
 
           setArticle(articlePayload);
           setPhoto(articlePayload.preview);
+
+          if (articlePayload.link) {
+            setValue("link", articlePayload.link);
+          }
 
           setValue("title", articlePayload.title);
           setValue("description", articlePayload.description);
@@ -194,13 +204,17 @@ const ArticlePage = () => {
   }
 
   const onSubmit: SubmitHandler<TInputs> = async (data) => {
-    const newArticle = {
+    const newArticle: any = {
       title: data.title,
       content: editor.getHTML(),
       description: data.description,
       onMainPage: data.onMainPage,
       updatedAt: new Date().toISOString(),
     };
+
+    if (data.link) {
+      newArticle.link = data.link.split(" ").join("-");
+    }
 
     try {
       const response = await $api.patch(`/articles/${article._id}`, newArticle);
@@ -213,6 +227,7 @@ const ArticlePage = () => {
         // viewCount: 0,
         onMainPage: false,
         description: "",
+        link: "",
       });
       editor.commands.setContent("");
       setFile({} as File);
@@ -252,6 +267,22 @@ const ArticlePage = () => {
           id='kitchenForm'
           onSubmit={handleSubmit(onSubmit)}
         >
+          {/* Ссылка на статью */}
+          <div className={styles.inputWrapper}>
+            <label htmlFor='link' className={styles.label}>
+              Ссылка
+            </label>
+            <input
+              type='text'
+              id='link'
+              placeholder='Ссылка на статью, например (best-kitchens), пусто = автоматический id'
+              {...register("link", {
+                required: true,
+              })}
+              className={`${styles.textInput} ${styles.fullInput}`}
+            />
+          </div>
+
           {/* Заголовок */}
           <div className={styles.inputWrapper}>
             <label htmlFor='title' className={styles.label}>

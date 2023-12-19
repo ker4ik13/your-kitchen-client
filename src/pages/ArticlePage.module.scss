@@ -16,7 +16,6 @@
 .container {
   @include container();
 }
-
 .prevPage {
   display: flex;
   align-items: center;
@@ -168,6 +167,9 @@
   padding: 0 0 0 rem(20);
   color: #fff;
   font-family: "Gilroy", sans-serif;
+  max-width: rem(940);
+  margin-left: auto;
+  margin-right: auto;
 
   & p {
     cursor: text;

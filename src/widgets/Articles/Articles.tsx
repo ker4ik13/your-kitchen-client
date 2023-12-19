@@ -34,7 +34,7 @@ const Articles = ({ articles }: Props) => {
             {articles.slice(0, articlesPerPage).map((article) => (
               <ArticleCard
                 article={article}
-                href={`/articles/${article._id}`}
+                href={`/articles/${article.link || article._id}`}
                 key={article._id}
               />
             ))}

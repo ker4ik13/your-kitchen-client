@@ -9,7 +9,9 @@ export default function RootLayout({
 }) {
   return (
     <Provider store={store}>
-      <html lang='ru'>{children}</html>
+      <html lang='ru' prefix='og: https://ogp.me/ns#'>
+        {children}
+      </html>
     </Provider>
   );
 }

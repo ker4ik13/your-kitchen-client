@@ -22,9 +22,9 @@ const Footer = () => {
             <Link href={"#reviews"} className={styles.link}>
               Отзывы
             </Link>
-            {/* <Link href={"/articles"} className={styles.link}>
+            <Link href={"/articles"} className={styles.link}>
               Статьи
-            </Link> */}
+            </Link>
             {/* <Menu>
               <div className={styles.menuRelative}>
                 <div className={styles.menuFlex}>
@@ -63,7 +63,9 @@ const Footer = () => {
               className={`${styles.downLink} ${styles.mt}`}
             >
               <Icon icon={Icons.mail(styles.downIcon)} />
-              <p className={styles.downLinkText}>info@youkuhnya.ru</p>
+              <p className={styles.downLinkText} itemProp='email'>
+                info@youkuhnya.ru
+              </p>
             </a>
           </div>
         </div>
@@ -84,7 +86,7 @@ const Footer = () => {
               <Icon icon={Icons.vk(styles.footerDownIcon)} />
             </Link>
           </div>
-          <p className={styles.footerDownText}>
+          <p className={styles.footerDownText} itemProp='address'>
             г. Москва, ул. Новоостаповская д. 6Б. Мы работаем 10:00 - 20:00 /
             Без выходных
           </p>

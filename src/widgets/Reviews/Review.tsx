@@ -33,7 +33,11 @@ const Review = ({ review }: ReviewProps) => {
   return (
     <>
       {/* Слайдер отзывы */}
-      <div className={styles.review}>
+      <div
+        className={styles.review}
+        itemScope
+        itemType='https://schema.org/Review'
+      >
         {/* Карточка пользователя */}
         <div className={styles.cardWrapper}>
           <div className={isOpenCard(isOpen)}>
@@ -46,14 +50,22 @@ const Review = ({ review }: ReviewProps) => {
                   alt={`${review.firstName}`}
                 />
               )}
-              <div className={styles.personName}>
-                <p className={styles.personFirstName}>{review.firstName}</p>
-                <p className={styles.personLastName}>
+              <div
+                className={styles.personName}
+                itemScope
+                itemType='https://schema.org/Person'
+              >
+                <p className={styles.personFirstName} itemProp='givenName'>
+                  {review.firstName}
+                </p>
+                <p className={styles.personLastName} itemProp='familyName'>
                   {review.lastName && review.lastName.slice(0, 1)}.
                 </p>
               </div>
             </div>
-            <div className={styles.reviewText}>{review.text}</div>
+            <div className={styles.reviewText} itemProp='reviewBody'>
+              {review.text}
+            </div>
             <button
               type='button'
               onClick={handleOpen}
@@ -78,7 +90,7 @@ const Review = ({ review }: ReviewProps) => {
           >
             {review.photos.map((photo, index) => (
               <SwiperSlide key={index} className={styles.reviewSlide}>
-                <img src={photo} alt={`Фото ${index + 1}`} />
+                <img src={photo} alt={`Фото ${index + 1}`} itemProp='image' />
               </SwiperSlide>
             ))}
           </Swiper>
