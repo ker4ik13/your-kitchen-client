@@ -9,11 +9,14 @@ import { VscEye } from "react-icons/vsc";
 import { IoIosArrowBack } from "react-icons/io";
 import { ViewArticleComponent } from "@/shared/ViewArticleComponent";
 import { Metadata } from "next";
+import UserArticleService from "@/services/UserArticleService";
 
 const CLIENT_URL = "https://youkuhnya.ru";
 
+export const revalidate = 10;
+
 export const generateStaticParams = async () => {
-  const articles = await ArticleService.getArticles();
+  const articles = await UserArticleService.getArticles();
 
   const links = articles.map((article) => ({
     id: article.link,
@@ -47,7 +50,13 @@ export const generateMetadata = async ({
   };
 };
 
-const ArticlePage = async ({ params }: { params: { id: string } }) => {
+interface Props {
+  params: {
+    id: string;
+  };
+}
+
+const ArticlePage = async ({ params }: Props) => {
   const article = await ArticleService.getArticle(params.id);
   const moreArticles = await ArticleService.getArticles();
 
