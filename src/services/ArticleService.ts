@@ -43,7 +43,7 @@ export default class ArticleService {
     return articlesWithPhotos;
   }
 
-  static async getArticle (id: string | string[] | undefined): Promise<IArticle> {
+  static async getArticle (id: string): Promise<IArticle> {
     const response = await axios.get<IArticle>(`${NEXT_PUBLIC_API_URL}/api/articles/${id}`);
 
     const returnArticle = {...response.data};

@@ -29,6 +29,7 @@ interface TInputs {
   description: string;
   onMainPage: boolean;
   link: string;
+  viewCount: number;
 }
 
 // Тексты
@@ -140,6 +141,7 @@ const ArticlePage = () => {
 
       setValue("title", articleById.title);
       setValue("description", articleById.description);
+      setValue("viewCount", articleById.viewCount);
 
       if (articleById.link) {
         setValue("link", articleById.link);
@@ -164,6 +166,7 @@ const ArticlePage = () => {
 
           setValue("title", articlePayload.title);
           setValue("description", articlePayload.description);
+          setValue("viewCount", articlePayload.viewCount);
           // setValue("viewCount", articlePayload.viewCount);
 
           setValue("onMainPage", articlePayload.onMainPage);
@@ -210,6 +213,7 @@ const ArticlePage = () => {
       description: data.description,
       onMainPage: data.onMainPage,
       updatedAt: new Date().toISOString(),
+      viewCount: data.viewCount,
     };
 
     if (data.link) {
@@ -224,7 +228,7 @@ const ArticlePage = () => {
       });
       reset({
         title: "",
-        // viewCount: 0,
+        viewCount: 0,
         onMainPage: false,
         description: "",
         link: "",
@@ -315,7 +319,7 @@ const ArticlePage = () => {
           </div>
 
           {/* Количество просмотров */}
-          {/* <div className={styles.inputWrapper}>
+          <div className={styles.inputWrapper}>
             <label htmlFor='title' className={styles.label}>
               Кол-во просмотров
             </label>
@@ -326,7 +330,7 @@ const ArticlePage = () => {
               {...register("viewCount")}
               className={styles.textInput}
             />
-          </div> */}
+          </div>
 
           {/* Обложка */}
           <div className={styles.inputWrapper}>
