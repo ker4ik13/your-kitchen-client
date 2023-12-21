@@ -20,14 +20,28 @@ const HelloScreen = ({ setIsOpen }: HelloScreenProps) => {
         </h1>
         <div className={styles.subtitle}>
           <Icon icon={Icons.ruble(styles.subtitleIcon)} />
-          <p className={styles.subtitleText}>рассрочка до 24 месяцев</p>
+          <p className={styles.subtitleText}>
+            <span>рассрочка</span> до 24 месяцев
+          </p>
         </div>
-        <div className={styles.subtitle2}>
+        <div className={styles.subtitle}>
+          <Icon icon={Icons.diamond(styles.subtitleIcon)} />
+          <p className={styles.subtitleText}>
+            производство <span>от 10 дней</span>
+          </p>
+        </div>
+        <div className={styles.subtitle}>
+          <Icon icon={Icons.shesternya(styles.subtitleIcon)} />
+          <p className={styles.subtitleText}>
+            <span>бесплатный</span> дизайн проект
+          </p>
+        </div>
+        {/* <div className={styles.subtitle2}>
           <span>+</span>
           <p className={styles.subtitle2Text}>
             3D дизайн проект и расчет за 0 ₽
           </p>
-        </div>
+        </div> */}
         <button
           type='button'
           className={styles.orangeButton}
