@@ -46,6 +46,20 @@ export default function RootLayout({
           }}
         />
         {/* <Script
+          async
+          src='https://www.googletagmanager.com/gtag/js?id=G-9PXGLTWQJK'
+        ></Script>
+        <Script
+          id='google-analytics'
+          dangerouslySetInnerHTML={{
+            __html: ` window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9PXGLTWQJK');`,
+          }}
+        />
+        <Script
           id='metrikaScript'
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

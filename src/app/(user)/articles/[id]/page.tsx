@@ -32,11 +32,11 @@ export const generateMetadata = async ({
   const article = await ArticleService.getArticle(params.id);
   return {
     metadataBase: new URL(`${CLIENT_URL}/articles/${article.link}`),
-    title: article.title,
+    title: `${article.title} | Твоя кухня`,
     description: article.description,
     openGraph: {
       type: "article",
-      title: article.title,
+      title: `${article.title} | Твоя кухня`,
       description: article.description,
       publishedTime: article.createdAt,
       modifiedTime: article.updatedAt,
