@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     url: "https://youkuhnya.ru/portfolio",
     description:
       "Фото кухонь на заказ с ценами и описанием от фабрики Твоя кухня.  Портфолио проектов кухонь под ключ. Отзывы клиентов о фабрике. Заходите на сайт и смотрите.",
-    siteName: "Твоя Кухня",
+    siteName: "Твоя кухня",
   },
   alternates: {
     canonical: "https://youkuhnya.ru/portfolio",

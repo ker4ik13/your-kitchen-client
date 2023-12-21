@@ -42,7 +42,7 @@ export const generateMetadata = async ({
       modifiedTime: article.updatedAt,
       url: `${CLIENT_URL}/articles/${article.link}`,
       images: article.preview,
-      siteName: "Твоя Кухня",
+      siteName: "Твоя кухня",
     },
     alternates: {
       canonical: `${CLIENT_URL}/articles/${article.link}`,
