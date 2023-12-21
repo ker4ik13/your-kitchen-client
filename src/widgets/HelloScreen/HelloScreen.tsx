@@ -16,7 +16,7 @@ const HelloScreen = ({ setIsOpen }: HelloScreenProps) => {
       <Image src={bgImage} className={styles.bgImage} alt='Фон' />
       <div className={styles.container}>
         <h1 className={styles.title}>
-          Кухни напрямую с фабрики с десятилетней гарантией, в срок от 10 дней
+          Кухни на заказ в Москве напрямую с фабрики с гарантией 10 лет
         </h1>
         <div className={styles.subtitle}>
           <Icon icon={Icons.ruble(styles.subtitleIcon)} />
