@@ -1,4 +1,4 @@
-import { Page404 } from "@/pages/Page404";
+import Page404 from "@/pages/Page404";
 import Nav from "@/widgets/Nav/Nav";
 import "./styles";
 import Footer from "@/widgets/Footer/Footer";

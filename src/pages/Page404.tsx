@@ -10,7 +10,7 @@ interface Props {
   buttonText?: string;
 }
 
-export const Page404 = ({ link, title, buttonText }: Props) => (
+const Page404 = ({ link, title, buttonText }: Props) => (
   <div className={styles.page}>
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -47,3 +47,5 @@ export const Page404 = ({ link, title, buttonText }: Props) => (
     </div>
   </div>
 );
+
+export default Page404;

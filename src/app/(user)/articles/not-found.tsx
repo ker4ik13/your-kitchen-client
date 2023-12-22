@@ -1,4 +1,4 @@
-import { Page404 } from "@/pages/Page404";
+import Page404 from "@/pages/Page404";
 import "../../styles";
 import { Metadata } from "next";
 
