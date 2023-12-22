@@ -10,6 +10,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { ViewArticleComponent } from "@/shared/ViewArticleComponent";
 import { Metadata } from "next";
 import UserArticleService from "@/services/UserArticleService";
+import { notFound } from "next/navigation";
 
 const CLIENT_URL = "https://youkuhnya.ru";
 
@@ -30,24 +31,32 @@ export const generateMetadata = async ({
   params: { id: string };
 }): Promise<Metadata> => {
   const article = await ArticleService.getArticle(params.id);
-  return {
-    metadataBase: new URL(`${CLIENT_URL}/articles/${article.link}`),
-    title: `${article.title} | Твоя кухня`,
-    description: article.description,
-    openGraph: {
-      type: "article",
+
+  if (article._id) {
+    return {
+      metadataBase: new URL(`${CLIENT_URL}/articles/${article.link}`),
       title: `${article.title} | Твоя кухня`,
       description: article.description,
-      publishedTime: article.createdAt,
-      modifiedTime: article.updatedAt,
-      url: `${CLIENT_URL}/articles/${article.link}`,
-      images: article.preview,
-      siteName: "Твоя кухня",
-    },
-    alternates: {
-      canonical: `${CLIENT_URL}/articles/${article.link}`,
-    },
-  };
+      openGraph: {
+        type: "article",
+        title: `${article.title} | Твоя кухня`,
+        description: article.description,
+        publishedTime: article.createdAt,
+        modifiedTime: article.updatedAt,
+        url: `${CLIENT_URL}/articles/${article.link}`,
+        images: article.preview,
+        siteName: "Твоя кухня",
+      },
+      alternates: {
+        canonical: `${CLIENT_URL}/articles/${article.link}`,
+      },
+    };
+  } else {
+    return {
+      title: "404: Статья не найдена",
+      description: "Страница не найдена",
+    };
+  }
 };
 
 interface Props {
@@ -59,6 +68,10 @@ interface Props {
 const ArticlePage = async ({ params }: Props) => {
   const article = await ArticleService.getArticle(params.id);
   const moreArticles = await ArticleService.getArticles();
+
+  if (!article._id) {
+    return notFound();
+  }
 
   return (
     <>
