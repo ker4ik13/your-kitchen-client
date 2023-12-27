@@ -63,13 +63,13 @@ const Kitchen = ({ kitchen, isPreview }: KitchenProps) => {
 						{kitchen.description}
 					</p>
 					<div className={styles.contentWrapper}>
-						<p className={styles.price} itemProp='offers'>
-							<span className={styles.brown} itemProp='price' content='RUB'>
-								От{' '}
-							</span>
-							{kitchen.price.toLocaleString('ru')}
-							<span>₽</span>
-						</p>
+						<div itemProp='offers'>
+							<p className={styles.price} itemProp='price' content='RUB'>
+								<span className={styles.brown}>От </span>
+								{kitchen.price.toLocaleString('ru')}
+								<span>₽</span>
+							</p>
+						</div>
 						<div className={styles.price}>
 							<span className={styles.brown}>Срок </span>
 							{kitchen.term}
