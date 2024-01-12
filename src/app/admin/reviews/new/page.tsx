@@ -35,7 +35,7 @@ const texts = {
 
 const NewKitchenPage = () => {
 	const { register, handleSubmit, reset } = useForm<TInputs>();
-	const userStore = useAppSelector(store => store.user);
+	const userStore = useAppSelector((store) => store.user);
 	const dispatch = useAppDispatch();
 
 	const [photos, setPhotos] = useState<any[]>([]);
@@ -92,7 +92,7 @@ const NewKitchenPage = () => {
 	const getPhotosFromFiles = (event: any, files: any[]) => {
 		const photos: any[] = [];
 
-		files.map(file => {
+		files.map((file) => {
 			let photo = {
 				title: file.name,
 				src: URL.createObjectURL(file),
@@ -174,15 +174,15 @@ const NewKitchenPage = () => {
 	const deleteImage = (photoTitle: number) => {
 		const images = [...photos];
 
-		const result = images.filter(image => photoTitle !== image.title);
+		const result = images.filter((image) => photoTitle !== image.title);
 
 		setPhotos(result);
 	};
 	const deleteImage2 = () => {
-		setPhoto({});
+		setPhoto(undefined);
 	};
 
-	const onSubmit: SubmitHandler<TInputs> = async data => {
+	const onSubmit: SubmitHandler<TInputs> = async (data) => {
 		const form = new FormData();
 
 		form.append('firstName', data.firstName);
@@ -197,7 +197,7 @@ const NewKitchenPage = () => {
 		}
 
 		// Добавление всех фото
-		files.forEach(file => {
+		files.forEach((file) => {
 			form.append(`files`, file);
 		});
 		form.append('text', data.text);
@@ -216,7 +216,7 @@ const NewKitchenPage = () => {
 				photos: [],
 				firstName: '',
 				lastName: '',
-				photo: {},
+				photo: undefined,
 				text: '',
 			});
 			setFiles([]);
@@ -302,11 +302,11 @@ const NewKitchenPage = () => {
 								})}
 								accept='image/png, image/jpeg, image/jpg, image/webp'
 								className={styles.inputPhotos}
-								onChange={event => changeHandler2(event)}
-								onDragStart={event => dragStartHandler2(event)}
-								onDragLeave={event => dragLeaveHandler2(event)}
-								onDragOver={event => dragStartHandler2(event)}
-								onDrop={event => dropHandler2(event)}
+								onChange={(event) => changeHandler2(event)}
+								onDragStart={(event) => dragStartHandler2(event)}
+								onDragLeave={(event) => dragLeaveHandler2(event)}
+								onDragOver={(event) => dragStartHandler2(event)}
+								onDrop={(event) => dropHandler2(event)}
 							/>
 							<label htmlFor='photo' className={styles.labelPhotos}>
 								{!drag
@@ -316,7 +316,7 @@ const NewKitchenPage = () => {
 						</div>
 
 						{/* Предпросмотр фото */}
-						{photo !== undefined && (
+						{photo && (
 							<div className={styles.photosPreview}>
 								<div className={styles.photo}>
 									<img
@@ -365,11 +365,11 @@ const NewKitchenPage = () => {
 								multiple
 								className={styles.inputPhotos}
 								required
-								onChange={event => changeHandler(event)}
-								onDragStart={event => dragStartHandler(event)}
-								onDragLeave={event => dragLeaveHandler(event)}
-								onDragOver={event => dragStartHandler(event)}
-								onDrop={event => dropHandler(event)}
+								onChange={(event) => changeHandler(event)}
+								onDragStart={(event) => dragStartHandler(event)}
+								onDragLeave={(event) => dragLeaveHandler(event)}
+								onDragOver={(event) => dragStartHandler(event)}
+								onDrop={(event) => dropHandler(event)}
 							/>
 							<label htmlFor='photos' className={styles.labelPhotos}>
 								{!drag
