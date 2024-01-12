@@ -2,42 +2,35 @@
 
 .helloScreen {
 	display: flex;
-	//
-	// height: 100vh;
-	// min-height: rem(800);
-	// max-height: rem(1400);
-	min-height: rem(700);
+	min-height: rem(750);
+	max-height: rem(1400);
 	background-color: #433a31;
 	padding-top: rem(160);
 	position: relative;
 
-	@media (max-width: $max-1400) {
-		min-height: rem(800);
-	}
 	@media (max-width: $max-1300) {
-		min-height: rem(700);
-	}
-	@media (max-width: $max-1100) {
-		min-height: rem(600);
-	}
-	@media (max-width: $max-1000) {
 		min-height: rem(700);
 	}
 	@media (max-width: $max-700) {
 		min-height: rem(600);
+		width: 100%;
+		margin-left: 0;
 	}
+	overflow: hidden;
 }
 .bgImage {
 	position: absolute;
 	top: 0;
 	left: 0;
 	z-index: 0;
-	width: 100%;
+	width: 115%;
 	height: 100%;
 	-o-object-fit: cover;
 	object-fit: cover;
-	-o-object-position: center;
-	object-position: center;
+	max-width: none;
+	margin-left: -5%;
+	-o-object-position: 100% 20%;
+	object-position: 100% 20%;
 
 	@media (max-width: $max-1000) {
 		-o-object-position: right;
@@ -65,7 +58,7 @@
 	color: #fff;
 	max-width: rem(730);
 	width: 100%;
-	margin-bottom: rem(10);
+	margin-bottom: rem(20);
 
 	@media (max-width: $max-700) {
 		font-size: rem(24);
@@ -76,7 +69,7 @@
 .subtitle {
 	display: flex;
 	align-items: center;
-	margin-top: rem(-10);
+	margin-top: rem(-16);
 }
 .subtitleIcon {
 	width: rem(64);
