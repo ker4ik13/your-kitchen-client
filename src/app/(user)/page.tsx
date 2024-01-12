@@ -1,30 +1,28 @@
-import HomePage from "@/pages/HomePage";
-import { Metadata } from "next";
+import HomePage from '@/pages/HomePage';
+import { SITE_NAME, pagesData } from '@/shared/constants';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://youkuhnya.ru/"),
-  title: "Кухни на заказ в Москве от производителя. Кухни с гарантией 10 лет",
-  description:
-    "Кухни по индивидуальным размерам без наценок. Долговечная немецкая и австрийская фурнитура. Срок изготовления 10-20 дней. Бесплатный 3D проект кухни и визуализация за 4 часа. Запишитесь на замер и расчет стоимости.",
-  keywords:
-    "Кухни на заказ, Кухни в Москве, Производство кухонь, Гарантия 10 лет, Индивидуальные размеры кухонь, Немецкая фурнитура, Австрийская фурнитура, Срок изготовления 10-20 дней, Бесплатный 3D проект кухни, Визуализация кухни, Замер кухни, Расчет стоимости кухни, Долговечные кухни, Кухни с гарантированным качеством, Бесплатная консультация по кухням, Изготовление кухонь под заказ, Кухонные решения, Кухни с доставкой, Эксклюзивные кухни, Профессиональные дизайнеры кухонь",
-  openGraph: {
-    type: "website",
-    title: "Кухни на заказ в Москве от производителя. Кухни с гарантией 10 лет",
-    url: "https://youkuhnya.ru/",
-    description:
-      "Кухни по индивидуальным размерам без наценок. Долговечная немецкая и австрийская фурнитура. Срок изготовления 10-20 дней. Бесплатный 3D проект кухни и визуализация за 4 часа. Запишитесь на замер и расчет стоимости.",
-    siteName: "Твоя кухня",
-  },
-  alternates: {
-    canonical: "https://youkuhnya.ru/",
-  },
+	metadataBase: new URL(pagesData.main.url),
+	title: pagesData.main.title,
+	description: pagesData.main.description,
+	keywords: pagesData.main.keywords,
+	openGraph: {
+		type: pagesData.main.type,
+		title: pagesData.main.title,
+		url: pagesData.main.url,
+		description: pagesData.main.description,
+		siteName: SITE_NAME,
+	},
+	alternates: {
+		canonical: pagesData.main.url,
+	},
 };
 
 export default function Home() {
-  return (
-    <>
-      <HomePage />
-    </>
-  );
+	return (
+		<>
+			<HomePage />
+		</>
+	);
 }
