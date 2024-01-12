@@ -1,161 +1,164 @@
-@import "@/shared/styles/_vars";
+@import '@/shared/styles/_vars';
 
 .helloScreen {
-  display: flex;
-  height: 100vh;
-  max-height: rem(1400);
-  background-color: #433a31;
-  padding-top: rem(160);
-  position: relative;
+	display: flex;
+	//
+	// height: 100vh;
+	// min-height: rem(800);
+	// max-height: rem(1400);
+	min-height: rem(700);
+	background-color: #433a31;
+	padding-top: rem(160);
+	position: relative;
 
-  @media (max-width: $max-1400) {
-    min-height: rem(800);
-  }
-  @media (max-width: $max-1300) {
-    min-height: rem(700);
-  }
-  @media (max-width: $max-1100) {
-    min-height: rem(600);
-  }
-  @media (max-width: $max-1000) {
-    min-height: rem(700);
-  }
-  @media (max-width: $max-700) {
-    min-height: rem(600);
-  }
+	@media (max-width: $max-1400) {
+		min-height: rem(800);
+	}
+	@media (max-width: $max-1300) {
+		min-height: rem(700);
+	}
+	@media (max-width: $max-1100) {
+		min-height: rem(600);
+	}
+	@media (max-width: $max-1000) {
+		min-height: rem(700);
+	}
+	@media (max-width: $max-700) {
+		min-height: rem(600);
+	}
 }
 .bgImage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-  object-fit: cover;
-  -o-object-position: center;
-  object-position: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 0;
+	width: 100%;
+	height: 100%;
+	-o-object-fit: cover;
+	object-fit: cover;
+	-o-object-position: center;
+	object-position: center;
 
-  @media (max-width: $max-1000) {
-    -o-object-position: right;
-    object-position: right;
-  }
+	@media (max-width: $max-1000) {
+		-o-object-position: right;
+		object-position: right;
+	}
 
-  @media (max-width: $max-700) {
-    -o-object-position: 75%;
-    object-position: 75%;
-  }
+	@media (max-width: $max-700) {
+		-o-object-position: 75%;
+		object-position: 75%;
+	}
 }
 .container {
-  @include container();
+	@include container();
 
-  @media (min-width: $max-700) {
-    padding-left: rem(56);
-  }
-  position: relative;
-  z-index: 2;
+	@media (min-width: $max-700) {
+		padding-left: rem(56);
+	}
+	position: relative;
+	z-index: 2;
 }
 .title {
-  @include gilroy(500);
-  font-size: rem(50);
-  line-height: 1.3;
-  color: #fff;
-  max-width: rem(730);
-  width: 100%;
-  margin-bottom: rem(10);
+	@include gilroy(500);
+	font-size: rem(50);
+	line-height: 1.3;
+	color: #fff;
+	max-width: rem(730);
+	width: 100%;
+	margin-bottom: rem(10);
 
-  @media (max-width: $max-700) {
-    font-size: rem(24);
-    max-width: rem(380);
-    line-height: 1.3;
-  }
+	@media (max-width: $max-700) {
+		font-size: rem(24);
+		max-width: rem(380);
+		line-height: 1.3;
+	}
 }
 .subtitle {
-  display: flex;
-  align-items: center;
-  margin-top: rem(-10);
+	display: flex;
+	align-items: center;
+	margin-top: rem(-10);
 }
 .subtitleIcon {
-  width: rem(64);
+	width: rem(64);
 }
 .subtitleText {
-  @include gilroy(400);
-  font-size: rem(27);
-  line-height: 1.3;
-  color: #fff;
+	@include gilroy(400);
+	font-size: rem(27);
+	line-height: 1.3;
+	color: #fff;
 
-  & span {
-    font-weight: 700;
-  }
+	& span {
+		font-weight: 700;
+	}
 
-  @media (max-width: $max-700) {
-    margin-left: rem(-8);
-    font-size: rem(18);
-  }
+	@media (max-width: $max-700) {
+		margin-left: rem(-8);
+		font-size: rem(18);
+	}
 }
 .subtitle2 {
-  display: flex;
-  align-items: flex-start;
-  margin-left: rem(48);
-  margin-top: rem(20);
+	display: flex;
+	align-items: flex-start;
+	margin-left: rem(48);
+	margin-top: rem(20);
 
-  @media (max-width: $max-700) {
-    margin-left: rem(24);
-    margin-top: rem(8);
-    margin-bottom: rem(32);
-    align-items: center;
-  }
+	@media (max-width: $max-700) {
+		margin-left: rem(24);
+		margin-top: rem(8);
+		margin-bottom: rem(32);
+		align-items: center;
+	}
 
-  & span {
-    color: #d3613d;
-    font-size: rem(30);
-  }
+	& span {
+		color: #d3613d;
+		font-size: rem(30);
+	}
 }
 .subtitle2Text {
-  color: #fff;
-  font-size: rem(20);
-  margin-left: rem(8);
-  margin-top: rem(4);
-  max-width: rem(180);
-  cursor: text;
+	color: #fff;
+	font-size: rem(20);
+	margin-left: rem(8);
+	margin-top: rem(4);
+	max-width: rem(180);
+	cursor: text;
 
-  @media (max-width: $max-700) {
-    font-size: rem(14);
-    max-width: none;
-  }
+	@media (max-width: $max-700) {
+		font-size: rem(14);
+		max-width: none;
+	}
 }
 .orangeButton {
-  margin-top: rem(35);
-  margin-left: rem(48);
-  color: #fff;
-  font-weight: 700;
-  max-width: rem(270);
-  width: 100%;
-  @include orange-gradient();
-  padding: rem(20) rem(40);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border-radius: rem(100);
-  font-size: rem(14);
-  text-transform: uppercase;
-  border: 1px solid transparent;
-  transition: border 0.2s linear;
-  text-decoration: none;
-  cursor: pointer;
-  position: relative;
-  z-index: 4;
+	margin-top: rem(35);
+	margin-left: rem(48);
+	color: #fff;
+	font-weight: 700;
+	max-width: rem(270);
+	width: 100%;
+	@include orange-gradient();
+	padding: rem(20) rem(40);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	border-radius: rem(100);
+	font-size: rem(14);
+	text-transform: uppercase;
+	border: 1px solid transparent;
+	transition: border 0.2s linear;
+	text-decoration: none;
+	cursor: pointer;
+	position: relative;
+	z-index: 4;
 
-  &:hover {
-    border-color: rgba(255, 255, 255, 0.6);
-  }
+	&:hover {
+		border-color: rgba(255, 255, 255, 0.6);
+	}
 
-  @media (max-width: $max-768) {
-    margin-top: rem(250);
-    margin-bottom: rem(50);
-  }
-  @media (max-width: $max-450) {
-    margin: rem(250) auto rem(50);
-  }
+	@media (max-width: $max-768) {
+		margin-top: rem(250);
+		margin-bottom: rem(50);
+	}
+	@media (max-width: $max-450) {
+		margin: rem(250) auto rem(50);
+	}
 }
