@@ -48,11 +48,14 @@ const HomePage = () => {
 	return (
 		<Provider store={store}>
 			<HelloScreen setIsOpen={setIsOpenFirst} />
+			<Kitchens setIsOpen={setIsOpenCatalog} />
 			<SecondScreen />
 			<Correction setIsOpen={setIsOpenSecond} setIsOpenVideo={setIsOpenVideo} />
 			<AllVariants setIsOpen={setIsOpenFirst} />
+			<WhatsNext />
+			<Results />
+			<LeaveRequestBlock />
 			<PreviewPhotos />
-			<Kitchens setIsOpen={setIsOpenCatalog} />
 			<DynamicModal1
 				isOpen={isOpenFirst}
 				setIsOpen={setIsOpenFirst}
@@ -72,9 +75,6 @@ const HomePage = () => {
 			<Reviews />
 			<DynamicOurTeam />
 			<MainArticles />
-			<LeaveRequestBlock />
-			<WhatsNext />
-			<Results />
 			<LeaveRequestBlock2 />
 			{isOpenThanks && <DynamicThanksModal setIsOpen={setIsOpenThanks} />}
 			<DynamicModalVideo
