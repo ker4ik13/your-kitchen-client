@@ -12,8 +12,15 @@ export default function robots(): MetadataRoute.Robots {
 				pagesLinks.articles,
 				`${pagesLinks.articles}/`,
 				`${pagesLinks.articles}/*`,
+				pagesLinks.advantages,
+				`${pagesLinks.advantages}/`,
 			],
-			disallow: [`${pagesLinks.admin}/`, '/*?*', `${pagesLinks.portfolio}/*?*`],
+			disallow: [
+				`${pagesLinks.admin}/`,
+				'/*?*',
+				`${pagesLinks.portfolio}/*?*`,
+				`${pagesLinks.advantages}/*?*`,
+			],
 		},
 		sitemap: `${CLIENT_URL}/sitemap.xml`,
 	};

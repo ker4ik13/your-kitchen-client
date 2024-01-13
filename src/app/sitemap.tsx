@@ -1,7 +1,12 @@
 import UserArticleService from '@/services/UserArticleService';
 import { CLIENT_URL, pagesData, pagesLinks } from '@/shared/constants';
 
-const siteRoutes = ['', pagesLinks.portfolio, pagesLinks.articles];
+const siteRoutes = [
+	'',
+	pagesLinks.portfolio,
+	pagesLinks.articles,
+	pagesLinks.advantages,
+];
 
 const getArticlesInfo = async () => {
 	const articles = await UserArticleService.getArticles();
