@@ -5,6 +5,7 @@ import { Icons } from '@/shared/IconsComponents/Icons';
 import Logo from '@/shared/Logo/Logo';
 import { links, pagesLinks } from '@/shared/constants';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useRef } from 'react';
 import styles from './Nav.module.scss';
 import { handleNav } from './handleNav';
@@ -17,6 +18,10 @@ import { handleNav } from './handleNav';
 
 const Nav = () => {
 	const burgerWrapper = useRef<HTMLDivElement>(null);
+	const path = usePathname();
+
+	const isActive = (link: string) =>
+		path === link ? `${styles.link} ${styles.active}` : styles.link;
 	// const [rotate, setRotate] = useState<ChevronDirection>(ChevronDirection.Up);
 
 	// const handleRotate = () => {
@@ -34,19 +39,34 @@ const Nav = () => {
 					<Logo />
 					<div className={styles.burgerWrapper} ref={burgerWrapper}>
 						<div className={styles.pages}>
-							<Link href={`/${pagesLinks.howWeWork}`} className={styles.link}>
+							<Link
+								href={`/${pagesLinks.howWeWork}`}
+								className={isActive(`/${pagesLinks.howWeWork}`)}
+							>
 								Как мы работаем
 							</Link>
-							<Link href={`${pagesLinks.portfolio}`} className={styles.link}>
+							<Link
+								href={`${pagesLinks.portfolio}`}
+								className={isActive(pagesLinks.portfolio)}
+							>
 								Наши кухни
 							</Link>
-							<Link href={`${pagesLinks.reviews}`} className={styles.link}>
+							<Link
+								href={`${pagesLinks.reviews}`}
+								className={isActive(pagesLinks.reviews)}
+							>
 								Отзывы
 							</Link>
-							<Link href={`${pagesLinks.articles}`} className={styles.link}>
+							<Link
+								href={`${pagesLinks.articles}`}
+								className={isActive(pagesLinks.articles)}
+							>
 								Статьи
 							</Link>
-							<Link href={`${pagesLinks.advantages}`} className={styles.link}>
+							<Link
+								href={`${pagesLinks.advantages}`}
+								className={isActive(pagesLinks.advantages)}
+							>
 								Преимущества
 							</Link>
 							{/* <div className={styles.menuWrapper}>
