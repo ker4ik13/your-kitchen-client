@@ -5,6 +5,7 @@ import Icon from '@/shared/IconsComponents/Icon';
 import { ChevronDirection, Icons } from '@/shared/IconsComponents/Icons';
 import { LeaveRequestBlock2 } from '@/shared/LeaveRequestBlock2';
 import { ViewArticleComponent } from '@/shared/ViewArticleComponent';
+import { CLIENT_URL, SITE_NAME, pagesData } from '@/shared/constants';
 import ArticleCard from '@/widgets/Articles/ArticleCard';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -13,14 +14,12 @@ import { notFound } from 'next/navigation';
 import { IoIosArrowBack } from 'react-icons/io';
 import { VscEye } from 'react-icons/vsc';
 
-const CLIENT_URL = 'https://youkuhnya.ru';
-
 export const revalidate = 10;
 
 export const generateStaticParams = async () => {
 	const articles = await UserArticleService.getArticles();
 
-	const links = articles.map(article => ({
+	const links = articles.map((article) => ({
 		id: article.link,
 	}));
 	return links;
@@ -35,21 +34,23 @@ export const generateMetadata = async ({
 
 	if (article._id) {
 		return {
-			metadataBase: new URL(`${CLIENT_URL}/articles/${article.link}`),
-			title: `${article.title} | Твоя кухня`,
+			metadataBase: new URL(
+				`${CLIENT_URL}/${pagesData.articles.name}/${article.link}`,
+			),
+			title: `${article.title} | ${SITE_NAME}`,
 			description: article.description,
 			openGraph: {
-				type: 'article',
-				title: `${article.title} | Твоя кухня`,
+				type: pagesData.articles.type,
+				title: `${article.title} | ${SITE_NAME}`,
 				description: article.description,
 				publishedTime: article.createdAt,
 				modifiedTime: article.updatedAt,
-				url: `${CLIENT_URL}/articles/${article.link}`,
+				url: `${CLIENT_URL}/${pagesData.articles.name}/${article.link}`,
 				images: article.preview,
-				siteName: 'Твоя кухня',
+				siteName: SITE_NAME,
 			},
 			alternates: {
-				canonical: `${CLIENT_URL}/articles/${article.link}`,
+				canonical: `${CLIENT_URL}/${pagesData.articles.name}/${article.link}`,
 			},
 		};
 	} else {
@@ -84,12 +85,15 @@ const ArticlePage = async ({ params }: Props) => {
 				<div className={styles.container}>
 					<ViewArticleComponent articleId={article.link} />
 					<div className={styles.prevPage}>
-						<Link href={'/articles'} className={styles.prevButton}>
+						<Link
+							href={`/${pagesData.articles.name}`}
+							className={styles.prevButton}
+						>
 							<IoIosArrowBack />
 							<p>Назад</p>
 						</Link>
 						<p className={styles.nameText}>
-							<Link href={`/articles`}>Статьи</Link>
+							<Link href={`/${pagesData.articles.name}`}>Статьи</Link>
 							<span>/</span>
 							<span className={`${styles.nameText} ${styles.articleName}`}>
 								{article.title}
@@ -131,18 +135,21 @@ const ArticlePage = async ({ params }: Props) => {
 				<div className={styles.container}>
 					<div className={styles.articles}>
 						{moreArticles
-							.filter(item => item._id !== article._id)
+							.filter((item) => item._id !== article._id)
 							.slice(0, 3)
-							.map(article => (
+							.map((article) => (
 								<ArticleCard
 									article={article}
 									key={article._id}
-									href={`/articles/${article.link}`}
+									href={`/${pagesData.articles.name}/${article.link}`}
 								/>
 							))}
 					</div>
 					<div className={styles.buttonWrapper}>
-						<Link href={'/articles'} className={styles.orangeButton}>
+						<Link
+							href={`/${pagesData.articles.name}`}
+							className={styles.orangeButton}
+						>
 							Показать еще
 							<Icon icon={Icons.chevron(ChevronDirection.Down)} />
 						</Link>
