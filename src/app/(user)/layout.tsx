@@ -9,6 +9,10 @@ export const metadata: Metadata = {
 	verification: {
 		google: 'Nf5juItdjnxMIYOb4kOe_8QgiyDbS4fqFVU1tZsjo38',
 		yandex: '8cb11033a13960f6',
+		other: {
+			'zen-verification':
+				'dBZrk3siMlnkNbciHK3sTxTjpaHeP4EzbLxVfgqCTkJzy105Kug9rXQJUPfQHqG1',
+		},
 	},
 	icons: {
 		shortcut: '/favicon.ico',

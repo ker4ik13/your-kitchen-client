@@ -182,8 +182,10 @@
 			border-radius: rem(6);
 			max-width: rem(250);
 			width: 100%;
-			height: rem(200);
+			height: rem(220);
 			-o-object-fit: cover;
+			-o-object-position: center;
+			object-position: center;
 			object-fit: cover;
 			-webkit-mask-image: linear-gradient(
 				0deg,
