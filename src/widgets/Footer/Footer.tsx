@@ -73,6 +73,13 @@ const Footer = () => {
 					</div>
 				</div>
 			</div>
+			<div className={styles.badge}>
+				<iframe
+					src='https://yandex.ru/sprav/widget/rating-badge/192446974752?type=rating&theme=dark'
+					width='150'
+					height='50'
+				></iframe>
+			</div>
 			<div className={styles.footerDown}>
 				<div className={styles.downContainer}>
 					<p className={styles.footerDownText}>

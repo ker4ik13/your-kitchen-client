@@ -61,6 +61,7 @@ export const pagesLinks: ILink = {
 	articles: '/articles',
 	portfolio: '/portfolio',
 	advantages: '/preimushestva',
+	furniture: '/korpusnaya_mebel',
 	admin: '/admin',
 	adminClaims: '/admin/claims',
 	adminAdmins: '/admin/admins',

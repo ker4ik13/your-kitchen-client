@@ -46,28 +46,34 @@ const Nav = () => {
 								Как мы работаем
 							</Link>
 							<Link
-								href={`${pagesLinks.portfolio}`}
+								href={pagesLinks.portfolio}
 								className={isActive(pagesLinks.portfolio)}
 							>
 								Наши кухни
 							</Link>
 							<Link
-								href={`${pagesLinks.reviews}`}
+								href={pagesLinks.reviews}
 								className={isActive(pagesLinks.reviews)}
 							>
 								Отзывы
 							</Link>
 							<Link
-								href={`${pagesLinks.articles}`}
+								href={pagesLinks.articles}
 								className={isActive(pagesLinks.articles)}
 							>
 								Статьи
 							</Link>
 							<Link
-								href={`${pagesLinks.advantages}`}
+								href={pagesLinks.advantages}
 								className={isActive(pagesLinks.advantages)}
 							>
 								Преимущества
+							</Link>
+							<Link
+								href={pagesLinks.furniture}
+								className={isActive(pagesLinks.furniture)}
+							>
+								Мебель
 							</Link>
 							{/* <div className={styles.menuWrapper}>
                 <Menu>
