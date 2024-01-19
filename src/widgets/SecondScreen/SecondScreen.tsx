@@ -9,7 +9,7 @@ const SecondScreen = () => {
 		<div className={styles.secondScreen}>
 			<h2 className={styles.title}>Если вы еще не заказали кухню</h2>
 			<div className={styles.container}>
-				<div className='ellipse1 z-0'></div>
+				<div className={styles.ellipse}></div>
 				<p className={styles.first}>01</p>
 				<p className={styles.second}>02</p>
 				{/* Left side */}

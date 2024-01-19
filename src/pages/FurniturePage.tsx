@@ -1,3 +1,4 @@
+import { CustomerChoice } from '@/widgets/CustomerChoice/CustomerChoice';
 import { FourSteps } from '@/widgets/FourSteps/FourSteps';
 import { FurnitureAdvantages } from '@/widgets/FurnitureAdvantages/FurnitureAdvantages';
 import { FurnitureHelloScreen } from '@/widgets/FurnitureHelloScreen/FurnitureHelloScreen';
@@ -11,9 +12,10 @@ const FurniturePage = () => {
 			<FurnitureHelloScreen />
 			<FurnitureAdvantages />
 			<LeaveRequestMini />
+			<CustomerChoice />
 			<Reviews withoutBg />
 			<FourSteps />
-			{/* <LeaveRequestMini /> */}
+			<LeaveRequestMini />
 		</div>
 	);
 };

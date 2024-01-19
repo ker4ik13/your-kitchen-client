@@ -19,7 +19,25 @@
 	padding-bottom: rem(50);
 }
 .title {
-	@include title();
+	@include noto(400);
+	font-size: rem(40);
+	color: #fff;
+	line-height: 1.3;
+	max-width: rem(750);
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+
+	& span {
+		background-color: #7b402e;
+		padding: rem(5) rem(15);
+		border-radius: rem(50);
+	}
+
+	@media (max-width: $max-768) {
+		font-weight: 300;
+		font-size: rem(24);
+	}
 }
 .subtitle {
 	text-align: center;

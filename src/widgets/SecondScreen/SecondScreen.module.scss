@@ -113,6 +113,24 @@
 		top: 7rem;
 	}
 }
+.ellipse {
+	border-radius: rem(100);
+	background-color: #98826d;
+	-webkit-filter: blur(rem(64));
+	filter: blur(rem(64));
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: rem(384);
+	aspect-ratio: 1/1;
+	z-index: 0;
+	opacity: 0.6;
+
+	@media (max-width: $max-450) {
+		width: 16rem;
+	}
+}
 .second {
 	position: absolute;
 	@include dm();

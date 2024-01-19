@@ -14,7 +14,7 @@
 	@include container();
 }
 .title {
-	@include title();
+	@include title(300);
 }
 .items {
 	margin-top: rem(75);
