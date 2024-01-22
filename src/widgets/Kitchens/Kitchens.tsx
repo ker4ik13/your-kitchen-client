@@ -1,6 +1,7 @@
 'use client';
 
 import { UserKitchenService } from '@/services/UserKitchenService';
+import { OrangeButton } from '@/shared/ui';
 import { IKitchen } from '@/types/IKitchen';
 import { useEffect, useState } from 'react';
 import Kitchen from '../Kitchen/Kitchen';
@@ -65,19 +66,15 @@ const Kitchens = () => {
 							<Kitchen kitchen={kitchen} key={index} isPreview />
 						))}
 					</div>
-					<div className={styles.linkWrapper}>
-						{/* TODO: вынести кнопку в отдельный компонент */}
-						<button
-							type='button'
-							className={styles.link}
-							onClick={() => {
-								setIsOpen(true);
-								document.body.classList.add('overflow');
-							}}
-						>
-							Получить полный каталог
-						</button>
-					</div>
+					<OrangeButton
+						center
+						onClick={() => {
+							setIsOpen(true);
+							document.body.classList.add('overflow');
+						}}
+					>
+						Получить полный каталог
+					</OrangeButton>
 				</div>
 			</div>
 		</>

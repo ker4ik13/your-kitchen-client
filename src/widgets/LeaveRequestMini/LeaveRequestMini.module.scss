@@ -248,18 +248,6 @@
 	text-align: center;
 }
 .button {
-	border-radius: rem(100);
-	@include orange-gradient();
-	@include gilroy(700);
 	font-size: rem(12);
-	text-transform: uppercase;
-	padding: rem(16) rem(40);
-	color: #fff;
-	max-width: rem(260);
 	min-width: rem(260);
-	width: 100%;
-	min-height: rem(70);
-	text-align: center;
-	cursor: pointer;
-	text-decoration: none;
 }

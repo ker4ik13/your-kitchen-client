@@ -4,6 +4,7 @@ import { isErrorStyles } from '@/features/isErrorStyles';
 import requests from '@/features/requests';
 import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
+import { OrangeButton } from '@/shared/ui';
 import { TFormInputsNames, type TFormInputs } from '@/types/TFormInputs';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -95,13 +96,12 @@ export const LeaveRequestMini = ({ title }: LeaveRequestMiniProps) => {
 									/>
 									<Icon icon={Icons.phoneGray(styles.icon)} />
 								</div>
-								<button
-									type='button'
-									className={styles.button}
+								<OrangeButton
 									onClick={handleSubmit(onSubmitLeaveRequest)}
+									className={styles.button}
 								>
 									Получить эскиз
-								</button>
+								</OrangeButton>
 							</div>
 						</form>
 						<p className={styles.text}>

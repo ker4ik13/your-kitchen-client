@@ -5,6 +5,7 @@ import pages from '@/data/images/pages.webp';
 import money from '@/data/images/woman-money.webp';
 import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
+import { OrangeButton } from '@/shared/ui';
 import Image from 'next/image';
 import styles from './Correction.module.scss';
 
@@ -32,8 +33,7 @@ const Correction = ({ setIsOpen, setIsOpenVideo }: CorrectionProps) => {
 								правша или левша, кулинарные привычки, поможет выбрать самую
 								удобную для вас форму и расположение
 							</p>
-							<button
-								type='button'
+							<OrangeButton
 								className={styles.orangeButton}
 								onClick={() => {
 									setIsOpen(true);
@@ -41,7 +41,7 @@ const Correction = ({ setIsOpen, setIsOpenVideo }: CorrectionProps) => {
 								}}
 							>
 								Оставить заявку
-							</button>
+							</OrangeButton>
 						</div>
 
 						{/* Center side */}
@@ -150,17 +150,19 @@ const Correction = ({ setIsOpen, setIsOpenVideo }: CorrectionProps) => {
 								котором вы можете лучше ознакомиться с процессом изготовления,
 								хранения, обработки, покраски и другими видами работ.
 							</p>
-							<button
-								type='button'
+							<OrangeButton
 								className={styles.card3OrangeButton}
 								onClick={() => {
 									setIsOpenVideo(true);
 									document.body.classList.add('overflow');
 								}}
+								prefix={{
+									icon: <Icon icon={Icons.play(styles.card3ButtonIcon)} />,
+									location: 'right',
+								}}
 							>
 								Видео с производства
-								<Icon icon={Icons.play(styles.card3ButtonIcon)} />
-							</button>
+							</OrangeButton>
 						</div>
 
 						{/* Right side */}

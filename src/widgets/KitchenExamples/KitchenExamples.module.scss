@@ -182,22 +182,7 @@
 	margin-top: rem(30);
 }
 .moreButton {
-	@include orange-gradient();
-	padding: rem(30) rem(65);
-	border-radius: rem(50);
-	color: #fff;
-	@include gilroy(700);
-	font-size: rem(14);
-	text-transform: uppercase;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: rem(12);
-	cursor: pointer;
-	margin: 0 auto;
 	margin-top: rem(35);
-	position: relative;
-	z-index: 5;
 }
 .loading {
 	max-width: rem(100);

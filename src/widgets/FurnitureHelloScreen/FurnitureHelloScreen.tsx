@@ -1,6 +1,7 @@
 'use client';
 
 import bgImage from '@/data/images/bg_mebel.jpg';
+import { OrangeButton } from '@/shared/ui';
 import Image from 'next/image';
 import { useState } from 'react';
 import Modal1 from '../Modals/Modal1';
@@ -43,16 +44,15 @@ export const FurnitureHelloScreen = () => {
 						тумбы, мебельные гарнитуры для кухни и многое другое.
 					</p>
 
-					<button
-						type='button'
-						className={styles.orangeButton}
+					<OrangeButton
+						className={styles.button}
 						onClick={() => {
 							setIsOpen(true);
 							document.body.classList.add('overflow');
 						}}
 					>
 						Рассчитать стоимость
-					</button>
+					</OrangeButton>
 				</div>
 			</div>
 		</>

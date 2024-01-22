@@ -6,6 +6,7 @@ import requests from '@/features/requests';
 import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import { links } from '@/shared/constants';
+import { OrangeButton } from '@/shared/ui';
 import { TFormInputsNames, type TFormInputs } from '@/types/TFormInputs';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -192,13 +193,12 @@ const LeaveRequest = ({
 								</Link>
 							</div>
 						</div>
-						<button
-							type='button'
+						<OrangeButton
 							className={styles.button}
 							onClick={handleSubmit(onSubmitLeaveRequest)}
 						>
 							{buttonText || 'Рассчитать стоимость'}
-						</button>
+						</OrangeButton>
 					</div>
 				</div>
 			</div>
@@ -316,13 +316,12 @@ const LeaveRequest = ({
 								</Link>
 							</div>
 						</div>
-						<button
-							type='button'
+						<OrangeButton
 							className={styles.button}
 							onClick={handleSubmit(onSubmitLeaveRequest)}
 						>
 							{buttonText || 'Рассчитать стоимость'}
-						</button>
+						</OrangeButton>
 					</div>
 				</div>
 			</div>

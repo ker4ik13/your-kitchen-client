@@ -1,6 +1,7 @@
 import bgImage from '@/data/images/bg.webp';
 import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
+import { OrangeButton } from '@/shared/ui';
 import Image from 'next/image';
 import styles from './HelloScreen.module.scss';
 
@@ -39,8 +40,7 @@ const HelloScreen = ({ setIsOpen }: HelloScreenProps) => {
 						<span>бесплатный</span> дизайн проект
 					</p>
 				</div>
-				<button
-					type='button'
+				<OrangeButton
 					className={styles.orangeButton}
 					onClick={() => {
 						setIsOpen(true);
@@ -48,7 +48,7 @@ const HelloScreen = ({ setIsOpen }: HelloScreenProps) => {
 					}}
 				>
 					Рассчитать стоимость
-				</button>
+				</OrangeButton>
 			</div>
 		</div>
 	);

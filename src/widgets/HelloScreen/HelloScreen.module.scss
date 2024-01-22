@@ -123,29 +123,6 @@
 .orangeButton {
 	margin-top: rem(35);
 	margin-left: rem(48);
-	color: #fff;
-	font-weight: 700;
-	max-width: rem(270);
-	width: 100%;
-	@include orange-gradient();
-	padding: rem(20) rem(40);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	border-radius: rem(100);
-	font-size: rem(14);
-	text-transform: uppercase;
-	border: 1px solid transparent;
-	transition: border 0.2s linear;
-	text-decoration: none;
-	cursor: pointer;
-	position: relative;
-	z-index: 4;
-
-	&:hover {
-		border-color: rgba(255, 255, 255, 0.6);
-	}
 
 	@media (max-width: $max-768) {
 		margin-top: rem(250);

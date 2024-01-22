@@ -3,6 +3,7 @@ import requests from '@/features/requests';
 import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import { links } from '@/shared/constants';
+import { OrangeButton } from '@/shared/ui';
 import { TFormInputsNames, type TFormInputs } from '@/types/TFormInputs';
 import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -14,6 +15,7 @@ interface LeaveRequestProps {
 	onClick?: (...options: any) => void;
 	setIsOpen?: (isOpen: boolean) => void;
 	setIsOpenThanks?: (isOpen: boolean) => void;
+	buttonText?: string;
 }
 
 const API_URL: string | undefined = process.env.NEXT_PUBLIC_API_URL;
@@ -27,6 +29,7 @@ const LeaveRequest2 = ({
 	onClick,
 	setIsOpen,
 	setIsOpenThanks,
+	buttonText,
 }: LeaveRequestProps) => {
 	const {
 		register,
@@ -151,13 +154,12 @@ const LeaveRequest2 = ({
 									</Link>
 								</div>
 							</div>
-							<button
-								type='button'
+							<OrangeButton
 								className={styles.button}
 								onClick={handleSubmit(onSubmitLeaveRequest)}
 							>
-								Рассчитать стоимость
-							</button>
+								{buttonText || 'Рассчитать стоимость'}
+							</OrangeButton>
 						</div>
 					</form>
 				</div>
@@ -251,13 +253,12 @@ const LeaveRequest2 = ({
 									</Link>
 								</div>
 							</div>
-							<button
-								type='button'
+							<OrangeButton
 								className={styles.button}
 								onClick={handleSubmit(onSubmitLeaveRequest)}
 							>
-								Рассчитать стоимость
-							</button>
+								{buttonText || 'Рассчитать стоимость'}
+							</OrangeButton>
 						</div>
 					</form>
 				</div>

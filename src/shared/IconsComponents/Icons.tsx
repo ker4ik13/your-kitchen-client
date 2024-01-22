@@ -4,7 +4,7 @@ interface IIcons {
 	person: (className: string) => JSX.Element;
 	phone: (className: string) => JSX.Element;
 	ruble: (className: string) => JSX.Element;
-	chevron: (rotate: ChevronDirection) => JSX.Element;
+	chevron: (rotate: 'left' | 'right' | 'up' | 'down') => JSX.Element;
 	mail: (className: string) => JSX.Element;
 	telegram: (className: string) => JSX.Element;
 	whatsapp: (className: string) => JSX.Element;
@@ -183,11 +183,19 @@ export const Icons: IIcons = {
 			</defs>
 		</svg>
 	),
-	chevron: (rotate: ChevronDirection) => {
-		if (rotate === 'up') {
-			return <p className={styles.rotateUp}>{'›'}</p>;
+	chevron: (rotate) => {
+		switch (rotate) {
+			case 'down':
+				return <p className={styles.rotateDown}>{'›'}</p>;
+			case 'up':
+				return <p className={styles.rotateUp}>{'›'}</p>;
+			case 'left':
+				return <p className={styles.rotateLeft}>{'›'}</p>;
+			case 'right':
+				return <p className={styles.rotateRight}>{'›'}</p>;
+			default:
+				return <p className={styles.rotateDown}>{'›'}</p>;
 		}
-		return <p className={styles.rotateDown}>{'›'}</p>;
 	},
 	mail: (className: string) => (
 		<svg
