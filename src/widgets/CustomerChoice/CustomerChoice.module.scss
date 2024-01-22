@@ -3,6 +3,10 @@
 .choisePage {
 	padding-top: rem(50);
 	padding-bottom: rem(200);
+
+	@media (max-width: $max-950) {
+		padding-bottom: rem(50);
+	}
 }
 .container {
 	@include container();
@@ -16,6 +20,21 @@
 	justify-content: space-between;
 	margin-top: rem(50);
 	position: relative;
+
+	@media (max-width: $max-950) {
+		flex-direction: column;
+		justify-content: flex-start;
+
+		& .texts:first-child {
+			order: 2;
+		}
+		& .texts:last-child {
+			order: 3;
+		}
+		& .wrapper {
+			order: 1;
+		}
+	}
 }
 .texts {
 	display: flex;
@@ -25,42 +44,88 @@
 	position: relative;
 	z-index: 10;
 
+	@media (max-width: $max-950) {
+		gap: rem(20);
+		max-width: rem(500);
+		margin: 0 auto;
+	}
+
 	& .text {
 		&:first-child {
 			margin-left: rem(70);
 			max-width: rem(300);
+
+			@media (max-width: $max-950) {
+				margin-left: 0;
+				max-width: none;
+			}
 		}
 
 		&:nth-child(2) {
 			max-width: rem(320);
+
+			@media (max-width: $max-950) {
+				max-width: none;
+			}
 		}
 		&:nth-child(3) {
 			margin-left: rem(20);
 			max-width: rem(310);
+
+			@media (max-width: $max-950) {
+				margin-left: 0;
+				max-width: none;
+			}
 		}
 	}
 
 	&:last-child {
 		max-width: rem(420);
 
+		@media (max-width: $max-950) {
+			gap: rem(20);
+			max-width: rem(500);
+			margin: 0 auto;
+		}
+
 		& .text {
 			&:first-child {
 				margin-right: rem(70);
 				margin-left: 0;
 				white-space: nowrap;
+
+				@media (max-width: $max-950) {
+					margin: 0;
+					white-space: wrap;
+				}
 			}
 			&:nth-child(2) {
 				margin-left: rem(30);
 				max-width: rem(350);
+
+				@media (max-width: $max-950) {
+					margin: 0;
+					max-width: none;
+				}
 			}
 			&:nth-child(3) {
 				max-width: rem(300);
 				margin-left: rem(50);
+
+				@media (max-width: $max-950) {
+					margin: 0;
+					max-width: none;
+				}
 			}
 
 			&:last-child {
 				max-width: rem(380);
 				margin-left: rem(30);
+
+				@media (max-width: $max-950) {
+					margin: 0;
+					max-width: none;
+				}
 			}
 		}
 		gap: rem(38);
@@ -93,6 +158,12 @@
 	top: 0;
 	left: 50%;
 	transform: translate(-50%, 0);
+
+	@media (max-width: $max-950) {
+		position: static;
+		transform: none;
+		margin: 0 auto;
+	}
 }
 .person {
 	max-width: rem(350);
@@ -122,6 +193,10 @@
 	opacity: 0.78;
 	-webkit-filter: blur(rem(79));
 	filter: blur(rem(79));
+
+	@media (max-width: $max-950) {
+		top: 15%;
+	}
 
 	@media (max-width: $max-450) {
 		width: 16rem;

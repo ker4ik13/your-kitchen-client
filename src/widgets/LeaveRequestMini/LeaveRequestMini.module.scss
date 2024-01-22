@@ -12,10 +12,6 @@
 	// 	#2d2928 112.16%
 	// );
 	overflow: hidden;
-
-	@media (max-width: $max-1100) {
-		overflow: hidden;
-	}
 }
 
 .container {
@@ -40,9 +36,12 @@
 		transform: translate(-50%, 0);
 		height: 100%;
 	}
-	// @media (max-width: $max-600) {
-	// 	background-image: url('../../data/images/modal-bg.webp');
-	// }
+
+	@media (max-width: $max-950) {
+		background-image: url('../../data/images/modal-bg.webp');
+		height: 100%;
+		min-height: rem(700);
+	}
 }
 .closeButton {
 	@include gilroy(400);
@@ -86,7 +85,7 @@
 	position: relative;
 	z-index: 2;
 
-	@media (max-width: $max-1100) {
+	@media (max-width: $max-400) {
 		display: none;
 	}
 }
@@ -99,6 +98,18 @@
 	position: relative;
 	z-index: 2;
 	margin: 0 auto;
+
+	@media (max-width: $max-950) {
+		max-width: rem(650);
+	}
+
+	@media (max-width: $max-650) {
+		max-width: rem(400);
+	}
+
+	@media (max-width: $max-400) {
+		max-width: rem(320);
+	}
 }
 .title {
 	@include noto(400);
@@ -106,13 +117,13 @@
 	color: #b79571;
 	line-height: 1.15;
 
-	@media (max-width: $max-450) {
-		font-size: rem(30);
-		text-align: center;
+	@media (max-width: $max-650) {
+		font-size: rem(32);
 	}
 }
 
 .text {
+	margin: 0 auto;
 	margin-top: rem(40);
 	@include gilroy(400);
 	color: #4f4a46;
@@ -125,13 +136,9 @@
 		font-weight: 700;
 	}
 
-	@media (max-width: $max-1100) {
-		margin-top: rem(20);
-		margin-left: rem(250);
-	}
 	@media (max-width: $max-600) {
-		margin: 0 auto;
 		margin-top: rem(20);
+		max-width: rem(500);
 	}
 	@media (max-width: $max-400) {
 		max-width: rem(300);
@@ -150,7 +157,7 @@
 	align-items: center;
 	gap: rem(20);
 
-	@media (max-width: $max-600) {
+	@media (max-width: $max-950) {
 		flex-direction: column;
 		margin: 0 auto;
 	}
