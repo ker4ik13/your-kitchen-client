@@ -67,6 +67,8 @@ export const pagesLinks: ILink = {
 	adminAdmins: '/admin/admins',
 	adminAdminsNew: '/admin/admins/new',
 	adminKitchens: '/admin/kitchens',
+	adminFurniture: '/admin/furniture',
+	adminFurnitureNew: '/admin/furniture/new',
 	adminKitchensNew: '/admin/kitchens/new',
 	adminReviews: '/admin/reviews',
 	adminReviewsNew: '/admin/reviews/new',

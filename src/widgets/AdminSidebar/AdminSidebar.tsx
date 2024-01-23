@@ -46,6 +46,13 @@ const AdminSidebar: FC<AdminSidebarProps> = ({ store }) => {
 						<Icon icon={Icons.kitchen(styles.icon)} />
 						<p>Кухни</p>
 					</Link>
+					<Link
+						href={pagesLinks.adminFurniture}
+						className={isActive('furniture')}
+					>
+						<Icon icon={Icons.kitchen(styles.icon)} />
+						<p>Мебель</p>
+					</Link>
 					<Link href={pagesLinks.adminReviews} className={isActive('reviews')}>
 						<MdOutlineRateReview />
 						<p>Отзывы</p>

@@ -31,13 +31,6 @@
 .swiper-pagination-bullet-active {
 	opacity: 1 !important;
 }
-.swiper-pagination-fraction,
-.swiper-pagination-custom,
-.swiper-horizontal > .swiper-pagination-bullets,
-.swiper-pagination-bullets.swiper-pagination-horizontal {
-	bottom: auto !important;
-	top: 1.25rem !important;
-}
 .swiper-horizontal > .swiper-scrollbar,
 .swiper-scrollbar.swiper-scrollbar-horizontal {
 	max-width: 53.75rem !important;

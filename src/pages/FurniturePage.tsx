@@ -4,6 +4,7 @@ import { Furniture } from '@/widgets/Furniture/Furniture';
 import { FurnitureAdvantages } from '@/widgets/FurnitureAdvantages/FurnitureAdvantages';
 import { FurnitureHelloScreen } from '@/widgets/FurnitureHelloScreen/FurnitureHelloScreen';
 import { LeaveRequestMini } from '@/widgets/LeaveRequestMini/LeaveRequestMini';
+import MainArticles from '@/widgets/MainArticles/MainArticles';
 import Reviews from '@/widgets/Reviews/Reviews';
 import styles from './FurniturePage.module.scss';
 
@@ -21,6 +22,7 @@ const FurniturePage = () => {
 			<Reviews withoutBg />
 			<FourSteps />
 			<LeaveRequestMini />
+			<MainArticles />
 		</div>
 	);
 };
