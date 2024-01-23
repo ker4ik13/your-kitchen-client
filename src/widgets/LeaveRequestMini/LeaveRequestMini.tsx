@@ -1,11 +1,12 @@
 'use client';
 
 import { isErrorStyles } from '@/features/isErrorStyles';
-import requests from '@/features/requests';
+import ClaimService from '@/services/ClaimService';
 import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import { OrangeButton } from '@/shared/ui';
 import { TFormInputsNames, type TFormInputs } from '@/types/TFormInputs';
+import { CreateClaimDto } from '@/types/dtos/CreateClaim.dto';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ReactInputMask from 'react-input-mask';
@@ -20,9 +21,15 @@ if (!API_URL) {
 
 interface LeaveRequestMiniProps {
 	title?: string;
+	tag?: string;
+	location?: string;
 }
 
-export const LeaveRequestMini = ({ title }: LeaveRequestMiniProps) => {
+export const LeaveRequestMini = ({
+	title,
+	tag,
+	location,
+}: LeaveRequestMiniProps) => {
 	const {
 		register,
 		handleSubmit,
@@ -34,10 +41,15 @@ export const LeaveRequestMini = ({ title }: LeaveRequestMiniProps) => {
 	const [isOpenThanks, setIsOpenThanks] = useState(false);
 
 	const onSubmitLeaveRequest: SubmitHandler<TFormInputs> = async (data) => {
-		data.date = new Date().toISOString();
-		const result = await requests.post(`${API_URL}/api/claims`, data);
+		const newClaim = new CreateClaimDto({
+			...data,
+			date: new Date().toISOString(),
+			location,
+			tag,
+		});
+		const result = await ClaimService.addClaim(newClaim);
 
-		if (result?.ok) {
+		if (result?.status === 201) {
 			resetField('firstName');
 			setValue('mobilePhone', '');
 			setIsOpenThanks(true);

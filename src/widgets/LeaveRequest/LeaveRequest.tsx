@@ -2,12 +2,13 @@ import miniLogo from '@/data/images/logo.webp';
 import phone from '@/data/images/phoneHand.webp';
 import designer from '@/data/team/team2.webp';
 import { isErrorStyles } from '@/features/isErrorStyles';
-import requests from '@/features/requests';
+import ClaimService from '@/services/ClaimService';
 import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import { links } from '@/shared/constants';
 import { OrangeButton } from '@/shared/ui';
 import { TFormInputsNames, type TFormInputs } from '@/types/TFormInputs';
+import { CreateClaimDto } from '@/types/dtos/CreateClaim.dto';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -27,6 +28,8 @@ interface LeaveRequestProps {
 	setIsOpen?: (isOpen: boolean) => void;
 	setIsOpenThanks?: (isOpen: boolean) => void;
 	buttonText?: string;
+	tag?: string;
+	location?: string;
 }
 
 const LeaveRequest = ({
@@ -35,6 +38,8 @@ const LeaveRequest = ({
 	setIsOpen,
 	setIsOpenThanks,
 	buttonText,
+	tag,
+	location,
 }: LeaveRequestProps) => {
 	const {
 		register,
@@ -47,10 +52,15 @@ const LeaveRequest = ({
 	const router = useRouter();
 
 	const onSubmitLeaveRequest: SubmitHandler<TFormInputs> = async (data) => {
-		data.date = new Date().toISOString();
-		const result = await requests.post(`${API_URL}/api/claims`, data);
+		const newClaim = new CreateClaimDto({
+			...data,
+			date: new Date().toISOString(),
+			location,
+			tag,
+		});
+		const result = await ClaimService.addClaim(newClaim);
 
-		if (result?.ok) {
+		if (result.status === 201) {
 			resetField('firstName');
 			setValue('mobilePhone', '');
 

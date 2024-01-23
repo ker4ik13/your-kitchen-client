@@ -1,10 +1,11 @@
 import { isErrorStyles } from '@/features/isErrorStyles';
-import requests from '@/features/requests';
+import ClaimService from '@/services/ClaimService';
 import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import { links } from '@/shared/constants';
 import { OrangeButton } from '@/shared/ui';
 import { TFormInputsNames, type TFormInputs } from '@/types/TFormInputs';
+import { CreateClaimDto } from '@/types/dtos/CreateClaim.dto';
 import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ReactInputMask from 'react-input-mask';
@@ -16,6 +17,8 @@ interface LeaveRequestProps {
 	setIsOpen?: (isOpen: boolean) => void;
 	setIsOpenThanks?: (isOpen: boolean) => void;
 	buttonText?: string;
+	tag?: string;
+	location?: string;
 }
 
 const API_URL: string | undefined = process.env.NEXT_PUBLIC_API_URL;
@@ -30,6 +33,8 @@ const LeaveRequest2 = ({
 	setIsOpen,
 	setIsOpenThanks,
 	buttonText,
+	tag,
+	location,
 }: LeaveRequestProps) => {
 	const {
 		register,
@@ -40,10 +45,17 @@ const LeaveRequest2 = ({
 	} = useForm<TFormInputs>();
 
 	const onSubmitLeaveRequest: SubmitHandler<TFormInputs> = async (data) => {
-		data.date = new Date().toISOString();
-		const result = await requests.post(`${API_URL}/api/claims`, data);
+		const newClaim = new CreateClaimDto({
+			...data,
+			date: new Date().toISOString(),
+			location,
+			tag,
+		});
 
-		if (result?.ok) {
+		const result = await ClaimService.addClaim(newClaim);
+		console.log(result);
+
+		if (result?.status === 201) {
 			resetField('firstName');
 			setValue('mobilePhone', '');
 		}

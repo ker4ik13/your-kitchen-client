@@ -1,16 +1,28 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import ThanksModal from "@/widgets/Modals/ThanksModal";
-import LeaveRequest2 from "@/widgets/LeaveRequest2/LeaveRequest2";
+import LeaveRequest2 from '@/widgets/LeaveRequest2/LeaveRequest2';
+import ThanksModal from '@/widgets/Modals/ThanksModal';
+import { useState } from 'react';
 
-export const LeaveRequestBlock2 = () => {
-  const [isOpenThanks, setIsOpenThanks] = useState(false);
+interface LeaveRequestBlockProps {
+	location?: string;
+	tag?: string;
+}
 
-  return (
-    <>
-      <LeaveRequest2 setIsOpenThanks={setIsOpenThanks} />
-      {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
-    </>
-  );
+export const LeaveRequestBlock2 = ({
+	location,
+	tag,
+}: LeaveRequestBlockProps) => {
+	const [isOpenThanks, setIsOpenThanks] = useState(false);
+
+	return (
+		<>
+			<LeaveRequest2
+				setIsOpenThanks={setIsOpenThanks}
+				location={location}
+				tag={tag}
+			/>
+			{isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
+		</>
+	);
 };
