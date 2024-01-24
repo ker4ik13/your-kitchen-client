@@ -8,121 +8,42 @@ import MiniLoading from '@/shared/MiniLoading';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { checkAuth } from '@/store/user.slice';
 import { IError } from '@/types/IError';
-import {
-	KitchensOptions,
-	KitchensStyles,
-	kitchensStylesTranslate,
-	kitchensTranslate,
-} from '@/types/KitchenOptions';
 import { UserRoles } from '@/types/UserRoles';
 import AdminSidebar from '@/widgets/AdminSidebar/AdminSidebar';
-import { useEffect, useState, type KeyboardEventHandler } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { components } from 'react-select';
-import CreatableSelect from 'react-select/creatable';
-
-interface ISelectOptions {
-	value: string;
-	label: string;
-}
-interface IReadonlySelectOptions {
-	readonly value: string;
-	readonly label: string;
-}
-
-const kitchensStyles: ISelectOptions[] = [
-	{ value: KitchensOptions.chalet, label: kitchensTranslate.chalet },
-	{ value: KitchensOptions.classic, label: kitchensTranslate.classic },
-	{ value: KitchensOptions.hightech, label: kitchensTranslate.hightech },
-	{ value: KitchensOptions.loft, label: kitchensTranslate.loft },
-	{ value: KitchensOptions.minimalism, label: kitchensTranslate.minimalism },
-	{ value: 'Модерн', label: 'Модерн' },
-	{ value: 'Современный', label: 'Современный' },
-	{ value: 'Прованс', label: 'Прованс' },
-	{ value: 'Скандинавский', label: 'Скандинавский' },
-];
-const kitchensTypes: ISelectOptions[] = [
-	{ value: KitchensStyles.straight, label: kitchensStylesTranslate.straight },
-	{ value: KitchensStyles.corner, label: kitchensStylesTranslate.corner },
-	{ value: KitchensStyles.UShaped, label: kitchensStylesTranslate.UShaped },
-	{ value: KitchensStyles.fullWidth, label: kitchensStylesTranslate.fullWidth },
-];
-
-const createOption = (label: string) => ({
-	label,
-	value: label,
-});
+import { useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 // Поля формы
 interface TInputs {
-	title: string;
+	name: string;
+	slug: string;
 	description: string;
 	price: number;
-	style: unknown | IReadonlySelectOptions;
 	photos: ImageData[];
-	type: unknown | IReadonlySelectOptions;
-	term: string;
 	onMainPage: boolean;
 }
 
 // Тексты
 const texts = {
-	notFoundText: 'Кухня не найдена',
+	notFoundText: 'Мебель не найдена',
 	buttonText: 'Добавить',
-	titleText: 'Добавить кухню',
-	addOrChangeErrorText: 'Ошибка добавления кухни. Попробуйте еще раз',
+	titleText: 'Добавить мебель',
+	addOrChangeErrorText: 'Ошибка добавления мебели. Попробуйте еще раз',
 	errorText: 'Что-то пошло не так. Попробуйте еще раз',
-	successText: 'Кухня успешно добавлена',
+	successText: 'Мебель успешно добавлена',
 };
 
-const NewKitchenPage = () => {
-	const { register, handleSubmit, control, reset } = useForm<TInputs>();
-	const userStore = useAppSelector(store => store.user);
+const NewFurniturePage = () => {
+	const { register, handleSubmit, reset } = useForm<TInputs>();
+	const userStore = useAppSelector((store) => store.user);
 	const dispatch = useAppDispatch();
 
 	const [photos, setPhotos] = useState<any[]>([]);
 	const [files, setFiles] = useState<File[]>([]);
 	const [drag, setDrag] = useState(false);
 
-	// Стейты для select
-	const [inputValue, setInputValue] = useState('');
-	const [value, setValue] = useState<
-		readonly IReadonlySelectOptions[] | unknown[]
-	>([]);
-	// Стейты для select 2
-	const [inputValue2, setInputValue2] = useState('');
-	const [value2, setValue2] = useState<
-		readonly IReadonlySelectOptions[] | unknown[]
-	>([]);
-
 	// Ошибка
 	const [error, setError] = useState<IError>({ isError: false, value: '' });
-
-	// Срок
-	const [termValue, setTermValue] = useState('');
-
-	// Обработка нажатия enter в select
-	const handleKeyDown: KeyboardEventHandler = event => {
-		if (!inputValue) return;
-		switch (event.key) {
-			case 'Enter':
-			case 'Tab':
-				setValue(prev => [...prev, createOption(inputValue)]);
-				setInputValue('');
-				event.preventDefault();
-		}
-	};
-	// Обработка нажатия enter в select 2
-	const handleKeyDown2: KeyboardEventHandler = event => {
-		if (!inputValue2) return;
-		switch (event.key) {
-			case 'Enter':
-			case 'Tab':
-				setValue2(prev => [...prev, createOption(inputValue2)]);
-				setInputValue2('');
-				event.preventDefault();
-		}
-	};
 
 	useEffect(() => {
 		if (localStorage.getItem('token')) {
@@ -168,7 +89,7 @@ const NewKitchenPage = () => {
 	const getPhotosFromFiles = (event: any, files: any[]) => {
 		const photos: any[] = [];
 
-		files.map(file => {
+		files.map((file) => {
 			let photo = {
 				title: file.name,
 				src: URL.createObjectURL(file),
@@ -213,25 +134,23 @@ const NewKitchenPage = () => {
 	const deleteImage = (photoTitle: number) => {
 		const images = [...photos];
 
-		const result = images.filter(image => photoTitle !== image.title);
+		const result = images.filter((image) => photoTitle !== image.title);
 
 		setPhotos(result);
 	};
 
-	const onSubmit: SubmitHandler<TInputs> = async data => {
+	const onSubmit: SubmitHandler<TInputs> = async (data) => {
 		const form = new FormData();
 
-		form.append('title', data.title);
+		form.append('name', data.name);
 		form.append('description', data.description);
 		form.append('price', data.price.toString());
-		form.append('style', JSON.stringify(data.style));
+
 		// Добавление всех фото
-		files.forEach(file => {
+		files.forEach((file) => {
 			form.append(`files`, file);
 		});
 		form.append('onMainPage', JSON.stringify(data.onMainPage));
-		form.append('type', JSON.stringify(data.type));
-		form.append('term', data.term);
 
 		const response = await $api.post('/kitchens', form, {
 			headers: {
@@ -247,11 +166,8 @@ const NewKitchenPage = () => {
 				description: '',
 				photos: [],
 				price: 0,
-				style: '',
-				term: '',
-				title: '',
+				name: '',
 				onMainPage: false,
-				type: '',
 			});
 			setFiles([]);
 			setPhotos([]);
@@ -276,7 +192,7 @@ const NewKitchenPage = () => {
 						<h2 className={styles.title}>{texts.titleText}</h2>
 						<button
 							type='submit'
-							form='kitchenForm'
+							form='furnitureForm'
 							className={styles.addButton}
 						>
 							{texts.buttonText}
@@ -291,7 +207,7 @@ const NewKitchenPage = () => {
 						{/* Форма */}
 						<form
 							className={styles.addForm}
-							id='kitchenForm'
+							id='furnitureForm'
 							onSubmit={handleSubmit(onSubmit)}
 						>
 							{/* Заголовок */}
@@ -302,8 +218,8 @@ const NewKitchenPage = () => {
 								<input
 									type='text'
 									id='title'
-									placeholder='Название кухни'
-									{...register('title', {
+									placeholder='Название мебели'
+									{...register('name', {
 										required: true,
 									})}
 									className={`${styles.textInput} ${styles.fullInput}`}
@@ -340,6 +256,22 @@ const NewKitchenPage = () => {
 								</div>
 							</div>
 
+							{/* Ссылка */}
+							<div className={styles.inputWrapper}>
+								<label htmlFor='slug' className={styles.label}>
+									Ссылка
+								</label>
+								<input
+									type='text'
+									id='slug'
+									placeholder='Ссылка на мебель (shkaf)'
+									{...register('slug', {
+										required: true,
+									})}
+									className={`${styles.textInput} ${styles.fullInput}`}
+								/>
+							</div>
+
 							{/* Описание */}
 							<div className={styles.inputWrapper}>
 								<label htmlFor='description' className={styles.label}>
@@ -356,7 +288,7 @@ const NewKitchenPage = () => {
 							</div>
 
 							{/* Срок */}
-							<div className={styles.inputWrapper}>
+							{/* <div className={styles.inputWrapper}>
 								<label htmlFor='term' className={styles.label}>
 									Срок
 								</label>
@@ -366,7 +298,7 @@ const NewKitchenPage = () => {
 									id='term'
 									{...register('term', {
 										required: true,
-										onChange: event => {
+										onChange: (event) => {
 											setTermValue(event.target.value);
 										},
 									})}
@@ -376,51 +308,7 @@ const NewKitchenPage = () => {
 									<p>Будет отображаться так:</p>
 									<p>Срок {`${termValue}`}</p>
 								</div>
-							</div>
-
-							{/* Стиль кухни */}
-							<div className={styles.inputWrapper}>
-								<label className={styles.label}>Стиль кухни</label>
-								<Controller
-									control={control}
-									name='style'
-									render={({ field }) => (
-										<CreatableSelect
-											className={styles.select}
-											components={components}
-											options={kitchensStyles}
-											value={field.value}
-											isSearchable
-											onChange={newValue => field.onChange(newValue)}
-											onInputChange={newValue => setInputValue(newValue)}
-											onKeyDown={handleKeyDown}
-											placeholder='Стиль кухни'
-										/>
-									)}
-								/>
-							</div>
-
-							{/* Тип кухни */}
-							<div className={styles.inputWrapper}>
-								<label className={styles.label}>Тип кухни</label>
-								<Controller
-									control={control}
-									name='type'
-									render={({ field }) => (
-										<CreatableSelect
-											className={styles.select}
-											components={components}
-											options={kitchensTypes}
-											value={field.value}
-											isSearchable
-											onChange={newValue => field.onChange(newValue)}
-											onInputChange={newValue => setInputValue2(newValue)}
-											onKeyDown={handleKeyDown2}
-											placeholder='Тип кухни'
-										/>
-									)}
-								/>
-							</div>
+							</div> */}
 
 							{/* Фото */}
 							<div className={styles.inputWrapper}>
@@ -436,11 +324,11 @@ const NewKitchenPage = () => {
 									multiple
 									className={styles.inputPhotos}
 									required
-									onChange={event => changeHandler(event)}
-									onDragStart={event => dragStartHandler(event)}
-									onDragLeave={event => dragLeaveHandler(event)}
-									onDragOver={event => dragStartHandler(event)}
-									onDrop={event => dropHandler(event)}
+									onChange={(event) => changeHandler(event)}
+									onDragStart={(event) => dragStartHandler(event)}
+									onDragLeave={(event) => dragLeaveHandler(event)}
+									onDragOver={(event) => dragStartHandler(event)}
+									onDrop={(event) => dropHandler(event)}
 								/>
 								<label htmlFor='photos' className={styles.labelPhotos}>
 									{!drag
@@ -479,4 +367,4 @@ const NewKitchenPage = () => {
 	);
 };
 
-export default NewKitchenPage;
+export default NewFurniturePage;

@@ -5,32 +5,34 @@ import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import MiniLoading from '@/shared/MiniLoading';
 import { pagesLinks } from '@/shared/constants';
+import { getAllFurniture } from '@/store/furniture.slice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { deleteKitchen, getKitchens } from '@/store/kitchens.slice';
+import { deleteKitchen } from '@/store/kitchens.slice';
 import { checkAuth } from '@/store/user.slice';
 import { UserRoles } from '@/types/UserRoles';
 import AdminSidebar from '@/widgets/AdminSidebar/AdminSidebar';
-import Kitchen from '@/widgets/Kitchen/Kitchen';
+import FurnitureItem from '@/widgets/FurnitureItem/FurnitureItem';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import styles from '../Page.module.scss';
 
 // Тексты
 const texts = {
-	buttonText: '+ Добавить кухню',
-	titleText: 'Кухни',
+	buttonText: '+ Добавить мебель',
+	titleText: 'Мебель',
 	onMainPageText: 'На главной',
 };
 
-const KitchensPage = () => {
+const FurniturePage = () => {
 	const userStore = useAppSelector((store) => store.user);
 	const dispatch = useAppDispatch();
-	const kitchenStore = useAppSelector((store) => store.kitchens);
+	// const kitchenStore = useAppSelector((store) => store.kitchens);
+	const furnitureStore = useAppSelector((store) => store.furniture);
 
 	useEffect(() => {
 		if (localStorage.getItem('token')) {
 			dispatch(checkAuth());
-			dispatch(getKitchens());
+			dispatch(getAllFurniture());
 		}
 	}, []);
 
@@ -43,7 +45,7 @@ const KitchensPage = () => {
 		}
 	};
 
-	if (kitchenStore.isLoading) {
+	if (furnitureStore.isLoading) {
 		return (
 			<div className={styles.page}>
 				<div className={styles.container}>
@@ -69,11 +71,11 @@ const KitchensPage = () => {
 			<div className={styles.container}>
 				<div className={styles.string}>
 					<h2 className={styles.title}>
-						{texts.titleText} ({kitchenStore.kitchens.length})
+						{texts.titleText} ({furnitureStore.allFurniture.length})
 					</h2>
 					{isUserHaveRights(userStore.user, UserRoles.Admin) && (
 						<Link
-							href={pagesLinks.adminKitchensNew}
+							href={pagesLinks.adminFurnitureNew}
 							className={styles.addButton}
 						>
 							{texts.buttonText}
@@ -81,29 +83,29 @@ const KitchensPage = () => {
 					)}
 				</div>
 				<div className={styles.kitchens}>
-					{kitchenStore.kitchens &&
-						kitchenStore.kitchens
+					{furnitureStore.allFurniture &&
+						furnitureStore.allFurniture
 							.slice(0)
 							.reverse()
-							.map((kitchen, index) => (
+							.map((furniture, index) => (
 								<div className={styles.kitchenLink} key={index}>
 									{isUserHaveRights(userStore.user, UserRoles.Admin) && (
 										<button
 											type='button'
 											className={styles.removeButton}
-											onClick={() => removeKitchen(kitchen._id)}
+											onClick={() => removeKitchen(furniture._id)}
 										>
 											<Icon icon={Icons.remove(styles.removeIcon)} />
 										</button>
 									)}
-									{kitchen.onMainPage && (
+									{furniture.onMainPage && (
 										<p className={styles.kitchenOption}>
 											{texts.onMainPageText}
 										</p>
 									)}
 
-									<Link href={`/admin/kitchens/${kitchen._id}`}>
-										<Kitchen kitchen={kitchen} />
+									<Link href={`/admin/furniture/${furniture._id}`}>
+										<FurnitureItem furniture={furniture} />
 									</Link>
 								</div>
 							))}
@@ -113,4 +115,4 @@ const KitchensPage = () => {
 	);
 };
 
-export default KitchensPage;
+export default FurniturePage;

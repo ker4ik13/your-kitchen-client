@@ -14,7 +14,7 @@ const furnitures: IFurniture[] = [
 	{
 		_id: '3281391321dsa',
 		name: 'Распашные шкафы 1',
-		link: 'shkafi',
+		slug: 'shkafi',
 		description: 'Кухня из массива дерева',
 		price: 10000,
 		photos: [photo1, photo2],
@@ -22,7 +22,7 @@ const furnitures: IFurniture[] = [
 	{
 		_id: '3281391321dsa',
 		name: 'Угловые и шкафы-купе 2',
-		link: 'angle-shkafi',
+		slug: 'angle-shkafi',
 		description:
 			'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero magni fugit maiores. Dicta minus laborum illo nulla soluta rerum, nisi dolorum beatae sapiente ipsam totam consectetur eveniet necessitatibus a magni!rem ipsum dolor sit, amet consectetur adipisicing elit. Libero magni fugit maiores. Dicta minus laborum illo nulla soluta rerum, nisi dolorum beatae sapiente ipsam totam consectetur eveniet necessitatibus a magni!',
 		price: 10000,
@@ -31,7 +31,7 @@ const furnitures: IFurniture[] = [
 	{
 		_id: '3281391321dsa',
 		name: 'Угловые и шкафы-купе 3',
-		link: 'angle-shkafi',
+		slug: 'angle-shkafi',
 		description:
 			'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero magni fugit maiores. Dicta minus laborum illo nulla soluta rerum, nisi dolorum beatae sapiente ipsam totam consectetur eveniet necessitatibus a magni!rem ipsum dolor sit, amet consectetur adipisicing elit. Libero magni fugit maiores. Dicta minus laborum illo nulla soluta rerum, nisi dolorum beatae sapiente ipsam totam consectetur eveniet necessitatibus a magni!',
 		price: 10000,
@@ -40,7 +40,7 @@ const furnitures: IFurniture[] = [
 	{
 		_id: '3281391321dsa',
 		name: 'Угловые и шкафы-купе 4',
-		link: 'angle-shkafi',
+		slug: 'angle-shkafi',
 		description:
 			'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero magni fugit maiores. Dicta minus laborum illo nulla soluta rerum, nisi dolorum beatae sapiente ipsam totam consectetur eveniet necessitatibus a magni!rem ipsum dolor sit, amet consectetur adipisicing elit. Libero magni fugit maiores. Dicta minus laborum illo nulla soluta rerum, nisi dolorum beatae sapiente ipsam totam consectetur eveniet necessitatibus a magni!',
 		price: 10000,
@@ -49,7 +49,7 @@ const furnitures: IFurniture[] = [
 	{
 		_id: '3281391321dsa',
 		name: 'Угловые и шкафы-купе 5',
-		link: 'angle-shkafi',
+		slug: 'angle-shkafi',
 		description:
 			'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero magni fugit maiores. Dicta minus laborum illo nulla soluta rerum, nisi dolorum beatae sapiente ipsam totam consectetur eveniet necessitatibus a magni!rem ipsum dolor sit, amet consectetur adipisicing elit. Libero magni fugit maiores. Dicta minus laborum illo nulla soluta rerum, nisi dolorum beatae sapiente ipsam totam consectetur eveniet necessitatibus a magni!',
 		price: 10000,
@@ -58,7 +58,7 @@ const furnitures: IFurniture[] = [
 	{
 		_id: '3281391321dsa',
 		name: 'Прихожие',
-		link: 'prihozhie',
+		slug: 'prihozhie',
 		description: 'Кухня из массива дерева 6',
 		price: 10000,
 		photos: [photo1, photo2],
@@ -66,7 +66,7 @@ const furnitures: IFurniture[] = [
 	{
 		_id: '3281391321dsa',
 		name: 'Комоды',
-		link: 'comodi',
+		slug: 'comodi',
 		description:
 			'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero magni fugit maiores. Dicta minus laborum illo nulla soluta rerum, nisi dolorum beatae sapiente ipsam totam consectetur eveniet necessitatibus a magni!rem ipsum dolor sit, amet consectetur adipisicing elit. Libero magni fugit maiores. Dicta minus laborum illo nulla soluta rerum, nisi dolorum beatae sapiente ipsam totam consectetur eveniet necessitatibus a magni!',
 		price: 10000,
