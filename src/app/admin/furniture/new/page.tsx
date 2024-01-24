@@ -3,7 +3,7 @@
 import styles from '../../Page.module.scss';
 
 import { isUserHaveRights } from '@/features/isUserHaveRights';
-import $api from '@/http';
+import FurnitureService from '@/services/FurnitureService';
 import MiniLoading from '@/shared/MiniLoading';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { checkAuth } from '@/store/user.slice';
@@ -153,11 +153,7 @@ const NewFurniturePage = () => {
 		});
 		form.append('onMainPage', JSON.stringify(data.onMainPage));
 
-		const response = await $api.post('/furniture', form, {
-			headers: {
-				'Content-Type': 'multipart/form-data',
-			},
-		});
+		const response = await FurnitureService.addFurniture(form);
 		if (response.status === 201) {
 			setError({
 				isError: false,

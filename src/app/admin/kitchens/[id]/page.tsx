@@ -2,7 +2,6 @@
 
 import styles from '../../Page.module.scss';
 
-import $api from '@/http';
 import KitchenService from '@/services/KitchenService';
 import MiniLoading from '@/shared/MiniLoading';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -230,11 +229,7 @@ const EditKitchenPage = () => {
 		form.append('type', JSON.stringify(data.type));
 		form.append('term', data.term);
 
-		const response = await $api.patch(`/kitchens/${path.id}`, form, {
-			headers: {
-				'Content-Type': 'multipart/form-data',
-			},
-		});
+		const response = await KitchenService.updateKitchen(kitchen._id, form);
 		if (response.status === 200) {
 			setError({
 				isError: false,

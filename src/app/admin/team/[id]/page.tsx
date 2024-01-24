@@ -9,7 +9,6 @@ import AdminSidebar from '@/widgets/AdminSidebar/AdminSidebar';
 import { useEffect, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 
-import $api from '@/http';
 import { WorkerService } from '@/services/WorkerService';
 import { IError } from '@/types/IError';
 import { IWorker } from '@/types/IWorker';
@@ -136,11 +135,8 @@ const EditWorkerPage = () => {
 		form.append('jobTitle', data.jobTitle);
 		form.append('experience', data.experience);
 
-		const response = await $api.patch(`/workers/${path.id}`, form, {
-			headers: {
-				'Content-Type': 'multipart/form-data',
-			},
-		});
+		const response = await WorkerService.updateWorker(worker._id, form);
+
 		if (response.status === 200) {
 			setError({
 				isError: false,

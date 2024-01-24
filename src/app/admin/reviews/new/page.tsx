@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { isUserHaveRights } from '@/features/isUserHaveRights';
-import $api from '@/http';
+import { ReviewService } from '@/services/ReviewService';
 import { IError } from '@/types/IError';
 import { UserRoles } from '@/types/UserRoles';
 
@@ -202,11 +202,8 @@ const NewReviewPage = () => {
 		});
 		form.append('text', data.text);
 
-		const response = await $api.post('/reviews', form, {
-			headers: {
-				'Content-Type': 'multipart/form-data',
-			},
-		});
+		const response = await ReviewService.addReview(form);
+
 		if (response.status === 201) {
 			setError({
 				isError: false,

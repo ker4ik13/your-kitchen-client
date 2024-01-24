@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { isUserHaveRights } from '@/features/isUserHaveRights';
-import $api from '@/http';
+import { WorkerService } from '@/services/WorkerService';
 import { IError } from '@/types/IError';
 import { UserRoles } from '@/types/UserRoles';
 
@@ -137,11 +137,8 @@ const NewWorkerPage = () => {
 		form.append('experience', data.experience);
 		form.append('file', file);
 
-		const response = await $api.post('/workers', form, {
-			headers: {
-				'Content-Type': 'multipart/form-data',
-			},
-		});
+		const response = await WorkerService.addWorker(form);
+
 		if (response.status === 201) {
 			setError({
 				isError: false,

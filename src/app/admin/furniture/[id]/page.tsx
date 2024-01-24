@@ -2,7 +2,6 @@
 
 import styles from '../../Page.module.scss';
 
-import $api from '@/http';
 import FurnitureService from '@/services/FurnitureService';
 import MiniLoading from '@/shared/MiniLoading';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -45,7 +44,7 @@ const EditFurniturePage = () => {
 
 	const [photos, setPhotos] = useState<any[]>([]);
 	const [files, setFiles] = useState<File[]>([]);
-	// const [drag, setDrag] = useState(false);
+	const [drag, setDrag] = useState(false);
 
 	// Ошибка
 	const [error, setError] = useState<IError>({ isError: false, value: '' });
@@ -66,6 +65,52 @@ const EditFurniturePage = () => {
 			getProduct(path.id);
 		}
 	}, []);
+
+	// Обработчик фото
+	const getPhotosFromFiles = (event: any, files: any[]) => {
+		const photos: any[] = [];
+
+		files.map((file) => {
+			let photo = {
+				title: file.name,
+				src: URL.createObjectURL(file),
+			};
+
+			photos.push(photo);
+		});
+
+		setPhotos(photos);
+	};
+
+	// TODO: добавить дозагрузку изображений
+	// Обработчики
+	const dragStartHandler = (event: any) => {
+		event.preventDefault();
+		setDrag(true);
+	};
+	const dragLeaveHandler = (event: any) => {
+		event.preventDefault();
+		setDrag(false);
+	};
+	const dropHandler = (event: any) => {
+		event.preventDefault();
+		setDrag(false);
+		let files = [...event.dataTransfer.files];
+		setFiles(files);
+
+		if (files && files.length > 0) {
+			getPhotosFromFiles(event, files);
+		}
+	};
+	const changeHandler = (event: any) => {
+		event.preventDefault();
+		let files = [...event.target.files];
+		setFiles(files);
+
+		if (files && files.length > 0) {
+			getPhotosFromFiles(event, files);
+		}
+	};
 
 	if (!path || !path.id) {
 		return (
@@ -151,12 +196,10 @@ const EditFurniturePage = () => {
 		form.append('price', data.price.toString());
 		form.append('onMainPage', JSON.stringify(data.onMainPage));
 
-		// TODO: исправить во всех админ страницах такие запросы на сервисы
-		const response = await $api.patch(`/furniture/${path.id}`, form, {
-			headers: {
-				'Content-Type': 'multipart/form-data',
-			},
-		});
+		const response = await FurnitureService.updateFurniture(
+			furniture._id,
+			form,
+		);
 		if (response.status === 200) {
 			setError({
 				isError: false,
@@ -286,31 +329,31 @@ const EditFurniturePage = () => {
 					</div>
 
 					{/* Фото */}
-					{/* <div className={styles.inputWrapper}>
-            <label className={styles.label}>Фото</label>
-            <input
-              id='photos'
-              type='file'
-              {...register("photos", {
-                required: true,
-                value: photos,
-              })}
-              accept='image/png, image/jpeg, image/jpg, image/webp'
-              multiple
-              className={styles.inputPhotos}
-              required
-              onChange={(event) => changeHandler(event)}
-              onDragStart={(event) => dragStartHandler(event)}
-              onDragLeave={(event) => dragLeaveHandler(event)}
-              onDragOver={(event) => dragStartHandler(event)}
-              onDrop={(event) => dropHandler(event)}
-            />
-            <label htmlFor='photos' className={styles.labelPhotos}>
-              {!drag
-                ? "Нажмите или перетащите изображения"
-                : "Отпустите изображения"}
-            </label>
-          </div> */}
+					<div className={styles.inputWrapper}>
+						<label className={styles.label}>Фото</label>
+						<input
+							id='photos'
+							type='file'
+							{...register('photos', {
+								required: true,
+								value: photos,
+							})}
+							accept='image/png, image/jpeg, image/jpg, image/webp'
+							multiple
+							className={styles.inputPhotos}
+							required
+							onChange={(event) => changeHandler(event)}
+							onDragStart={(event) => dragStartHandler(event)}
+							onDragLeave={(event) => dragLeaveHandler(event)}
+							onDragOver={(event) => dragStartHandler(event)}
+							onDrop={(event) => dropHandler(event)}
+						/>
+						<label htmlFor='photos' className={styles.labelPhotos}>
+							{!drag
+								? 'Нажмите или перетащите изображения'
+								: 'Отпустите изображения'}
+						</label>
+					</div>
 
 					{/* Предпросмотр фото */}
 					{photos && photos.length > 0 && (

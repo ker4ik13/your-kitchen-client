@@ -52,7 +52,11 @@ export default class FurnitureService {
 	}
 
 	static async addFurniture(body: object): Promise<AxiosResponse<IFurniture>> {
-		return await $api.post<IFurniture>(`/furniture`, body);
+		return await $api.post('/furniture', body, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		});
 	}
 
 	static async deleteFurniture(id: string): Promise<AxiosResponse<IFurniture>> {
@@ -60,9 +64,13 @@ export default class FurnitureService {
 	}
 
 	static async updateFurniture(
-		id: string,
+		slug: string,
 		body: object,
 	): Promise<AxiosResponse<IFurniture>> {
-		return await $api.patch<IFurniture>(`/furniture/${id}`, body);
+		return await $api.patch(`/furniture/${slug}`, body, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		});
 	}
 }

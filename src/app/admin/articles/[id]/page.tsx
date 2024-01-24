@@ -9,7 +9,6 @@ import AdminSidebar from '@/widgets/AdminSidebar/AdminSidebar';
 import { useCallback, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import $api from '@/http';
 import ArticleService from '@/services/ArticleService';
 import { type IArticle } from '@/types/IArticle';
 import { IError } from '@/types/IError';
@@ -221,7 +220,10 @@ const EditArticlePage = () => {
 		}
 
 		try {
-			const response = await $api.patch(`/articles/${article._id}`, newArticle);
+			const response = await ArticleService.updateArticle(
+				article._id,
+				newArticle,
+			);
 			setError({
 				isError: false,
 				value: texts.successText,

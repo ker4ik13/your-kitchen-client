@@ -9,7 +9,6 @@ import AdminSidebar from '@/widgets/AdminSidebar/AdminSidebar';
 import { useEffect, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 
-import $api from '@/http';
 import { ReviewService } from '@/services/ReviewService';
 import type { IError } from '@/types/IError';
 import type { IReview } from '@/types/IReview';
@@ -149,11 +148,8 @@ const EditReviewPage = () => {
 
 		form.append('text', data.text);
 
-		const response = await $api.patch(`/reviews/${path.id}`, form, {
-			headers: {
-				'Content-Type': 'multipart/form-data',
-			},
-		});
+		const response = await ReviewService.updateReview(review._id, form);
+
 		if (response.status === 200) {
 			setError({
 				isError: false,
