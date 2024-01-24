@@ -144,6 +144,7 @@ const NewFurniturePage = () => {
 
 		form.append('name', data.name);
 		form.append('description', data.description);
+		form.append('slug', data.slug);
 		form.append('price', data.price.toString());
 
 		// Добавление всех фото
@@ -152,7 +153,7 @@ const NewFurniturePage = () => {
 		});
 		form.append('onMainPage', JSON.stringify(data.onMainPage));
 
-		const response = await $api.post('/kitchens', form, {
+		const response = await $api.post('/furniture', form, {
 			headers: {
 				'Content-Type': 'multipart/form-data',
 			},
@@ -167,6 +168,7 @@ const NewFurniturePage = () => {
 				photos: [],
 				price: 0,
 				name: '',
+				slug: '',
 				onMainPage: false,
 			});
 			setFiles([]);
@@ -212,12 +214,12 @@ const NewFurniturePage = () => {
 						>
 							{/* Заголовок */}
 							<div className={styles.inputWrapper}>
-								<label htmlFor='title' className={styles.label}>
+								<label htmlFor='name' className={styles.label}>
 									Название
 								</label>
 								<input
 									type='text'
-									id='title'
+									id='name'
 									placeholder='Название мебели'
 									{...register('name', {
 										required: true,
@@ -286,29 +288,6 @@ const NewFurniturePage = () => {
 									className={styles.textArea}
 								/>
 							</div>
-
-							{/* Срок */}
-							{/* <div className={styles.inputWrapper}>
-								<label htmlFor='term' className={styles.label}>
-									Срок
-								</label>
-								<input
-									type='text'
-									placeholder='21 день'
-									id='term'
-									{...register('term', {
-										required: true,
-										onChange: (event) => {
-											setTermValue(event.target.value);
-										},
-									})}
-									className={styles.textInput}
-								/>
-								<div className={styles.clue}>
-									<p>Будет отображаться так:</p>
-									<p>Срок {`${termValue}`}</p>
-								</div>
-							</div> */}
 
 							{/* Фото */}
 							<div className={styles.inputWrapper}>

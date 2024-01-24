@@ -33,7 +33,7 @@ const texts = {
 	successText: 'Отзыв успешно добавлен',
 };
 
-const NewKitchenPage = () => {
+const NewReviewPage = () => {
 	const { register, handleSubmit, reset } = useForm<TInputs>();
 	const userStore = useAppSelector((store) => store.user);
 	const dispatch = useAppDispatch();
@@ -407,4 +407,4 @@ const NewKitchenPage = () => {
 	);
 };
 
-export default NewKitchenPage;
+export default NewReviewPage;

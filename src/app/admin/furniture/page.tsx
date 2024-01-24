@@ -5,9 +5,8 @@ import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import MiniLoading from '@/shared/MiniLoading';
 import { pagesLinks } from '@/shared/constants';
-import { getAllFurniture } from '@/store/furniture.slice';
+import { deleteFurniture, getAllFurniture } from '@/store/furniture.slice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { deleteKitchen } from '@/store/kitchens.slice';
 import { checkAuth } from '@/store/user.slice';
 import { UserRoles } from '@/types/UserRoles';
 import AdminSidebar from '@/widgets/AdminSidebar/AdminSidebar';
@@ -36,12 +35,12 @@ const FurniturePage = () => {
 		}
 	}, []);
 
-	const removeKitchen = async (id: string) => {
+	const removeFurniture = async (id: string) => {
 		if (
 			localStorage.getItem('token') &&
 			isUserHaveRights(userStore.user, UserRoles.Admin)
 		) {
-			dispatch(deleteKitchen(id));
+			dispatch(deleteFurniture(id));
 		}
 	};
 
@@ -93,7 +92,7 @@ const FurniturePage = () => {
 										<button
 											type='button'
 											className={styles.removeButton}
-											onClick={() => removeKitchen(furniture._id)}
+											onClick={() => removeFurniture(furniture.slug)}
 										>
 											<Icon icon={Icons.remove(styles.removeIcon)} />
 										</button>
@@ -104,7 +103,7 @@ const FurniturePage = () => {
 										</p>
 									)}
 
-									<Link href={`/admin/furniture/${furniture._id}`}>
+									<Link href={`/admin/furniture/${furniture.slug}`}>
 										<FurnitureItem furniture={furniture} />
 									</Link>
 								</div>

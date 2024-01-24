@@ -35,7 +35,7 @@ const texts = {
 	successText: 'Отзыв успешно изменен',
 };
 
-const NewKitchenPage = () => {
+const EditReviewPage = () => {
 	const path = useParams();
 
 	const { register, handleSubmit, reset, setValue } = useForm<TInputs>();
@@ -288,4 +288,4 @@ const NewKitchenPage = () => {
 	);
 };
 
-export default NewKitchenPage;
+export default EditReviewPage;

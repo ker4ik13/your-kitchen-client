@@ -113,6 +113,7 @@ export const deleteFurniture = createAsyncThunk(
 	async (id: string) => {
 		try {
 			const response = await FurnitureService.deleteFurniture(id);
+			console.log(response);
 			return response.data;
 		} catch (error) {
 			console.log(error);

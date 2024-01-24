@@ -49,7 +49,7 @@ const isSuccess = (error: IError) => {
 	return error.isError === true ? styles.error : styles.success;
 };
 
-const NewAdminPage = () => {
+const EditAdminPage = () => {
 	const path = useParams();
 
 	const { register, handleSubmit, control, reset, setValue } =
@@ -250,4 +250,4 @@ const NewAdminPage = () => {
 	);
 };
 
-export default NewAdminPage;
+export default EditAdminPage;
