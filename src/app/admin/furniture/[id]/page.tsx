@@ -119,11 +119,11 @@ const EditFurniturePage = () => {
 
 	// Удалить изображение из нового объекта
 	const deleteNewImage = (photoTitle: string) => {
-		const images = [...photos];
+		const images = [...newPhotos];
 
-		const result = images.filter((image) => photoTitle !== image);
+		const result = images.filter((image) => photoTitle !== image.title);
 
-		setPhotos(result);
+		setNewPhotos(result);
 	};
 
 	if (!path || !path.id) {
@@ -405,11 +405,11 @@ const EditFurniturePage = () => {
 										<button
 											type='button'
 											className={styles.deleteButton}
-											onClick={() => deleteNewImage(photo.name)}
+											onClick={() => deleteNewImage(photo.title)}
 										>
 											×
 										</button>
-										<p className={styles.photoTitle}>{photo.name}</p>
+										<p className={styles.photoTitle}>{photo.title}</p>
 									</div>
 								))}
 							</div>
