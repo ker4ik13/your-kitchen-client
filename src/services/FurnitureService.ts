@@ -5,23 +5,6 @@ import type { AxiosResponse } from 'axios';
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 export default class FurnitureService {
-	static async getMainFurniture(): Promise<IFurniture[]> {
-		const response = await $api.get<IFurniture[]>('/kitchens-main');
-
-		const returnFurniture = [...response.data];
-		const furnitureWithPhotos: IFurniture[] = returnFurniture.map(
-			(furniture) => {
-				const furniturePhotos = furniture.photos.map((file) => {
-					return `${NEXT_PUBLIC_API_URL}/images/${file}`;
-				});
-				furniture.photos = furniturePhotos;
-				return furniture;
-			},
-		);
-
-		return furnitureWithPhotos;
-	}
-
 	static async getAllFurniture(): Promise<IFurniture[]> {
 		const response = await $api.get<IFurniture[]>('/furniture');
 

@@ -41,6 +41,10 @@
 	background-color: #fff !important;
 	bottom: 0.8rem !important;
 }
+.furniture-pagination {
+	top: auto !important;
+	bottom: 1rem !important;
+}
 .my-scrollbar {
 	background-color: #9d9387;
 	-webkit-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));

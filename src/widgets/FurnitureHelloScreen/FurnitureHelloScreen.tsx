@@ -18,6 +18,14 @@ export const FurnitureHelloScreen = () => {
 				isOpen={isOpen}
 				setIsOpen={setIsOpen}
 				setIsOpenThanks={setIsOpenThanks}
+				location='Страница корпусной мебели'
+				descriptionText={
+					<>
+						чтобы <span>рассчитать стоимость мебели</span> по телефону или
+						договориться о выезде на замер.
+						<br /> Выезд <span>бесплатный</span> и возможен в этот же день
+					</>
+				}
 			/>
 			<div className={styles.helloScreen}>
 				<Image

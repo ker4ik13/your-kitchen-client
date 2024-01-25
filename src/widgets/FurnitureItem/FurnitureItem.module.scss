@@ -18,11 +18,13 @@
 	max-height: rem(370);
 	height: 100%;
 	position: relative;
+	border-radius: rem(12);
 }
 .betweenWrapper {
 	display: flex;
 	align-items: flex-end;
 	justify-content: space-between;
+	flex-wrap: wrap;
 	gap: rem(4);
 }
 
@@ -32,10 +34,6 @@
 	z-index: 2;
 	color: #fff;
 	letter-spacing: rem(0.4);
-
-	@media (max-width: $max-450) {
-		padding: 0 rem(40);
-	}
 }
 
 .name {
@@ -72,6 +70,7 @@
 	line-height: 1.3;
 	font-size: rem(22);
 	cursor: text;
+	white-space: nowrap;
 
 	& span {
 		&:last-child {
@@ -86,10 +85,12 @@
 }
 .image {
 	width: 100%;
-	max-height: rem(380);
-	height: 100%;
-	border-radius: rem(12);
-	overflow: hidden;
+	height: rem(370);
+
+	@media screen and (max-width: $max-600) {
+		height: 100%;
+		max-height: rem(240);
+	}
 }
 .pagination {
 	top: auto !important;

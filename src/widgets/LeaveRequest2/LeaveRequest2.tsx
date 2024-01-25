@@ -6,6 +6,7 @@ import { OrangeButton } from '@/shared/ui';
 import { TFormInputsNames, type TFormInputs } from '@/types/TFormInputs';
 import { CreateClaimDto } from '@/types/dtos/CreateClaim.dto';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ReactInputMask from 'react-input-mask';
 import styles from './LeaveRequest2.module.scss';
@@ -16,6 +17,7 @@ interface LeaveRequestProps {
 	setIsOpen?: (isOpen: boolean) => void;
 	setIsOpenThanks?: (isOpen: boolean) => void;
 	buttonText?: string;
+	descriptionText?: string | ReactNode;
 	tag?: string;
 	location?: string;
 }
@@ -32,6 +34,7 @@ const LeaveRequest2 = ({
 	setIsOpen,
 	setIsOpenThanks,
 	buttonText,
+	descriptionText,
 	tag,
 	location,
 }: LeaveRequestProps) => {
@@ -52,7 +55,6 @@ const LeaveRequest2 = ({
 		});
 
 		const result = await ClaimService.addClaim(newClaim);
-		console.log(result);
 
 		if (result?.status === 201) {
 			resetField('firstName');
@@ -90,9 +92,15 @@ const LeaveRequest2 = ({
 						</h3>
 					</div>
 					<p className={styles.text}>
-						чтобы <span>рассчитать стоимость кухни</span> по телефону или
-						договориться о выезде на замер кухни.
-						<br /> Выезд <span>бесплатный</span> и возможен в этот же день
+						{descriptionText ? (
+							descriptionText
+						) : (
+							<>
+								чтобы <span>рассчитать стоимость кухни</span> по телефону или
+								договориться о выезде на замер кухни.
+								<br /> Выезд <span>бесплатный</span> и возможен в этот же день
+							</>
+						)}
 					</p>
 					<form className={styles.formWrapper2}>
 						<div className={styles.inputsWrapper2}>
@@ -189,9 +197,15 @@ const LeaveRequest2 = ({
 						</h3>
 					</div>
 					<p className={styles.text}>
-						чтобы <span>рассчитать стоимость кухни</span> по телефону или
-						договориться о выезде на замер кухни.
-						<br /> Выезд <span>бесплатный</span> и возможен в этот же день
+						{descriptionText ? (
+							descriptionText
+						) : (
+							<>
+								чтобы <span>рассчитать стоимость кухни</span> по телефону или
+								договориться о выезде на замер кухни.
+								<br /> Выезд <span>бесплатный</span> и возможен в этот же день
+							</>
+						)}
 					</p>
 					<form className={styles.formWrapper2}>
 						<div className={styles.inputsWrapper2}>

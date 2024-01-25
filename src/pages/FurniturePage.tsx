@@ -1,3 +1,4 @@
+import type { IFurniture } from '@/types/IFurniture';
 import { CustomerChoice } from '@/widgets/CustomerChoice/CustomerChoice';
 import { FourSteps } from '@/widgets/FourSteps/FourSteps';
 import { Furniture } from '@/widgets/Furniture/Furniture';
@@ -8,20 +9,27 @@ import MainArticles from '@/widgets/MainArticles/MainArticles';
 import Reviews from '@/widgets/Reviews/Reviews';
 import styles from './FurniturePage.module.scss';
 
-const FurniturePage = () => {
+interface FurniturePageProps {
+	furniture: IFurniture[];
+}
+
+const FurniturePage = ({ furniture }: FurniturePageProps) => {
 	return (
 		<div className={styles.bg}>
 			<FurnitureHelloScreen />
-			<Furniture />
+			{furniture.length && <Furniture furniture={furniture} />}
 			<FurnitureAdvantages />
 			<LeaveRequestMini
 				tag='Получить бесплатный эскиз'
-				location='Страница Мебель, четвертый блок'
+				location='Страница корпусной мебели'
 			/>
 			<CustomerChoice />
 			<Reviews withoutBg />
 			<FourSteps />
-			<LeaveRequestMini />
+			<LeaveRequestMini
+				tag='Получить бесплатный эскиз'
+				location='Страница корпусной мебели'
+			/>
 			<MainArticles />
 		</div>
 	);

@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { type FC } from 'react';
 import { IoMdPhotos } from 'react-icons/io';
+import { LuArmchair } from 'react-icons/lu';
 import { MdArticle, MdOutlineRateReview } from 'react-icons/md';
 import styles from './AdminSidebar.module.scss';
 
@@ -49,7 +50,7 @@ const AdminSidebar: FC<AdminSidebarProps> = ({ store }) => {
 						href={pagesLinks.adminFurniture}
 						className={isActive('furniture')}
 					>
-						<Icons.kitchen className={styles.icon} />
+						<LuArmchair />
 						<p>Мебель</p>
 					</Link>
 					<Link href={pagesLinks.adminReviews} className={isActive('reviews')}>

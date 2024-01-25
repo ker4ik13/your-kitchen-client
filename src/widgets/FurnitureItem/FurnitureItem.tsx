@@ -24,7 +24,7 @@ const FurnitureItem = ({ furniture }: FurnitureItemProps) => {
 					pagination={{
 						enabled: true,
 						clickable: true,
-						horizontalClass: styles.pagination,
+						horizontalClass: 'furniture-pagination',
 					}}
 					loop={true}
 					modules={[Navigation, Pagination]}

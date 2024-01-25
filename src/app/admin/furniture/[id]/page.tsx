@@ -20,7 +20,6 @@ interface TInputs {
 	description: string;
 	price: number;
 	photos: ImageData[] | string[];
-	onMainPage: boolean;
 }
 
 // Тексты
@@ -36,22 +35,19 @@ const texts = {
 const EditFurniturePage = () => {
 	const path = useParams();
 
-	const { register, handleSubmit, control, reset, setValue } =
-		useForm<TInputs>();
+	const { register, handleSubmit, reset, setValue } = useForm<TInputs>();
 	const userStore = useAppSelector((store) => store.user);
 	const dispatch = useAppDispatch();
 	const furnitureStore = useAppSelector((store) => store.furniture);
 
-	// TODO: добавлять фотки объектом newPhotos
 	const [photos, setPhotos] = useState<any[]>([]);
+	const [newPhotos, setNewPhotos] = useState<any[]>([]);
 	const [files, setFiles] = useState<File[]>([]);
+
 	const [drag, setDrag] = useState(false);
 
 	// Ошибка
 	const [error, setError] = useState<IError>({ isError: false, value: '' });
-
-	// Срок
-	const [termValue, setTermValue] = useState('');
 
 	const [furniture, setFurniture] = useState<IFurniture>({} as IFurniture);
 
@@ -67,10 +63,6 @@ const EditFurniturePage = () => {
 		}
 	}, []);
 
-	useEffect(() => {
-		console.log(furniture);
-	}, [furniture]);
-
 	// Обработчик фото
 	const getPhotosFromFiles = (event: any, files: any[]) => {
 		const photos: any[] = [];
@@ -84,10 +76,9 @@ const EditFurniturePage = () => {
 			photos.push(photo);
 		});
 
-		setPhotos(photos);
+		setNewPhotos(photos);
 	};
 
-	// TODO: добавить дозагрузку изображений
 	// Обработчики
 	const dragStartHandler = (event: any) => {
 		event.preventDefault();
@@ -117,6 +108,24 @@ const EditFurniturePage = () => {
 		}
 	};
 
+	// Удалить изображение из существующего объекта
+	const deleteImage = (photoTitle: string) => {
+		const images = [...photos];
+
+		const result = images.filter((image) => photoTitle !== image);
+
+		setPhotos(result);
+	};
+
+	// Удалить изображение из нового объекта
+	const deleteNewImage = (photoTitle: string) => {
+		const images = [...photos];
+
+		const result = images.filter((image) => photoTitle !== image);
+
+		setPhotos(result);
+	};
+
 	if (!path || !path.id) {
 		return (
 			<div className={styles.kitchensPage}>
@@ -141,10 +150,6 @@ const EditFurniturePage = () => {
 			setValue('slug', furnitureBySlug.slug);
 			setValue('description', furnitureBySlug.description);
 			setValue('price', furnitureBySlug.price);
-
-			if (furnitureBySlug.onMainPage) {
-				setValue('onMainPage', furnitureBySlug.onMainPage);
-			}
 		} else {
 			if (typeof path.id === 'string') {
 				try {
@@ -159,10 +164,6 @@ const EditFurniturePage = () => {
 					setValue('slug', furniturePayload.slug);
 					setValue('description', furniturePayload.description);
 					setValue('price', furniturePayload.price);
-
-					if (furniturePayload.onMainPage) {
-						setValue('onMainPage', furniturePayload.onMainPage);
-					}
 				} catch (error) {
 					setError({
 						isError: true,
@@ -193,18 +194,40 @@ const EditFurniturePage = () => {
 		);
 	}
 	const onSubmit: SubmitHandler<TInputs> = async (data) => {
+		if (!photos.length && !newPhotos.length) {
+			setError({
+				isError: true,
+				value: 'Добавьте хотя бы одну фотографию',
+			});
+			return;
+		}
+
+		setError({
+			isError: false,
+			value: '',
+		});
+
 		const form = new FormData();
 
 		form.append('name', data.name);
 		form.append('slug', data.slug);
 		form.append('description', data.description);
 		form.append('price', data.price.toString());
-		form.append('onMainPage', JSON.stringify(data.onMainPage));
+
+		const oldPhotos = photos.map((photo: string) => photo.split('/').at(-1));
+
+		form.append('photos', JSON.stringify(oldPhotos));
+
+		// Добавление новых фото
+		files.forEach((file) => {
+			form.append(`files`, file);
+		});
 
 		const response = await FurnitureService.updateFurniture(
-			furniture._id,
+			furniture.slug,
 			form,
 		);
+
 		if (response.status === 200) {
 			setError({
 				isError: false,
@@ -215,11 +238,11 @@ const EditFurniturePage = () => {
 				photos: [],
 				price: 0,
 				slug: '',
-				onMainPage: false,
 				name: '',
 			});
 			setFiles([]);
 			setPhotos([]);
+			setNewPhotos([]);
 		} else {
 			setError({
 				isError: true,
@@ -285,20 +308,6 @@ const EditFurniturePage = () => {
 								className={styles.textInput}
 							/>
 						</div>
-
-						{/* На главной */}
-						<div className={styles.inputWrapper}>
-							<label htmlFor='onMainPage' className={styles.label}>
-								На главной странице
-							</label>
-							<input
-								defaultChecked={furniture.onMainPage}
-								type='checkbox'
-								{...register('onMainPage')}
-								id='onMainPage'
-								className={styles.checkboxInput}
-							/>
-						</div>
 					</div>
 
 					{/* Ссылка */}
@@ -333,14 +342,37 @@ const EditFurniturePage = () => {
 						/>
 					</div>
 
-					{/* Фото */}
+					{/* Предпросмотр фото */}
+					{photos && photos.length > 0 && (
+						<div className={styles.photosPreview}>
+							{photos.map((photo, index) => (
+								<div className={styles.photo} key={index}>
+									<img
+										src={photo}
+										draggable={false}
+										alt={`Фото ${index + 1}`}
+										className={styles.previewPhoto}
+									/>
+									<button
+										type='button'
+										className={styles.deleteButton}
+										onClick={() => deleteImage(photo)}
+									>
+										×
+									</button>
+									<p className={styles.photoTitle}>{photo}</p>
+								</div>
+							))}
+						</div>
+					)}
+
+					{/* Добавить фото */}
 					<div className={styles.inputWrapper}>
 						<label className={styles.label}>Фото</label>
 						<input
 							id='photos'
 							type='file'
 							{...register('photos', {
-								// TODO: required?
 								value: photos,
 							})}
 							accept='image/png, image/jpeg, image/jpg, image/webp'
@@ -353,34 +385,35 @@ const EditFurniturePage = () => {
 							onDrop={(event) => dropHandler(event)}
 						/>
 						<label htmlFor='photos' className={styles.labelPhotos}>
-							{!drag
-								? 'Нажмите или перетащите изображения'
-								: 'Отпустите изображения'}
+							{!drag ? 'Добавить новые фото' : 'Отпустите изображения'}
 						</label>
 					</div>
 
-					{/* Предпросмотр фото */}
-					{photos && photos.length > 0 && (
-						<div className={styles.photosPreview}>
-							{photos.map((photo, index) => (
-								<div className={styles.photo} key={index}>
-									<img
-										src={photo}
-										draggable={false}
-										alt={`Фото ${index + 1}`}
-										className={styles.previewPhoto}
-									/>
-									{/* <button
-                    type='button'
-                    className={styles.deleteButton}
-                    onClick={() => deleteImage(photo)}
-                  >
-                    ×
-                  </button> */}
-									<p className={styles.photoTitle}>{photo}</p>
-								</div>
-							))}
-						</div>
+					{/* Предпросмотр новых фото */}
+					{newPhotos && newPhotos.length > 0 && (
+						<>
+							<label className={styles.label}>Новые фото</label>
+							<div className={styles.photosPreview}>
+								{newPhotos.map((photo, index) => (
+									<div className={styles.photo} key={index}>
+										<img
+											src={photo.src}
+											draggable={false}
+											alt={`Фото ${index + 1}`}
+											className={styles.previewPhoto}
+										/>
+										<button
+											type='button'
+											className={styles.deleteButton}
+											onClick={() => deleteNewImage(photo.name)}
+										>
+											×
+										</button>
+										<p className={styles.photoTitle}>{photo.name}</p>
+									</div>
+								))}
+							</div>
+						</>
 					)}
 				</form>
 			</div>

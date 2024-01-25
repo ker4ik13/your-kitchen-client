@@ -20,7 +20,6 @@ interface TInputs {
 	description: string;
 	price: number;
 	photos: ImageData[];
-	onMainPage: boolean;
 }
 
 // Тексты
@@ -124,7 +123,6 @@ const NewFurniturePage = () => {
 		event.preventDefault();
 		let files = [...event.target.files];
 		setFiles(files);
-		console.log(files);
 
 		if (files && files.length > 0) {
 			getPhotosFromFiles(event, files);
@@ -132,7 +130,7 @@ const NewFurniturePage = () => {
 	};
 
 	// Удаление фоток
-	const deleteImage = (photoTitle: number) => {
+	const deleteImage = (photoTitle: string) => {
 		const images = [...photos];
 
 		const result = images.filter((image) => photoTitle !== image.title);
@@ -152,7 +150,6 @@ const NewFurniturePage = () => {
 		files.forEach((file) => {
 			form.append(`files`, file);
 		});
-		form.append('onMainPage', JSON.stringify(data.onMainPage));
 
 		const response = await FurnitureService.addFurniture(form);
 		if (response.status === 201) {
@@ -166,7 +163,6 @@ const NewFurniturePage = () => {
 				price: 0,
 				name: '',
 				slug: '',
-				onMainPage: false,
 			});
 			setFiles([]);
 			setPhotos([]);
@@ -240,21 +236,7 @@ const NewFurniturePage = () => {
 										className={styles.textInput}
 									/>
 								</div>
-
-								{/* На главной */}
-								<div className={styles.inputWrapper}>
-									<label htmlFor='onMainPage' className={styles.label}>
-										На главной странице
-									</label>
-									<input
-										type='checkbox'
-										{...register('onMainPage')}
-										id='onMainPage'
-										className={styles.checkboxInput}
-									/>
-								</div>
 							</div>
-
 							{/* Ссылка */}
 							<div className={styles.inputWrapper}>
 								<label htmlFor='slug' className={styles.label}>

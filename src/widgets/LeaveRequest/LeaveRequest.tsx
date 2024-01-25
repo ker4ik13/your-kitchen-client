@@ -11,6 +11,7 @@ import { CreateClaimDto } from '@/types/dtos/CreateClaim.dto';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import type { ReactNode } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ReactInputMask from 'react-input-mask';
 import styles from './LeaveRequest.module.scss';
@@ -27,6 +28,7 @@ interface LeaveRequestProps {
 	setIsOpen?: (isOpen: boolean) => void;
 	setIsOpenThanks?: (isOpen: boolean) => void;
 	buttonText?: string;
+	descriptionText?: string | ReactNode;
 	tag?: string;
 	location?: string;
 }
@@ -37,6 +39,7 @@ const LeaveRequest = ({
 	setIsOpen,
 	setIsOpenThanks,
 	buttonText,
+	descriptionText,
 	tag,
 	location,
 }: LeaveRequestProps) => {
@@ -126,9 +129,15 @@ const LeaveRequest = ({
 						</div>
 					</div>
 					<p className={styles.text}>
-						чтобы <span>рассчитать стоимость кухни</span> по телефону или
-						договориться о выезде на замер кухни.
-						<br /> Выезд <span>бесплатный</span> и возможен в этот же день
+						{descriptionText ? (
+							descriptionText
+						) : (
+							<>
+								чтобы <span>рассчитать стоимость кухни</span> по телефону или
+								договориться о выезде на замер кухни.
+								<br /> Выезд <span>бесплатный</span> и возможен в этот же день
+							</>
+						)}
 					</p>
 					<form className={styles.formWrapper}>
 						<div className={styles.inputsWrapper}>
@@ -249,9 +258,15 @@ const LeaveRequest = ({
 						</div>
 					</div>
 					<p className={styles.text}>
-						чтобы <span>рассчитать стоимость кухни</span> по телефону или
-						договориться о выезде на замер кухни.
-						<br /> Выезд <span>бесплатный</span> и возможен в этот же день
+						{descriptionText ? (
+							descriptionText
+						) : (
+							<>
+								чтобы <span>рассчитать стоимость кухни</span> по телефону или
+								договориться о выезде на замер кухни.
+								<br /> Выезд <span>бесплатный</span> и возможен в этот же день
+							</>
+						)}
 					</p>
 					<form className={styles.formWrapper}>
 						<div className={styles.inputsWrapper}>

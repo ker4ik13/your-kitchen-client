@@ -22,8 +22,13 @@
 	margin-top: rem(40);
 	width: 100%;
 	flex-wrap: wrap;
+	margin-bottom: rem(30);
 }
 
-.button {
+.notFoundText {
+	text-align: center;
+	color: #fff;
+	@include noto(400);
+	font-size: rem(20);
 	margin-top: rem(30);
 }

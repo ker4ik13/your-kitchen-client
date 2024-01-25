@@ -24,7 +24,6 @@ const texts = {
 const FurniturePage = () => {
 	const userStore = useAppSelector((store) => store.user);
 	const dispatch = useAppDispatch();
-	// const kitchenStore = useAppSelector((store) => store.kitchens);
 	const furnitureStore = useAppSelector((store) => store.furniture);
 
 	useEffect(() => {
@@ -95,11 +94,6 @@ const FurniturePage = () => {
 										>
 											<Icons.remove className={styles.removeIcon} />
 										</button>
-									)}
-									{furniture.onMainPage && (
-										<p className={styles.kitchenOption}>
-											{texts.onMainPageText}
-										</p>
 									)}
 
 									<Link href={`/admin/furniture/${furniture.slug}`}>

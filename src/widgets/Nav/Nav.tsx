@@ -51,6 +51,12 @@ const Nav = () => {
 								Наши кухни
 							</Link>
 							<Link
+								href={pagesLinks.furniture}
+								className={isActive(pagesLinks.furniture)}
+							>
+								Мебель
+							</Link>
+							<Link
 								href={pagesLinks.reviews}
 								className={isActive(pagesLinks.reviews)}
 							>
@@ -68,12 +74,7 @@ const Nav = () => {
 							>
 								Преимущества
 							</Link>
-							<Link
-								href={pagesLinks.furniture}
-								className={isActive(pagesLinks.furniture)}
-							>
-								Мебель
-							</Link>
+
 							{/* <div className={styles.menuWrapper}>
                 <Menu>
                   <div className={styles.dropdownButtonWrapper}>
@@ -114,6 +115,12 @@ const Nav = () => {
 								<p className={styles.contactsText} itemProp='telephone'>
 									+7 (495) 988-55-28
 								</p>
+							</Link>
+							<Link href={links.tgGroup} target='_blank'>
+								<Icons.telegram className={styles.navIcon} />
+							</Link>
+							<Link href={links.whatsapp} target='_blank'>
+								<Icons.splashWhatsapp className={styles.navIcon} />
 							</Link>
 						</div>
 					</div>

@@ -85,13 +85,13 @@ const Footer = () => {
 						© 2023 Мебельная фабрика «Твоя Кухня». Все права защищены.
 					</p>
 					<div className={styles.footerIcons}>
-						<Link href={links.tgGroup}>
+						<Link href={links.tgGroup} target='_blank'>
 							<Icons.telegram className={styles.footerDownIcon} />
 						</Link>
-						<Link href={links.whatsapp}>
+						<Link href={links.whatsapp} target='_blank'>
 							<Icons.whatsapp className={styles.footerDownIcon} />
 						</Link>
-						<Link href={links.vk}>
+						<Link href={links.vk} target='_blank'>
 							<Icons.vk className={styles.footerDownIcon} />
 						</Link>
 					</div>

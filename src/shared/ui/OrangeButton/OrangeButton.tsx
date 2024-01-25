@@ -1,3 +1,5 @@
+'use client';
+
 import { Icons } from '@/shared/IconsComponents/Icons';
 import Link from 'next/link';
 import { ButtonHTMLAttributes, type ReactNode } from 'react';

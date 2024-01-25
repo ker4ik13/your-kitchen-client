@@ -1,4 +1,5 @@
 import FurniturePage from '@/pages/FurniturePage';
+import { UserFurnitureService } from '@/services/UserFurnitureService';
 import { SITE_NAME, pagesData } from '@/shared/constants';
 import { Metadata } from 'next';
 
@@ -19,6 +20,11 @@ export const metadata: Metadata = {
 	},
 };
 
-export default function Home() {
-	return <FurniturePage />;
+const getFurniture = async () => {
+	return await UserFurnitureService.getAllFurniture();
+};
+
+export default async function page() {
+	const furniture = await getFurniture();
+	return <FurniturePage furniture={furniture} />;
 }
