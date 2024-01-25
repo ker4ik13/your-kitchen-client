@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from './Reviews.module.scss';
 
 import { UserReviewsService } from '@/services/UserReviewsService';
-import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import '@/shared/styles/swiper-my.css';
 import type { IReview } from '@/types/IReview';
@@ -88,7 +87,7 @@ const Reviews = ({ withoutBg }: ReviewsProps) => {
 			{reviews && reviews.length !== 0 && (
 				<div className={styles.container}>
 					<div className={styles.wrapper}>
-						<Icon icon={Icons.touch(styles.icon)} />
+						<Icons.touch className={styles.icon} />
 						<p className={styles.text}>
 							Двигайте ползунок, чтобы посмотреть следующий отзыв
 						</p>

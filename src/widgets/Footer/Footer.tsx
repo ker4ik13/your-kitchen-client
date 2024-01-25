@@ -1,4 +1,3 @@
-import Icon from '@/shared/IconsComponents/Icon';
 import Logo from '@/shared/Logo/Logo';
 
 import { Icons } from '@/shared/IconsComponents/Icons';
@@ -58,14 +57,14 @@ const Footer = () => {
 					</div>
 					<div className={styles.downWrapper}>
 						<a href={links.tel} className={styles.downLink}>
-							<Icon icon={Icons.phone(styles.downIcon)} />
+							<Icons.phone className={styles.downIcon} />
 							<p className={styles.downLinkText}>{links.phone}</p>
 						</a>
 						<a
 							href={links.mailTo}
 							className={`${styles.downLink} ${styles.mt}`}
 						>
-							<Icon icon={Icons.mail(styles.downIcon)} />
+							<Icons.mail className={styles.downIcon} />
 							<p className={styles.downLinkText} itemProp='email'>
 								{links.email}
 							</p>
@@ -87,13 +86,13 @@ const Footer = () => {
 					</p>
 					<div className={styles.footerIcons}>
 						<Link href={links.tgGroup}>
-							<Icon icon={Icons.telegram(styles.footerDownIcon)} />
+							<Icons.telegram className={styles.footerDownIcon} />
 						</Link>
 						<Link href={links.whatsapp}>
-							<Icon icon={Icons.whatsapp(styles.footerDownIcon)} />
+							<Icons.whatsapp className={styles.footerDownIcon} />
 						</Link>
 						<Link href={links.vk}>
-							<Icon icon={Icons.vk(styles.footerDownIcon)} />
+							<Icons.vk className={styles.footerDownIcon} />
 						</Link>
 					</div>
 					<p className={styles.footerDownText} itemProp='address'>

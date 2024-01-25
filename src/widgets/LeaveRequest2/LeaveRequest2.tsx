@@ -1,6 +1,5 @@
 import { isErrorStyles } from '@/features/isErrorStyles';
 import ClaimService from '@/services/ClaimService';
-import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import { links } from '@/shared/constants';
 import { OrangeButton } from '@/shared/ui';
@@ -112,7 +111,7 @@ const LeaveRequest2 = ({
 										minLength: 2,
 									})}
 								/>
-								<Icon icon={Icons.user(styles.icon)} />
+								<Icons.user className={styles.icon} />
 							</div>
 							<div className={styles.inputWrapper}>
 								<ReactInputMask
@@ -131,7 +130,7 @@ const LeaveRequest2 = ({
 										minLength: 16,
 									})}
 								/>
-								<Icon icon={Icons.phoneGray(styles.icon)} />
+								<Icons.phoneGray className={styles.icon} />
 							</div>
 						</div>
 						<div className={styles.contactsWrapper}>
@@ -145,7 +144,7 @@ const LeaveRequest2 = ({
 										className={styles.contactCard}
 										target='_blank'
 									>
-										<Icon icon={Icons.telegram(styles.contactsIcon)} />
+										<Icons.telegram className={styles.contactsIcon} />
 										<p className={styles.contactText}>Telegram</p>
 									</Link>
 									<Link
@@ -153,7 +152,7 @@ const LeaveRequest2 = ({
 										className={styles.contactCard}
 										target='_blank'
 									>
-										<Icon icon={Icons.whatsapp(styles.contactsIcon)} />
+										<Icons.whatsapp className={styles.contactsIcon} />
 										<p className={styles.contactText}>WhatsApp</p>
 									</Link>
 									<Link
@@ -161,7 +160,7 @@ const LeaveRequest2 = ({
 										className={styles.contactCard}
 										target='_blank'
 									>
-										<Icon icon={Icons.vk(styles.contactsIcon)} />
+										<Icons.vk className={styles.contactsIcon} />
 										<p className={styles.contactText}>VK.com</p>
 									</Link>
 								</div>
@@ -211,7 +210,7 @@ const LeaveRequest2 = ({
 										minLength: 2,
 									})}
 								/>
-								<Icon icon={Icons.user(styles.icon)} />
+								<Icons.user className={styles.icon} />
 							</div>
 							<div className={styles.inputWrapper}>
 								<ReactInputMask
@@ -230,7 +229,7 @@ const LeaveRequest2 = ({
 										minLength: 16,
 									})}
 								/>
-								<Icon icon={Icons.phoneGray(styles.icon)} />
+								<Icons.phoneGray className={styles.icon} />
 							</div>
 						</div>
 						<div className={styles.contactsWrapper}>
@@ -244,7 +243,7 @@ const LeaveRequest2 = ({
 										className={styles.contactCard}
 										target='_blank'
 									>
-										<Icon icon={Icons.telegram(styles.contactsIcon)} />
+										<Icons.telegram className={styles.contactsIcon} />
 										<p className={styles.contactText}>Telegram</p>
 									</Link>
 									<Link
@@ -252,7 +251,7 @@ const LeaveRequest2 = ({
 										className={styles.contactCard}
 										target='_blank'
 									>
-										<Icon icon={Icons.whatsapp(styles.contactsIcon)} />
+										<Icons.whatsapp className={styles.contactsIcon} />
 										<p className={styles.contactText}>WhatsApp</p>
 									</Link>
 									<Link
@@ -260,7 +259,7 @@ const LeaveRequest2 = ({
 										className={styles.contactCard}
 										target='_blank'
 									>
-										<Icon icon={Icons.vk(styles.contactsIcon)} />
+										<Icons.vk className={styles.contactsIcon} />
 										<p className={styles.contactText}>VK.com</p>
 									</Link>
 								</div>

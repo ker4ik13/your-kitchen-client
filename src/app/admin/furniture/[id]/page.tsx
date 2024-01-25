@@ -19,7 +19,7 @@ interface TInputs {
 	slug: string;
 	description: string;
 	price: number;
-	photos: ImageData[];
+	photos: ImageData[] | string[];
 	onMainPage: boolean;
 }
 
@@ -42,6 +42,7 @@ const EditFurniturePage = () => {
 	const dispatch = useAppDispatch();
 	const furnitureStore = useAppSelector((store) => store.furniture);
 
+	// TODO: добавлять фотки объектом newPhotos
 	const [photos, setPhotos] = useState<any[]>([]);
 	const [files, setFiles] = useState<File[]>([]);
 	const [drag, setDrag] = useState(false);
@@ -65,6 +66,10 @@ const EditFurniturePage = () => {
 			getProduct(path.id);
 		}
 	}, []);
+
+	useEffect(() => {
+		console.log(furniture);
+	}, [furniture]);
 
 	// Обработчик фото
 	const getPhotosFromFiles = (event: any, files: any[]) => {
@@ -335,13 +340,12 @@ const EditFurniturePage = () => {
 							id='photos'
 							type='file'
 							{...register('photos', {
-								required: true,
+								// TODO: required?
 								value: photos,
 							})}
 							accept='image/png, image/jpeg, image/jpg, image/webp'
 							multiple
 							className={styles.inputPhotos}
-							required
 							onChange={(event) => changeHandler(event)}
 							onDragStart={(event) => dragStartHandler(event)}
 							onDragLeave={(event) => dragLeaveHandler(event)}

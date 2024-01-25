@@ -1,8 +1,7 @@
 'use client';
 
 import { UserKitchenService } from '@/services/UserKitchenService';
-import Icon from '@/shared/IconsComponents/Icon';
-import { ChevronDirection, Icons } from '@/shared/IconsComponents/Icons';
+import { Icons } from '@/shared/IconsComponents/Icons';
 import MiniLoading from '@/shared/MiniLoading';
 import { OrangeButton } from '@/shared/ui';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -156,11 +155,7 @@ const KitchenExamples = () => {
 												<span>Cтиль: </span>
 												{styleValue.label}
 											</div>
-											<Icon
-												icon={Icons.chevron(
-													open ? ChevronDirection.Down : ChevronDirection.Up,
-												)}
-											/>
+											<Icons.chevron direction={open ? 'down' : 'up'} />
 										</Listbox.Button>
 										<Listbox.Options className={styles.listOptions}>
 											{kitchensStyles.map((type, i) => (
@@ -191,11 +186,7 @@ const KitchenExamples = () => {
 													? budgetValue.label
 													: `${budgetValue.label}₽`}
 											</div>
-											<Icon
-												icon={Icons.chevron(
-													open ? ChevronDirection.Down : ChevronDirection.Up,
-												)}
-											/>
+											<Icons.chevron direction={open ? 'down' : 'up'} />
 										</Listbox.Button>
 										<Listbox.Options className={styles.listOptions}>
 											{kitchensBudget.map((type, i) => (
@@ -224,11 +215,7 @@ const KitchenExamples = () => {
 												<span>Сроки: </span>
 												{termValue.label}
 											</div>
-											<Icon
-												icon={Icons.chevron(
-													open ? ChevronDirection.Down : ChevronDirection.Up,
-												)}
-											/>
+											<Icons.chevron direction={open ? 'down' : 'up'} />
 										</Listbox.Button>
 										<Listbox.Options className={styles.listOptions}>
 											{kitchensDays.map((type, i) => (
@@ -257,11 +244,7 @@ const KitchenExamples = () => {
 												<span>Тип кухни: </span>
 												{typeValue.label}
 											</div>
-											<Icon
-												icon={Icons.chevron(
-													open ? ChevronDirection.Down : ChevronDirection.Up,
-												)}
-											/>
+											<Icons.chevron direction={open ? 'down' : 'up'} />
 										</Listbox.Button>
 										<Listbox.Options className={styles.listOptions}>
 											{kitchensTypes.map((type, i) => (

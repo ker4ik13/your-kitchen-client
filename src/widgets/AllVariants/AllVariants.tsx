@@ -3,7 +3,6 @@ import man from '@/data/images/man1.webp';
 import materials from '@/data/images/materials1.webp';
 import phone from '@/data/images/phone1.webp';
 import work from '@/data/images/work1.webp';
-import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import { OrangeButton } from '@/shared/ui';
 import Image from 'next/image';
@@ -22,7 +21,7 @@ const AllVariants = ({ setIsOpen }: AllVariantProps) => {
 					<h2 className={styles.title2}>
 						И получите дизайн-проект идеальной для себя кухни
 					</h2>
-					<Icon icon={Icons.ruble(styles.icon)} />
+					<Icons.ruble className={styles.icon} />
 					<p className={styles.title3}>с идеальным бюджетом</p>
 				</div>
 				<div className={styles.variants}>

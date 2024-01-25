@@ -11,7 +11,6 @@ import comp5 from '@/data/companies/comp5.webp';
 import comp6 from '@/data/companies/comp6.webp';
 import comp7 from '@/data/companies/comp7.webp';
 import comp8 from '@/data/companies/comp8.webp';
-import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import Image, { type StaticImageData } from 'next/image';
 import styles from './Advantages.module.scss';
@@ -159,7 +158,7 @@ const Advantages = () => {
 					</div>
 					<div className={styles.cards}>
 						<div className={styles.card}>
-							<Icon icon={Icons.house(styles.icon)} />
+							<Icons.house className={styles.icon} />
 							<p className={styles.cardText}>
 								Высокое качество. Фабрика сотрудничает только с надежными
 								проверенными поставщиками – лидерами в своей отрасли. Мы уверены
@@ -181,7 +180,7 @@ const Advantages = () => {
 						</div>
 						<hr />
 						<div className={styles.card}>
-							<Icon icon={Icons.settings(styles.icon)} />
+							<Icons.settings className={styles.icon} />
 							<p className={styles.cardText}>
 								Эргономику и функциональность. Мы создаем профессиональные
 								интеллектуальные решения, которые улучшают качество пользования
@@ -190,7 +189,7 @@ const Advantages = () => {
 						</div>
 						<hr />
 						<div className={styles.card}>
-							<Icon icon={Icons.diamond2(styles.icon)} />
+							<Icons.diamond2 className={styles.icon} />
 							<p className={styles.cardText}>
 								Актуальные и уникальные дизайн-решения. Мы разрабатываем
 								индивидуальные проекты с учетом образа жизни, вкусов и
@@ -201,7 +200,7 @@ const Advantages = () => {
 						</div>
 						<hr />
 						<div className={styles.card}>
-							<Icon icon={Icons.repair(styles.icon)} />
+							<Icons.repair className={styles.icon} />
 							<p className={styles.cardText}>
 								Исключительный фирменный сервис от замера до монтажа. Мы
 								помогаем клиентам преодолевать все трудности ремонта и процесса
@@ -211,7 +210,7 @@ const Advantages = () => {
 						</div>
 						<hr />
 						<div className={styles.card}>
-							<Icon icon={Icons.key(styles.icon)} />
+							<Icons.key className={styles.icon} />
 							<p className={styles.cardText}>
 								Под ключ: комплексное решение. Наша компания не только
 								предлагает клиентам качественную мебель, но и обеспечивает их

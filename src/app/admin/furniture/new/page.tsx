@@ -124,6 +124,7 @@ const NewFurniturePage = () => {
 		event.preventDefault();
 		let files = [...event.target.files];
 		setFiles(files);
+		console.log(files);
 
 		if (files && files.length > 0) {
 			getPhotosFromFiles(event, files);

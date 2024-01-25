@@ -1,52 +1,20 @@
 import styles from './Icons.module.scss';
 
 interface IIcons {
-	person: (className: string) => JSX.Element;
-	phone: (className: string) => JSX.Element;
-	ruble: (className: string) => JSX.Element;
-	chevron: (rotate: 'left' | 'right' | 'up' | 'down') => JSX.Element;
-	mail: (className: string) => JSX.Element;
-	telegram: (className: string) => JSX.Element;
-	whatsapp: (className: string) => JSX.Element;
-	vk: (className: string) => JSX.Element;
-	coffee: (className: string) => JSX.Element;
-	diamond: (className: string) => JSX.Element;
-	diamond2: (className: string) => JSX.Element;
-	heart: (className: string) => JSX.Element;
-	play: (className: string) => JSX.Element;
-	pot: (className: string) => JSX.Element;
-	quotes: (className: string) => JSX.Element;
-	touch: (className: string) => JSX.Element;
-	user: (className: string) => JSX.Element;
-	phoneGray: (className: string) => JSX.Element;
-	docs: (className: string) => JSX.Element;
-	kitchen: (className: string) => JSX.Element;
-	reviews: (className: string) => JSX.Element;
-	team: (className: string) => JSX.Element;
-	copy: (className: string) => JSX.Element;
-	edit: (className: string) => JSX.Element;
-	remove: (className: string) => JSX.Element;
-	done: (className: string) => JSX.Element;
-	cancel: (className: string) => JSX.Element;
-	shesternya: (className: string) => JSX.Element;
-	house: (className: string) => JSX.Element;
-	settings: (className: string) => JSX.Element;
-	repair: (className: string) => JSX.Element;
-	key: (className: string) => JSX.Element;
+	className?: string;
 }
 
-export enum ChevronDirection {
-	Up = 'up',
-	Down = 'down',
+interface IChevron {
+	direction: 'up' | 'down' | 'left' | 'right';
 }
 
-export const Icons: IIcons = {
-	person: (className: string) => (
+export const Icons = {
+	person: ({ className }: IIcons) => (
 		<svg viewBox='0 0 17 17' className={className}>
 			<path d='M8.50817 0.000549316C13.277 0.0271201 17.0925 3.90513 16.9982 8.67857C16.9072 13.2866 13.1641 17.0577 8.36532 16.9999C3.77649 16.9441 -0.105443 13.1856 0.00218579 8.27735C0.100513 3.81147 3.7373 0.024463 8.50817 0.000549316ZM14.1693 13.4195C14.8416 12.6429 15.3393 11.784 15.6415 10.8169C16.1657 9.13958 16.1458 7.47027 15.5186 5.8242C14.344 2.74 11.1225 0.512702 7.32824 1.0853C3.99507 1.58815 1.25918 4.39137 1.01469 7.94921C0.903077 9.576 1.26582 11.0892 2.12885 12.4769C2.3348 12.8077 2.55936 13.1259 2.82976 13.4128C3.38385 11.4433 4.60829 10.0994 6.50308 9.33354C5.54174 8.63274 4.98698 7.70276 4.9345 6.5177C4.88201 5.32534 5.34508 4.33491 6.27055 3.59159C7.73948 2.41119 9.77978 2.55267 11.0773 3.90911C11.7184 4.57936 12.0712 5.38712 12.0705 6.31909C12.0699 7.5812 11.5258 8.57893 10.5033 9.32823C12.3894 10.0961 13.6152 11.4433 14.1693 13.4195ZM8.47628 16.0022C8.47628 16.0115 8.4776 16.0201 8.4776 16.0294C8.91742 15.9862 9.36189 15.9689 9.79639 15.8952C10.6129 15.7564 11.3896 15.4913 12.1131 15.0795C12.5157 14.8503 12.9043 14.6039 13.2584 14.3056C13.287 14.2817 13.3109 14.2319 13.3083 14.1967C13.299 14.0897 13.2784 13.9834 13.2564 13.8778C13.0658 12.9505 12.6545 12.1374 11.9868 11.4619C10.775 10.235 9.30741 9.78126 7.61724 10.0603C6.78013 10.1984 6.04201 10.5671 5.38959 11.1164C4.91058 11.5197 4.52259 11.9913 4.22362 12.538C3.93794 13.0601 3.76719 13.6207 3.68747 14.2093C3.68348 14.2405 3.71205 14.287 3.73929 14.3089C4.11333 14.6125 4.51262 14.8769 4.93782 15.1074C5.45869 15.3897 6.00348 15.6049 6.57218 15.761C7.19403 15.9317 7.8305 16.0055 8.47628 16.0022ZM8.49421 8.95425C9.85684 8.96487 11.0707 7.87281 11.0866 6.39216C11.1019 4.95667 9.92992 3.78755 8.50484 3.78423C7.07976 3.78091 5.89983 4.94139 5.91445 6.38086C5.92907 7.90204 7.14886 8.9589 8.49421 8.95425Z' />
 		</svg>
 	),
-	phone: (className: string) => (
+	phone: ({ className }: IIcons) => (
 		<svg viewBox='0 0 51 51' className={className}>
 			<g filter='url(#filter0_dd_268_686)'>
 				<path d='M28.3433 31.999C27.9399 31.9873 27.5355 31.9096 27.1362 31.7999C26.5045 31.6261 25.9129 31.3554 25.3356 31.0521C24.7348 30.7367 24.1657 30.3709 23.6239 29.962C23.0171 29.5043 22.452 28.9994 21.9382 28.4401C21.1585 27.5903 20.4774 26.6673 19.9245 25.6539C19.6925 25.2287 19.4962 24.7862 19.3385 24.3281C19.2047 23.9379 19.0898 23.5422 19.0353 23.1323C18.9636 22.5943 18.984 22.065 19.2581 21.5789C19.3477 21.4204 19.4606 21.27 19.5852 21.1375C19.8889 20.8154 20.2053 20.506 20.5176 20.1926C20.7317 19.9778 20.982 19.8254 21.2836 19.77C21.6442 19.704 21.9703 19.8005 22.244 20.0316C22.4993 20.247 22.7368 20.4837 22.9734 20.7199C23.3208 21.0669 23.6636 21.4194 24.0029 21.7745C24.2048 21.9858 24.3213 22.2398 24.3478 22.5334C24.3712 22.7904 24.3055 23.0276 24.1687 23.2395C24.0741 23.3858 23.9597 23.5224 23.8386 23.6484C23.597 23.9003 23.3452 24.1432 23.0954 24.3875C23.0624 24.42 23.0598 24.4454 23.0787 24.4865C23.2831 24.9275 23.5593 25.3222 23.8706 25.6925C24.3198 26.2269 24.8086 26.7221 25.3534 27.16C25.7074 27.4445 26.0808 27.699 26.4958 27.8885C26.5436 27.9103 26.564 27.8905 26.5925 27.8625C26.8799 27.5806 27.1657 27.2977 27.4562 27.0193C27.6245 26.8578 27.8153 26.7262 28.0442 26.6678C28.4358 26.5672 28.798 26.6398 29.1017 26.9076C29.3682 27.1422 29.619 27.3952 29.8713 27.6456C30.1673 27.9392 30.4588 28.2384 30.7502 28.5361C30.8942 28.6834 31.0259 28.8399 31.1093 29.0319C31.2553 29.3677 31.2355 29.6979 31.0839 30.0255C30.9898 30.2287 30.8443 30.3923 30.6892 30.5502C30.4415 30.8022 30.1958 31.0562 29.9511 31.3112C29.5152 31.7663 28.9816 31.9924 28.3412 32L28.3433 31.999ZM19.7403 22.6558C19.7515 22.795 19.7561 22.9347 19.7754 23.0728C19.8212 23.4 19.9067 23.7175 20.016 24.0299C20.2093 24.58 20.4621 25.1027 20.7454 25.6107C21.045 26.1476 21.3996 26.648 21.7857 27.1265C22.157 27.5867 22.5446 28.0307 22.9729 28.4401C23.5792 29.0202 24.2348 29.5384 24.9464 29.9813C25.4241 30.2785 25.921 30.5421 26.4373 30.7692C27.0106 31.0211 27.5991 31.2081 28.2283 31.2553C28.709 31.2914 29.1159 31.1573 29.4394 30.7875C29.5925 30.6127 29.7619 30.4517 29.9252 30.2856C30.0351 30.1738 30.1515 30.0682 30.2573 29.9529C30.3209 29.8833 30.3789 29.8055 30.4247 29.7233C30.4964 29.5947 30.5076 29.4545 30.4369 29.322C30.3947 29.2427 30.3433 29.1645 30.2802 29.1015C29.8021 28.6184 29.3204 28.1384 28.8392 27.6583C28.7761 27.5953 28.7141 27.5313 28.6459 27.475C28.4781 27.3378 28.2827 27.3226 28.0971 27.4348C28.0274 27.477 27.9623 27.5308 27.9038 27.5882C27.6617 27.8255 27.4236 28.0662 27.1835 28.3055C27.1011 28.3878 27.0223 28.4747 26.9333 28.5488C26.7471 28.7038 26.536 28.7424 26.3188 28.625C26.0009 28.4533 25.6804 28.2826 25.3778 28.0861C24.976 27.8255 24.6102 27.5166 24.2643 27.1834C23.8488 26.7831 23.452 26.3676 23.1077 25.9028C22.8172 25.5111 22.5461 25.1088 22.3569 24.6567C22.3121 24.5495 22.2841 24.4403 22.2918 24.324C22.303 24.1482 22.4072 24.0253 22.5268 23.91C22.8025 23.6438 23.0771 23.3766 23.3508 23.1084C23.4022 23.0581 23.4515 23.0048 23.4953 22.9484C23.6636 22.731 23.6646 22.5085 23.4937 22.2926C23.4352 22.2184 23.3625 22.156 23.2959 22.0884C22.8457 21.6343 22.3955 21.1801 21.9444 20.7265C21.8935 20.6757 21.8406 20.6254 21.7826 20.5843C21.6295 20.4751 21.4581 20.4527 21.2897 20.532C21.1905 20.5782 21.0995 20.6513 21.0201 20.728C20.7373 21.0023 20.4586 21.2807 20.1834 21.5626C20.0908 21.6576 20.0033 21.7607 19.9311 21.871C19.7754 22.1082 19.7409 22.3779 19.7398 22.6558H19.7403Z' />
@@ -110,7 +78,7 @@ export const Icons: IIcons = {
 			</defs>
 		</svg>
 	),
-	ruble: (className: string) => (
+	ruble: ({ className }: IIcons) => (
 		<svg
 			viewBox='0 0 63 63'
 			xmlns='http://www.w3.org/2000/svg'
@@ -183,8 +151,8 @@ export const Icons: IIcons = {
 			</defs>
 		</svg>
 	),
-	chevron: (rotate) => {
-		switch (rotate) {
+	chevron: ({ direction }: IChevron) => {
+		switch (direction) {
 			case 'down':
 				return <p className={styles.rotateDown}>{'›'}</p>;
 			case 'up':
@@ -197,7 +165,7 @@ export const Icons: IIcons = {
 				return <p className={styles.rotateDown}>{'›'}</p>;
 		}
 	},
-	mail: (className: string) => (
+	mail: ({ className }: IIcons) => (
 		<svg
 			viewBox='0 0 53 48'
 			fill='none'
@@ -263,7 +231,7 @@ export const Icons: IIcons = {
 			</defs>
 		</svg>
 	),
-	telegram: function (className: string): JSX.Element {
+	telegram: function ({ className }: IIcons): JSX.Element {
 		return (
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
@@ -294,7 +262,7 @@ export const Icons: IIcons = {
 			</svg>
 		);
 	},
-	whatsapp: function (className: string): JSX.Element {
+	whatsapp: function ({ className }: IIcons): JSX.Element {
 		return (
 			<svg
 				viewBox='0 0 40 40'
@@ -355,7 +323,7 @@ export const Icons: IIcons = {
 			</svg>
 		);
 	},
-	vk: function (className: string): JSX.Element {
+	vk: function ({ className }: IIcons): JSX.Element {
 		return (
 			<svg
 				viewBox='0 0 30 30'
@@ -386,7 +354,7 @@ export const Icons: IIcons = {
 			</svg>
 		);
 	},
-	coffee: (className) => (
+	coffee: ({ className }: IIcons) => (
 		<svg
 			viewBox='0 0 59 62'
 			xmlns='http://www.w3.org/2000/svg'
@@ -467,7 +435,7 @@ export const Icons: IIcons = {
 			</defs>
 		</svg>
 	),
-	diamond: (className) => (
+	diamond: ({ className }: IIcons) => (
 		<svg
 			viewBox='0 0 60 60'
 			xmlns='http://www.w3.org/2000/svg'
@@ -560,7 +528,7 @@ export const Icons: IIcons = {
 			</defs>
 		</svg>
 	),
-	heart: (className) => (
+	heart: ({ className }: IIcons) => (
 		<svg
 			viewBox='0 0 55 54'
 			xmlns='http://www.w3.org/2000/svg'
@@ -629,7 +597,7 @@ export const Icons: IIcons = {
 			</defs>
 		</svg>
 	),
-	play: (className) => (
+	play: ({ className }: IIcons) => (
 		<svg
 			viewBox='0 0 8 9'
 			xmlns='http://www.w3.org/2000/svg'
@@ -642,7 +610,7 @@ export const Icons: IIcons = {
 			/>
 		</svg>
 	),
-	pot: (className) => (
+	pot: ({ className }: IIcons) => (
 		<svg
 			viewBox='0 0 66 60'
 			xmlns='http://www.w3.org/2000/svg'
@@ -731,7 +699,7 @@ export const Icons: IIcons = {
 			</defs>
 		</svg>
 	),
-	quotes: (className) => (
+	quotes: ({ className }: IIcons) => (
 		<svg
 			viewBox='0 0 45 40'
 			xmlns='http://www.w3.org/2000/svg'
@@ -747,7 +715,7 @@ export const Icons: IIcons = {
 			/>
 		</svg>
 	),
-	touch: (className) => (
+	touch: ({ className }: IIcons) => (
 		<svg
 			viewBox='0 0 22 30'
 			xmlns='http://www.w3.org/2000/svg'
@@ -763,7 +731,7 @@ export const Icons: IIcons = {
 			/>
 		</svg>
 	),
-	phoneGray: (className) => {
+	phoneGray: ({ className }: IIcons) => {
 		return (
 			<svg
 				viewBox='0 0 17 17'
@@ -785,7 +753,7 @@ export const Icons: IIcons = {
 			</svg>
 		);
 	},
-	user: (className) => (
+	user: ({ className }: IIcons) => (
 		<svg
 			viewBox='0 0 17 17'
 			xmlns='http://www.w3.org/2000/svg'
@@ -797,7 +765,7 @@ export const Icons: IIcons = {
 			/>
 		</svg>
 	),
-	docs: (className) => {
+	docs: ({ className }: IIcons) => {
 		return (
 			<svg
 				fill='none'
@@ -813,7 +781,7 @@ export const Icons: IIcons = {
 			</svg>
 		);
 	},
-	kitchen: (className) => {
+	kitchen: ({ className }: IIcons) => {
 		return (
 			<svg
 				viewBox='0 0 32 32'
@@ -829,7 +797,7 @@ export const Icons: IIcons = {
 			</svg>
 		);
 	},
-	reviews: (className) => {
+	reviews: ({ className }: IIcons) => {
 		return (
 			<svg
 				className={className}
@@ -846,7 +814,7 @@ export const Icons: IIcons = {
 			</svg>
 		);
 	},
-	team: (className) => {
+	team: ({ className }: IIcons) => {
 		return (
 			<svg
 				className={className}
@@ -857,7 +825,7 @@ export const Icons: IIcons = {
 			</svg>
 		);
 	},
-	copy: (className) => {
+	copy: ({ className }: IIcons) => {
 		return (
 			<svg
 				className={className}
@@ -881,7 +849,7 @@ export const Icons: IIcons = {
 			</svg>
 		);
 	},
-	edit: (className) => {
+	edit: ({ className }: IIcons) => {
 		return (
 			<svg
 				viewBox='0 0 24 24'
@@ -903,7 +871,7 @@ export const Icons: IIcons = {
 			</svg>
 		);
 	},
-	remove: (className) => {
+	remove: ({ className }: IIcons) => {
 		return (
 			<svg
 				viewBox='0 0 24 24'
@@ -942,7 +910,7 @@ export const Icons: IIcons = {
 			</svg>
 		);
 	},
-	done: (className) => {
+	done: ({ className }: IIcons) => {
 		return (
 			<svg
 				viewBox='0 0 24 24'
@@ -958,7 +926,7 @@ export const Icons: IIcons = {
 			</svg>
 		);
 	},
-	cancel: (className) => {
+	cancel: ({ className }: IIcons) => {
 		return (
 			<svg
 				viewBox='0 0 76 76'
@@ -979,7 +947,7 @@ export const Icons: IIcons = {
 			</svg>
 		);
 	},
-	shesternya(className) {
+	shesternya({ className }: IIcons) {
 		return (
 			<svg
 				viewBox='0 0 62 61'
@@ -1054,7 +1022,7 @@ export const Icons: IIcons = {
 			</svg>
 		);
 	},
-	house: (className) => (
+	house: ({ className }: IIcons) => (
 		<svg
 			viewBox='0 0 34 28'
 			className={className}
@@ -1070,7 +1038,7 @@ export const Icons: IIcons = {
 			/>
 		</svg>
 	),
-	settings: (className: string) => (
+	settings: ({ className }: IIcons) => (
 		<svg
 			viewBox='0 0 28 28'
 			className={className}
@@ -1086,7 +1054,7 @@ export const Icons: IIcons = {
 			/>
 		</svg>
 	),
-	diamond2: (className: string) => (
+	diamond2: ({ className }: IIcons) => (
 		<svg
 			viewBox='0 0 28 28'
 			className={className}
@@ -1122,7 +1090,7 @@ export const Icons: IIcons = {
 			/>
 		</svg>
 	),
-	repair: (className: string) => (
+	repair: ({ className }: IIcons) => (
 		<svg
 			viewBox='0 0 28 28'
 			className={className}
@@ -1134,7 +1102,7 @@ export const Icons: IIcons = {
 			/>
 		</svg>
 	),
-	key: (className) => (
+	key: ({ className }: IIcons) => (
 		<svg
 			viewBox='0 0 28 28'
 			className={className}

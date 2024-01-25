@@ -2,7 +2,6 @@
 
 import { isErrorStyles } from '@/features/isErrorStyles';
 import ClaimService from '@/services/ClaimService';
-import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import { OrangeButton } from '@/shared/ui';
 import { TFormInputsNames, type TFormInputs } from '@/types/TFormInputs';
@@ -87,7 +86,7 @@ export const LeaveRequestMini = ({
 											minLength: 2,
 										})}
 									/>
-									<Icon icon={Icons.user(styles.icon)} />
+									<Icons.user className={styles.icon} />
 								</div>
 								<div className={styles.inputWrapper}>
 									<ReactInputMask
@@ -106,7 +105,7 @@ export const LeaveRequestMini = ({
 											minLength: 16,
 										})}
 									/>
-									<Icon icon={Icons.phoneGray(styles.icon)} />
+									<Icons.phoneGray className={styles.icon} />
 								</div>
 								<OrangeButton
 									onClick={handleSubmit(onSubmitLeaveRequest)}

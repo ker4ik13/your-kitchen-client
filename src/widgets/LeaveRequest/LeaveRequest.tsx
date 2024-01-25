@@ -3,7 +3,6 @@ import phone from '@/data/images/phoneHand.webp';
 import designer from '@/data/team/team2.webp';
 import { isErrorStyles } from '@/features/isErrorStyles';
 import ClaimService from '@/services/ClaimService';
-import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import { links } from '@/shared/constants';
 import { OrangeButton } from '@/shared/ui';
@@ -148,7 +147,7 @@ const LeaveRequest = ({
 									placeholder='Ваше имя'
 									autoComplete='given-name'
 								/>
-								<Icon icon={Icons.user(styles.icon)} />
+								<Icons.user className={styles.icon} />
 							</div>
 							<div className={styles.inputWrapper}>
 								<ReactInputMask
@@ -167,7 +166,7 @@ const LeaveRequest = ({
 										minLength: 16,
 									})}
 								/>
-								<Icon icon={Icons.phoneGray(styles.icon)} />
+								<Icons.phoneGray className={styles.icon} />
 							</div>
 						</div>
 					</form>
@@ -182,7 +181,7 @@ const LeaveRequest = ({
 									className={styles.contactCard}
 									target='_blank'
 								>
-									<Icon icon={Icons.telegram(styles.contactsIcon)} />
+									<Icons.telegram className={styles.contactsIcon} />
 									<p className={styles.contactText}>Telegram</p>
 								</Link>
 								<Link
@@ -190,7 +189,7 @@ const LeaveRequest = ({
 									className={styles.contactCard}
 									target='_blank'
 								>
-									<Icon icon={Icons.whatsapp(styles.contactsIcon)} />
+									<Icons.whatsapp className={styles.contactsIcon} />
 									<p className={styles.contactText}>WhatsApp</p>
 								</Link>
 								<Link
@@ -198,7 +197,7 @@ const LeaveRequest = ({
 									className={styles.contactCard}
 									target='_blank'
 								>
-									<Icon icon={Icons.vk(styles.contactsIcon)} />
+									<Icons.vk className={styles.contactsIcon} />
 									<p className={styles.contactText}>VK.com</p>
 								</Link>
 							</div>
@@ -271,7 +270,7 @@ const LeaveRequest = ({
 									placeholder='Ваше имя'
 									autoComplete='given-name'
 								/>
-								<Icon icon={Icons.user(styles.icon)} />
+								<Icons.user className={styles.icon} />
 							</div>
 							<div className={styles.inputWrapper}>
 								<ReactInputMask
@@ -290,7 +289,7 @@ const LeaveRequest = ({
 										minLength: 16,
 									})}
 								/>
-								<Icon icon={Icons.phoneGray(styles.icon)} />
+								<Icons.phoneGray className={styles.icon} />
 							</div>
 						</div>
 					</form>
@@ -305,7 +304,7 @@ const LeaveRequest = ({
 									className={styles.contactCard}
 									target='_blank'
 								>
-									<Icon icon={Icons.telegram(styles.contactsIcon)} />
+									<Icons.telegram className={styles.contactsIcon} />
 									<p className={styles.contactText}>Telegram</p>
 								</Link>
 								<Link
@@ -313,7 +312,7 @@ const LeaveRequest = ({
 									className={styles.contactCard}
 									target='_blank'
 								>
-									<Icon icon={Icons.whatsapp(styles.contactsIcon)} />
+									<Icons.whatsapp className={styles.contactsIcon} />
 									<p className={styles.contactText}>WhatsApp</p>
 								</Link>
 								<Link
@@ -321,7 +320,7 @@ const LeaveRequest = ({
 									className={styles.contactCard}
 									target='_blank'
 								>
-									<Icon icon={Icons.vk(styles.contactsIcon)} />
+									<Icons.vk className={styles.contactsIcon} />
 									<p className={styles.contactText}>VK.com</p>
 								</Link>
 							</div>

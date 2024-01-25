@@ -1,4 +1,3 @@
-import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import Link from 'next/link';
 import { ButtonHTMLAttributes, type ReactNode } from 'react';
@@ -56,7 +55,7 @@ export const OrangeButton = ({
 					(prefix && prefix.location === 'left' && prefix.icon)}
 				{children}
 				{prefix && prefix.location === 'right' && prefix.icon}
-				{arrow && <Icon icon={Icons.chevron(arrow)} />}
+				{arrow && <Icons.chevron direction={arrow} />}
 			</Link>
 		);
 	}
@@ -73,7 +72,7 @@ export const OrangeButton = ({
 				(prefix && prefix.location === 'left' && prefix.icon)}
 			{children}
 			{prefix && prefix.location === 'right' && prefix.icon}
-			{arrow && <Icon icon={Icons.chevron(arrow)} />}
+			{arrow && <Icons.chevron direction={arrow} />}
 		</button>
 	);
 };

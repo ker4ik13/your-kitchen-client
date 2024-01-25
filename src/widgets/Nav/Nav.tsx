@@ -1,6 +1,5 @@
 'use client';
 
-import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import Logo from '@/shared/Logo/Logo';
 import { links, pagesLinks } from '@/shared/constants';
@@ -111,7 +110,7 @@ const Nav = () => {
                 <p className={styles.contactsText}>Кабинет</p>
               </Link> */}
 							<Link href={links.tel} className={styles.contactsWrapper}>
-								<Icon icon={Icons.phone(styles.personIcon)} />
+								<Icons.phone className={styles.personIcon} />
 								<p className={styles.contactsText} itemProp='telephone'>
 									+7 (495) 988-55-28
 								</p>
