@@ -13,11 +13,13 @@ interface FurniturePageProps {
 	furniture: IFurniture[];
 }
 
+export const revalidate = 30;
+
 const FurniturePage = ({ furniture }: FurniturePageProps) => {
 	return (
 		<div className={styles.bg}>
 			<FurnitureHelloScreen />
-			{furniture.length && <Furniture furniture={furniture} />}
+			{furniture && furniture.length && <Furniture furniture={furniture} />}
 			<FurnitureAdvantages />
 			<LeaveRequestMini
 				tag='Получить бесплатный эскиз'

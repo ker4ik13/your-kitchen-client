@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 		canonical: pagesData.main.url,
 	},
 };
+export const revalidate = 30;
 
 const getFurniture = async () => {
 	return await UserFurnitureService.getAllFurniture();
