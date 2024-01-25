@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { isUserHaveRights } from '@/features/isUserHaveRights';
-import $api from '@/http';
+import { WorkerService } from '@/services/WorkerService';
 import { IError } from '@/types/IError';
 import { UserRoles } from '@/types/UserRoles';
 
@@ -33,9 +33,9 @@ const texts = {
 	successText: 'Работник успешно добавлен',
 };
 
-const NewKitchenPage = () => {
+const NewWorkerPage = () => {
 	const { register, handleSubmit, reset } = useForm<TInputs>();
-	const userStore = useAppSelector(store => store.user);
+	const userStore = useAppSelector((store) => store.user);
 	const dispatch = useAppDispatch();
 
 	const [photo, setPhoto] = useState<any>();
@@ -128,7 +128,7 @@ const NewKitchenPage = () => {
 		setPhoto({});
 	};
 
-	const onSubmit: SubmitHandler<TInputs> = async data => {
+	const onSubmit: SubmitHandler<TInputs> = async (data) => {
 		const form = new FormData();
 
 		form.append('firstName', data.firstName);
@@ -137,11 +137,8 @@ const NewKitchenPage = () => {
 		form.append('experience', data.experience);
 		form.append('file', file);
 
-		const response = await $api.post('/workers', form, {
-			headers: {
-				'Content-Type': 'multipart/form-data',
-			},
-		});
+		const response = await WorkerService.addWorker(form);
+
 		if (response.status === 201) {
 			setError({
 				isError: false,
@@ -273,11 +270,11 @@ const NewKitchenPage = () => {
 								required
 								accept='image/png, image/jpeg, image/jpg, image/webp'
 								className={styles.inputPhotos}
-								onChange={event => changeHandler2(event)}
-								onDragStart={event => dragStartHandler2(event)}
-								onDragLeave={event => dragLeaveHandler2(event)}
-								onDragOver={event => dragStartHandler2(event)}
-								onDrop={event => dropHandler2(event)}
+								onChange={(event) => changeHandler2(event)}
+								onDragStart={(event) => dragStartHandler2(event)}
+								onDragLeave={(event) => dragLeaveHandler2(event)}
+								onDragOver={(event) => dragStartHandler2(event)}
+								onDrop={(event) => dropHandler2(event)}
 							/>
 							<label htmlFor='photo' className={styles.labelPhotos}>
 								{!drag
@@ -313,4 +310,4 @@ const NewKitchenPage = () => {
 	);
 };
 
-export default NewKitchenPage;
+export default NewWorkerPage;

@@ -1,8 +1,8 @@
 import image404 from '@/data/images/404.svg';
 import kitchen404img from '@/data/images/kitchen404.svg';
 import { pagesLinks } from '@/shared/constants';
+import { OrangeButton } from '@/shared/ui';
 import Image from 'next/image';
-import Link from 'next/link';
 import styles from './ErrorPage.module.scss';
 
 interface Props {
@@ -26,13 +26,12 @@ const Page404 = ({ link, title, buttonText }: Props) => (
 						draggable={false}
 					/>
 					<div className={styles.buttonWrapper}>
-						<Link
+						<OrangeButton
 							href={link ? link : pagesLinks.main}
-							type='button'
-							className={styles.orangeButton}
+							className={styles.button}
 						>
 							{buttonText ? buttonText : 'Вернуться на главную'}
-						</Link>
+						</OrangeButton>
 					</div>
 				</div>
 				<div className={styles.column}>

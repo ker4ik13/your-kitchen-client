@@ -3,7 +3,7 @@
 import styles from '../../Page.module.scss';
 
 import { isUserHaveRights } from '@/features/isUserHaveRights';
-import $api from '@/http';
+import KitchenService from '@/services/KitchenService';
 import MiniLoading from '@/shared/MiniLoading';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { checkAuth } from '@/store/user.slice';
@@ -77,7 +77,7 @@ const texts = {
 
 const NewKitchenPage = () => {
 	const { register, handleSubmit, control, reset } = useForm<TInputs>();
-	const userStore = useAppSelector(store => store.user);
+	const userStore = useAppSelector((store) => store.user);
 	const dispatch = useAppDispatch();
 
 	const [photos, setPhotos] = useState<any[]>([]);
@@ -102,23 +102,23 @@ const NewKitchenPage = () => {
 	const [termValue, setTermValue] = useState('');
 
 	// Обработка нажатия enter в select
-	const handleKeyDown: KeyboardEventHandler = event => {
+	const handleKeyDown: KeyboardEventHandler = (event) => {
 		if (!inputValue) return;
 		switch (event.key) {
 			case 'Enter':
 			case 'Tab':
-				setValue(prev => [...prev, createOption(inputValue)]);
+				setValue((prev) => [...prev, createOption(inputValue)]);
 				setInputValue('');
 				event.preventDefault();
 		}
 	};
 	// Обработка нажатия enter в select 2
-	const handleKeyDown2: KeyboardEventHandler = event => {
+	const handleKeyDown2: KeyboardEventHandler = (event) => {
 		if (!inputValue2) return;
 		switch (event.key) {
 			case 'Enter':
 			case 'Tab':
-				setValue2(prev => [...prev, createOption(inputValue2)]);
+				setValue2((prev) => [...prev, createOption(inputValue2)]);
 				setInputValue2('');
 				event.preventDefault();
 		}
@@ -168,7 +168,7 @@ const NewKitchenPage = () => {
 	const getPhotosFromFiles = (event: any, files: any[]) => {
 		const photos: any[] = [];
 
-		files.map(file => {
+		files.map((file) => {
 			let photo = {
 				title: file.name,
 				src: URL.createObjectURL(file),
@@ -213,12 +213,12 @@ const NewKitchenPage = () => {
 	const deleteImage = (photoTitle: number) => {
 		const images = [...photos];
 
-		const result = images.filter(image => photoTitle !== image.title);
+		const result = images.filter((image) => photoTitle !== image.title);
 
 		setPhotos(result);
 	};
 
-	const onSubmit: SubmitHandler<TInputs> = async data => {
+	const onSubmit: SubmitHandler<TInputs> = async (data) => {
 		const form = new FormData();
 
 		form.append('title', data.title);
@@ -226,18 +226,14 @@ const NewKitchenPage = () => {
 		form.append('price', data.price.toString());
 		form.append('style', JSON.stringify(data.style));
 		// Добавление всех фото
-		files.forEach(file => {
+		files.forEach((file) => {
 			form.append(`files`, file);
 		});
 		form.append('onMainPage', JSON.stringify(data.onMainPage));
 		form.append('type', JSON.stringify(data.type));
 		form.append('term', data.term);
 
-		const response = await $api.post('/kitchens', form, {
-			headers: {
-				'Content-Type': 'multipart/form-data',
-			},
-		});
+		const response = await KitchenService.addKitchen(form);
 		if (response.status === 201) {
 			setError({
 				isError: false,
@@ -366,7 +362,7 @@ const NewKitchenPage = () => {
 									id='term'
 									{...register('term', {
 										required: true,
-										onChange: event => {
+										onChange: (event) => {
 											setTermValue(event.target.value);
 										},
 									})}
@@ -391,8 +387,8 @@ const NewKitchenPage = () => {
 											options={kitchensStyles}
 											value={field.value}
 											isSearchable
-											onChange={newValue => field.onChange(newValue)}
-											onInputChange={newValue => setInputValue(newValue)}
+											onChange={(newValue) => field.onChange(newValue)}
+											onInputChange={(newValue) => setInputValue(newValue)}
 											onKeyDown={handleKeyDown}
 											placeholder='Стиль кухни'
 										/>
@@ -413,8 +409,8 @@ const NewKitchenPage = () => {
 											options={kitchensTypes}
 											value={field.value}
 											isSearchable
-											onChange={newValue => field.onChange(newValue)}
-											onInputChange={newValue => setInputValue2(newValue)}
+											onChange={(newValue) => field.onChange(newValue)}
+											onInputChange={(newValue) => setInputValue2(newValue)}
 											onKeyDown={handleKeyDown2}
 											placeholder='Тип кухни'
 										/>
@@ -436,11 +432,11 @@ const NewKitchenPage = () => {
 									multiple
 									className={styles.inputPhotos}
 									required
-									onChange={event => changeHandler(event)}
-									onDragStart={event => dragStartHandler(event)}
-									onDragLeave={event => dragLeaveHandler(event)}
-									onDragOver={event => dragStartHandler(event)}
-									onDrop={event => dropHandler(event)}
+									onChange={(event) => changeHandler(event)}
+									onDragStart={(event) => dragStartHandler(event)}
+									onDragLeave={(event) => dragLeaveHandler(event)}
+									onDragOver={(event) => dragStartHandler(event)}
+									onDrop={(event) => dropHandler(event)}
 								/>
 								<label htmlFor='photos' className={styles.labelPhotos}>
 									{!drag

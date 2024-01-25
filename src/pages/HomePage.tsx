@@ -41,14 +41,13 @@ const DynamicThanksModal = dynamic(
 const HomePage = () => {
 	const [isOpenFirst, setIsOpenFirst] = useState(false);
 	const [isOpenSecond, setIsOpenSecond] = useState(false);
-	const [isOpenCatalog, setIsOpenCatalog] = useState(false);
 	const [isOpenThanks, setIsOpenThanks] = useState(false);
 	const [isOpenVideo, setIsOpenVideo] = useState(false);
 
 	return (
 		<Provider store={store}>
 			<HelloScreen setIsOpen={setIsOpenFirst} />
-			<Kitchens setIsOpen={setIsOpenCatalog} />
+			<Kitchens />
 			<SecondScreen />
 			<Correction setIsOpen={setIsOpenSecond} setIsOpenVideo={setIsOpenVideo} />
 			<AllVariants setIsOpen={setIsOpenFirst} />
@@ -60,12 +59,6 @@ const HomePage = () => {
 				isOpen={isOpenFirst}
 				setIsOpen={setIsOpenFirst}
 				setIsOpenThanks={setIsOpenThanks}
-			/>
-			<DynamicModal1
-				isOpen={isOpenCatalog}
-				setIsOpen={setIsOpenCatalog}
-				setIsOpenThanks={setIsOpenThanks}
-				buttonText='Получить каталог'
 			/>
 			<DynamicModal2
 				isOpen={isOpenSecond}

@@ -4,7 +4,6 @@ import { Navigation, Thumbs } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from './Reviews.module.scss';
 
-import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import '@/shared/styles/swiper-my.css';
 import type { IReview } from '@/types/IReview';
@@ -42,7 +41,7 @@ const Review = ({ review }: ReviewProps) => {
 				{/* Карточка пользователя */}
 				<div className={styles.cardWrapper}>
 					<div className={isOpenCard(isOpen)}>
-						<Icon icon={Icons.quotes(styles.quotes)} />
+						<Icons.quotes className={styles.quotes} />
 						<div className={styles.personInfo}>
 							{review.photo && (
 								<Image

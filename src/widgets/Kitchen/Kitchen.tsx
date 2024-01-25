@@ -35,6 +35,7 @@ const Kitchen = ({ kitchen, isPreview }: KitchenProps) => {
 				pagination={{
 					enabled: true,
 					clickable: true,
+					horizontalClass: styles.pagination,
 				}}
 				allowTouchMove={window.innerWidth > 768 ? false : true}
 				loop={true}

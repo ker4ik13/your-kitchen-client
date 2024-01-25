@@ -1,6 +1,5 @@
 'use client';
 
-import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import Logo from '@/shared/Logo/Logo';
 import { links, pagesLinks } from '@/shared/constants';
@@ -46,29 +45,36 @@ const Nav = () => {
 								Как мы работаем
 							</Link>
 							<Link
-								href={`${pagesLinks.portfolio}`}
+								href={pagesLinks.portfolio}
 								className={isActive(pagesLinks.portfolio)}
 							>
 								Наши кухни
 							</Link>
 							<Link
-								href={`${pagesLinks.reviews}`}
+								href={pagesLinks.furniture}
+								className={isActive(pagesLinks.furniture)}
+							>
+								Мебель
+							</Link>
+							<Link
+								href={pagesLinks.reviews}
 								className={isActive(pagesLinks.reviews)}
 							>
 								Отзывы
 							</Link>
 							<Link
-								href={`${pagesLinks.articles}`}
+								href={pagesLinks.articles}
 								className={isActive(pagesLinks.articles)}
 							>
 								Статьи
 							</Link>
 							<Link
-								href={`${pagesLinks.advantages}`}
+								href={pagesLinks.advantages}
 								className={isActive(pagesLinks.advantages)}
 							>
 								Преимущества
 							</Link>
+
 							{/* <div className={styles.menuWrapper}>
                 <Menu>
                   <div className={styles.dropdownButtonWrapper}>
@@ -105,10 +111,16 @@ const Nav = () => {
                 <p className={styles.contactsText}>Кабинет</p>
               </Link> */}
 							<Link href={links.tel} className={styles.contactsWrapper}>
-								<Icon icon={Icons.phone(styles.personIcon)} />
+								<Icons.phone className={styles.personIcon} />
 								<p className={styles.contactsText} itemProp='telephone'>
 									+7 (495) 988-55-28
 								</p>
+							</Link>
+							<Link href={links.tgGroup} target='_blank'>
+								<Icons.telegram className={styles.navIcon} />
+							</Link>
+							<Link href={links.whatsapp} target='_blank'>
+								<Icons.splashWhatsapp className={styles.navIcon} />
 							</Link>
 						</div>
 					</div>

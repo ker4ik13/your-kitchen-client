@@ -1,10 +1,12 @@
 import { isErrorStyles } from '@/features/isErrorStyles';
-import requests from '@/features/requests';
-import Icon from '@/shared/IconsComponents/Icon';
+import ClaimService from '@/services/ClaimService';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import { links } from '@/shared/constants';
+import { OrangeButton } from '@/shared/ui';
 import { TFormInputsNames, type TFormInputs } from '@/types/TFormInputs';
+import { CreateClaimDto } from '@/types/dtos/CreateClaim.dto';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ReactInputMask from 'react-input-mask';
 import styles from './LeaveRequest2.module.scss';
@@ -14,6 +16,10 @@ interface LeaveRequestProps {
 	onClick?: (...options: any) => void;
 	setIsOpen?: (isOpen: boolean) => void;
 	setIsOpenThanks?: (isOpen: boolean) => void;
+	buttonText?: string;
+	descriptionText?: string | ReactNode;
+	tag?: string;
+	location?: string;
 }
 
 const API_URL: string | undefined = process.env.NEXT_PUBLIC_API_URL;
@@ -27,6 +33,10 @@ const LeaveRequest2 = ({
 	onClick,
 	setIsOpen,
 	setIsOpenThanks,
+	buttonText,
+	descriptionText,
+	tag,
+	location,
 }: LeaveRequestProps) => {
 	const {
 		register,
@@ -37,10 +47,16 @@ const LeaveRequest2 = ({
 	} = useForm<TFormInputs>();
 
 	const onSubmitLeaveRequest: SubmitHandler<TFormInputs> = async (data) => {
-		data.date = new Date().toISOString();
-		const result = await requests.post(`${API_URL}/api/claims`, data);
+		const newClaim = new CreateClaimDto({
+			...data,
+			date: new Date().toISOString(),
+			location,
+			tag,
+		});
 
-		if (result?.ok) {
+		const result = await ClaimService.addClaim(newClaim);
+
+		if (result?.status === 201) {
 			resetField('firstName');
 			setValue('mobilePhone', '');
 		}
@@ -76,9 +92,15 @@ const LeaveRequest2 = ({
 						</h3>
 					</div>
 					<p className={styles.text}>
-						чтобы <span>рассчитать стоимость кухни</span> по телефону или
-						договориться о выезде на замер кухни.
-						<br /> Выезд <span>бесплатный</span> и возможен в этот же день
+						{descriptionText ? (
+							descriptionText
+						) : (
+							<>
+								чтобы <span>рассчитать стоимость кухни</span> по телефону или
+								договориться о выезде на замер кухни.
+								<br /> Выезд <span>бесплатный</span> и возможен в этот же день
+							</>
+						)}
 					</p>
 					<form className={styles.formWrapper2}>
 						<div className={styles.inputsWrapper2}>
@@ -97,7 +119,7 @@ const LeaveRequest2 = ({
 										minLength: 2,
 									})}
 								/>
-								<Icon icon={Icons.user(styles.icon)} />
+								<Icons.user className={styles.icon} />
 							</div>
 							<div className={styles.inputWrapper}>
 								<ReactInputMask
@@ -116,7 +138,7 @@ const LeaveRequest2 = ({
 										minLength: 16,
 									})}
 								/>
-								<Icon icon={Icons.phoneGray(styles.icon)} />
+								<Icons.phoneGray className={styles.icon} />
 							</div>
 						</div>
 						<div className={styles.contactsWrapper}>
@@ -130,7 +152,7 @@ const LeaveRequest2 = ({
 										className={styles.contactCard}
 										target='_blank'
 									>
-										<Icon icon={Icons.telegram(styles.contactsIcon)} />
+										<Icons.telegram className={styles.contactsIcon} />
 										<p className={styles.contactText}>Telegram</p>
 									</Link>
 									<Link
@@ -138,7 +160,7 @@ const LeaveRequest2 = ({
 										className={styles.contactCard}
 										target='_blank'
 									>
-										<Icon icon={Icons.whatsapp(styles.contactsIcon)} />
+										<Icons.whatsapp className={styles.contactsIcon} />
 										<p className={styles.contactText}>WhatsApp</p>
 									</Link>
 									<Link
@@ -146,18 +168,17 @@ const LeaveRequest2 = ({
 										className={styles.contactCard}
 										target='_blank'
 									>
-										<Icon icon={Icons.vk(styles.contactsIcon)} />
+										<Icons.vk className={styles.contactsIcon} />
 										<p className={styles.contactText}>VK.com</p>
 									</Link>
 								</div>
 							</div>
-							<button
-								type='button'
+							<OrangeButton
 								className={styles.button}
 								onClick={handleSubmit(onSubmitLeaveRequest)}
 							>
-								Рассчитать стоимость
-							</button>
+								{buttonText || 'Рассчитать стоимость'}
+							</OrangeButton>
 						</div>
 					</form>
 				</div>
@@ -176,9 +197,15 @@ const LeaveRequest2 = ({
 						</h3>
 					</div>
 					<p className={styles.text}>
-						чтобы <span>рассчитать стоимость кухни</span> по телефону или
-						договориться о выезде на замер кухни.
-						<br /> Выезд <span>бесплатный</span> и возможен в этот же день
+						{descriptionText ? (
+							descriptionText
+						) : (
+							<>
+								чтобы <span>рассчитать стоимость кухни</span> по телефону или
+								договориться о выезде на замер кухни.
+								<br /> Выезд <span>бесплатный</span> и возможен в этот же день
+							</>
+						)}
 					</p>
 					<form className={styles.formWrapper2}>
 						<div className={styles.inputsWrapper2}>
@@ -197,7 +224,7 @@ const LeaveRequest2 = ({
 										minLength: 2,
 									})}
 								/>
-								<Icon icon={Icons.user(styles.icon)} />
+								<Icons.user className={styles.icon} />
 							</div>
 							<div className={styles.inputWrapper}>
 								<ReactInputMask
@@ -216,7 +243,7 @@ const LeaveRequest2 = ({
 										minLength: 16,
 									})}
 								/>
-								<Icon icon={Icons.phoneGray(styles.icon)} />
+								<Icons.phoneGray className={styles.icon} />
 							</div>
 						</div>
 						<div className={styles.contactsWrapper}>
@@ -230,7 +257,7 @@ const LeaveRequest2 = ({
 										className={styles.contactCard}
 										target='_blank'
 									>
-										<Icon icon={Icons.telegram(styles.contactsIcon)} />
+										<Icons.telegram className={styles.contactsIcon} />
 										<p className={styles.contactText}>Telegram</p>
 									</Link>
 									<Link
@@ -238,7 +265,7 @@ const LeaveRequest2 = ({
 										className={styles.contactCard}
 										target='_blank'
 									>
-										<Icon icon={Icons.whatsapp(styles.contactsIcon)} />
+										<Icons.whatsapp className={styles.contactsIcon} />
 										<p className={styles.contactText}>WhatsApp</p>
 									</Link>
 									<Link
@@ -246,18 +273,17 @@ const LeaveRequest2 = ({
 										className={styles.contactCard}
 										target='_blank'
 									>
-										<Icon icon={Icons.vk(styles.contactsIcon)} />
+										<Icons.vk className={styles.contactsIcon} />
 										<p className={styles.contactText}>VK.com</p>
 									</Link>
 								</div>
 							</div>
-							<button
-								type='button'
+							<OrangeButton
 								className={styles.button}
 								onClick={handleSubmit(onSubmitLeaveRequest)}
 							>
-								Рассчитать стоимость
-							</button>
+								{buttonText || 'Рассчитать стоимость'}
+							</OrangeButton>
 						</div>
 					</form>
 				</div>

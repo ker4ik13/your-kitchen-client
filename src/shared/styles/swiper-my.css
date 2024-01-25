@@ -31,13 +31,6 @@
 .swiper-pagination-bullet-active {
 	opacity: 1 !important;
 }
-.swiper-pagination-fraction,
-.swiper-pagination-custom,
-.swiper-horizontal > .swiper-pagination-bullets,
-.swiper-pagination-bullets.swiper-pagination-horizontal {
-	bottom: auto !important;
-	top: 1.25rem !important;
-}
 .swiper-horizontal > .swiper-scrollbar,
 .swiper-scrollbar.swiper-scrollbar-horizontal {
 	max-width: 53.75rem !important;
@@ -47,6 +40,10 @@
 	height: 1.5rem !important;
 	background-color: #fff !important;
 	bottom: 0.8rem !important;
+}
+.furniture-pagination {
+	top: auto !important;
+	bottom: 1rem !important;
 }
 .my-scrollbar {
 	background-color: #9d9387;

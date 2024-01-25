@@ -41,6 +41,16 @@ export const pagesData: IPages = {
 		url: `${CLIENT_URL}/preimushestva`,
 		type: 'website',
 	},
+	furniture: {
+		name: `korpusnaya_mebel`,
+		title: 'Корпусная мебель на заказ',
+		description:
+			'Качественная мебель на заказ от производителя. Мебель пох индивидуальным размерам и проектам по доступным ценам в Москве. Шкафы, прихожие, гардеробные и другая мебель с максимальной выгодой.',
+		keywords:
+			'Мебель на заказ,Изготовление мебели на заказ, Мебель по индивидуальному заказу, Заказ мебели по размерам, Мебель под заказ, Мебель на заказ по индивидуальным размерам, Корпусная мебель на заказ, Заказ мебели по размерам недорого, Мебель на заказ в Москве, Мебель для ванной на заказ, Мебель на заказ комната, Детская мебель на заказ, Мебель для гостиной, Мебель на заказ недорого Москва, Мебель на заказ область, Встраиваемая мебель на заказ, Встроенная мебель на заказ, Производство мебели на заказ, Мебель на заказ фото, Заказ мебели по размеру недорого Москва',
+		url: `${CLIENT_URL}/korpusnaya_mebel`,
+		type: 'website',
+	},
 };
 
 export const links: ILink = {
@@ -61,11 +71,14 @@ export const pagesLinks: ILink = {
 	articles: '/articles',
 	portfolio: '/portfolio',
 	advantages: '/preimushestva',
+	furniture: '/korpusnaya_mebel',
 	admin: '/admin',
 	adminClaims: '/admin/claims',
 	adminAdmins: '/admin/admins',
 	adminAdminsNew: '/admin/admins/new',
 	adminKitchens: '/admin/kitchens',
+	adminFurniture: '/admin/furniture',
+	adminFurnitureNew: '/admin/furniture/new',
 	adminKitchensNew: '/admin/kitchens/new',
 	adminReviews: '/admin/reviews',
 	adminReviewsNew: '/admin/reviews/new',

@@ -1,11 +1,10 @@
 import styles from '@/pages/ArticlePage.module.scss';
 import ArticleService from '@/services/ArticleService';
 import UserArticleService from '@/services/UserArticleService';
-import Icon from '@/shared/IconsComponents/Icon';
-import { ChevronDirection, Icons } from '@/shared/IconsComponents/Icons';
 import { LeaveRequestBlock2 } from '@/shared/LeaveRequestBlock2';
 import { ViewArticleComponent } from '@/shared/ViewArticleComponent';
 import { CLIENT_URL, SITE_NAME, pagesData } from '@/shared/constants';
+import { OrangeButton } from '@/shared/ui';
 import ArticleCard from '@/widgets/Articles/ArticleCard';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -146,13 +145,9 @@ const ArticlePage = async ({ params }: Props) => {
 							))}
 					</div>
 					<div className={styles.buttonWrapper}>
-						<Link
-							href={`/${pagesData.articles.name}`}
-							className={styles.orangeButton}
-						>
+						<OrangeButton href={`/${pagesData.articles.name}`} arrow='down'>
 							Показать еще
-							<Icon icon={Icons.chevron(ChevronDirection.Down)} />
-						</Link>
+						</OrangeButton>
 					</div>
 				</div>
 				<LeaveRequestBlock2 />

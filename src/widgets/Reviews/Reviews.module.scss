@@ -12,6 +12,11 @@
 	);
 	position: relative;
 }
+.reviewsPageWithoutBg {
+	padding-top: rem(150);
+	padding-bottom: rem(50);
+	position: relative;
+}
 
 .container {
 	@include container();

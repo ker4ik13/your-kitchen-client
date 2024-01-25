@@ -3,8 +3,8 @@ import acril2 from '@/data/images/acril2.webp';
 import colors from '@/data/images/colors.webp';
 import pages from '@/data/images/pages.webp';
 import money from '@/data/images/woman-money.webp';
-import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
+import { OrangeButton } from '@/shared/ui';
 import Image from 'next/image';
 import styles from './Correction.module.scss';
 
@@ -32,8 +32,7 @@ const Correction = ({ setIsOpen, setIsOpenVideo }: CorrectionProps) => {
 								правша или левша, кулинарные привычки, поможет выбрать самую
 								удобную для вас форму и расположение
 							</p>
-							<button
-								type='button'
+							<OrangeButton
 								className={styles.orangeButton}
 								onClick={() => {
 									setIsOpen(true);
@@ -41,7 +40,7 @@ const Correction = ({ setIsOpen, setIsOpenVideo }: CorrectionProps) => {
 								}}
 							>
 								Оставить заявку
-							</button>
+							</OrangeButton>
 						</div>
 
 						{/* Center side */}
@@ -55,13 +54,13 @@ const Correction = ({ setIsOpen, setIsOpenVideo }: CorrectionProps) => {
 						{/* Right side */}
 						<div className={styles.rightSide}>
 							<div className={styles.rightSideCard}>
-								<Icon icon={Icons.coffee(styles.rightSideIcon)} />
+								<Icons.coffee className={styles.rightSideIcon} />
 								<p className={styles.rightSideText}>
 									Ведь кому-то кухня нужна, чтобы просто выпить утренний кофе
 								</p>
 							</div>
 							<div className={styles.rightSideCard}>
-								<Icon icon={Icons.pot(styles.rightSideIcon)} />
+								<Icons.pot className={styles.rightSideIcon} />
 								<p className={styles.rightSideText}>
 									А кому-то чтобы готовить завтрак, обед и ужин на всю семью
 								</p>
@@ -109,13 +108,13 @@ const Correction = ({ setIsOpen, setIsOpenVideo }: CorrectionProps) => {
 						{/* Right side */}
 						<div className={styles.rightSideCard2}>
 							<div className={styles.rightSideCard2Round}>
-								<Icon icon={Icons.diamond(styles.rightSideCard2Icon)} />
+								<Icons.diamond className={styles.rightSideCard2Icon} />
 								<p className={styles.rightSideCard2RoundText}>
 									Так, мы <span>доведем проект до состояния:</span>
 								</p>
 							</div>
 							<div className={styles.rightSideCard2RoundLower}>
-								<Icon icon={Icons.heart(styles.rightSideCard2Icon)} />
+								<Icons.heart className={styles.rightSideCard2Icon} />
 								<p className={styles.rightSideCard2RoundText}>
 									“да, это именно та кухня, которую я хочу!”
 								</p>
@@ -150,17 +149,19 @@ const Correction = ({ setIsOpen, setIsOpenVideo }: CorrectionProps) => {
 								котором вы можете лучше ознакомиться с процессом изготовления,
 								хранения, обработки, покраски и другими видами работ.
 							</p>
-							<button
-								type='button'
+							<OrangeButton
 								className={styles.card3OrangeButton}
 								onClick={() => {
 									setIsOpenVideo(true);
 									document.body.classList.add('overflow');
 								}}
+								prefix={{
+									icon: <Icons.play className={styles.card3ButtonIcon} />,
+									location: 'right',
+								}}
 							>
 								Видео с производства
-								<Icon icon={Icons.play(styles.card3ButtonIcon)} />
-							</button>
+							</OrangeButton>
 						</div>
 
 						{/* Right side */}

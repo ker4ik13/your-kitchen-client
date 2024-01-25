@@ -1,11 +1,9 @@
 'use client';
 
 import UserArticleService from '@/services/UserArticleService';
-import Icon from '@/shared/IconsComponents/Icon';
-import { ChevronDirection, Icons } from '@/shared/IconsComponents/Icons';
 import { pagesLinks } from '@/shared/constants';
+import { OrangeButton } from '@/shared/ui';
 import { IArticle } from '@/types/IArticle';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ArticleCard from '../Articles/ArticleCard';
 import styles from './MainArticles.module.scss';
@@ -43,11 +41,10 @@ const MainArticles = () => {
 						))}
 					</div>
 				)}
-				<div className={styles.buttonWrapper}>
-					<Link href={pagesLinks.articles} className={styles.orangeButton}>
+				<div className={styles.button}>
+					<OrangeButton href={pagesLinks.articles} center arrow='down'>
 						Показать еще
-						<Icon icon={Icons.chevron(ChevronDirection.Down)} />
-					</Link>
+					</OrangeButton>
 				</div>
 			</div>
 		</div>

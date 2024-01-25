@@ -1,7 +1,6 @@
 'use client';
 
 import { isUserHaveRights } from '@/features/isUserHaveRights';
-import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import MiniLoading from '@/shared/MiniLoading';
 import { pagesLinks } from '@/shared/constants';
@@ -126,7 +125,7 @@ const AdminsPage = () => {
 										className={styles.removeAdminButton}
 										onClick={() => removeAdmin(user._id)}
 									>
-										<Icon icon={Icons.remove(styles.removeIcon)} />
+										<Icons.remove className={styles.removeIcon} />
 									</button>
 								)}
 							</div>

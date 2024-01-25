@@ -69,7 +69,7 @@
 
 	@media (min-width: $max-1100) {
 		position: relative;
-		left: 40%;
+		left: 36%;
 		transform: translate(-50%, 0);
 	}
 
@@ -87,9 +87,8 @@
 	gap: rem(16);
 
 	@media (max-width: $max-1100) {
-		flex-direction: column;
 		justify-content: flex-start;
-		align-items: flex-start;
+		align-items: center;
 		position: relative;
 		width: 100%;
 
@@ -280,4 +279,14 @@
 	display: flex;
 	gap: rem(8);
 	// border-bottom: 2px solid #fff;
+}
+
+.navIcons {
+	display: flex;
+	gap: rem(8);
+	align-items: center;
+	justify-content: center;
+}
+.navIcon {
+	width: rem(18);
 }
