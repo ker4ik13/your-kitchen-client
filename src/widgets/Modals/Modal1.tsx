@@ -1,4 +1,5 @@
-import type { ReactNode } from 'react';
+import { closeModalOnEscape } from '@/shared/helpers/closeModalOnEscape';
+import { useEffect, type ReactNode } from 'react';
 import LeaveRequest from '../LeaveRequest/LeaveRequest';
 import styles from './Modal.module.scss';
 
@@ -23,6 +24,16 @@ const Modal1 = ({
 	tag,
 	location,
 }: ModalProps) => {
+	useEffect(() => {
+		document.addEventListener('keydown', (event) =>
+			closeModalOnEscape(event, setIsOpen),
+		);
+		return () =>
+			document.removeEventListener('keydown', (event) =>
+				closeModalOnEscape(event, setIsOpen),
+			);
+	}, []);
+
 	return (
 		<div
 			className={isOpenStyles(isOpen)}

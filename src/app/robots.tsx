@@ -13,6 +13,7 @@ export default function robots(): MetadataRoute.Robots {
 				`${pagesLinks.articles}/`,
 				`${pagesLinks.articles}/*`,
 				pagesLinks.advantages,
+				pagesLinks.furniture,
 				`${pagesLinks.advantages}/`,
 			],
 			disallow: [
@@ -20,6 +21,7 @@ export default function robots(): MetadataRoute.Robots {
 				'/*?*',
 				`${pagesLinks.portfolio}/*?*`,
 				`${pagesLinks.advantages}/*?*`,
+				`${pagesLinks.furniture}/*?*`,
 			],
 		},
 		sitemap: `${CLIENT_URL}/sitemap.xml`,

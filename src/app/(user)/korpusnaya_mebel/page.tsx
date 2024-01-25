@@ -4,21 +4,22 @@ import { SITE_NAME, pagesData } from '@/shared/constants';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-	metadataBase: new URL(pagesData.main.url),
-	title: pagesData.main.title,
-	description: pagesData.main.description,
-	keywords: pagesData.main.keywords,
+	metadataBase: new URL(pagesData.furniture.url),
+	title: pagesData.furniture.title,
+	description: pagesData.furniture.description,
+	keywords: pagesData.furniture.keywords,
 	openGraph: {
-		type: pagesData.main.type,
-		title: pagesData.main.title,
-		url: pagesData.main.url,
-		description: pagesData.main.description,
+		type: pagesData.furniture.type,
+		title: pagesData.furniture.title,
+		url: pagesData.furniture.url,
+		description: pagesData.furniture.description,
 		siteName: SITE_NAME,
 	},
 	alternates: {
-		canonical: pagesData.main.url,
+		canonical: pagesData.furniture.url,
 	},
 };
+
 export const revalidate = 30;
 
 const getFurniture = async () => {

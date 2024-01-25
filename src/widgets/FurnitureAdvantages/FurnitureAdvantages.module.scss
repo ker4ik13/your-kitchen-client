@@ -23,6 +23,10 @@
 	gap: rem(60);
 	flex-wrap: wrap;
 	align-items: flex-start;
+
+	@media screen and (max-width: $max-768) {
+		gap: rem(30);
+	}
 }
 .item {
 	display: flex;
