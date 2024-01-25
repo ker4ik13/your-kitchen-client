@@ -1,6 +1,5 @@
 'use client';
 
-import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import MiniLoading from '@/shared/MiniLoading';
 import { pagesLinks } from '@/shared/constants';
@@ -89,7 +88,7 @@ const ArticlesPage = () => {
 									className={styles.removeButton}
 									onClick={() => removeArticle(article._id)}
 								>
-									<Icon icon={Icons.remove(styles.removeIcon)} />
+									<Icons.remove className={styles.removeIcon} />
 								</button>
 								{article.onMainPage && (
 									<p className={styles.kitchenOption}>{texts.onMainPageText}</p>

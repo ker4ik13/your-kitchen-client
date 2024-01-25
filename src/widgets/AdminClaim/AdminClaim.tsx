@@ -1,7 +1,6 @@
 'use client';
 
 import ClaimService from '@/services/ClaimService';
-import Icon from '@/shared/IconsComponents/Icon';
 import { Icons } from '@/shared/IconsComponents/Icons';
 import type { IClaim } from '@/types/IClaim';
 import { useState, type FC } from 'react';
@@ -97,11 +96,11 @@ const AdminClaim: FC<AdminClaimProps> = ({ propsClaim }) => {
 							className={styles.button}
 							onClick={handleSubmit(onSubmit)}
 						>
-							<Icon icon={Icons.done(styles.icon)} />
+							<Icons.done className={styles.icon} />
 						</button>
 					) : (
 						<button type='button' className={styles.button} onClick={editClaim}>
-							<Icon icon={Icons.edit(styles.icon)} />
+							<Icons.edit className={styles.icon} />
 						</button>
 					)}
 					{isEdit && (
@@ -110,7 +109,7 @@ const AdminClaim: FC<AdminClaimProps> = ({ propsClaim }) => {
 							className={styles.button}
 							onClick={cancelEdit}
 						>
-							<Icon icon={Icons.cancel(styles.icon)} />
+							<Icons.cancel className={styles.icon} />
 						</button>
 					)}
 					<button
@@ -118,7 +117,7 @@ const AdminClaim: FC<AdminClaimProps> = ({ propsClaim }) => {
 						className={styles.button}
 						onClick={() => deleteClaim(claim._id)}
 					>
-						<Icon icon={Icons.remove(styles.icon)} />
+						<Icons.remove className={styles.icon} />
 					</button>
 				</div>
 			</div>
@@ -143,7 +142,7 @@ const AdminClaim: FC<AdminClaimProps> = ({ propsClaim }) => {
 						className={styles.button}
 						onClick={(event: any) => copy(event, claim.firstName)}
 					>
-						<Icon icon={Icons.copy(styles.icon)} />
+						<Icons.copy className={styles.icon} />
 					</button>
 				</div>
 				<div className={styles.fieldWrapper}>
@@ -166,7 +165,7 @@ const AdminClaim: FC<AdminClaimProps> = ({ propsClaim }) => {
 						className={styles.button}
 						onClick={(event: any) => copy(event, claim.mobilePhone)}
 					>
-						<Icon icon={Icons.copy(styles.icon)} />
+						<Icons.copy className={styles.icon} />
 					</button>
 				</div>
 				{claim.email && (
@@ -188,7 +187,7 @@ const AdminClaim: FC<AdminClaimProps> = ({ propsClaim }) => {
 							className={styles.button}
 							onClick={(event: any) => copy(event, claim.email || '')}
 						>
-							<Icon icon={Icons.copy(styles.icon)} />
+							<Icons.copy className={styles.icon} />
 						</button>
 					</div>
 				)}
@@ -206,7 +205,7 @@ const AdminClaim: FC<AdminClaimProps> = ({ propsClaim }) => {
 							copy(event, new Date(claim.date).toLocaleString('ru'))
 						}
 					>
-						<Icon icon={Icons.copy(styles.icon)} />
+						<Icons.copy className={styles.icon} />
 					</button>
 				</div>
 				{claim.tag && (
@@ -220,7 +219,7 @@ const AdminClaim: FC<AdminClaimProps> = ({ propsClaim }) => {
 							className={styles.button}
 							onClick={(event: any) => copy(event, claim.tag || '')}
 						>
-							<Icon icon={Icons.copy(styles.icon)} />
+							<Icons.copy className={styles.icon} />
 						</button>
 					</div>
 				)}
@@ -235,7 +234,7 @@ const AdminClaim: FC<AdminClaimProps> = ({ propsClaim }) => {
 							className={styles.button}
 							onClick={(event: any) => copy(event, claim.location || '')}
 						>
-							<Icon icon={Icons.copy(styles.icon)} />
+							<Icons.copy className={styles.icon} />
 						</button>
 					</div>
 				)}
