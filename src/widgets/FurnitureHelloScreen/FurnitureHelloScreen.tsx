@@ -33,6 +33,8 @@ export const FurnitureHelloScreen = () => {
 					className={styles.bgImage}
 					alt='Фон'
 					draggable={false}
+					priority
+					quality={100}
 				/>
 				<div className={styles.container}>
 					<div className={styles.tags}>
