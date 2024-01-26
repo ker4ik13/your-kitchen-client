@@ -11,6 +11,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { isUserHaveRights } from '@/features/isUserHaveRights';
 import { ReviewService } from '@/services/ReviewService';
+import { deleteImage } from '@/shared/helpers/deleteImage';
+import {
+	dragLeaveHandler,
+	dragStartHandler,
+	dropOrChangeHandler,
+} from '@/shared/helpers/dragHandlers';
 import { IError } from '@/types/IError';
 import { UserRoles } from '@/types/UserRoles';
 
@@ -87,23 +93,6 @@ const NewReviewPage = () => {
 			</div>
 		);
 	}
-
-	// Обработчик фото
-	const getPhotosFromFiles = (event: any, files: any[]) => {
-		const photos: any[] = [];
-
-		files.map((file) => {
-			let photo = {
-				title: file.name,
-				src: URL.createObjectURL(file),
-			};
-
-			photos.push(photo);
-		});
-
-		setPhotos(photos);
-	};
-
 	const getPhotoFromFiles = (event: any, file: any) => {
 		let photo = {
 			title: file.name,
@@ -113,35 +102,6 @@ const NewReviewPage = () => {
 		setPhoto(photo);
 	};
 
-	// Обработчики
-	const dragStartHandler = (event: any) => {
-		event.preventDefault();
-		setDrag(true);
-	};
-	const dragLeaveHandler = (event: any) => {
-		event.preventDefault();
-		setDrag(false);
-	};
-	const dropHandler = (event: any) => {
-		event.preventDefault();
-		setDrag(false);
-		let files = [...event.dataTransfer.files];
-		setFiles(files);
-
-		if (files && files.length > 0) {
-			getPhotosFromFiles(event, files);
-		}
-	};
-	const changeHandler = (event: any) => {
-		event.preventDefault();
-		let files = [...event.target.files];
-		setFiles(files);
-
-		if (files && files.length > 0) {
-			getPhotosFromFiles(event, files);
-		}
-	};
-	// 2
 	const dragStartHandler2 = (event: any) => {
 		event.preventDefault();
 		setDrag2(true);
@@ -170,14 +130,6 @@ const NewReviewPage = () => {
 		}
 	};
 
-	// Удаление фоток
-	const deleteImage = (photoTitle: number) => {
-		const images = [...photos];
-
-		const result = images.filter((image) => photoTitle !== image.title);
-
-		setPhotos(result);
-	};
 	const deleteImage2 = () => {
 		setPhoto(undefined);
 	};
@@ -362,11 +314,27 @@ const NewReviewPage = () => {
 								multiple
 								className={styles.inputPhotos}
 								required
-								onChange={(event) => changeHandler(event)}
-								onDragStart={(event) => dragStartHandler(event)}
-								onDragLeave={(event) => dragLeaveHandler(event)}
-								onDragOver={(event) => dragStartHandler(event)}
-								onDrop={(event) => dropHandler(event)}
+								onChange={(event) =>
+									dropOrChangeHandler(
+										event,
+										files,
+										setDrag,
+										setFiles,
+										setPhotos,
+									)
+								}
+								onDragStart={(event) => dragStartHandler(event, setDrag)}
+								onDragLeave={(event) => dragLeaveHandler(event, setDrag)}
+								onDragOver={(event) => dragStartHandler(event, setDrag)}
+								onDrop={(event) =>
+									dropOrChangeHandler(
+										event,
+										files,
+										setDrag,
+										setFiles,
+										setPhotos,
+									)
+								}
 							/>
 							<label htmlFor='photos' className={styles.labelPhotos}>
 								{!drag
@@ -388,7 +356,15 @@ const NewReviewPage = () => {
 										<button
 											type='button'
 											className={styles.deleteButton}
-											onClick={() => deleteImage(photo.title)}
+											onClick={() =>
+												deleteImage(
+													photos,
+													files,
+													photo.title,
+													setFiles,
+													setPhotos,
+												)
+											}
 										>
 											×
 										</button>

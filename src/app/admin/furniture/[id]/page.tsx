@@ -4,6 +4,7 @@ import styles from '../../Page.module.scss';
 
 import FurnitureService from '@/services/FurnitureService';
 import MiniLoading from '@/shared/MiniLoading';
+import { dropOrChangeHandler } from '@/shared/helpers/dragHandlers';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { checkAuth } from '@/store/user.slice';
 import { IError } from '@/types/IError';
@@ -98,23 +99,14 @@ const EditFurniturePage = () => {
 			getPhotosFromFiles(event, files);
 		}
 	};
-	const changeHandler = (event: any) => {
-		event.preventDefault();
-		let files = [...event.target.files];
-		setFiles(files);
-
-		if (files && files.length > 0) {
-			getPhotosFromFiles(event, files);
-		}
-	};
 
 	// Удалить изображение из существующего объекта
 	const deleteImage = (photoTitle: string) => {
 		const images = [...photos];
 
-		const result = images.filter((image) => photoTitle !== image);
+		const newPhotos = images.filter((image) => photoTitle !== image);
 
-		setPhotos(result);
+		setPhotos(newPhotos);
 	};
 
 	// Удалить изображение из нового объекта
@@ -122,7 +114,9 @@ const EditFurniturePage = () => {
 		const images = [...newPhotos];
 
 		const result = images.filter((image) => photoTitle !== image.title);
+		const newFiles = files.filter((file) => photoTitle !== file.name);
 
+		setFiles(newFiles);
 		setNewPhotos(result);
 	};
 
@@ -378,7 +372,15 @@ const EditFurniturePage = () => {
 							accept='image/png, image/jpeg, image/jpg, image/webp'
 							multiple
 							className={styles.inputPhotos}
-							onChange={(event) => changeHandler(event)}
+							onChange={(event) =>
+								dropOrChangeHandler(
+									event,
+									files,
+									setDrag,
+									setFiles,
+									setNewPhotos,
+								)
+							}
 							onDragStart={(event) => dragStartHandler(event)}
 							onDragLeave={(event) => dragLeaveHandler(event)}
 							onDragOver={(event) => dragStartHandler(event)}

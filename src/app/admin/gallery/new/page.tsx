@@ -4,6 +4,12 @@ import styles from '../../Page.module.scss';
 
 import GalleryService from '@/services/GalleryService';
 import MiniLoading from '@/shared/MiniLoading';
+import { deleteImage } from '@/shared/helpers/deleteImage';
+import {
+	dragLeaveHandler,
+	dragStartHandler,
+	dropOrChangeHandler,
+} from '@/shared/helpers/dragHandlers';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { checkAuth } from '@/store/user.slice';
 import { IError } from '@/types/IError';
@@ -57,60 +63,6 @@ const NewPhotosPage = () => {
 			</div>
 		);
 	}
-
-	// Обработчик фото
-	const getPhotosFromFiles = (event: any, files: any[]) => {
-		const photos: any[] = [];
-
-		files.map((file) => {
-			let photo = {
-				title: file.name,
-				src: URL.createObjectURL(file),
-			};
-
-			photos.push(photo);
-		});
-
-		setPhotos(photos);
-	};
-
-	// Обработчики
-	const dragStartHandler = (event: any) => {
-		event.preventDefault();
-		setDrag(true);
-	};
-	const dragLeaveHandler = (event: any) => {
-		event.preventDefault();
-		setDrag(false);
-	};
-	const dropHandler = (event: any) => {
-		event.preventDefault();
-		setDrag(false);
-		let files = [...event.dataTransfer.files];
-		setFiles(files);
-
-		if (files && files.length > 0) {
-			getPhotosFromFiles(event, files);
-		}
-	};
-	const changeHandler = (event: any) => {
-		event.preventDefault();
-		let files = [...event.target.files];
-		setFiles(files);
-
-		if (files && files.length > 0) {
-			getPhotosFromFiles(event, files);
-		}
-	};
-
-	// Удаление фоток
-	const deleteImage = (photoTitle: number) => {
-		const images = [...photos];
-
-		const result = images.filter((image) => photoTitle !== image.title);
-
-		setPhotos(result);
-	};
 
 	const onSubmit = async () => {
 		const form = new FormData();
@@ -170,11 +122,15 @@ const NewPhotosPage = () => {
 							multiple
 							className={styles.inputPhotos}
 							required
-							onChange={(event) => changeHandler(event)}
-							onDragStart={(event) => dragStartHandler(event)}
-							onDragLeave={(event) => dragLeaveHandler(event)}
-							onDragOver={(event) => dragStartHandler(event)}
-							onDrop={(event) => dropHandler(event)}
+							onChange={(event) =>
+								dropOrChangeHandler(event, files, setDrag, setFiles, setPhotos)
+							}
+							onDragStart={(event) => dragStartHandler(event, setDrag)}
+							onDragLeave={(event) => dragLeaveHandler(event, setDrag)}
+							onDragOver={(event) => dragStartHandler(event, setDrag)}
+							onDrop={(event) =>
+								dropOrChangeHandler(event, files, setDrag, setFiles, setPhotos)
+							}
 						/>
 						<label htmlFor='photos' className={styles.labelPhotos}>
 							{!drag
@@ -196,7 +152,15 @@ const NewPhotosPage = () => {
 									<button
 										type='button'
 										className={styles.deleteButton}
-										onClick={() => deleteImage(photo.title)}
+										onClick={() =>
+											deleteImage(
+												photos,
+												files,
+												photo.title,
+												setFiles,
+												setPhotos,
+											)
+										}
 									>
 										×
 									</button>

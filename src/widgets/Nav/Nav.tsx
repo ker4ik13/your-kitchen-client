@@ -38,11 +38,8 @@ const Nav = () => {
 					<Logo />
 					<div className={styles.burgerWrapper} ref={burgerWrapper}>
 						<div className={styles.pages}>
-							<Link
-								href={`/${pagesLinks.howWeWork}`}
-								className={isActive(`/${pagesLinks.howWeWork}`)}
-							>
-								Как мы работаем
+							<Link href={`/`} className={isActive(`/`)}>
+								Главная
 							</Link>
 							<Link
 								href={pagesLinks.portfolio}
@@ -56,11 +53,12 @@ const Nav = () => {
 							>
 								Мебель
 							</Link>
+
 							<Link
-								href={pagesLinks.reviews}
-								className={isActive(pagesLinks.reviews)}
+								href={pagesLinks.advantages}
+								className={isActive(pagesLinks.advantages)}
 							>
-								Отзывы
+								Преимущества
 							</Link>
 							<Link
 								href={pagesLinks.articles}
@@ -69,10 +67,10 @@ const Nav = () => {
 								Статьи
 							</Link>
 							<Link
-								href={pagesLinks.advantages}
-								className={isActive(pagesLinks.advantages)}
+								href={pagesLinks.reviews}
+								className={isActive(pagesLinks.reviews)}
 							>
-								Преимущества
+								Отзывы
 							</Link>
 
 							{/* <div className={styles.menuWrapper}>
@@ -116,7 +114,7 @@ const Nav = () => {
 									+7 (495) 988-55-28
 								</p>
 							</Link>
-							<Link href={links.tgGroup} target='_blank'>
+							<Link href={links.tgChat} target='_blank'>
 								<Icons.telegram className={styles.navIcon} />
 							</Link>
 							<Link href={links.whatsapp} target='_blank'>

@@ -29,6 +29,7 @@
 			order: 2;
 		}
 		& .texts:last-child {
+			margin-top: rem(20);
 			order: 3;
 		}
 		& .wrapper {
@@ -168,17 +169,24 @@
 .person {
 	max-width: rem(350);
 	width: 100%;
-	-webkit-mask-image: linear-gradient(
-		0deg,
-		#373435 0%,
-		rgba(70, 65, 64, 0) 37.66%
-	);
-	mask-image: linear-gradient(
-		180deg,
-		#373435 0%,
-		rgba(70, 65, 64, 1) 70%,
-		rgba(70, 65, 64, 0) 100%
-	);
+}
+.middleImage {
+	position: relative;
+	z-index: 10;
+
+	// old gradient
+
+	// -webkit-mask-image: linear-gradient(
+	// 	0deg,
+	// 	#373435 0%,
+	// 	rgba(70, 65, 64, 0) 37.66%
+	// );
+	// mask-image: linear-gradient(
+	// 	180deg,
+	// 	#373435 0%,
+	// 	rgba(70, 65, 64, 1) 70%,
+	// 	rgba(70, 65, 64, 0) 100%
+	// );
 }
 .ellipse {
 	border-radius: rem(100);

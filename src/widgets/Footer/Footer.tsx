@@ -12,20 +12,23 @@ const Footer = () => {
 				<div className={styles.upperWrapper}>
 					<Logo />
 					<div className={styles.pages}>
-						<Link href={`#${pagesLinks.howWeWork}`} className={styles.link}>
-							Как мы работаем
+						<Link href={'/'} className={styles.link}>
+							Главная
 						</Link>
 						<Link href={`${pagesLinks.portfolio}`} className={styles.link}>
 							Наши кухни
 						</Link>
-						<Link href={`${pagesLinks.reviews}`} className={styles.link}>
-							Отзывы
+						<Link href={`${pagesLinks.furniture}`} className={styles.link}>
+							Мебель
+						</Link>
+						<Link href={`${pagesLinks.advantages}`} className={styles.link}>
+							Преимущества
 						</Link>
 						<Link href={`${pagesLinks.articles}`} className={styles.link}>
 							Статьи
 						</Link>
-						<Link href={`${pagesLinks.advantages}`} className={styles.link}>
-							Преимущества
+						<Link href={`${pagesLinks.reviews}`} className={styles.link}>
+							Отзывы
 						</Link>
 						{/* <Menu>
               <div className={styles.menuRelative}>
