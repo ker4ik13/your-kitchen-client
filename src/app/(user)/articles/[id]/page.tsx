@@ -103,18 +103,14 @@ const ArticlePage = async ({ params }: Props) => {
             {article.title}
           </h1>
           <div className={styles.previewWrapper}>
-            <div
-              itemProp="image"
-              itemScope
-              itemType="http://schema.org/ImageObject"
-            >
+            <div itemScope itemType="http://schema.org/ImageObject">
               <meta itemProp="height" content="460" />
               <meta itemProp="width" content="1060" />
-              <meta itemProp="url" content={article.preview} />
               <Image
                 src={article.preview}
                 alt={article.title}
                 className={styles.previewPhoto}
+                itemProp="image"
                 width={1060}
                 height={460}
               />
