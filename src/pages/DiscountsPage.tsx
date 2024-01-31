@@ -1,4 +1,4 @@
-import { FurnitureHelloScreen } from "@/widgets/FurnitureHelloScreen/FurnitureHelloScreen";
+import { DiscountsHelloScreen } from "@/widgets/DiscountsHelloScreen/DiscountsHelloScreen";
 import { LeaveRequestMini } from "@/widgets/LeaveRequestMini/LeaveRequestMini";
 import MainArticles from "@/widgets/MainArticles/MainArticles";
 import styles from "./FurniturePage.module.scss";
@@ -8,7 +8,7 @@ export const revalidate = 30;
 const DiscountsPage = () => {
   return (
     <div className={styles.bg}>
-      <FurnitureHelloScreen />
+      <DiscountsHelloScreen />
       <LeaveRequestMini
         tag="Узнать про акции"
         location="Страница акций"
@@ -17,8 +17,9 @@ const DiscountsPage = () => {
           text: "Узнать подробнее",
           arrow: "right",
         }}
+        type="promotion"
       />
-      <MainArticles />
+      <MainArticles withoutBg />
     </div>
   );
 };

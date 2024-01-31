@@ -53,8 +53,9 @@ export const pagesData: IPages = {
   },
   discounts: {
     name: `discounts`,
-    title: "Скидки, акции и подарки",
-    description: "Скидки, акции и подарки",
+    title: "Акции и скидки на мебель и кухонные гарнитуры",
+    description:
+      "Актуальный каталог акций и скидок на кухни и корпусную мебель в Москве. Узнай как выгодно приобрести кухонный гарнитур или другую мебель на заказ. Подарки и техника новым клиентам фабрики «Твоя кухня».",
     keywords: "Скидки, акции, подарки",
     url: `${CLIENT_URL}/discounts`,
     type: "website",
@@ -75,6 +76,7 @@ export const links: ILink = {
 export const pagesLinks: ILink = {
   main: "/",
   howWeWork: "#how-we-work",
+  discounts: "/discounts",
   reviews: "/#reviews",
   articles: "/articles",
   portfolio: "/portfolio",

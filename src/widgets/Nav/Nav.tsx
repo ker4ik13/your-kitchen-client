@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { Icons } from '@/shared/IconsComponents/Icons';
-import Logo from '@/shared/Logo/Logo';
-import { links, pagesLinks } from '@/shared/constants';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useRef } from 'react';
-import styles from './Nav.module.scss';
-import { handleNav } from './handleNav';
+import { Icons } from "@/shared/IconsComponents/Icons";
+import Logo from "@/shared/Logo/Logo";
+import { links, pagesLinks } from "@/shared/constants";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useRef } from "react";
+import styles from "./Nav.module.scss";
+import { handleNav } from "./handleNav";
 
 // const teamLinks = [
 //   { href: "/team/designers", label: "Дизайнеры" },
@@ -16,64 +16,70 @@ import { handleNav } from './handleNav';
 // ];
 
 const Nav = () => {
-	const burgerWrapper = useRef<HTMLDivElement>(null);
-	const path = usePathname();
+  const burgerWrapper = useRef<HTMLDivElement>(null);
+  const path = usePathname();
 
-	const isActive = (link: string) =>
-		path === link ? `${styles.link} ${styles.active}` : styles.link;
-	// const [rotate, setRotate] = useState<ChevronDirection>(ChevronDirection.Up);
+  const isActive = (link: string) =>
+    path === link ? `${styles.link} ${styles.active}` : styles.link;
+  // const [rotate, setRotate] = useState<ChevronDirection>(ChevronDirection.Up);
 
-	// const handleRotate = () => {
-	//   if (rotate === ChevronDirection.Up) {
-	//     setRotate(ChevronDirection.Down);
-	//   } else {
-	//     setRotate(ChevronDirection.Up);
-	//   }
-	// };
+  // const handleRotate = () => {
+  //   if (rotate === ChevronDirection.Up) {
+  //     setRotate(ChevronDirection.Down);
+  //   } else {
+  //     setRotate(ChevronDirection.Up);
+  //   }
+  // };
 
-	return (
-		<nav className={styles.nav}>
-			<div className={styles.container}>
-				<div className={styles.wrapper}>
-					<Logo />
-					<div className={styles.burgerWrapper} ref={burgerWrapper}>
-						<div className={styles.pages}>
-							<Link href={`/`} className={isActive(`/`)}>
-								Главная
-							</Link>
-							<Link
-								href={pagesLinks.portfolio}
-								className={isActive(pagesLinks.portfolio)}
-							>
-								Наши кухни
-							</Link>
-							<Link
-								href={pagesLinks.furniture}
-								className={isActive(pagesLinks.furniture)}
-							>
-								Мебель
-							</Link>
+  return (
+    <nav className={styles.nav}>
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <Logo />
+          <div className={styles.burgerWrapper} ref={burgerWrapper}>
+            <div className={styles.pages}>
+              <Link href={`/`} className={isActive(`/`)}>
+                Главная
+              </Link>
+              <Link
+                href={pagesLinks.portfolio}
+                className={isActive(pagesLinks.portfolio)}
+              >
+                Наши кухни
+              </Link>
+              <Link
+                href={pagesLinks.furniture}
+                className={isActive(pagesLinks.furniture)}
+              >
+                Мебель
+              </Link>
 
-							<Link
-								href={pagesLinks.advantages}
-								className={isActive(pagesLinks.advantages)}
-							>
-								Преимущества
-							</Link>
-							<Link
-								href={pagesLinks.articles}
-								className={isActive(pagesLinks.articles)}
-							>
-								Статьи
-							</Link>
-							<Link
-								href={pagesLinks.reviews}
-								className={isActive(pagesLinks.reviews)}
-							>
-								Отзывы
-							</Link>
+              <Link
+                href={pagesLinks.advantages}
+                className={isActive(pagesLinks.advantages)}
+              >
+                Преимущества
+              </Link>
+              <Link
+                href={pagesLinks.articles}
+                className={isActive(pagesLinks.articles)}
+              >
+                Статьи
+              </Link>
+              <Link
+                href={pagesLinks.reviews}
+                className={isActive(pagesLinks.reviews)}
+              >
+                Отзывы
+              </Link>
+              <Link
+                href={pagesLinks.discounts}
+                className={isActive(pagesLinks.discounts)}
+              >
+                Акции
+              </Link>
 
-							{/* <div className={styles.menuWrapper}>
+              {/* <div className={styles.menuWrapper}>
                 <Menu>
                   <div className={styles.dropdownButtonWrapper}>
                     <Menu.Button
@@ -99,40 +105,40 @@ const Nav = () => {
                   </Menu.Items>
                 </Menu>
               </div> */}
-						</div>
-						<div className={styles.contacts}>
-							{/* <Link
+            </div>
+            <div className={styles.contacts}>
+              {/* <Link
                 to={"/"}
                 className={`${styles.contactsWrapper} ${styles.hover}`}
               >
                 <Icon icon={Icons.person(styles.icon)} />
                 <p className={styles.contactsText}>Кабинет</p>
               </Link> */}
-							<Link href={links.tel} className={styles.contactsWrapper}>
-								<Icons.phone className={styles.personIcon} />
-								<p className={styles.contactsText} itemProp='telephone'>
-									+7 (495) 988-55-28
-								</p>
-							</Link>
-							<Link href={links.tgChat} target='_blank'>
-								<Icons.telegram className={styles.navIcon} />
-							</Link>
-							<Link href={links.whatsapp} target='_blank'>
-								<Icons.splashWhatsapp className={styles.navIcon} />
-							</Link>
-						</div>
-					</div>
-					<div
-						className={styles.burger}
-						onClick={(event) => handleNav(event, burgerWrapper, styles)}
-					>
-						<span></span>
-						<span></span>
-					</div>
-				</div>
-			</div>
-		</nav>
-	);
+              <Link href={links.tel} className={styles.contactsWrapper}>
+                <Icons.phone className={styles.personIcon} />
+                <p className={styles.contactsText} itemProp="telephone">
+                  +7 (495) 988-55-28
+                </p>
+              </Link>
+              <Link href={links.tgChat} target="_blank">
+                <Icons.telegram className={styles.navIcon} />
+              </Link>
+              <Link href={links.whatsapp} target="_blank">
+                <Icons.splashWhatsapp className={styles.navIcon} />
+              </Link>
+            </div>
+          </div>
+          <div
+            className={styles.burger}
+            onClick={(event) => handleNav(event, burgerWrapper, styles)}
+          >
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
 };
 
 export default Nav;
