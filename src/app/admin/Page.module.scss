@@ -30,6 +30,7 @@
   margin-top: rem(20);
   cursor: text;
 }
+
 .success {
   font-size: rem(20);
   color: green;
@@ -271,6 +272,13 @@
   grid-template-rows: auto;
   gap: rem(30);
 }
+.discounts {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  gap: rem(30);
+}
 .reviews {
   display: flex;
   flex-direction: column;
@@ -295,6 +303,10 @@
   position: relative;
   max-height: rem(500);
 }
+.discountLink {
+  width: 100%;
+  position: relative;
+}
 .workerLink {
   max-width: rem(370);
   width: 100%;
@@ -311,6 +323,19 @@
   position: absolute;
   top: rem(20);
   right: rem(20);
+  z-index: 10;
+}
+.removeButtonLeft {
+  background-color: #fff;
+  padding: rem(10);
+  border-radius: rem(8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1/1;
+  position: absolute;
+  top: rem(20);
+  left: rem(20);
   z-index: 10;
 }
 .removeReviewButton {
@@ -378,6 +403,11 @@
 }
 .adminWrapper {
   position: relative;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: rem(10);
 }
 .admin {
   background-color: #fff;

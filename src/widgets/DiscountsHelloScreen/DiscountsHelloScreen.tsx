@@ -1,7 +1,6 @@
 "use client";
 
 import bgImage from "@/data/images/bg_discouts.jpg";
-import { Icons } from "@/shared/IconsComponents/Icons";
 import Image from "next/image";
 import { useState } from "react";
 import Modal1 from "../Modals/Modal1";
@@ -48,13 +47,13 @@ export const DiscountsHelloScreen = () => {
             Москве. Выгодное предложения на покупку кухонного гарнитура или
             другой мебели на заказ.
           </p>
-          <div className={styles.description}>
+          {/* <div className={styles.description}>
             <p>
               <Icons.gift className={styles.icon} />
               <span>Подарки и техника</span> новым и действующим клиентам
               фабрики «Твоя кухня».
             </p>
-          </div>
+          </div> */}
           {/* <button type="button" className={styles.downButton}>
             <Icons.arrow className={styles.arrowIcon} />
           </button> */}

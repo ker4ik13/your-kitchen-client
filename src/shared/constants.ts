@@ -73,7 +73,7 @@ export const links: ILink = {
   email: "info@youkuhnya.ru",
 };
 
-export const pagesLinks: ILink = {
+export const pagesLinks = {
   main: "/",
   howWeWork: "#how-we-work",
   discounts: "/discounts",
@@ -84,8 +84,10 @@ export const pagesLinks: ILink = {
   furniture: "/korpusnaya_mebel",
   admin: "/admin",
   adminClaims: "/admin/claims",
+  adminDiscounts: "/admin/discounts",
   adminAdmins: "/admin/admins",
   adminAdminsNew: "/admin/admins/new",
+  adminDiscountsNew: "/admin/discounts/new",
   adminKitchens: "/admin/kitchens",
   adminFurniture: "/admin/furniture",
   adminFurnitureNew: "/admin/furniture/new",

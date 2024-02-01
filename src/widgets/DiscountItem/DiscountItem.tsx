@@ -51,6 +51,21 @@ export const DiscountItem = ({ discount }: Props) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isOpenThanks, setIsOpenThanks] = useState(false);
 
+  // Дата вида 01.01.2021
+  const getDate = (date: string) => {
+    const dateArray = date.split(".");
+    return {
+      day: dateArray[0],
+      month: dateArray[1],
+      year: dateArray[2],
+    };
+  };
+
+  const getDiscountDate = (date: string) => {
+    const { day, month } = getDate(date);
+    return `${day}.${month}`;
+  };
+
   return (
     <>
       {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
@@ -59,7 +74,7 @@ export const DiscountItem = ({ discount }: Props) => {
         setIsOpenThanks={setIsOpenThanks}
         isOpen={isOpenModal}
         location="Страница акций"
-        tag="Учавствовать в акции"
+        tag={`Акция: ${discount.name}`}
       />
       <DiscountModal
         discount={discount}
@@ -90,9 +105,9 @@ export const DiscountItem = ({ discount }: Props) => {
             <p className={styles.name}>{discount.name}</p>
             <div className={styles.term}>
               <p className={styles.termText}>Сроки проведения</p>
-              <p
-                className={styles.termDate}
-              >{`${discount.startDate} - ${discount.endDate}`}</p>
+              <p className={styles.termDate}>{`${getDiscountDate(
+                discount.startDate,
+              )} - ${getDiscountDate(discount.endDate)}`}</p>
             </div>
           </div>
           <div className={styles.desc}>

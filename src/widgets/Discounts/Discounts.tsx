@@ -8,6 +8,13 @@ interface DiscountsProps {
 
 const NO_DISCOUNTS_TEXT = "Акций пока что нет";
 
+const sortByStartDates = (a: IDiscount, b: IDiscount) => {
+  const dateA = new Date(a.startDate.split(".").reverse().join("-"));
+  const dateB = new Date(b.startDate.split(".").reverse().join("-"));
+
+  return dateB.getTime() - dateA.getTime();
+};
+
 export const Discounts = ({ discounts }: DiscountsProps) => {
   return (
     <>
@@ -18,9 +25,12 @@ export const Discounts = ({ discounts }: DiscountsProps) => {
               <p className={styles.notFoundText}>{NO_DISCOUNTS_TEXT}</p>
             )}
             {/* Акции */}
-            {discounts.map((discount) => (
-              <DiscountItem key={discount._id} discount={discount} />
-            ))}
+            {discounts
+              .sort(sortByStartDates)
+              .sort((a, b) => +b.isActive - +a.isActive)
+              .map((discount) => (
+                <DiscountItem key={discount._id} discount={discount} />
+              ))}
           </div>
         </div>
       </div>

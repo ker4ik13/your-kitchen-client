@@ -11,4 +11,5 @@ export interface IDiscount {
   isActive: boolean;
 }
 
+// 'Акция', 'Подарок', 'Скидка'
 export type DiscountType = "promotion" | "gift" | "discount";
