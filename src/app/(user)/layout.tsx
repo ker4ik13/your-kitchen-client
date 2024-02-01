@@ -45,6 +45,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#433A31" />
         {process.env.NODE_ENV === "production" && (
           <>
+            <script src="//code.jivo.ru/widget/d1XdJXNdT6" async></script>
             <script defer src="https://af.click.ru/af.js?id=12257"></script>
             <Script
               async
