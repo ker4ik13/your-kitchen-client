@@ -18,6 +18,8 @@ if (!API_URL) {
   throw new Error("Api url has been not imported from .env");
 }
 
+export type ModalType = "default" | "promotion";
+
 interface LeaveRequestMiniProps {
   title?: string;
   tag?: string;
@@ -26,13 +28,26 @@ interface LeaveRequestMiniProps {
     text?: string;
     arrow?: "left" | "right" | "up" | "down";
   };
+  type?: ModalType;
 }
+
+const getModalType = (type: ModalType): string => {
+  switch (type) {
+    case "default":
+      return styles.card;
+    case "promotion":
+      return styles.promotion;
+    default:
+      return styles.card;
+  }
+};
 
 export const LeaveRequestMini = ({
   title,
   tag,
   location,
   button,
+  type = "default",
 }: LeaveRequestMiniProps) => {
   const {
     register,
@@ -66,7 +81,7 @@ export const LeaveRequestMini = ({
       <div className={styles.leaveRequest}>
         <div className={styles.container}>
           {/* Карточка */}
-          <div className={styles.card}>
+          <div className={getModalType(type)}>
             <div className={styles.wrapper}>
               <p className={styles.minus}>—</p>
               <h3 className={styles.title}>

@@ -20,7 +20,7 @@ const Footer = () => {
               Главная
             </Link>
             <Link href={`${pagesLinks.portfolio}`} className={styles.link}>
-              Наши кухни
+              Кухни
             </Link>
             <Link href={`${pagesLinks.furniture}`} className={styles.link}>
               Мебель
@@ -33,6 +33,9 @@ const Footer = () => {
             </Link>
             <Link href={`${pagesLinks.reviews}`} className={styles.link}>
               Отзывы
+            </Link>
+            <Link href={`${pagesLinks.discounts}`} className={styles.link}>
+              Акции
             </Link>
             {/* <Menu>
               <div className={styles.menuRelative}>
