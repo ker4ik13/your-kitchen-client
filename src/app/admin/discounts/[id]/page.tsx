@@ -12,9 +12,21 @@ import type { IDiscount } from "@/types/IDiscount";
 import type { IError } from "@/types/IError";
 import { UserRoles } from "@/types/UserRoles";
 import AdminSidebar from "@/widgets/AdminSidebar/AdminSidebar";
+import EditorButtons from "@/widgets/EditorButtons/EditorButtons";
+import { Image as EditorImage } from "@tiptap/extension-image";
+import { Link as EditorLink } from "@tiptap/extension-link";
+import TextAlign from "@tiptap/extension-text-align";
+import Underline from "@tiptap/extension-underline";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useEffect, useState, type KeyboardEventHandler } from "react";
+import {
+  useCallback,
+  useEffect,
+  useState,
+  type KeyboardEventHandler,
+} from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import ReactInputMask from "react-input-mask";
 import { components } from "react-select";
@@ -93,6 +105,31 @@ const EditDiscountPage = () => {
 
   const [discount, setDiscount] = useState<IDiscount>({} as IDiscount);
 
+  const editor = useEditor({
+    extensions: [
+      StarterKit.configure({
+        heading: {
+          levels: [1, 2, 3, 4, 5, 6],
+        },
+      }),
+      EditorImage,
+      Underline,
+      EditorLink.configure({
+        openOnClick: false,
+      }),
+      TextAlign.configure({
+        types: ["heading", "paragraph"],
+      }),
+    ],
+    content: discount.conditions || discountStore.discount.conditions,
+  });
+
+  useEffect(() => {
+    if (discount.conditions) {
+      editor?.commands.setContent(discount.conditions);
+    }
+  }, [editor, discount.conditions]);
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       dispatch(checkAuth());
@@ -105,6 +142,31 @@ const EditDiscountPage = () => {
     }
   }, []);
 
+  const setLink = useCallback(() => {
+    const previousUrl = editor?.getAttributes("link").href;
+    const url = window.prompt("URL", previousUrl);
+
+    // cancelled
+    if (url === null) {
+      return;
+    }
+
+    // empty
+    if (url === "") {
+      editor?.chain().focus().extendMarkRange("link").unsetLink().run();
+
+      return;
+    }
+
+    // update link
+    editor
+      ?.chain()
+      .focus()
+      .extendMarkRange("link")
+      .setLink({ href: url })
+      .run();
+  }, [editor]);
+
   if (!path || !path.id) {
     return (
       <div className={styles.kitchensPage}>
@@ -114,6 +176,77 @@ const EditDiscountPage = () => {
         </div>
       </div>
     );
+  }
+
+  const getProduct = async (id: string) => {
+    const productById = discountStore.discounts.find(
+      (discount) => discount.slug === path.id,
+    );
+
+    if (productById) {
+      setPhoto({
+        title: productById.image.split("/").at(-1),
+        src: productById.image,
+      });
+      setDiscount(productById);
+
+      setValue("name", productById.name);
+      setValue("description", productById.description);
+      setValue("endDate", productById.endDate);
+      setValue("startDate", productById.startDate);
+      setValue("isActive", productById.isActive);
+      setValue("slug", productById.slug);
+
+      const needType = discountsTypes.find(
+        (type) => type.value === productById.type,
+      );
+      if (needType) {
+        setValue("type", needType);
+      }
+
+      if (productById.conditions) {
+        editor?.commands.setContent(productById.conditions);
+      }
+    } else {
+      if (typeof path.id === "string") {
+        try {
+          const productPayload = await DiscountService.getDiscount(path.id);
+
+          setDiscount(productPayload);
+          setPhoto({
+            title: productPayload.image.split("/").at(-1),
+            src: productPayload.image,
+          });
+
+          setValue("name", productPayload.name);
+          setValue("description", productPayload.description);
+          setValue("endDate", productPayload.endDate);
+          setValue("startDate", productPayload.startDate);
+          setValue("isActive", productPayload.isActive);
+          setValue("slug", productPayload.slug);
+
+          const needType = discountsTypes.find(
+            (type) => type.value === productPayload.type,
+          );
+          if (needType) {
+            setValue("type", needType);
+          }
+
+          if (productPayload.conditions) {
+            editor?.commands.setContent(productPayload.conditions);
+          }
+        } catch (error) {
+          setError({
+            isError: true,
+            value: texts.addOrChangeErrorText,
+          });
+        }
+      }
+    }
+  };
+
+  if (!editor) {
+    return null;
   }
 
   // Обработчик фото
@@ -149,73 +282,6 @@ const EditDiscountPage = () => {
   // const deleteImage = () => {
   //   setPhoto(undefined);
   // };
-
-  const getProduct = async (id: string) => {
-    const productById = discountStore.discounts.find(
-      (discount) => discount.slug === path.id,
-    );
-
-    if (productById) {
-      setPhoto({
-        title: productById.image.split("/").at(-1),
-        src: productById.image,
-      });
-      setDiscount(productById);
-
-      setValue("name", productById.name);
-      setValue("description", productById.description);
-      setValue("endDate", productById.endDate);
-      setValue("startDate", productById.startDate);
-      setValue("isActive", productById.isActive);
-      setValue("slug", productById.slug);
-
-      const needType = discountsTypes.find(
-        (type) => type.value === productById.type,
-      );
-      if (needType) {
-        setValue("type", needType);
-      }
-
-      if (productById.conditions) {
-        setValue("conditions", productById.conditions);
-      }
-    } else {
-      if (typeof path.id === "string") {
-        try {
-          const productPayload = await DiscountService.getDiscount(path.id);
-
-          setDiscount(productPayload);
-          setPhoto({
-            title: productPayload.image.split("/").at(-1),
-            src: productPayload.image,
-          });
-
-          setValue("name", productPayload.name);
-          setValue("description", productPayload.description);
-          setValue("endDate", productPayload.endDate);
-          setValue("startDate", productPayload.startDate);
-          setValue("isActive", productPayload.isActive);
-          setValue("slug", productPayload.slug);
-
-          const needType = discountsTypes.find(
-            (type) => type.value === productPayload.type,
-          );
-          if (needType) {
-            setValue("type", needType);
-          }
-
-          if (productPayload.conditions) {
-            setValue("conditions", productPayload.conditions);
-          }
-        } catch (error) {
-          setError({
-            isError: true,
-            value: texts.addOrChangeErrorText,
-          });
-        }
-      }
-    }
-  };
 
   // Обработка нажатия enter в select
   const handleKeyDown: KeyboardEventHandler = (event) => {
@@ -258,8 +324,8 @@ const EditDiscountPage = () => {
     form.append("startDate", data.startDate);
     form.append("isActive", JSON.stringify(data.isActive));
 
-    if (data.conditions) {
-      form.append("conditions", data.conditions);
+    if (editor.getHTML() !== "") {
+      form.append("conditions", editor.getHTML());
     }
 
     form.append("type", data.type.value);
@@ -282,6 +348,7 @@ const EditDiscountPage = () => {
       });
       setFile({} as File);
       setPhoto(undefined);
+      editor.commands.setContent("");
     } else {
       setError({
         isError: true,
@@ -520,6 +587,9 @@ const EditDiscountPage = () => {
                 </div>
               )}
             </form>
+            <EditorContent editor={editor} className={styles.editor}>
+              <EditorButtons editor={editor} setLink={setLink} />
+            </EditorContent>
           </>
         )}
       </div>

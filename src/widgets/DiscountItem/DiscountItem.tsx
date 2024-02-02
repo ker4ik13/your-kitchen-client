@@ -11,6 +11,7 @@ import { DiscountModal } from "../Modals/DiscountModal";
 import Modal1 from "../Modals/Modal1";
 import ThanksModal from "../Modals/ThanksModal";
 import styles from "./DiscountItem.module.scss";
+import { getDiscountType } from "@/shared/helpers/getDiscountType";
 
 interface Props {
   discount: IDiscount;
@@ -18,19 +19,6 @@ interface Props {
 
 const isActiveDiscount = (isActive: boolean): string => {
   return isActive ? styles.discount : `${styles.discount} ${styles.archive}`;
-};
-
-const getDiscountType = (type: DiscountType): string => {
-  switch (type) {
-    case "discount":
-      return "Скидка";
-    case "gift":
-      return "Подарок";
-    case "promotion":
-      return "Акция";
-    default:
-      return "Акция";
-  }
 };
 
 const getBgFromDiscountType = (type: DiscountType): string => {
@@ -66,6 +54,11 @@ export const DiscountItem = ({ discount }: Props) => {
     return `${day}.${month}`;
   };
 
+  const openModal = (setOpenModal: (value: boolean) => void) => {
+    setOpenModal(true);
+    document.body.classList.add("overflow");
+  };
+
   return (
     <>
       {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
@@ -93,13 +86,9 @@ export const DiscountItem = ({ discount }: Props) => {
           className={styles.discount_bg}
         />
         {/* Левая часть */}
-        <Image
-          src={discount.image}
-          width={350}
-          height={260}
-          alt="Акция"
-          className={styles.leftImage}
-        />
+        <div className={styles.leftImage}>
+          <Image src={discount.image} width={350} height={260} alt="Акция" />
+        </div>
         <div className={styles.rightSide}>
           <div className={styles.upper}>
             <p className={styles.name}>{discount.name}</p>
@@ -116,13 +105,13 @@ export const DiscountItem = ({ discount }: Props) => {
           </div>
           <button
             type="button"
-            onClick={() => setIsOpenConditions(true)}
+            onClick={() => openModal(setIsOpenConditions)}
             className={styles.link}
           >
             Подробные условия
           </button>
           <OrangeButton
-            onClick={() => setIsOpenModal(true)}
+            onClick={() => openModal(setIsOpenModal)}
             className={styles.button}
             disabled={!discount.isActive}
           >

@@ -1,7 +1,7 @@
 import { closeModalOnEscape } from "@/shared/helpers/closeModalOnEscape";
+import { getDiscountType } from "@/shared/helpers/getDiscountType";
 import { IDiscount } from "@/types/IDiscount";
 import { useEffect, type ReactNode } from "react";
-import LeaveRequest from "../LeaveRequest/LeaveRequest";
 import styles from "./DiscountModal.module.scss";
 
 interface ModalProps {
@@ -37,15 +37,55 @@ export const DiscountModal = ({
       );
   }, []);
 
+  const closeModal = () => {
+    setIsOpen(false);
+    document.body.classList.remove("overflow");
+  };
+
   return (
-    <div
-      className={isOpenStyles(isOpen)}
-      onClick={() => {
-        setIsOpen(false);
-        document.body.classList.remove("overflow");
-      }}
-    >
-      <LeaveRequest
+    <div className={isOpenStyles(isOpen)} onClick={closeModal}>
+      <div
+        className={styles.container}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className={styles.modalInner}>
+          <p className={styles.bgText}>{getDiscountType(discount.type)}</p>
+          <div className={styles.upper}>
+            <div className={styles.name}>
+              {`Подробные условия "${discount.name}"`}
+            </div>
+            <button
+              type="button"
+              className={styles.closeButton}
+              onClick={closeModal}
+            >
+              ×
+            </button>
+          </div>
+          <p className={styles.label}>Описание:</p>
+          <div className={styles.description}>{discount.description}</div>
+          {discount.conditions && (
+            <>
+              <p className={styles.label}>Условия:</p>
+
+              <div
+                className={styles.content}
+                dangerouslySetInnerHTML={{ __html: discount.conditions }}
+              ></div>
+            </>
+          )}
+          <div className={styles.lower}>
+            {/* <button
+              type="button"
+              className={styles.closeButtonText}
+              onClick={closeModal}
+            >
+              Закрыть
+            </button> */}
+          </div>
+        </div>
+      </div>
+      {/* <LeaveRequest
         isModal={true}
         onClick={(event: any) => event.stopPropagation()}
         setIsOpen={setIsOpen}
@@ -54,7 +94,7 @@ export const DiscountModal = ({
         descriptionText={descriptionText}
         tag={tag}
         location={location}
-      />
+      /> */}
     </div>
   );
 };

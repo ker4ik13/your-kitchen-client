@@ -14,11 +14,24 @@ import { checkAuth } from "@/store/user.slice";
 import type { IError } from "@/types/IError";
 import { UserRoles } from "@/types/UserRoles";
 import AdminSidebar from "@/widgets/AdminSidebar/AdminSidebar";
-import { useEffect, useState, type KeyboardEventHandler } from "react";
+import TextAlign from "@tiptap/extension-text-align";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import {
+  useCallback,
+  useEffect,
+  useState,
+  type KeyboardEventHandler,
+} from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import ReactInputMask from "react-input-mask";
 import { components } from "react-select";
 import CreatableSelect from "react-select/creatable";
+
+import EditorButtons from "@/widgets/EditorButtons/EditorButtons";
+import { Image as EditorImage } from "@tiptap/extension-image";
+import { Link as EditorLink } from "@tiptap/extension-link";
+import Underline from "@tiptap/extension-underline";
 
 interface ISelectOptions {
   value: string;
@@ -83,6 +96,24 @@ const NewDiscountPage = () => {
     readonly IReadonlySelectOptions[] | unknown[]
   >([]);
 
+  const editor = useEditor({
+    extensions: [
+      StarterKit.configure({
+        heading: {
+          levels: [1, 2, 3, 4, 5, 6],
+        },
+      }),
+      EditorImage,
+      Underline,
+      EditorLink.configure({
+        openOnClick: false,
+      }),
+      TextAlign.configure({
+        types: ["heading", "paragraph"],
+      }),
+    ],
+  });
+
   // Ошибка
   const [error, setError] = useState<IError>({ isError: false, value: "" });
 
@@ -117,6 +148,35 @@ const NewDiscountPage = () => {
       });
     }
   }, [userStore.user]);
+
+  const setLink = useCallback(() => {
+    const previousUrl = editor?.getAttributes("link").href;
+    const url = window.prompt("URL", previousUrl);
+
+    // cancelled
+    if (url === null) {
+      return;
+    }
+
+    // empty
+    if (url === "") {
+      editor?.chain().focus().extendMarkRange("link").unsetLink().run();
+
+      return;
+    }
+
+    // update link
+    editor
+      ?.chain()
+      .focus()
+      .extendMarkRange("link")
+      .setLink({ href: url })
+      .run();
+  }, [editor]);
+
+  if (!editor) {
+    return null;
+  }
 
   if (userStore.isLoading) {
     return (
@@ -175,9 +235,10 @@ const NewDiscountPage = () => {
   const onSubmit: SubmitHandler<TInputs> = async (data) => {
     const form = new FormData();
 
-    if (data.conditions) {
-      form.append("conditions", data.conditions);
+    if (editor.getHTML() !== "") {
+      form.append("conditions", editor.getHTML());
     }
+
     form.append("name", data.name);
     form.append("slug", data.slug);
     form.append("description", data.description);
@@ -205,6 +266,7 @@ const NewDiscountPage = () => {
       });
       setFile({} as File);
       setPhoto(undefined);
+      editor.commands.setContent("");
     } else {
       setError({
         isError: true,
@@ -443,6 +505,9 @@ const NewDiscountPage = () => {
                 </div>
               )}
             </form>
+            <EditorContent editor={editor} className={styles.editor}>
+              <EditorButtons editor={editor} setLink={setLink} />
+            </EditorContent>
           </>
         )}
       </div>
