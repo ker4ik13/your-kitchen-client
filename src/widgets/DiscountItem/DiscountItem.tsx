@@ -3,6 +3,7 @@
 import bg1 from "@/data/images/discount_bg1.jpg";
 import bg2 from "@/data/images/discount_bg2.jpg";
 import bg3 from "@/data/images/discount_bg3.jpg";
+import { SITE_NAME, pagesData } from "@/shared/constants";
 import { getDiscountType } from "@/shared/helpers/getDiscountType";
 import { OrangeButton } from "@/shared/ui";
 import type { DiscountType, IDiscount } from "@/types/IDiscount";
@@ -77,25 +78,45 @@ export const DiscountItem = ({ discount }: Props) => {
         isOpen={isOpenConditions}
         setIsOpen={setIsOpenConditions}
       />
-      <div className={isActiveDiscount(discount.isActive)}>
+      <div
+        className={isActiveDiscount(discount.isActive)}
+        itemScope
+        itemType="http://schema.org/Offer"
+      >
         <Image
           src={getBgFromDiscountType(discount.type)}
           width={1060}
           height={310}
           alt="Фон"
           quality={100}
+          itemProp="image"
           draggable={false}
           className={styles.discount_bg}
         />
         {/* Левая часть */}
         <div className={styles.leftImage}>
+          <span itemProp="availability" content="InStock"></span>
+          <span itemProp="priceCurrency" content="RUB"></span>
+          <span itemProp="price" content="0.00"></span>
+          <span itemProp="url" content={pagesData.discounts.url}></span>
           <Image src={discount.image} width={350} height={260} alt="Акция" />
         </div>
-        <div className={styles.rightSide}>
+        <div
+          className={styles.rightSide}
+          itemScope
+          itemType="http://schema.org/Thing"
+        >
           <div className={styles.upper}>
-            <p className={styles.name}>{discount.name}</p>
+            <p className={styles.name} itemProp="name">
+              {discount.name}
+            </p>
+            <span itemScope itemType="http://schema.org/Brand">
+              <span itemProp="name" content={SITE_NAME}></span>
+            </span>
             <div className={styles.term}>
               <p className={styles.termText}>Сроки проведения</p>
+              <span itemProp="validFrom" content={discount.startDate}></span>
+              <span itemProp="validThrough" content={discount.endDate}></span>
               <p className={styles.termDate}>{`${getDiscountDate(
                 discount.startDate,
               )} - ${getDiscountDate(discount.endDate)}`}</p>
@@ -103,7 +124,9 @@ export const DiscountItem = ({ discount }: Props) => {
           </div>
           <div className={styles.desc}>
             <p className={styles.descTitle}>Описание</p>
-            <p className={styles.descText}>{discount.description}</p>
+            <p className={styles.descText} itemProp="description">
+              {discount.description}
+            </p>
           </div>
           <button
             type="button"

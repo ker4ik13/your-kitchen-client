@@ -1,7 +1,9 @@
 "use client";
 
 import bgImage from "@/data/images/bg_discouts.jpg";
+import { Icons } from "@/shared/IconsComponents/Icons";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import Modal1 from "../Modals/Modal1";
 import ThanksModal from "../Modals/ThanksModal";
@@ -54,9 +56,9 @@ export const DiscountsHelloScreen = () => {
               фабрики «Твоя кухня».
             </p>
           </div> */}
-          {/* <button type="button" className={styles.downButton}>
+          <Link href={"#discounts"} className={styles.downButton}>
             <Icons.arrow className={styles.arrowIcon} />
-          </button> */}
+          </Link>
         </div>
       </div>
     </>

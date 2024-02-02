@@ -18,7 +18,7 @@ const sortByStartDates = (a: IDiscount, b: IDiscount) => {
 export const Discounts = ({ discounts }: DiscountsProps) => {
   return (
     <>
-      <div className={styles.discountsPage}>
+      <div className={styles.discountsPage} id="discounts">
         <div className={styles.container}>
           <div className={styles.discounts}>
             {!discounts.length && (

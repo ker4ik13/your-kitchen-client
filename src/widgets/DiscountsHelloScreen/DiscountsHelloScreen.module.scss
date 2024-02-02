@@ -42,10 +42,6 @@
 }
 .container {
   @include container();
-
-  @media (min-width: $max-700) {
-    padding-left: rem(56);
-  }
   position: relative;
   z-index: 2;
 }
@@ -62,6 +58,8 @@
   text-align: center;
   font-size: rem(48);
   text-transform: uppercase;
+  position: relative;
+  z-index: 10;
 
   @media screen and (max-width: $max-768) {
     font-size: rem(28);
@@ -75,16 +73,21 @@
   justify-content: center;
   margin-top: rem(60);
   gap: rem(40);
+  z-index: 1;
 
   & span:first-child {
     height: rem(2);
     width: 100%;
     background-color: $white;
+    position: relative;
+    z-index: 10;
   }
   & span:last-child {
     height: rem(2);
     width: 100%;
     background-color: $white;
+    position: relative;
+    z-index: 10;
   }
 
   & span:nth-child(2) {
@@ -94,6 +97,23 @@
     width: rem(20);
     border-radius: rem(100);
     background-color: $white;
+    position: relative;
+    z-index: 10;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    border-radius: 100%;
+    height: rem(300);
+    -webkit-filter: blur(rem(110));
+    filter: blur(rem(110));
+    background: rgba(108, 101, 91, 0.8);
+    z-index: 0;
   }
 
   @media screen and (max-width: $max-768) {
@@ -118,6 +138,8 @@
   max-width: rem(815);
   margin-top: rem(50);
   text-wrap: pretty;
+  position: relative;
+  z-index: 10;
 
   @media screen and (max-width: $max-768) {
     margin-top: rem(50);
@@ -131,6 +153,8 @@
   justify-content: center;
   align-items: flex-start;
   text-align: center;
+  position: relative;
+  z-index: 10;
 
   & p {
     @include gilroy(400);
@@ -158,8 +182,10 @@
   filter: drop-shadow(0px 0px 12px #f28c6b) drop-shadow(0px 0px 19px #f28c6b);
 }
 .downButton {
+  position: relative;
+  z-index: 10;
   margin: 0 auto;
-  margin-top: rem(40);
+  margin-top: rem(100);
   width: rem(60);
   aspect-ratio: 1/1;
   display: flex;
@@ -171,13 +197,14 @@
   backdrop-filter: blur(2.3499999046325684px);
   margin-bottom: rem(10);
   transition: 0.1s;
+  border: rem(1) solid transparent;
 
   &:focus-visible {
     outline: 2px solid $white;
   }
 
-  @media screen and (max-width: $max-768) {
-    margin-top: rem(30);
+  &:hover {
+    border: rem(1) solid $white;
   }
 }
 .arrowIcon {
