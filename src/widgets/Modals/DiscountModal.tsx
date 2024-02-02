@@ -1,32 +1,18 @@
 import { closeModalOnEscape } from "@/shared/helpers/closeModalOnEscape";
 import { getDiscountType } from "@/shared/helpers/getDiscountType";
 import { IDiscount } from "@/types/IDiscount";
-import { useEffect, type ReactNode } from "react";
+import { useEffect } from "react";
 import styles from "./DiscountModal.module.scss";
 
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
-  setIsOpenThanks: (isOpen: boolean) => void;
-  buttonText?: string;
-  descriptionText?: string | ReactNode;
-  tag?: string;
-  location?: string;
   discount: IDiscount;
 }
 const isOpenStyles = (isOpen: boolean) =>
   isOpen ? styles.modal : `${styles.modal} ${styles.hidden}`;
 
-export const DiscountModal = ({
-  isOpen,
-  setIsOpen,
-  setIsOpenThanks,
-  buttonText,
-  descriptionText,
-  tag,
-  location,
-  discount,
-}: ModalProps) => {
+export const DiscountModal = ({ isOpen, setIsOpen, discount }: ModalProps) => {
   useEffect(() => {
     document.addEventListener("keydown", (event) =>
       closeModalOnEscape(event, setIsOpen),
@@ -64,10 +50,9 @@ export const DiscountModal = ({
           </div>
           <p className={styles.label}>Описание:</p>
           <div className={styles.description}>{discount.description}</div>
-          {discount.conditions && (
+          {discount.conditions && discount.conditions !== "<p></p>" && (
             <>
               <p className={styles.label}>Условия:</p>
-
               <div
                 className={styles.content}
                 dangerouslySetInnerHTML={{ __html: discount.conditions }}

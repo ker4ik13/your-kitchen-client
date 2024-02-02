@@ -9,13 +9,13 @@
   width: 100%;
   height: 100%;
   background-color: #333;
-  padding: rem(30) rem(10) rem(0) rem(50);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: flex-start;
+  overflow-y: auto;
 }
 .upper {
+  padding: rem(30) rem(10) rem(0) rem(50);
   display: flex;
   flex-direction: column;
 }
@@ -25,13 +25,15 @@
   margin-top: rem(50);
 }
 .links {
+  padding: rem(10) rem(10) rem(10) rem(50);
   display: flex;
   flex-direction: column;
   gap: rem(10);
-  margin-top: rem(50);
   color: #fff;
   @include gilroy(400);
   cursor: default;
+  overflow-y: auto;
+  padding-bottom: rem(100);
 }
 .link {
   cursor: pointer;
@@ -64,9 +66,15 @@
   fill: #fff;
 }
 .logout {
-  text-align: center;
+  padding: rem(10) rem(10) rem(10) rem(50);
+  padding-bottom: rem(30);
+  background-color: #333;
+  position: fixed;
+  bottom: 0;
+  max-width: rem(250);
+  width: 100%;
+  text-align: left;
   color: #fff;
   @include gilroy(400);
   cursor: pointer;
-  margin-bottom: rem(50);
 }

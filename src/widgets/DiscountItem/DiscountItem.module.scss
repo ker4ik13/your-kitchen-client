@@ -15,8 +15,8 @@
   gap: rem(30);
 
   &.archive {
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
+    -webkit-filter: grayscale(70%);
+    filter: grayscale(70%);
   }
 
   @media screen and (max-width: $max-850) {

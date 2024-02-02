@@ -235,7 +235,7 @@ const NewDiscountPage = () => {
   const onSubmit: SubmitHandler<TInputs> = async (data) => {
     const form = new FormData();
 
-    if (editor.getHTML() !== "") {
+    if (editor.getHTML() !== "" && editor.getHTML() !== "<p></p>") {
       form.append("conditions", editor.getHTML());
     }
 
@@ -326,7 +326,7 @@ const NewDiscountPage = () => {
                 {/* Ссылка */}
                 <div className={styles.inputWrapper}>
                   <label htmlFor="slug" className={styles.label}>
-                    Цена
+                    Ссылка
                   </label>
                   <input
                     type="text"

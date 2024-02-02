@@ -408,7 +408,7 @@ const EditDiscountPage = () => {
                 {/* Ссылка */}
                 <div className={styles.inputWrapper}>
                   <label htmlFor="slug" className={styles.label}>
-                    Цена
+                    Ссылка
                   </label>
                   <input
                     type="text"

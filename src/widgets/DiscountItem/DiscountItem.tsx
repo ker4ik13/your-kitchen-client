@@ -3,6 +3,7 @@
 import bg1 from "@/data/images/discount_bg1.jpg";
 import bg2 from "@/data/images/discount_bg2.jpg";
 import bg3 from "@/data/images/discount_bg3.jpg";
+import { getDiscountType } from "@/shared/helpers/getDiscountType";
 import { OrangeButton } from "@/shared/ui";
 import type { DiscountType, IDiscount } from "@/types/IDiscount";
 import Image from "next/image";
@@ -11,7 +12,6 @@ import { DiscountModal } from "../Modals/DiscountModal";
 import Modal1 from "../Modals/Modal1";
 import ThanksModal from "../Modals/ThanksModal";
 import styles from "./DiscountItem.module.scss";
-import { getDiscountType } from "@/shared/helpers/getDiscountType";
 
 interface Props {
   discount: IDiscount;
@@ -68,12 +68,14 @@ export const DiscountItem = ({ discount }: Props) => {
         isOpen={isOpenModal}
         location="Страница акций"
         tag={`Акция: ${discount.name}`}
+        title="Оставьте заявку и зафиксируйте участие в акции"
+        descriptionText="специалист перезвонит вам и расскажет подробные условия, ответит на вопросы и забронирует ваше участие в текущей акции"
+        buttonText="Участвовать в акции"
       />
       <DiscountModal
         discount={discount}
         isOpen={isOpenConditions}
         setIsOpen={setIsOpenConditions}
-        setIsOpenThanks={setIsOpenThanks}
       />
       <div className={isActiveDiscount(discount.isActive)}>
         <Image
@@ -115,7 +117,7 @@ export const DiscountItem = ({ discount }: Props) => {
             className={styles.button}
             disabled={!discount.isActive}
           >
-            Учавствовать в акции
+            Участвовать в акции
           </OrangeButton>
           <p className={styles.discount_type}>
             {getDiscountType(discount.type)}

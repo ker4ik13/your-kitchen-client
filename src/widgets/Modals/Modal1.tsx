@@ -7,6 +7,7 @@ interface ModalProps {
 	isOpen: boolean;
 	setIsOpen: (value: boolean) => void;
 	setIsOpenThanks: (isOpen: boolean) => void;
+	title?: string;
 	buttonText?: string;
 	descriptionText?: string | ReactNode;
 	tag?: string;
@@ -19,6 +20,7 @@ const Modal1 = ({
 	isOpen,
 	setIsOpen,
 	setIsOpenThanks,
+	title,
 	buttonText,
 	descriptionText,
 	tag,
@@ -50,6 +52,7 @@ const Modal1 = ({
 				buttonText={buttonText}
 				descriptionText={descriptionText}
 				tag={tag}
+				title={title}
 				location={location}
 			/>
 		</div>

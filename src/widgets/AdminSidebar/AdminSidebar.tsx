@@ -32,60 +32,55 @@ const AdminSidebar: FC<AdminSidebarProps> = ({ store }) => {
       <div className={styles.upper}>
         <Logo />
         <h2 className={styles.name}>{store.user ? store.user.email : ""}</h2>
-        <div className={styles.links}>
-          {isUserHaveRights(store.user, UserRoles.Admin) && (
-            <Link href={pagesLinks.adminClaims} className={isActive("claims")}>
-              <Icons.docs className={styles.icon} />
-              <p>Заявки</p>
-            </Link>
-          )}
-          <Link
-            href={pagesLinks.adminKitchens}
-            className={isActive("kitchens")}
-          >
-            <Icons.kitchen className={styles.icon} />
-            <p>Кухни</p>
+      </div>
+
+      <div className={styles.links}>
+        {isUserHaveRights(store.user, UserRoles.Admin) && (
+          <Link href={pagesLinks.adminClaims} className={isActive("claims")}>
+            <Icons.docs className={styles.icon} />
+            <p>Заявки</p>
           </Link>
-          <Link
-            href={pagesLinks.adminFurniture}
-            className={isActive("furniture")}
-          >
-            <LuArmchair />
-            <p>Мебель</p>
-          </Link>
-          <Link href={pagesLinks.adminReviews} className={isActive("reviews")}>
-            <MdOutlineRateReview />
-            <p>Отзывы</p>
-          </Link>
-          <Link href={pagesLinks.adminTeam} className={isActive("team")}>
+        )}
+        <Link href={pagesLinks.adminKitchens} className={isActive("kitchens")}>
+          <Icons.kitchen className={styles.icon} />
+          <p>Кухни</p>
+        </Link>
+        <Link
+          href={pagesLinks.adminFurniture}
+          className={isActive("furniture")}
+        >
+          <LuArmchair />
+          <p>Мебель</p>
+        </Link>
+        <Link href={pagesLinks.adminReviews} className={isActive("reviews")}>
+          <MdOutlineRateReview />
+          <p>Отзывы</p>
+        </Link>
+        <Link href={pagesLinks.adminTeam} className={isActive("team")}>
+          <Icons.team className={styles.icon} />
+          <p>Команда</p>
+        </Link>
+        {isUserHaveRights(store.user, UserRoles.Admin) && (
+          <Link href={pagesLinks.adminAdmins} className={isActive("admins")}>
             <Icons.team className={styles.icon} />
-            <p>Команда</p>
+            <p>Администраторы</p>
           </Link>
-          {isUserHaveRights(store.user, UserRoles.Admin) && (
-            <Link href={pagesLinks.adminAdmins} className={isActive("admins")}>
-              <Icons.team className={styles.icon} />
-              <p>Администраторы</p>
-            </Link>
-          )}
-          <Link
-            href={pagesLinks.adminArticles}
-            className={isActive("articles")}
-          >
-            <MdArticle />
-            <p>Статьи</p>
-          </Link>
-          <Link
-            href={pagesLinks.adminDiscounts}
-            className={isActive("discounts")}
-          >
-            <MdDiscount />
-            <p>Акции</p>
-          </Link>
-          <Link href={pagesLinks.adminGallery} className={isActive("gallery")}>
-            <IoMdPhotos />
-            <p>Галерея</p>
-          </Link>
-        </div>
+        )}
+        <Link href={pagesLinks.adminArticles} className={isActive("articles")}>
+          <MdArticle />
+          <p>Статьи</p>
+        </Link>
+        <Link
+          href={pagesLinks.adminDiscounts}
+          className={isActive("discounts")}
+        >
+          <MdDiscount />
+          <p>Акции</p>
+        </Link>
+        <Link href={pagesLinks.adminGallery} className={isActive("gallery")}>
+          <IoMdPhotos />
+          <p>Галерея</p>
+        </Link>
       </div>
       <button
         type="button"
