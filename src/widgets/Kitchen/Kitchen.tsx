@@ -1,14 +1,16 @@
+"use client";
+
 import { SITE_NAME } from "@/shared/constants";
 import "@/shared/styles/swiper-my.css";
-import { useAppDispatch } from "@/store/hooks";
-import { setIsOpen, setKitchen } from "@/store/kitchens.slice";
 import { IKitchen } from "@/types/IKitchen";
 import Image from "next/image";
+import { useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import PreviewPhotos from "../PreviewPhotos/PreviewPhotos";
 import styles from "./Kitchen.module.scss";
 
 interface KitchenProps {
@@ -17,19 +19,34 @@ interface KitchenProps {
 }
 
 const Kitchen = ({ kitchen, isPreview }: KitchenProps) => {
-  const dispatch = useAppDispatch();
+  const [isOpenPreview, setIsOpenPreview] = useState(false);
 
   const openPreview = () => {
     if (isPreview) {
-      dispatch(setKitchen(kitchen));
-      dispatch(setIsOpen(true));
+      setIsOpenPreview(true);
       document.body.classList.add("overflow");
+    } else {
+      return;
+    }
+  };
+
+  const closePreview = () => {
+    if (isPreview) {
+      setIsOpenPreview(false);
+      document.body.classList.remove("overflow");
     } else {
       return;
     }
   };
   return (
     <>
+      {isPreview && isOpenPreview && (
+        <PreviewPhotos
+          isOpen={isOpenPreview}
+          kitchen={kitchen}
+          closePreview={closePreview}
+        />
+      )}
       <Swiper
         className={styles.kitchen}
         navigation={true}
@@ -38,7 +55,11 @@ const Kitchen = ({ kitchen, isPreview }: KitchenProps) => {
           clickable: true,
           horizontalClass: styles.pagination,
         }}
-        allowTouchMove={window.innerWidth > 768 ? false : true}
+        allowTouchMove={
+          typeof window !== "undefined" && window.innerWidth > 768
+            ? false
+            : true
+        }
         loop={true}
         modules={[Navigation, Pagination]}
         onClick={openPreview}
