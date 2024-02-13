@@ -3,7 +3,6 @@ import main2 from "@/data/images/main/main2.jpg";
 import main3 from "@/data/images/main/main3.jpg";
 import main4 from "@/data/images/main/main4.jpg";
 import main5 from "@/data/images/main/main5.jpg";
-import HomePage from "@/pages/HomePage";
 import { SITE_NAME, pagesData } from "@/shared/constants";
 import { Metadata } from "next";
 
@@ -25,6 +24,56 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
-  return <HomePage />;
-}
+import styles from "@/pages/HomePage.module.scss";
+import { UserKitchenService } from "@/services/UserKitchenService";
+import { UserReviewsService } from "@/services/UserReviewsService";
+import { UserWorkerService } from "@/services/UserWorkerService";
+import { LeaveRequestBlock } from "@/shared/LeaveRequestBlock";
+import { LeaveRequestBlock2 } from "@/shared/LeaveRequestBlock2";
+import MiniLoading from "@/shared/MiniLoading";
+import AllVariants from "@/widgets/AllVariants/AllVariants";
+import Correction from "@/widgets/Correction/Correction";
+import HelloScreen from "@/widgets/HelloScreen/HelloScreen";
+import Kitchens from "@/widgets/Kitchens/Kitchens";
+import MainArticles from "@/widgets/MainArticles/MainArticles";
+import Results from "@/widgets/Results/Results";
+import Reviews from "@/widgets/Reviews/Reviews";
+import SecondScreen from "@/widgets/SecondScreen/SecondScreen";
+import WhatsNext from "@/widgets/WhatsNext/WhatsNext";
+import dynamic from "next/dynamic";
+
+const DynamicOurTeam = dynamic(() => import("@/widgets/OurTeam/OurTeam"), {
+  loading: () => <MiniLoading className={styles.loading} />,
+});
+
+export const revalidate = 30;
+
+const getHomeInfo = async () => {
+  const kitchens = await UserKitchenService.getMainKitchens();
+  const reviews = await UserReviewsService.getReviews();
+  const workers = await UserWorkerService.getWorkers();
+
+  return { kitchens, reviews, workers };
+};
+
+const HomePage = async () => {
+  const { kitchens, reviews, workers } = await getHomeInfo();
+  return (
+    <>
+      <HelloScreen />
+      <Kitchens kitchens={kitchens} />
+      <SecondScreen />
+      <Correction />
+      <AllVariants />
+      <WhatsNext />
+      <Results />
+      <LeaveRequestBlock />
+      <Reviews reviews={reviews} />
+      <DynamicOurTeam team={workers} />
+      <MainArticles />
+      <LeaveRequestBlock2 />
+    </>
+  );
+};
+
+export default HomePage;

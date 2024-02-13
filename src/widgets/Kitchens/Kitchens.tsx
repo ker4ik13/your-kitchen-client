@@ -1,27 +1,20 @@
 "use client";
 
-import { UserKitchenService } from "@/services/UserKitchenService";
 import { OrangeButton } from "@/shared/ui";
 import { IKitchen } from "@/types/IKitchen";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Kitchen from "../Kitchen/Kitchen";
 import Modal1 from "../Modals/Modal1";
 import ThanksModal from "../Modals/ThanksModal";
 import styles from "./Kitchens.module.scss";
 
-const Kitchens = () => {
-  const [kitchens, setKitchens] = useState<IKitchen[]>([]);
+interface KitchensProps {
+  kitchens: IKitchen[];
+}
+
+const Kitchens = ({ kitchens }: KitchensProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenThanks, setIsOpenThanks] = useState(false);
-
-  const getKitchens = async () => {
-    const response = await UserKitchenService.getMainKitchens();
-    setKitchens(response);
-  };
-
-  useEffect(() => {
-    getKitchens();
-  }, []);
 
   return (
     <>

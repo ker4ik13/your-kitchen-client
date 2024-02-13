@@ -4,6 +4,7 @@ import main3 from "@/data/images/main/main3.jpg";
 import main4 from "@/data/images/main/main4.jpg";
 import main5 from "@/data/images/main/main5.jpg";
 import { UserKitchenService } from "@/services/UserKitchenService";
+import { UserReviewsService } from "@/services/UserReviewsService";
 import { LeaveRequestBlock } from "@/shared/LeaveRequestBlock";
 import { SITE_NAME, pagesData } from "@/shared/constants";
 import KitchenExamples from "@/widgets/KitchenExamples/KitchenExamples";
@@ -28,16 +29,19 @@ export const metadata: Metadata = {
   },
 };
 
-const getKitchens = async () => {
-  return await UserKitchenService.getKitchens();
+const getPortfolioInfo = async () => {
+  const kitchens = await UserKitchenService.getKitchens();
+  const reviews = await UserReviewsService.getReviews();
+
+  return { kitchens, reviews };
 };
 
 const PortfolioPage = async () => {
-  const kitchens = await getKitchens();
+  const { kitchens, reviews } = await getPortfolioInfo();
   return (
     <>
       <KitchenExamples kitchens={kitchens} />
-      <Reviews />
+      <Reviews reviews={reviews} />
       <LeaveRequestBlock />
     </>
   );

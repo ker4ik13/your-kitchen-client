@@ -3,9 +3,18 @@ import main2 from "@/data/images/main/main2.jpg";
 import main3 from "@/data/images/main/main3.jpg";
 import main4 from "@/data/images/main/main4.jpg";
 import main5 from "@/data/images/main/main5.jpg";
-import FurniturePage from "@/pages/FurniturePage";
+import styles from "@/pages/FurniturePage.module.scss";
 import { UserFurnitureService } from "@/services/UserFurnitureService";
+import { UserReviewsService } from "@/services/UserReviewsService";
 import { SITE_NAME, pagesData } from "@/shared/constants";
+import { CustomerChoice } from "@/widgets/CustomerChoice/CustomerChoice";
+import { FourSteps } from "@/widgets/FourSteps/FourSteps";
+import { Furniture } from "@/widgets/Furniture/Furniture";
+import { FurnitureAdvantages } from "@/widgets/FurnitureAdvantages/FurnitureAdvantages";
+import { FurnitureHelloScreen } from "@/widgets/FurnitureHelloScreen/FurnitureHelloScreen";
+import { LeaveRequestMini } from "@/widgets/LeaveRequestMini/LeaveRequestMini";
+import MainArticles from "@/widgets/MainArticles/MainArticles";
+import Reviews from "@/widgets/Reviews/Reviews";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -28,11 +37,31 @@ export const metadata: Metadata = {
 
 export const revalidate = 30;
 
-const getFurniture = async () => {
-  return await UserFurnitureService.getAllFurniture();
+const getFurnitureInfo = async () => {
+  const furniture = await UserFurnitureService.getAllFurniture();
+  const reviews = await UserReviewsService.getReviews();
+  return { furniture, reviews };
 };
 
 export default async function page() {
-  const furniture = await getFurniture();
-  return <FurniturePage furniture={furniture} />;
+  const { furniture, reviews } = await getFurnitureInfo();
+  return (
+    <div className={styles.bg}>
+      <FurnitureHelloScreen />
+      {furniture && furniture.length && <Furniture furniture={furniture} />}
+      <FurnitureAdvantages />
+      <LeaveRequestMini
+        tag="Получить бесплатный эскиз"
+        location="Страница корпусной мебели"
+      />
+      <CustomerChoice />
+      <Reviews withoutBg reviews={reviews} />
+      <FourSteps />
+      <LeaveRequestMini
+        tag="Получить бесплатный эскиз"
+        location="Страница корпусной мебели"
+      />
+      <MainArticles withoutBg />
+    </div>
+  );
 }
