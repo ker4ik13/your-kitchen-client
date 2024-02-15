@@ -64,6 +64,11 @@
   &:hover {
     background-color: darken(#fff, 10%);
   }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 .addForm {
   margin-top: rem(30);

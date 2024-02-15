@@ -1,9 +1,11 @@
 "use client";
 
+import { Texter } from "@/features/Texter";
 import styles from "../../Page.module.scss";
 
 import KitchenService from "@/services/KitchenService";
 import MiniLoading from "@/shared/MiniLoading";
+import { useDebouncedCallback } from "@/shared/helpers/hooks";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { checkAuth } from "@/store/user.slice";
 import { IError } from "@/types/IError";
@@ -98,7 +100,7 @@ const texts = {
 const EditKitchenPage = () => {
   const path = useParams();
 
-  const { register, handleSubmit, control, reset, setValue } =
+  const { register, handleSubmit, control, reset, setValue, getValues } =
     useForm<TInputs>();
   const userStore = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
@@ -125,6 +127,7 @@ const EditKitchenPage = () => {
   const [termValue, setTermValue] = useState("");
 
   const [kitchen, setKitchen] = useState<IKitchen>({} as IKitchen);
+  const [isOkSlug, setIsOkSlug] = useState(true);
 
   const editor = useEditor({
     extensions: [
@@ -150,6 +153,53 @@ const EditKitchenPage = () => {
       dispatch(checkAuth());
     }
   }, []);
+
+  const checkSlug = async (value: string) => {
+    if (kitchen.slug && kitchen.slug === value) {
+      setIsOkSlug(true);
+      setError({
+        isError: false,
+        value: "",
+      });
+      return;
+    }
+
+    const response = await KitchenService.checkSlug(value);
+
+    if (response.status === 404) {
+      setError({
+        isError: true,
+        value: "Такая ссылка уже используется",
+      });
+      setIsOkSlug(false);
+      return;
+    }
+
+    if (!response.data.valid) {
+      setError({
+        isError: true,
+        value: "Такая ссылка уже используется",
+      });
+      setIsOkSlug(false);
+      return;
+    }
+    setError({
+      isError: false,
+      value: "",
+    });
+    setIsOkSlug(true);
+  };
+
+  const debounceCheckSlug = useDebouncedCallback(checkSlug, 1000);
+
+  const generateSlug = () => {
+    const title = getValues("title");
+
+    if (title) {
+      setValue("slug", Texter.slugify(title));
+      checkSlug(Texter.slugify(title));
+    }
+  };
 
   const setLink = useCallback(() => {
     const previousUrl = editor?.getAttributes("link").href;
@@ -254,6 +304,17 @@ const EditKitchenPage = () => {
     return null;
   }
 
+  const changeSlugPlaceholder = (title: string) => {
+    const slugInput = document.querySelector("#slug");
+    if (!slugInput) {
+      return;
+    }
+
+    const slug = Texter.slugify(title);
+
+    slugInput.setAttribute("placeholder", slug);
+  };
+
   // Обработка нажатия enter в select
   const handleKeyDown: KeyboardEventHandler = (event) => {
     if (!inputValue) return;
@@ -297,6 +358,14 @@ const EditKitchenPage = () => {
     );
   }
   const onSubmit: SubmitHandler<TInputs> = async (data) => {
+    if (error.isError) {
+      return;
+    }
+
+    if (!isOkSlug) {
+      return;
+    }
+
     const form = new FormData();
 
     form.append("title", data.title);
@@ -377,6 +446,7 @@ const EditKitchenPage = () => {
               defaultValue={kitchen.title}
               {...register("title", {
                 required: true,
+                onChange: (event) => changeSlugPlaceholder(event.target.value),
               })}
               className={`${styles.textInput} ${styles.fullInput}`}
             />
@@ -393,9 +463,27 @@ const EditKitchenPage = () => {
               placeholder="kitchen-1-super"
               {...register("slug", {
                 required: true,
+                onChange: (event) => {
+                  debounceCheckSlug(event.target.value);
+                },
               })}
               className={`${styles.textInput} ${styles.fullInput}`}
             />
+          </div>
+
+          <div className={styles.string}>
+            <p className={isOkSlug ? styles.success : styles.error}>
+              {isOkSlug
+                ? "Ссылка доступна"
+                : "Поле пустое или кухня с такой ссылкой уже существует"}
+            </p>
+            <button
+              className={styles.addButton}
+              onClick={generateSlug}
+              type="button"
+            >
+              Сгенерировать ссылку
+            </button>
           </div>
 
           <div className={styles.string}>

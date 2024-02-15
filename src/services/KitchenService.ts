@@ -71,6 +71,12 @@ export default class KitchenService {
     return await $api.delete<IKitchen>(`/kitchens/${id}`);
   }
 
+  static async checkSlug(
+    slug: string,
+  ): Promise<AxiosResponse<{ valid: boolean }>> {
+    return await $api.get(`/check-slug/${slug}`);
+  }
+
   static async updateKitchen(
     id: string,
     body: object,

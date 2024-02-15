@@ -1,5 +1,6 @@
 "use client";
 
+import { Texter } from "@/features/Texter";
 import styles from "../../Page.module.scss";
 
 import { isUserHaveRights } from "@/features/isUserHaveRights";
@@ -11,6 +12,7 @@ import {
   dragStartHandler,
   dropOrChangeHandler,
 } from "@/shared/helpers/dragHandlers";
+import { useDebouncedCallback } from "@/shared/helpers/hooks";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { checkAuth } from "@/store/user.slice";
 import { IError } from "@/types/IError";
@@ -100,7 +102,8 @@ const texts = {
 };
 
 const NewKitchenPage = () => {
-  const { register, handleSubmit, control, reset } = useForm<TInputs>();
+  const { register, handleSubmit, control, reset, getValues, setValue } =
+    useForm<TInputs>();
   const userStore = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
 
@@ -110,7 +113,7 @@ const NewKitchenPage = () => {
 
   // Стейты для select
   const [inputValue, setInputValue] = useState("");
-  const [value, setValue] = useState<
+  const [value, setValueOpt] = useState<
     readonly IReadonlySelectOptions[] | unknown[]
   >([]);
   // Стейты для select 2
@@ -121,9 +124,59 @@ const NewKitchenPage = () => {
 
   // Ошибка
   const [error, setError] = useState<IError>({ isError: false, value: "" });
+  const [isOkSlug, setIsOkSlug] = useState(false);
 
   // Срок
   const [termValue, setTermValue] = useState("");
+
+  const checkSlug = async (value: string) => {
+    const response = await KitchenService.checkSlug(value);
+
+    if (response.status === 404) {
+      setError({
+        isError: true,
+        value: "Такая ссылка уже используется",
+      });
+      setIsOkSlug(false);
+      return;
+    }
+
+    if (!response.data.valid) {
+      setError({
+        isError: true,
+        value: "Такая ссылка уже используется",
+      });
+      setIsOkSlug(false);
+      return;
+    }
+    setError({
+      isError: false,
+      value: "",
+    });
+    setIsOkSlug(true);
+  };
+
+  const debounceCheckSlug = useDebouncedCallback(checkSlug, 1000);
+
+  const generateSlug = () => {
+    const title = getValues("title");
+
+    if (title) {
+      setValue("slug", Texter.slugify(title));
+      checkSlug(Texter.slugify(title));
+    }
+  };
+
+  const changeSlugPlaceholder = (title: string) => {
+    const slugInput = document.querySelector("#slug");
+    if (!slugInput) {
+      return;
+    }
+
+    const slug = Texter.slugify(title);
+
+    slugInput.setAttribute("placeholder", slug);
+  };
 
   // Обработка нажатия enter в select
   const handleKeyDown: KeyboardEventHandler = (event) => {
@@ -131,7 +184,7 @@ const NewKitchenPage = () => {
     switch (event.key) {
       case "Enter":
       case "Tab":
-        setValue((prev) => [...prev, createOption(inputValue)]);
+        setValueOpt((prev) => [...prev, createOption(inputValue)]);
         setInputValue("");
         event.preventDefault();
     }
@@ -237,6 +290,14 @@ const NewKitchenPage = () => {
   }
 
   const onSubmit: SubmitHandler<TInputs> = async (data) => {
+    if (error.isError) {
+      return;
+    }
+
+    if (!isOkSlug) {
+      return;
+    }
+
     const form = new FormData();
 
     form.append("title", data.title);
@@ -326,6 +387,8 @@ const NewKitchenPage = () => {
                   placeholder="Название кухни"
                   {...register("title", {
                     required: true,
+                    onChange: (event) =>
+                      changeSlugPlaceholder(event.target.value),
                   })}
                   className={`${styles.textInput} ${styles.fullInput}`}
                 />
@@ -342,9 +405,27 @@ const NewKitchenPage = () => {
                   placeholder="kitchen-1-super"
                   {...register("slug", {
                     required: true,
+                    onChange: (event) => {
+                      debounceCheckSlug(event.target.value);
+                    },
                   })}
                   className={`${styles.textInput} ${styles.fullInput}`}
                 />
+              </div>
+
+              <div className={styles.string}>
+                <p className={isOkSlug ? styles.success : styles.error}>
+                  {isOkSlug
+                    ? "Ссылка доступна"
+                    : "Поле пустое или кухня с такой ссылкой уже существует"}
+                </p>
+                <button
+                  className={styles.addButton}
+                  onClick={generateSlug}
+                  type="button"
+                >
+                  Сгенерировать ссылку
+                </button>
               </div>
 
               <div className={styles.string}>

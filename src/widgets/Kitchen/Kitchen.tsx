@@ -13,17 +13,20 @@ import styles from "./Kitchen.module.scss";
 interface KitchenProps {
   kitchen: IKitchen;
   isPreview?: boolean;
+  link?: string;
 }
 
-const Kitchen = ({ kitchen, isPreview }: KitchenProps) => {
+const Kitchen = ({ kitchen, isPreview, link }: KitchenProps) => {
   return (
     <>
       <Link
         className={styles.kitchen}
         href={
-          kitchen.slug
-            ? `/${pagesData.portfolio.name}/${kitchen.slug}`
-            : `${pagesData.portfolio.name}/${kitchen._id}`
+          link
+            ? link
+            : kitchen.slug
+              ? `/${pagesData.portfolio.name}/${kitchen.slug}`
+              : `${pagesData.portfolio.name}/${kitchen._id}`
         }
       >
         <Swiper
