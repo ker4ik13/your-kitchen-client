@@ -1,7 +1,9 @@
 "use client";
 
+import { pagesData } from "@/shared/constants";
 import { OrangeButton } from "@/shared/ui";
 import { IKitchen } from "@/types/IKitchen";
+import Link from "next/link";
 import { useState } from "react";
 import Kitchen from "../Kitchen/Kitchen";
 import Modal1 from "../Modals/Modal1";
@@ -47,7 +49,7 @@ const Kitchens = ({ kitchens }: KitchensProps) => {
         </div> */}
           <div className={styles.kitchens}>
             {kitchens.map((kitchen, index) => (
-              <Kitchen kitchen={kitchen} key={index} isPreview />
+              <Kitchen kitchen={kitchen} key={index} />
             ))}
           </div>
           <OrangeButton

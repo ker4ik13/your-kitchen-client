@@ -1,0 +1,20 @@
+.swiper-pagination-bullet {
+  background-color: #fff !important;
+  opacity: 0.5 !important;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1 !important;
+}
+.swiper-horizontal > .swiper-scrollbar,
+.swiper-scrollbar.swiper-scrollbar-horizontal {
+  max-width: 53.75rem !important;
+  width: 100% !important;
+  left: 50% !important;
+  transform: translate(-50%, 0) !important;
+  height: 1.5rem !important;
+  background-color: #fff !important;
+}
+.swiper-pagination {
+  bottom: auto !important;
+  top: 1.5rem !important;
+}

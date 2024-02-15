@@ -51,4 +51,20 @@ export class UserKitchenService {
 
     return kitchensWithPhotos;
   }
+
+  static async getKitchenBySlug(slug: string): Promise<IKitchen> {
+    const response = await fetch(
+      `${NEXT_PUBLIC_API_URL}/api/kitchens-by-slug/${slug}`,
+    );
+
+    const jsonKitchen: IKitchen = await response.json();
+
+    const returnKitchen = { ...jsonKitchen };
+    const kitchenPhotos = returnKitchen.photos.map((file) => {
+      return `${NEXT_PUBLIC_API_URL}/images/${file}`;
+    });
+
+    returnKitchen.photos = kitchenPhotos;
+    return returnKitchen;
+  }
 }

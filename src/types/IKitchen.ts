@@ -8,6 +8,12 @@ export interface IKitchen {
   style: IOption;
   type?: IOption;
   onMainPage?: boolean;
-  photos: string[] | undefined[];
+  photos: string[];
   term: string;
+  slug: string;
+  meta: {
+    keywords?: string;
+    description?: string;
+    title?: string;
+  };
 }
