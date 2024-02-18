@@ -37,7 +37,7 @@ const Nav = () => {
         <div className={styles.wrapper}>
           <Logo />
           <div className={styles.burgerWrapper} ref={burgerWrapper}>
-            <div className={styles.pages}>
+            <menu className={styles.pages}>
               <Link href={`/`} className={isActive(`/`)}>
                 Главная
               </Link>
@@ -105,7 +105,7 @@ const Nav = () => {
                   </Menu.Items>
                 </Menu>
               </div> */}
-            </div>
+            </menu>
             <div className={styles.contacts}>
               {/* <Link
                 to={"/"}

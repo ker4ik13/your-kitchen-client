@@ -13,6 +13,18 @@
   );
   padding-bottom: rem(50);
 }
+.kitchenPage {
+  padding-top: rem(150);
+  background: linear-gradient(
+    180deg,
+    #312d2a 0%,
+    #2a2827 23.59%,
+    #393632 38.43%,
+    #312d2a 48.32%,
+    #35302c 57.29%,
+    #2d2928 100%
+  );
+}
 .container {
   @include container();
 }

@@ -1,10 +1,10 @@
 import styles from "@/pages/ArticlePage.module.scss";
 import { UserKitchenService } from "@/services/UserKitchenService";
-import { LeaveRequestBlock2 } from "@/shared/LeaveRequestBlock2";
 import { CLIENT_URL, SITE_NAME, pagesData } from "@/shared/constants";
 import { OrangeButton, OrangeButtonModal } from "@/shared/ui";
 import KitchenCard from "@/widgets/Kitchen/KitchenCard";
 import { KitchenSlider } from "@/widgets/KitchenSlider/KitchenSlider";
+import { LeaveRequestFile } from "@/widgets/LeaveRequestFile/LeaveRequestFile";
 import { type Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -72,7 +72,7 @@ const KitchenPage = async ({ params }: Props) => {
 
   return (
     <>
-      <article className={styles.articlePage}>
+      <article className={styles.kitchenPage}>
         <div className={styles.container}>
           <div className={styles.prevPage}>
             <Link
@@ -103,7 +103,7 @@ const KitchenPage = async ({ params }: Props) => {
               }}
               center
             >
-              Расчитать стоимость
+              Рассчитать для себя
             </OrangeButtonModal>
           </div>
           <div
@@ -141,7 +141,10 @@ const KitchenPage = async ({ params }: Props) => {
             </OrangeButton>
           </div>
         </div>
-        <LeaveRequestBlock2 />
+        <LeaveRequestFile
+          location={`Страница "${kitchen.title}"`}
+          tag="Узнать цену"
+        />
       </article>
     </>
   );
