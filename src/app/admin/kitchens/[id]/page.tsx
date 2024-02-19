@@ -369,7 +369,7 @@ const EditKitchenPage = () => {
     const form = new FormData();
 
     form.append("title", data.title);
-    form.append("description", data.description);
+    form.append("description", editor.getHTML());
     form.append("price", data.price.toString());
     form.append("style", JSON.stringify(data.style));
     form.append("onMainPage", JSON.stringify(data.onMainPage));
