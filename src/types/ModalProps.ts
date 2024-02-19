@@ -8,6 +8,7 @@ export interface ModalProps {
   descriptionText?: string | ReactNode;
   tag?: string;
   location?: string;
+  title?: string;
 }
 export interface ModalButtonProps {
   buttonText?: string;
