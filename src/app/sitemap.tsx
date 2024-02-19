@@ -1,4 +1,5 @@
 import UserArticleService from "@/services/UserArticleService";
+import { UserKitchenService } from "@/services/UserKitchenService";
 import { CLIENT_URL, pagesData, pagesLinks } from "@/shared/constants";
 
 const siteRoutes = [
@@ -56,8 +57,24 @@ const getArticlesInfo = async () => {
   return articlesLinks;
 };
 
+// Получение информции о кухнях
+const getKitchensInfo = async () => {
+  const kitchens = await UserKitchenService.getKitchens();
+  const kitchensLinks = kitchens.map((kitchen) => {
+    if (kitchen.slug) {
+      return {
+        link: kitchen.slug,
+        lastModify: new Date().toISOString(),
+      };
+    }
+  });
+
+  return kitchensLinks;
+};
+
 export default async function sitemap() {
   const articlesLinks = await getArticlesInfo();
+  const kitchensLinks = await getKitchensInfo();
 
   // Все страницы
   const routes = siteRoutes.map((route) => ({
@@ -72,5 +89,13 @@ export default async function sitemap() {
     lastModified: article.lastModify,
   }));
 
-  return [...routes, ...articles];
+  // Кухни
+  const kitchens = kitchensLinks
+    .filter((kitchen) => kitchen?.link)
+    .map((kitchen) => ({
+      url: `${CLIENT_URL}/${pagesData.portfolio.name}/${kitchen?.link}`,
+      lastModified: kitchen?.lastModify,
+    }));
+
+  return [...routes, ...articles, ...kitchens];
 }
