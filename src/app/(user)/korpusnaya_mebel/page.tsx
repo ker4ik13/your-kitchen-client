@@ -12,6 +12,7 @@ import { FourSteps } from "@/widgets/FourSteps/FourSteps";
 import { Furniture } from "@/widgets/Furniture/Furniture";
 import { FurnitureAdvantages } from "@/widgets/FurnitureAdvantages/FurnitureAdvantages";
 import { FurnitureHelloScreen } from "@/widgets/FurnitureHelloScreen/FurnitureHelloScreen";
+import { LeaveRequestFile } from "@/widgets/LeaveRequestFile/LeaveRequestFile";
 import { LeaveRequestMini } from "@/widgets/LeaveRequestMini/LeaveRequestMini";
 import MainArticles from "@/widgets/MainArticles/MainArticles";
 import Reviews from "@/widgets/Reviews/Reviews";
@@ -56,11 +57,12 @@ export default async function page() {
       />
       <CustomerChoice />
       <Reviews withoutBg reviews={reviews} />
-      <FourSteps />
-      <LeaveRequestMini
+      <LeaveRequestFile
+        full
         tag="Получить бесплатный эскиз"
         location="Страница корпусной мебели"
       />
+      <FourSteps />
       <MainArticles withoutBg />
     </div>
   );

@@ -1,6 +1,5 @@
 import { Editor } from "@tiptap/react";
-import styles from "./EditorButtons.module.scss";
-import { type ReactNode, useCallback } from "react";
+import { useCallback, type ReactNode } from "react";
 import {
   FaAlignCenter,
   FaAlignJustify,
@@ -15,6 +14,7 @@ import {
   FaUnderline,
   FaUndo,
 } from "react-icons/fa";
+import { GoHorizontalRule } from "react-icons/go";
 import {
   LuHeading2,
   LuHeading3,
@@ -24,7 +24,7 @@ import {
 } from "react-icons/lu";
 import { MdFormatListBulleted, MdFormatListNumbered } from "react-icons/md";
 import { TbBlockquote } from "react-icons/tb";
-import { GoHorizontalRule } from "react-icons/go";
+import styles from "./EditorButtons.module.scss";
 
 interface Props {
   editor: Editor | null;
@@ -46,10 +46,11 @@ const EditorButtons = ({ editor, setLink }: Props): ReactNode => {
 
   return (
     <div className={styles.editorButtons}>
-      <button onClick={addImage}>
+      <button onClick={addImage} type="button">
         <FaImage />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
         className={editor.isActive("bold") ? styles.isActiveButton : ""}
@@ -57,6 +58,7 @@ const EditorButtons = ({ editor, setLink }: Props): ReactNode => {
         <FaBold />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleItalic().run()}
         disabled={!editor.can().chain().focus().toggleItalic().run()}
         className={editor.isActive("italic") ? styles.isActiveButton : ""}
@@ -64,6 +66,7 @@ const EditorButtons = ({ editor, setLink }: Props): ReactNode => {
         <FaItalic />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleStrike().run()}
         disabled={!editor.can().chain().focus().toggleStrike().run()}
         className={editor.isActive("strike") ? styles.isActiveButton : ""}
@@ -71,6 +74,7 @@ const EditorButtons = ({ editor, setLink }: Props): ReactNode => {
         <FaStrikethrough />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleUnderline().run()}
         disabled={!editor.can().chain().focus().toggleUnderline().run()}
         className={editor.isActive("underline") ? styles.isActiveButton : ""}
@@ -90,6 +94,7 @@ const EditorButtons = ({ editor, setLink }: Props): ReactNode => {
         Clear
       </button> */}
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
         className={
           editor.isActive("heading", { level: 2 }) ? styles.isActiveButton : ""
@@ -98,6 +103,7 @@ const EditorButtons = ({ editor, setLink }: Props): ReactNode => {
         <LuHeading2 />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
         className={
           editor.isActive("heading", { level: 3 }) ? styles.isActiveButton : ""
@@ -106,6 +112,7 @@ const EditorButtons = ({ editor, setLink }: Props): ReactNode => {
         <LuHeading3 />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
         className={
           editor.isActive("heading", { level: 4 }) ? styles.isActiveButton : ""
@@ -114,6 +121,7 @@ const EditorButtons = ({ editor, setLink }: Props): ReactNode => {
         <LuHeading4 />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
         className={
           editor.isActive("heading", { level: 5 }) ? styles.isActiveButton : ""
@@ -122,6 +130,7 @@ const EditorButtons = ({ editor, setLink }: Props): ReactNode => {
         <LuHeading5 />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
         className={
           editor.isActive("heading", { level: 6 }) ? styles.isActiveButton : ""
@@ -130,12 +139,14 @@ const EditorButtons = ({ editor, setLink }: Props): ReactNode => {
         <LuHeading6 />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         className={editor.isActive("bulletList") ? styles.isActiveButton : ""}
       >
         <MdFormatListBulleted />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         className={editor.isActive("orderedList") ? styles.isActiveButton : ""}
       >
@@ -149,12 +160,14 @@ const EditorButtons = ({ editor, setLink }: Props): ReactNode => {
         code block
       </button> */}
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         className={editor.isActive("blockquote") ? styles.isActiveButton : ""}
       >
         <TbBlockquote />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().setHorizontalRule().run()}
         className={editor.isActive("blockquote") ? styles.isActiveButton : ""}
       >
@@ -165,18 +178,21 @@ const EditorButtons = ({ editor, setLink }: Props): ReactNode => {
         hard break
       </button> */}
       <button
+        type="button"
         onClick={() => editor.chain().focus().undo().run()}
         disabled={!editor.can().chain().focus().undo().run()}
       >
         <FaUndo />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().redo().run()}
         disabled={!editor.can().chain().focus().redo().run()}
       >
         <FaRedo />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().setTextAlign("left").run()}
         disabled={!editor.can().chain().focus().setTextAlign("left").run()}
         className={
@@ -186,6 +202,7 @@ const EditorButtons = ({ editor, setLink }: Props): ReactNode => {
         <FaAlignLeft />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().setTextAlign("center").run()}
         disabled={!editor.can().chain().focus().setTextAlign("center").run()}
         className={
@@ -195,6 +212,7 @@ const EditorButtons = ({ editor, setLink }: Props): ReactNode => {
         <FaAlignCenter />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().setTextAlign("right").run()}
         disabled={!editor.can().chain().focus().setTextAlign("right").run()}
         className={
@@ -204,6 +222,7 @@ const EditorButtons = ({ editor, setLink }: Props): ReactNode => {
         <FaAlignRight />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().setTextAlign("justify").run()}
         disabled={!editor.can().chain().focus().setTextAlign("justify").run()}
         className={
@@ -213,6 +232,7 @@ const EditorButtons = ({ editor, setLink }: Props): ReactNode => {
         <FaAlignJustify />
       </button>
       <button
+        type="button"
         onClick={setLink}
         className={editor.isActive("link") ? styles.isActiveButton : ""}
       >

@@ -21,6 +21,7 @@ interface ButtonProps {
   };
   disabled?: boolean;
   modal: ModalButtonProps;
+  size?: "sm" | "md";
 }
 
 const isHaveArrow = (arrow: string | undefined): string => {
@@ -49,6 +50,7 @@ export const OrangeButtonModal = ({
   prefix,
   disabled,
   modal,
+  size = "md",
 }: ButtonProps) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isOpenThanks, setIsOpenThanks] = useState(false);
@@ -88,7 +90,9 @@ export const OrangeButtonModal = ({
         onClick={() => setIsOpenModal(true)}
         className={`${isCenter(center)} ${isHaveArrow(prefix?.location)} ${
           styles.button
-        } ${className || ""} ${isHaveArrow(arrow)}`}
+        } ${className || ""} ${isHaveArrow(arrow)} ${
+          size === "sm" ? styles.small : ""
+        }`}
       >
         {(prefix && prefix.location !== "right") ||
           (prefix && prefix.location === "left" && prefix.icon)}

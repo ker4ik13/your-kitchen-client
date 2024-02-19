@@ -93,21 +93,48 @@ const KitchenPage = async ({ params }: Props) => {
           <h1 className={styles.title}>{kitchen.title}</h1>
           <div className={styles.previewWrapperKitchen}>
             <KitchenSlider photos={kitchen.photos} />
+            <div className={styles.betweenWrapper}>
+              <div className={styles.tags}>
+                <div className={styles.tag}>
+                  <p>{kitchen.style.label}</p>
+                </div>
+                {kitchen.type && (
+                  <div className={styles.tag}>
+                    <p>{kitchen.type.label}</p>
+                  </div>
+                )}
+              </div>
+              <div className={styles.priceWrapper}>
+                <p className={styles.price} content={kitchen.price.toString()}>
+                  <span className={styles.brown}>От </span>
+                  {kitchen.price.toLocaleString("ru")}
+                  <span>₽</span>
+                </p>
+                <div className={styles.price}>
+                  <span className={styles.brown}>Срок </span>
+                  {kitchen.term}
+                </div>
+              </div>
+            </div>
           </div>
-          <div className={styles.button}>
+          <div className={styles.button}></div>
+          <div className={styles.contentString}>
+            <h5 className={styles.start}>
+              <b>Описание</b>
+            </h5>
             <OrangeButtonModal
+              size="sm"
               modal={{
                 buttonText: "Расчитать стоимость",
                 location: `Страница: ${kitchen.title}`,
                 tag: "Расчитать стоимость",
               }}
-              center
             >
               Рассчитать для себя
             </OrangeButtonModal>
           </div>
           <div
-            className={styles.content}
+            className={`${styles.content} ${styles.kitchenContent}`}
             dangerouslySetInnerHTML={{
               __html: kitchen.description,
             }}

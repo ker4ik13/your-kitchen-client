@@ -29,6 +29,7 @@ interface LeaveRequestProps {
   descriptionText?: string | ReactNode;
   tag?: string;
   location?: string;
+  full?: boolean;
 }
 
 export const LeaveRequestFile = ({
@@ -38,6 +39,7 @@ export const LeaveRequestFile = ({
   tag,
   location,
   cardTitle,
+  full,
 }: LeaveRequestProps) => {
   const {
     register,
@@ -81,7 +83,7 @@ export const LeaveRequestFile = ({
   return (
     <>
       {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
-      <div className={styles.leaveRequest}>
+      <div className={`${styles.leaveRequest} ${full ? styles.full : ""}`}>
         <Image
           src={requestBgImage}
           alt="Фон"
