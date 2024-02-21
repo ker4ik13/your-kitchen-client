@@ -1,0 +1,81 @@
+@import "@/shared/styles/_vars";
+
+.firstBlock {
+  background: #433a31;
+}
+.mainSwiper {
+  width: 100%;
+  height: auto;
+}
+
+.prevButton,
+.nextButton {
+  width: rem(48);
+  height: rem(48);
+  background-color: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  border-radius: rem(50);
+  top: auto;
+  border: 0;
+  outline: 1px solid transparent;
+  transition: 0.1s;
+  bottom: rem(60);
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  &:focus {
+    outline: 1px solid $white;
+  }
+  &:focus-within {
+    outline: 1px solid $white;
+  }
+}
+.nextButton {
+  right: calc(50% - rem(90));
+
+  &:after {
+    content: "next";
+    font-family: swiper-icons;
+    font-size: var(--swiper-navigation-size);
+    text-transform: none !important;
+    letter-spacing: 0;
+    font-variant: initial;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+  }
+}
+.prevButton {
+  left: calc(50% - rem(90));
+
+  &:after {
+    content: "prev";
+    font-family: swiper-icons;
+    font-size: var(--swiper-navigation-size);
+    text-transform: none !important;
+    letter-spacing: 0;
+    font-variant: initial;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+  }
+}
+.horizontal {
+  bottom: rem(70) !important;
+}
+.slide {
+  height: 100%;
+}

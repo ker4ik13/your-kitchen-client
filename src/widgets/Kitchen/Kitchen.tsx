@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/scss/pagination";
 import styles from "./Kitchen.module.scss";
 
 interface KitchenProps {
@@ -31,7 +31,9 @@ const Kitchen = ({ kitchen, isPreview, link }: KitchenProps) => {
       >
         <Swiper
           className={styles.swiper}
-          navigation={true}
+          navigation={{
+            enabled: true,
+          }}
           pagination={{
             enabled: true,
             clickable: true,

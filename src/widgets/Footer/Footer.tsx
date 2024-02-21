@@ -66,13 +66,18 @@ const Footer = () => {
             </Menu> */}
           </div>
           <div className={styles.downWrapper}>
-            <a href={links.tel} className={styles.downLink}>
+            <Link
+              aria-label="Телефон"
+              href={links.tel}
+              className={styles.downLink}
+            >
               <Icons.phone className={styles.downIcon} />
               <p className={styles.downLinkText} itemProp="telephone">
                 {links.phone}
               </p>
-            </a>
-            <a
+            </Link>
+            <Link
+              aria-label="Почта"
               href={links.mailTo}
               className={`${styles.downLink} ${styles.mt}`}
             >
@@ -80,12 +85,13 @@ const Footer = () => {
               <p className={styles.downLinkText} itemProp="email">
                 {links.email}
               </p>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
       <div className={styles.badge}>
         <iframe
+          title="Рейтинг в Яндекс"
           src="https://yandex.ru/sprav/widget/rating-badge/192446974752?type=rating&theme=dark"
           width="150"
           height="50"
@@ -99,13 +105,13 @@ const Footer = () => {
             ». Все права защищены.
           </p>
           <div className={styles.footerIcons}>
-            <Link href={links.tgGroup} target="_blank">
+            <Link aria-label="Телеграм" href={links.tgGroup} target="_blank">
               <Icons.telegram className={styles.footerDownIcon} />
             </Link>
-            <Link href={links.whatsapp} target="_blank">
+            <Link aria-label="Whatsapp" href={links.whatsapp} target="_blank">
               <Icons.whatsapp className={styles.footerDownIcon} />
             </Link>
-            <Link href={links.vk} target="_blank">
+            <Link aria-label="Вконтакте" href={links.vk} target="_blank">
               <Icons.vk className={styles.footerDownIcon} />
             </Link>
           </div>

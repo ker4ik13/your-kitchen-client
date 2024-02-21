@@ -15,15 +15,20 @@
   border-radius: rem(100);
   font-size: rem(14);
   text-transform: uppercase;
-  border: 1px solid transparent;
-  transition: border 0.2s linear;
+  transition: outline-color 0.2s linear;
   text-decoration: none;
   cursor: pointer;
   position: relative;
   z-index: 4;
+  border: 0;
+  outline: 1px solid transparent;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.6);
+    outline-color: rgba(255, 255, 255, 0.6);
+  }
+
+  &:focus {
+    outline-color: rgba(255, 255, 255, 0.6);
   }
 
   &.arrow {

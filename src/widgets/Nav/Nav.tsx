@@ -120,10 +120,14 @@ const Nav = () => {
                   +7 (495) 988-55-28
                 </p>
               </Link>
-              <Link href={links.tgChat} target="_blank">
+              <Link
+                aria-label="Наш телеграм"
+                href={links.tgChat}
+                target="_blank"
+              >
                 <Icons.telegram className={styles.navIcon} />
               </Link>
-              <Link href={links.whatsapp} target="_blank">
+              <Link aria-label="WhatsApp" href={links.whatsapp} target="_blank">
                 <Icons.splashWhatsapp className={styles.navIcon} />
               </Link>
             </div>
