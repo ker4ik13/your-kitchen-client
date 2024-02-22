@@ -58,16 +58,23 @@ const Review = ({ review }: ReviewProps) => {
                 itemType="https://schema.org/Person"
                 itemProp="author"
               >
-                <p className={styles.personFirstName} itemProp="givenName">
-                  {review.firstName}
-                </p>
-                <p className={styles.personLastName} itemProp="familyName">
-                  {review.lastName && review.lastName.slice(0, 1)}.
-                </p>
+                <div itemProp="name">
+                  <p className={styles.personFirstName}>{review.firstName}</p>
+                  <p className={styles.personLastName}>
+                    {review.lastName && review.lastName.slice(0, 1)}.
+                  </p>
+                </div>
               </div>
             </div>
             <div className={styles.reviewText} itemProp="reviewBody">
               {review.text}
+            </div>
+            <div
+              itemProp="reviewRating"
+              itemScope
+              itemType="https://schema.org/Rating"
+            >
+              <meta itemProp="ratingValue" content="5" />
             </div>
             <button
               type="button"
@@ -93,6 +100,7 @@ const Review = ({ review }: ReviewProps) => {
                 thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
             }}
             itemProp="itemReviewed"
+            content="Кухня"
           >
             {review.photos.map((photo, index) => (
               <SwiperSlide key={index} className={styles.reviewSlide}>

@@ -36,6 +36,12 @@
   &:focus-within {
     outline: 1px solid $white;
   }
+
+  @media screen and (max-width: $max-768) {
+    width: rem(36);
+    height: rem(36);
+    bottom: rem(34);
+  }
 }
 .nextButton {
   right: calc(50% - rem(90));
@@ -43,7 +49,7 @@
   &:after {
     content: "next";
     font-family: swiper-icons;
-    font-size: var(--swiper-navigation-size);
+    font-size: rem(16);
     text-transform: none !important;
     letter-spacing: 0;
     font-variant: initial;
@@ -53,6 +59,10 @@
     left: 50%;
     text-align: center;
     transform: translate(-50%, -50%);
+
+    @media screen and (max-width: $max-768) {
+      font-size: rem(12);
+    }
   }
 }
 .prevButton {
@@ -61,7 +71,7 @@
   &:after {
     content: "prev";
     font-family: swiper-icons;
-    font-size: var(--swiper-navigation-size);
+    font-size: rem(16);
     text-transform: none !important;
     letter-spacing: 0;
     font-variant: initial;
@@ -71,11 +81,28 @@
     left: 50%;
     text-align: center;
     transform: translate(-50%, -50%);
+
+    @media screen and (max-width: $max-768) {
+      font-size: rem(12);
+    }
   }
 }
 .horizontal {
   bottom: rem(70) !important;
+
+  @media screen and (max-width: $max-768) {
+    bottom: rem(40) !important;
+  }
 }
 .slide {
   height: 100%;
+}
+.pagination {
+  position: absolute;
+  left: 50%;
+  bottom: rem(20);
+  transform: translate(-50%, 0);
+  z-index: 10;
+  width: 100px;
+  background-color: #fff;
 }

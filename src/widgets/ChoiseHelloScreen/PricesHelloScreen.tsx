@@ -20,20 +20,17 @@ export const PricesHelloScreen = ({ openModal }: Props) => {
           priority
           quality={100}
         />
-        <div className={`${styles.container} ${styles.reverseDots}`}>
+        <div className={`${styles.container} ${styles.static}`}>
           <h2 className={`${styles.title} ${styles.boldTitle} ${styles.w840}`}>
             Есть проект - сравните цены!
           </h2>
-          <p className={`${styles.subtitle} ${styles.boldSubtitle}`}>
+          <p className={styles.subtitle}>
             Если у вас есть дизайн проект, эскиз, схема или картинка вашей кухни
             с размерами - пришлите информацию для расчета стоимости и получите
             консультанцию дизайнера.
           </p>
 
-          <OrangeButton
-            className={`${styles.button} ${styles.order4}`}
-            onClick={openModal}
-          >
+          <OrangeButton className={styles.button} onClick={openModal}>
             Узнать цену
           </OrangeButton>
           <div className={styles.ipad}>

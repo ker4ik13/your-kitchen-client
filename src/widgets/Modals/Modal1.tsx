@@ -1,13 +1,13 @@
 import { closeModalOnEscape } from "@/shared/helpers/closeModalOnEscape";
 import { ModalProps } from "@/types";
 import { useEffect } from "react";
-import LeaveRequest from "../LeaveRequest/LeaveRequest";
+import { LeaveRequest } from "../LeaveRequest/LeaveRequest";
 import styles from "./Modal.module.scss";
 
 const isOpenStyles = (isOpen: boolean) =>
   isOpen ? styles.modal : `${styles.modal} ${styles.hidden}`;
 
-const Modal1 = ({
+export const Modal1 = ({
   isOpen,
   setIsOpen,
   setIsOpenThanks,
@@ -49,5 +49,3 @@ const Modal1 = ({
     </div>
   );
 };
-
-export default Modal1;

@@ -5,8 +5,8 @@ import { Icons } from "@/shared/IconsComponents/Icons";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import Modal1 from "../Modals/Modal1";
-import ThanksModal from "../Modals/ThanksModal";
+import { Modal1 } from "../Modals/Modal1";
+import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./DiscountsHelloScreen.module.scss";
 
 export const DiscountsHelloScreen = () => {

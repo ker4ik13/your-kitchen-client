@@ -124,8 +124,8 @@ const KitchenExamples = ({ kitchens }: KitchenExamplesProps) => {
       <div className={styles.container}>
         <div className={styles.kitchens}>
           <h1 className={styles.title}>
-            <span>Примеры</span> кухонь, которые мы уже разработали для наших
-            клиентов
+            <span>Каталог</span> кухонь на заказ в Москве и области мебельной
+            фабрики “Твоя кухня”
           </h1>
           <h3 className={styles.subtitle}>
             <span>Выберите свою:</span> от лофта до классики

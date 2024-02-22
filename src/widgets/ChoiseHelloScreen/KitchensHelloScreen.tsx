@@ -3,11 +3,7 @@ import { OrangeButton } from "@/shared/ui";
 import Image from "next/image";
 import styles from "./ChoiseHelloScreen.module.scss";
 
-interface Props {
-  openModal: () => void;
-}
-
-export const KitchensHelloScreen = ({ openModal }: Props) => {
+export const KitchensHelloScreen = () => {
   return (
     <>
       <div className={`${styles.helloScreen} ${styles.kitchensScreen}`}>
@@ -20,7 +16,9 @@ export const KitchensHelloScreen = ({ openModal }: Props) => {
           quality={100}
         />
         <div className={`${styles.container} ${styles.reverseDots}`}>
-          <div className={`${styles.tags} ${styles.column}`}>
+          <div
+            className={`${styles.tags} ${styles.column} ${styles.upperTags}`}
+          >
             <div className={styles.tagWrapper}>
               <p className={styles.tag}>Рассрочка до 24 месяцев</p>
               <div className={styles.circle}></div>
@@ -34,18 +32,20 @@ export const KitchensHelloScreen = ({ openModal }: Props) => {
               <div className={`${styles.circle} ${styles.last}`}></div>
             </div>
           </div>
-          <h1 className={`${styles.title} ${styles.boldTitle} ${styles.w840}`}>
+          <h1
+            className={`${styles.title} ${styles.boldTitle} ${styles.w840} ${styles.ptHigh}`}
+          >
             Кухни на заказ от производителя в Москве и Московской области
           </h1>
-          <p className={`${styles.subtitle} ${styles.boldSubtitle}`}>
+          <p className={`${styles.subtitle} ${styles.upperSubtitle}`}>
             Индивидуальные кухни на заказ от производителя в Москве и Московской
             области с гарантией и возможностью рассрочки до 24 месяцев:
             выбирайте из широкого ассортимента стилей и материалов,
             наслаждайтесь уникальным дизайном и комфортом.
           </p>
 
-          <OrangeButton className={styles.button} onClick={openModal}>
-            получить 3D-проект и скидку
+          <OrangeButton className={styles.button} href="#kitchens">
+            Подробнее
           </OrangeButton>
         </div>
       </div>

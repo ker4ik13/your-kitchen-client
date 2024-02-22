@@ -10,17 +10,17 @@ const Footer = () => {
     <footer
       className={styles.footer}
       itemScope
-      itemType="https://schema.org/Organization"
+      itemType="https://schema.org/LocalBusiness"
     >
       <div className={styles.container}>
         <div className={styles.upperWrapper}>
-          <Logo />
+          <Logo isSchemaOrg />
           <div className={styles.pages}>
             <Link href={"/"} className={styles.link}>
               Главная
             </Link>
             <Link href={`${pagesLinks.portfolio}`} className={styles.link}>
-              Кухни
+              Каталог
             </Link>
             <Link href={`${pagesLinks.furniture}`} className={styles.link}>
               Мебель
@@ -115,13 +115,22 @@ const Footer = () => {
               <Icons.vk className={styles.footerDownIcon} />
             </Link>
           </div>
-          <p className={styles.footerDownText}>
-            <span itemProp="address">
-              г. Москва, ул. Новоостаповская д. 6Б.
-            </span>
-            <span> </span>
-            <span>Мы работаем 10:00 - 20:00 / Без выходных</span>
-          </p>
+          <div className={styles.footerDownText}>
+            <div
+              itemProp="address"
+              itemScope
+              itemType="http://schema.org/PostalAddress"
+            >
+              <span itemProp="addressLocality"> г. Москва,</span>
+              <span itemProp="streetAddress">
+                ул. Новоостаповская д. 6Б.
+              </span>{" "}
+              <span itemProp="postalCode" content="115088"></span>
+            </div>
+            <time itemProp="openingHours" dateTime="Mo-Su 10:00-20:00">
+              Мы работаем 10:00 - 20:00 / Без выходных
+            </time>
+          </div>
         </div>
       </div>
     </footer>

@@ -9,8 +9,8 @@ import { Icons } from "@/shared/IconsComponents/Icons";
 import { OrangeButton } from "@/shared/ui";
 import Image from "next/image";
 import { useState } from "react";
-import Modal1 from "../Modals/Modal1";
-import ThanksModal from "../Modals/ThanksModal";
+import { Modal1 } from "../Modals/Modal1";
+import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./AllVariant.module.scss";
 
 const AllVariants = () => {

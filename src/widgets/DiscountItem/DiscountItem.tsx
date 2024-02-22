@@ -10,8 +10,8 @@ import type { DiscountType, IDiscount } from "@/types/IDiscount";
 import Image from "next/image";
 import { useState } from "react";
 import { DiscountModal } from "../Modals/DiscountModal";
-import Modal1 from "../Modals/Modal1";
-import ThanksModal from "../Modals/ThanksModal";
+import { Modal1 } from "../Modals/Modal1";
+import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./DiscountItem.module.scss";
 
 interface Props {
@@ -95,7 +95,6 @@ export const DiscountItem = ({ discount }: Props) => {
         />
         {/* Левая часть */}
         <div className={styles.leftImage}>
-          <span itemProp="availability" content="InStock"></span>
           <span itemProp="priceCurrency" content="RUB"></span>
           <span itemProp="price" content="0.00"></span>
           <span itemProp="url" content={pagesData.discounts.url}></span>
@@ -113,7 +112,11 @@ export const DiscountItem = ({ discount }: Props) => {
             <span itemScope itemType="http://schema.org/Brand">
               <span itemProp="name" content={SITE_NAME}></span>
             </span>
-            <div className={styles.term}>
+            <div
+              className={styles.term}
+              itemProp="availability"
+              content="InStock"
+            >
               <p className={styles.termText}>Сроки проведения</p>
               <span itemProp="validFrom" content={discount.startDate}></span>
               <span itemProp="validThrough" content={discount.endDate}></span>

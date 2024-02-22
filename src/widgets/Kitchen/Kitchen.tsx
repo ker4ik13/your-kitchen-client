@@ -12,14 +12,15 @@ import styles from "./Kitchen.module.scss";
 
 interface KitchenProps {
   kitchen: IKitchen;
-  isPreview?: boolean;
   link?: string;
 }
 
-const Kitchen = ({ kitchen, isPreview, link }: KitchenProps) => {
+const Kitchen = ({ kitchen, link }: KitchenProps) => {
   return (
     <>
       <Link
+        itemScope
+        itemType="https://schema.org/Product"
         className={styles.kitchen}
         href={
           link
@@ -46,16 +47,14 @@ const Kitchen = ({ kitchen, isPreview, link }: KitchenProps) => {
           }
           loop={true}
           modules={[Navigation, Pagination]}
-          itemScope
-          itemType="https://schema.org/Product"
         >
           <div className={styles.content}>
-            <span itemProp="brand" content={SITE_NAME}></span>
+            <meta itemProp="brand" content={SITE_NAME} />
             <div className={styles.betweenWrapper}>
               <p className={styles.name} itemProp="name">
                 {kitchen.title}
               </p>
-              <div className={styles.tags} itemProp="keywords">
+              <div className={styles.tags}>
                 <div className={styles.tag}>
                   <p>{kitchen.style.label}</p>
                 </div>
@@ -79,7 +78,8 @@ const Kitchen = ({ kitchen, isPreview, link }: KitchenProps) => {
               itemScope
               itemType="http://schema.org/AggregateOffer"
             >
-              <div itemProp="priceCurrency" content="₽">
+              <meta itemProp="lowPrice" content={kitchen.price.toString()} />
+              <div itemProp="priceCurrency" content="RUB">
                 <p
                   className={styles.price}
                   itemProp="price"

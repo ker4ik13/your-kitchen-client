@@ -4,8 +4,8 @@ import bgImage from "@/data/images/bg_mebel.jpg";
 import { OrangeButton } from "@/shared/ui";
 import Image from "next/image";
 import { useState } from "react";
-import Modal1 from "../Modals/Modal1";
-import ThanksModal from "../Modals/ThanksModal";
+import { Modal1 } from "../Modals/Modal1";
+import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./FurnitureHelloScreen.module.scss";
 
 interface Props {

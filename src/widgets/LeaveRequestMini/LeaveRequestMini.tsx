@@ -9,7 +9,7 @@ import { CreateClaimDto } from "@/types/dtos/CreateClaim.dto";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import ReactInputMask from "react-input-mask";
-import ThanksModal from "../Modals/ThanksModal";
+import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./LeaveRequestMini.module.scss";
 
 const API_URL: string | undefined = process.env.NEXT_PUBLIC_API_URL;

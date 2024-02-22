@@ -1,13 +1,10 @@
 import bgImage from "@/data/images/bg_discounts_screen.jpg";
+import { pagesLinks } from "@/shared/constants";
 import { OrangeButton } from "@/shared/ui";
 import Image from "next/image";
 import styles from "./ChoiseHelloScreen.module.scss";
 
-interface Props {
-  openModal: () => void;
-}
-
-export const DiscountsHelloScreenSlider = ({ openModal }: Props) => {
+export const DiscountsHelloScreenSlider = () => {
   return (
     <>
       <div className={`${styles.helloScreen} ${styles.furnitureScreen}`}>
@@ -30,13 +27,13 @@ export const DiscountsHelloScreenSlider = ({ openModal }: Props) => {
           <h2 className={`${styles.title} ${styles.boldTitle} ${styles.w1050}`}>
             Подарки и техника новым и действующим клиентам фабрики «Твоя кухня»
           </h2>
-          <p className={`${styles.subtitle} ${styles.boldSubtitle}`}>
+          <p className={styles.subtitle}>
             Актуальный каталог акций и скидок на кухни и корпусную мебель в
             Москве. Выгодные предложения на покупку кухонного гарнитура и другой
             мебели на заказ.
           </p>
 
-          <OrangeButton className={styles.button} onClick={openModal}>
+          <OrangeButton className={styles.button} href={pagesLinks.discounts}>
             Подробнее об акциях
           </OrangeButton>
         </div>

@@ -27,12 +27,26 @@
   }
 
   @media (max-width: $max-450) {
-    min-height: rem(800);
+    min-height: rem(850);
   }
 
   &.screenIpad {
+    padding-top: rem(190);
+    position: relative;
+
     @media screen and (max-width: $max-1300) {
+      padding-top: rem(150);
       flex-direction: column;
+      align-items: flex-start;
+    }
+    @media screen and (max-width: $max-950) {
+      padding-top: rem(160);
+    }
+    @media screen and (max-width: $max-768) {
+      min-height: rem(900);
+    }
+    @media screen and (max-width: $max-700) {
+      min-height: rem(850);
     }
   }
 }
@@ -68,6 +82,13 @@
     -o-object-position: right;
     object-position: right;
   }
+
+  &.furnitureBg {
+    @media screen and (max-width: $max-768) {
+      -o-object-position: 81%;
+      object-position: 81%;
+    }
+  }
 }
 .container {
   @include container();
@@ -81,6 +102,16 @@
   &.reverseDots {
     display: flex;
     flex-direction: column;
+
+    .tags {
+      @media screen and (max-width: $max-950) {
+        gap: rem(4);
+      }
+    }
+  }
+
+  &.static {
+    position: static;
   }
 }
 .tags {
@@ -89,10 +120,15 @@
   gap: rem(15);
   order: 1;
 
+  &.upperTags {
+    @media screen and (max-width: $max-950) {
+      margin-top: rem(-30);
+    }
+  }
+
   &.column {
     .tagWrapper {
       display: flex;
-      flex-direction: row-reverse;
       align-items: center;
       gap: rem(15);
     }
@@ -102,6 +138,18 @@
       align-items: flex-start;
       order: 3;
       margin-top: rem(60);
+
+      &.upperTags {
+        margin-top: rem(20);
+
+        @media screen and (max-width: $max-700) {
+          margin-top: rem(60);
+        }
+      }
+
+      .tagWrapper {
+        flex-direction: row-reverse;
+      }
     }
   }
 }
@@ -140,6 +188,8 @@
   width: 100%;
   margin-bottom: rem(20);
   order: 2;
+  position: relative;
+  z-index: 10;
 
   @media screen and (max-width: $max-950) {
     order: 1;
@@ -165,36 +215,51 @@
     }
   }
 
+  &.ptHigh {
+    @media (max-width: $max-950) {
+      margin-top: rem(130);
+    }
+    @media (max-width: $max-700) {
+      margin-top: rem(114);
+    }
+  }
+
   @media (max-width: $max-700) {
     font-size: rem(24);
     max-width: rem(380);
     line-height: 1.3;
+    margin-top: rem(30);
   }
 }
 .subtitle {
   display: flex;
   align-items: center;
-  @include gilroy(400);
+  @include gilroy(600);
   font-size: rem(18);
   color: $white;
   max-width: rem(663);
   margin-top: rem(50);
   order: 3;
+  position: relative;
+  z-index: 10;
+
+  &.upperSubtitle {
+    @media screen and (max-width: $max-950) {
+      margin-top: 0;
+    }
+
+    @media screen and (max-width: $max-700) {
+      margin-top: rem(30);
+    }
+  }
 
   @media screen and (max-width: $max-950) {
     order: 2;
   }
 
-  @media (max-width: $max-768) {
-    margin-top: rem(30);
-  }
   @media (max-width: $max-500) {
     font-size: rem(14);
     max-width: rem(330);
-  }
-
-  &.boldSubtitle {
-    font-weight: 600;
   }
 }
 
@@ -204,17 +269,21 @@
 
   @media (max-width: $max-768) {
     margin: 0 auto;
-    margin-top: rem(30);
+    // margin-top: rem(30);
+    position: absolute;
+    left: 50%;
+    bottom: rem(90);
+    transform: translate(-50%, 0);
   }
 }
 .order4 {
   order: 3;
   @media screen and (max-width: $max-950) {
     order: 4;
-    margin-top: rem(-120);
   }
-  @media screen and (max-width: $max-450) {
-    margin-top: rem(-50);
+  @media screen and (max-width: $max-768) {
+    order: 0;
+    position: absolute;
   }
 }
 .ipad {
@@ -229,17 +298,19 @@
 
   @media screen and (max-width: $max-1300) {
     position: static;
-    margin-top: rem(240);
+    margin-top: rem(200);
     padding-inline: rem(40);
   }
+  @media screen and (max-width: $max-1000) {
+    margin: 0 auto;
+    margin-top: rem(120);
+    max-width: rem(400);
+  }
   @media screen and (max-width: $max-768) {
-    margin-top: rem(180);
-    padding-inline: rem(40);
     order: 3;
   }
   @media screen and (max-width: $max-450) {
     margin-top: rem(140);
-    padding-inline: rem(40);
   }
 }
 .ipadImg {
