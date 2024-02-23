@@ -54,6 +54,10 @@ const HomePage = async () => {
   const { kitchens, reviews, workers } = await getHomeInfo();
   return (
     <>
+      <div itemScope itemType="https://schema.org/WebSite">
+        <meta itemProp="url" content={pagesData.main.name} />
+        <meta itemProp="name" content={SITE_NAME} />
+      </div>
       <MainSlider />
       <Kitchens kitchens={kitchens} />
       <SecondScreen />
