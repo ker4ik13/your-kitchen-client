@@ -58,16 +58,20 @@ export const KitchenSlider = ({ photos }: Props) => {
             />
           </SwiperSlide>
         ))}
-        <button
-          type="button"
-          onClick={() => swiper?.slidePrev()}
-          className={styles.prevButton}
-        ></button>
-        <button
-          type="button"
-          onClick={() => swiper?.slideNext()}
-          className={styles.nextButton}
-        ></button>
+        {photos.length > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={() => swiper?.slidePrev()}
+              className={styles.prevButton}
+            ></button>
+            <button
+              type="button"
+              onClick={() => swiper?.slideNext()}
+              className={styles.nextButton}
+            ></button>
+          </>
+        )}
       </Swiper>
       <Swiper
         modules={[Thumbs, Navigation]}

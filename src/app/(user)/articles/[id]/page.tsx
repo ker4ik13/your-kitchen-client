@@ -38,10 +38,11 @@ export const generateMetadata = async ({
       ),
       title: `${article.title} | ${SITE_NAME}`,
       description: article.description,
+      keywords: article.meta.keywords || undefined,
       openGraph: {
         type: pagesData.articles.type,
-        title: `${article.title} | ${SITE_NAME}`,
-        description: article.description,
+        title: `${article.meta.title}` || `${article.title} | ${SITE_NAME}`,
+        description: article.meta.description || undefined,
         publishedTime: article.createdAt,
         modifiedTime: article.updatedAt,
         url: `${CLIENT_URL}/${pagesData.articles.name}/${article.link}`,

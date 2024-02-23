@@ -15,6 +15,7 @@ import {
 import { useDebouncedCallback } from "@/shared/helpers/hooks";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { checkAuth } from "@/store/user.slice";
+import type { IMeta } from "@/types";
 import { IError } from "@/types/IError";
 import {
   KitchensOptions,
@@ -84,11 +85,7 @@ interface TInputs {
   term: string;
   onMainPage: boolean;
   slug: string;
-  meta: {
-    description?: string;
-    title?: string;
-    keywords?: string;
-  };
+  meta: IMeta;
 }
 
 // Тексты
@@ -130,6 +127,11 @@ const NewKitchenPage = () => {
   const [termValue, setTermValue] = useState("");
 
   const checkSlug = async (value: string) => {
+    if (!value) {
+      setIsOkSlug(false);
+      return;
+    }
+
     const response = await KitchenService.checkSlug(value);
 
     if (response.status === 404) {
