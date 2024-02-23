@@ -40,6 +40,10 @@ const PortfolioPage = async () => {
   const { kitchens, reviews } = await getPortfolioInfo();
   return (
     <>
+      <div itemScope itemType="https://schema.org/WebSite">
+        <meta itemProp="url" content={pagesData.portfolio.name} />
+        <meta itemProp="name" content={SITE_NAME} />
+      </div>
       <KitchenExamples kitchens={kitchens} />
       <Reviews reviews={reviews} />
       <LeaveRequestBlock />
