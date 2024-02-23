@@ -259,7 +259,7 @@ const KitchenExamples = ({ kitchens }: KitchenExamplesProps) => {
                 .toReversed()
                 .map((kitchen, i) => (
                   <div className={styles.kitchenWrapper} key={i}>
-                    <Kitchen kitchen={kitchen} isPreview />
+                    <Kitchen kitchen={kitchen} />
                   </div>
                 ))}
             {scopeKitchens.length === 0 && (
