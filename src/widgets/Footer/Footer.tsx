@@ -10,17 +10,17 @@ const Footer = () => {
     <footer
       className={styles.footer}
       itemScope
-      itemType="https://schema.org/Organization"
+      itemType="https://schema.org/LocalBusiness"
     >
       <div className={styles.container}>
         <div className={styles.upperWrapper}>
-          <Logo />
+          <Logo isSchemaOrg />
           <div className={styles.pages}>
             <Link href={"/"} className={styles.link}>
               Главная
             </Link>
             <Link href={`${pagesLinks.portfolio}`} className={styles.link}>
-              Кухни
+              Каталог
             </Link>
             <Link href={`${pagesLinks.furniture}`} className={styles.link}>
               Мебель
@@ -66,13 +66,18 @@ const Footer = () => {
             </Menu> */}
           </div>
           <div className={styles.downWrapper}>
-            <a href={links.tel} className={styles.downLink}>
+            <Link
+              aria-label="Телефон"
+              href={links.tel}
+              className={styles.downLink}
+            >
               <Icons.phone className={styles.downIcon} />
               <p className={styles.downLinkText} itemProp="telephone">
                 {links.phone}
               </p>
-            </a>
-            <a
+            </Link>
+            <Link
+              aria-label="Почта"
               href={links.mailTo}
               className={`${styles.downLink} ${styles.mt}`}
             >
@@ -80,12 +85,13 @@ const Footer = () => {
               <p className={styles.downLinkText} itemProp="email">
                 {links.email}
               </p>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
       <div className={styles.badge}>
         <iframe
+          title="Рейтинг в Яндекс"
           src="https://yandex.ru/sprav/widget/rating-badge/192446974752?type=rating&theme=dark"
           width="150"
           height="50"
@@ -99,23 +105,32 @@ const Footer = () => {
             ». Все права защищены.
           </p>
           <div className={styles.footerIcons}>
-            <Link href={links.tgGroup} target="_blank">
+            <Link aria-label="Телеграм" href={links.tgGroup} target="_blank">
               <Icons.telegram className={styles.footerDownIcon} />
             </Link>
-            <Link href={links.whatsapp} target="_blank">
+            <Link aria-label="Whatsapp" href={links.whatsapp} target="_blank">
               <Icons.whatsapp className={styles.footerDownIcon} />
             </Link>
-            <Link href={links.vk} target="_blank">
+            <Link aria-label="Вконтакте" href={links.vk} target="_blank">
               <Icons.vk className={styles.footerDownIcon} />
             </Link>
           </div>
-          <p className={styles.footerDownText}>
-            <span itemProp="address">
-              г. Москва, ул. Новоостаповская д. 6Б.
-            </span>
-            <span> </span>
-            <span>Мы работаем 10:00 - 20:00 / Без выходных</span>
-          </p>
+          <div className={styles.footerDownText}>
+            <div
+              itemProp="address"
+              itemScope
+              itemType="http://schema.org/PostalAddress"
+            >
+              <span itemProp="addressLocality"> г. Москва,</span>
+              <span itemProp="streetAddress">
+                ул. Новоостаповская д. 6Б.
+              </span>{" "}
+              <span itemProp="postalCode" content="115088"></span>
+            </div>
+            <time itemProp="openingHours" dateTime="Mo-Su 10:00-20:00">
+              Мы работаем 10:00 - 20:00 / Без выходных
+            </time>
+          </div>
         </div>
       </div>
     </footer>

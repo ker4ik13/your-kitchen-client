@@ -29,6 +29,7 @@ const OurTeam = ({ team }: OurTeamProps) => {
             className={`${styles.slider} workersSlider`}
             slidesPerView={2.8}
             initialSlide={2}
+            speed={500}
             spaceBetween={50}
             centeredSlides
             loop

@@ -5,6 +5,7 @@ export * from "./IError";
 export * from "./IFurniture";
 export * from "./IKitchen";
 export * from "./ILoginResponse";
+export * from "./IMeta";
 export * from "./IOption";
 export * from "./IPhoto";
 export * from "./IReview";

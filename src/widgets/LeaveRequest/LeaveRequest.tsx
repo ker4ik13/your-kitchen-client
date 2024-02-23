@@ -16,12 +16,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import ReactInputMask from "react-input-mask";
 import styles from "./LeaveRequest.module.scss";
 
-const API_URL: string | undefined = process.env.NEXT_PUBLIC_API_URL;
-
-if (!API_URL) {
-  throw new Error("Api url has been not imported from .env");
-}
-
 interface LeaveRequestProps {
   isModal?: boolean;
   onClick?: (...options: any) => void;
@@ -34,7 +28,7 @@ interface LeaveRequestProps {
   location?: string;
 }
 
-const LeaveRequest = ({
+export const LeaveRequest = ({
   isModal,
   onClick,
   setIsOpen,
@@ -354,5 +348,3 @@ const LeaveRequest = ({
     </div>
   );
 };
-
-export default LeaveRequest;

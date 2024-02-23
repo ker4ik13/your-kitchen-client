@@ -5,6 +5,7 @@ import styles from "../../Page.module.scss";
 
 import KitchenService from "@/services/KitchenService";
 import MiniLoading from "@/shared/MiniLoading";
+import { dropOrChangeHandler } from "@/shared/helpers/dragHandlers";
 import { useDebouncedCallback } from "@/shared/helpers/hooks";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { checkAuth } from "@/store/user.slice";
@@ -108,7 +109,8 @@ const EditKitchenPage = () => {
 
   const [photos, setPhotos] = useState<any[]>([]);
   const [files, setFiles] = useState<File[]>([]);
-  // const [drag, setDrag] = useState(false);
+  const [newPhotos, setNewPhotos] = useState<any[]>([]);
+  const [drag, setDrag] = useState(false);
 
   // Стейты для select
   const [inputValue, setInputValue] = useState("");
@@ -161,6 +163,11 @@ const EditKitchenPage = () => {
         isError: false,
         value: "",
       });
+      return;
+    }
+
+    if (!value) {
+      setIsOkSlug(false);
       return;
     }
 
@@ -304,6 +311,26 @@ const EditKitchenPage = () => {
     return null;
   }
 
+  // Удалить изображение из существующего объекта
+  const deleteImage = (photoTitle: string) => {
+    const images = [...photos];
+
+    const newPhotos = images.filter((image) => photoTitle !== image);
+
+    setPhotos(newPhotos);
+  };
+
+  // Удалить изображение из нового объекта
+  const deleteNewImage = (photoTitle: string) => {
+    const images = [...newPhotos];
+
+    const result = images.filter((image) => photoTitle !== image.title);
+    const newFiles = files.filter((file) => photoTitle !== file.name);
+
+    setFiles(newFiles);
+    setNewPhotos(result);
+  };
+
   const changeSlugPlaceholder = (title: string) => {
     const slugInput = document.querySelector("#slug");
     if (!slugInput) {
@@ -338,6 +365,42 @@ const EditKitchenPage = () => {
     }
   };
 
+  // Обработчик фото
+  const getPhotosFromFiles = (event: any, files: any[]) => {
+    const photos: any[] = [];
+
+    files.map((file) => {
+      let photo = {
+        title: file.name,
+        src: URL.createObjectURL(file),
+      };
+
+      photos.push(photo);
+    });
+
+    setNewPhotos(photos);
+  };
+
+  // Обработчики
+  const dragStartHandler = (event: any) => {
+    event.preventDefault();
+    setDrag(true);
+  };
+  const dragLeaveHandler = (event: any) => {
+    event.preventDefault();
+    setDrag(false);
+  };
+  const dropHandler = (event: any) => {
+    event.preventDefault();
+    setDrag(false);
+    let files = [...event.dataTransfer.files];
+    setFiles(files);
+
+    if (files && files.length > 0) {
+      getPhotosFromFiles(event, files);
+    }
+  };
+
   if (userStore.isLoading) {
     return (
       <div className={styles.page}>
@@ -358,6 +421,19 @@ const EditKitchenPage = () => {
     );
   }
   const onSubmit: SubmitHandler<TInputs> = async (data) => {
+    if (!photos.length && !newPhotos.length) {
+      setError({
+        isError: true,
+        value: "Добавьте хотя бы одну фотографию",
+      });
+      return;
+    }
+
+    setError({
+      isError: false,
+      value: "",
+    });
+
     if (error.isError) {
       return;
     }
@@ -377,6 +453,14 @@ const EditKitchenPage = () => {
     form.append("term", data.term);
     form.append("slug", data.slug);
     form.append("meta", JSON.stringify(data.meta));
+
+    const oldPhotos = photos.map((photo: string) => photo.split("/").at(-1));
+    form.append("photos", JSON.stringify(oldPhotos));
+
+    // Добавление новых фото
+    files.forEach((file) => {
+      form.append(`files`, file);
+    });
 
     const response = await KitchenService.updateKitchen(kitchen._id, form);
     if (response.status === 200) {
@@ -402,6 +486,7 @@ const EditKitchenPage = () => {
       });
       setFiles([]);
       setPhotos([]);
+      setNewPhotos([]);
     } else {
       setError({
         isError: true,
@@ -632,33 +717,6 @@ const EditKitchenPage = () => {
             />
           </div>
 
-          {/* Фото */}
-          {/* <div className={styles.inputWrapper}>
-            <label className={styles.label}>Фото</label>
-            <input
-              id='photos'
-              type='file'
-              {...register("photos", {
-                required: true,
-                value: photos,
-              })}
-              accept='image/png, image/jpeg, image/jpg, image/webp'
-              multiple
-              className={styles.inputPhotos}
-              required
-              onChange={(event) => changeHandler(event)}
-              onDragStart={(event) => dragStartHandler(event)}
-              onDragLeave={(event) => dragLeaveHandler(event)}
-              onDragOver={(event) => dragStartHandler(event)}
-              onDrop={(event) => dropHandler(event)}
-            />
-            <label htmlFor='photos' className={styles.labelPhotos}>
-              {!drag
-                ? "Нажмите или перетащите изображения"
-                : "Отпустите изображения"}
-            </label>
-          </div> */}
-
           {/* Предпросмотр фото */}
           {photos && photos.length > 0 && (
             <div className={styles.photosPreview}>
@@ -670,17 +728,75 @@ const EditKitchenPage = () => {
                     alt={`Фото ${index + 1}`}
                     className={styles.previewPhoto}
                   />
-                  {/* <button
-                    type='button'
+                  <button
+                    type="button"
                     className={styles.deleteButton}
                     onClick={() => deleteImage(photo)}
                   >
                     ×
-                  </button> */}
+                  </button>
                   <p className={styles.photoTitle}>{photo}</p>
                 </div>
               ))}
             </div>
+          )}
+
+          {/* Добавить фото */}
+          <div className={styles.inputWrapper}>
+            <label className={styles.label}>Фото</label>
+            <input
+              id="photos"
+              type="file"
+              {...register("photos", {
+                value: photos,
+              })}
+              accept="image/png, image/jpeg, image/jpg, image/webp"
+              multiple
+              className={styles.inputPhotos}
+              onChange={(event) =>
+                dropOrChangeHandler(
+                  event,
+                  files,
+                  setDrag,
+                  setFiles,
+                  setNewPhotos,
+                )
+              }
+              onDragStart={(event) => dragStartHandler(event)}
+              onDragLeave={(event) => dragLeaveHandler(event)}
+              onDragOver={(event) => dragStartHandler(event)}
+              onDrop={(event) => dropHandler(event)}
+            />
+            <label htmlFor="photos" className={styles.labelPhotos}>
+              {!drag ? "Добавить новые фото" : "Отпустите изображения"}
+            </label>
+          </div>
+
+          {/* Предпросмотр новых фото */}
+          {newPhotos && newPhotos.length > 0 && (
+            <>
+              <label className={styles.label}>Новые фото</label>
+              <div className={styles.photosPreview}>
+                {newPhotos.map((photo, index) => (
+                  <div className={styles.photo} key={index}>
+                    <img
+                      src={photo.src}
+                      draggable={false}
+                      alt={`Фото ${index + 1}`}
+                      className={styles.previewPhoto}
+                    />
+                    <button
+                      type="button"
+                      className={styles.deleteButton}
+                      onClick={() => deleteNewImage(photo.title)}
+                    >
+                      ×
+                    </button>
+                    <p className={styles.photoTitle}>{photo.title}</p>
+                  </div>
+                ))}
+              </div>
+            </>
           )}
         </form>
       </div>

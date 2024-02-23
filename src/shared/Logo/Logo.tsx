@@ -4,7 +4,25 @@ import Link from "next/link";
 import { pagesLinks } from "../constants";
 import styles from "./Logo.module.scss";
 
-const Logo = () => {
+interface LogoProps {
+  isSchemaOrg?: boolean;
+}
+
+const Logo = ({ isSchemaOrg = false }: LogoProps) => {
+  if (!isSchemaOrg) {
+    return (
+      <Link href={pagesLinks.main} className={styles.logo}>
+        <Image
+          src={logoWithText}
+          alt="Твоя кухня"
+          draggable={false}
+          priority
+          className={styles.logoImg}
+        />
+      </Link>
+    );
+  }
+
   return (
     <Link href={pagesLinks.main} className={styles.logo}>
       <Image

@@ -13,14 +13,8 @@ import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import ReactInputMask from "react-input-mask";
-import ThanksModal from "../Modals/ThanksModal";
+import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./LeaveRequestFile.module.scss";
-
-const API_URL: string | undefined = process.env.NEXT_PUBLIC_API_URL;
-
-if (!API_URL) {
-  throw new Error("Api url has been not imported from .env");
-}
 
 interface LeaveRequestProps {
   title?: string;
@@ -53,7 +47,6 @@ export const LeaveRequestFile = ({
 
   const onSubmitLeaveRequest: SubmitHandler<TFormInputsFile> = async (data) => {
     const form = new FormData();
-    console.log(data);
 
     const files: any = [...data.files];
 
@@ -178,7 +171,7 @@ export const LeaveRequestFile = ({
                     type="submit"
                     onClick={handleSubmit(onSubmitLeaveRequest)}
                   >
-                    Узнать цену
+                    {buttonText ? buttonText : "Узнать цену"}
                   </OrangeButton>
                   <p className={styles.infoText}>
                     Нажимая на кнопку «Отправить» вы даёте{" "}

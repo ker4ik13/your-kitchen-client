@@ -1,0 +1,337 @@
+@import "@/shared/styles/_vars";
+
+.helloScreen {
+  display: flex;
+  min-height: rem(800);
+  max-height: rem(1400);
+  height: 100%;
+  overflow: hidden;
+  padding-top: rem(160);
+  position: relative;
+
+  @media (max-width: $max-1300) {
+    padding-top: rem(80);
+    min-height: rem(850);
+
+    &.furnitureScreen {
+      padding-top: rem(140);
+    }
+
+    &.kitchensScreen {
+      padding-top: rem(140);
+
+      @media screen and (max-width: $max-950) {
+        padding-top: rem(80);
+      }
+    }
+  }
+
+  @media (max-width: $max-450) {
+    min-height: rem(850);
+  }
+
+  &.screenIpad {
+    padding-top: rem(190);
+    position: relative;
+
+    @media screen and (max-width: $max-1300) {
+      padding-top: rem(150);
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    @media screen and (max-width: $max-950) {
+      padding-top: rem(160);
+    }
+    @media screen and (max-width: $max-768) {
+      min-height: rem(900);
+    }
+    @media screen and (max-width: $max-700) {
+      min-height: rem(850);
+    }
+  }
+}
+.bgImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  max-width: none;
+
+  &.blur {
+    -webkit-filter: blur(3px);
+    filter: blur(3px);
+  }
+
+  -webkit-mask-image: linear-gradient(
+    0deg,
+    rgba(64, 56, 48, 0) 0%,
+    rgba(255, 255, 255, 1) 30.29%
+  );
+
+  mask-image: linear-gradient(
+    0deg,
+    rgba(64, 56, 48, 0) 0%,
+    rgba(255, 255, 255, 1) 30.29%
+  );
+
+  @media (max-width: $max-1000) {
+    -o-object-position: right;
+    object-position: right;
+  }
+
+  &.furnitureBg {
+    @media screen and (max-width: $max-768) {
+      -o-object-position: 81%;
+      object-position: 81%;
+    }
+  }
+}
+.container {
+  @include container();
+
+  @media (min-width: $max-700) {
+    padding-left: rem(56);
+  }
+  position: relative;
+  z-index: 2;
+
+  &.reverseDots {
+    display: flex;
+    flex-direction: column;
+
+    .tags {
+      @media screen and (max-width: $max-950) {
+        gap: rem(4);
+      }
+    }
+  }
+
+  &.static {
+    position: static;
+  }
+}
+.tags {
+  display: flex;
+  align-items: center;
+  gap: rem(15);
+  order: 1;
+
+  &.upperTags {
+    @media screen and (max-width: $max-950) {
+      margin-top: rem(-30);
+    }
+  }
+
+  &.column {
+    .tagWrapper {
+      display: flex;
+      align-items: center;
+      gap: rem(15);
+    }
+
+    @media screen and (max-width: $max-950) {
+      flex-direction: column;
+      align-items: flex-start;
+      order: 3;
+      margin-top: rem(60);
+
+      &.upperTags {
+        margin-top: rem(20);
+
+        @media screen and (max-width: $max-700) {
+          margin-top: rem(60);
+        }
+      }
+
+      .tagWrapper {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+}
+.tag {
+  @include gilroy(500);
+  font-size: rem(20);
+  color: $white;
+
+  @media screen and (max-width: $max-768) {
+    font-size: rem(16);
+  }
+}
+.circle {
+  width: rem(10);
+  height: rem(10);
+  border-radius: rem(100);
+  background-color: #d56745;
+  -webkit-filter: drop-shadow(0px 0px 8.2px rgba(255, 255, 255, 0.25));
+  filter: drop-shadow(0px 0px 8.2px rgba(255, 255, 255, 0.25));
+
+  &.last {
+    display: none;
+
+    @media screen and (max-width: $max-950) {
+      display: block;
+    }
+  }
+}
+.title {
+  margin-top: rem(50);
+  @include noto(300);
+  font-size: rem(48);
+  line-height: 1.3;
+  color: #fff;
+  max-width: rem(660);
+  width: 100%;
+  margin-bottom: rem(20);
+  order: 2;
+  position: relative;
+  z-index: 10;
+
+  @media screen and (max-width: $max-950) {
+    order: 1;
+  }
+
+  &.boldTitle {
+    font-weight: 600;
+    max-width: rem(711);
+  }
+
+  &.w840 {
+    max-width: rem(840);
+  }
+
+  &.w1050 {
+    font-size: rem(44);
+    max-width: rem(1050);
+
+    @media (max-width: $max-700) {
+      font-size: rem(24);
+      max-width: rem(380);
+      line-height: 1.3;
+    }
+  }
+
+  &.ptHigh {
+    @media (max-width: $max-950) {
+      margin-top: rem(130);
+    }
+    @media (max-width: $max-700) {
+      margin-top: rem(114);
+    }
+  }
+
+  @media (max-width: $max-700) {
+    font-size: rem(24);
+    max-width: rem(380);
+    line-height: 1.3;
+    margin-top: rem(30);
+  }
+}
+.subtitle {
+  display: flex;
+  align-items: center;
+  @include gilroy(600);
+  font-size: rem(18);
+  color: $white;
+  max-width: rem(663);
+  margin-top: rem(50);
+  order: 3;
+  position: relative;
+  z-index: 10;
+
+  &.upperSubtitle {
+    @media screen and (max-width: $max-950) {
+      margin-top: 0;
+    }
+
+    @media screen and (max-width: $max-700) {
+      margin-top: rem(30);
+    }
+  }
+
+  @media screen and (max-width: $max-950) {
+    order: 2;
+  }
+
+  @media (max-width: $max-500) {
+    font-size: rem(14);
+    max-width: rem(330);
+  }
+}
+
+.button {
+  margin-top: rem(50);
+  order: 4;
+
+  @media (max-width: $max-768) {
+    margin: 0 auto;
+    // margin-top: rem(30);
+    position: absolute;
+    left: 50%;
+    bottom: rem(90);
+    transform: translate(-50%, 0);
+  }
+}
+.order4 {
+  order: 3;
+  @media screen and (max-width: $max-950) {
+    order: 4;
+  }
+  @media screen and (max-width: $max-768) {
+    order: 0;
+    position: absolute;
+  }
+}
+.ipad {
+  position: absolute;
+  right: rem(-100);
+  top: 50%;
+  transform: translate(0, -50%);
+  z-index: 1;
+  max-width: rem(500);
+  width: 100%;
+  order: 4;
+
+  @media screen and (max-width: $max-1300) {
+    position: static;
+    margin-top: rem(200);
+    padding-inline: rem(40);
+  }
+  @media screen and (max-width: $max-1000) {
+    margin: 0 auto;
+    margin-top: rem(120);
+    max-width: rem(400);
+  }
+  @media screen and (max-width: $max-768) {
+    order: 3;
+  }
+  @media screen and (max-width: $max-450) {
+    margin-top: rem(140);
+  }
+}
+.ipadImg {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+  z-index: 2;
+}
+.ellipse {
+  border-radius: rem(100);
+  background-color: #98826d;
+  -webkit-filter: blur(rem(64));
+  filter: blur(rem(64));
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: rem(384);
+  aspect-ratio: 1/1;
+  z-index: 0;
+  opacity: 0.6;
+}

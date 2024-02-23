@@ -33,6 +33,29 @@
     height: rem(280);
   }
 }
+.horizontal {
+  bottom: auto !important;
+  top: 1.25rem !important;
+  color: $white !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(9);
+  left: 50% !important;
+  transform: translate(-50%, 0) !important;
+}
+.bullet {
+  background-color: #fff !important;
+  opacity: 0.5 !important;
+  min-width: rem(8);
+  min-height: rem(8);
+  width: rem(8) !important;
+  height: rem(8) !important;
+  border-radius: rem(50);
+}
+.bulletActive {
+  opacity: 1 !important;
+}
 .sliderImage {
   width: 100%;
   height: 100%;
@@ -104,4 +127,84 @@
   mask-image: none;
   -webkit-filter: none;
   filter: none;
+}
+
+.prevButton,
+.nextButton {
+  width: rem(48);
+  height: rem(48);
+  background-color: rgba(40, 35, 32, 0.67);
+  position: absolute;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  border-radius: rem(50);
+  bottom: auto;
+  top: 50%;
+  transform: translate(0, -50%);
+  border: 0;
+  outline: 1px solid transparent;
+  transition: 0.1s;
+
+  &:hover {
+    background-color: rgba(40, 35, 32, 0.8);
+  }
+
+  &:focus {
+    outline: 1px solid $white;
+  }
+  &:focus-within {
+    outline: 1px solid $white;
+  }
+
+  @media screen and (max-width: $max-768) {
+    width: rem(24);
+    height: rem(24);
+  }
+}
+.nextButton {
+  right: rem(20);
+
+  &:after {
+    font-size: rem(16);
+    content: "next";
+    font-family: swiper-icons;
+    text-transform: none !important;
+    letter-spacing: 0;
+    font-variant: initial;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+
+    @media screen and (max-width: $max-768) {
+      font-size: rem(10);
+    }
+  }
+}
+.prevButton {
+  left: rem(20);
+
+  &:after {
+    font-size: rem(16);
+    content: "prev";
+    font-family: swiper-icons;
+    text-transform: none !important;
+    letter-spacing: 0;
+    font-variant: initial;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+
+    @media screen and (max-width: $max-768) {
+      font-size: rem(10);
+    }
+  }
 }

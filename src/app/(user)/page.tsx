@@ -24,27 +24,21 @@ export const metadata: Metadata = {
   },
 };
 
-import styles from "@/pages/HomePage.module.scss";
 import { UserKitchenService } from "@/services/UserKitchenService";
 import { UserReviewsService } from "@/services/UserReviewsService";
 import { UserWorkerService } from "@/services/UserWorkerService";
 import { LeaveRequestBlock } from "@/shared/LeaveRequestBlock";
 import { LeaveRequestBlock2 } from "@/shared/LeaveRequestBlock2";
-import MiniLoading from "@/shared/MiniLoading";
 import AllVariants from "@/widgets/AllVariants/AllVariants";
 import Correction from "@/widgets/Correction/Correction";
-import HelloScreen from "@/widgets/HelloScreen/HelloScreen";
 import Kitchens from "@/widgets/Kitchens/Kitchens";
 import MainArticles from "@/widgets/MainArticles/MainArticles";
+import { MainSlider } from "@/widgets/MainSlider/MainSlider";
+import OurTeam from "@/widgets/OurTeam/OurTeam";
 import Results from "@/widgets/Results/Results";
 import Reviews from "@/widgets/Reviews/Reviews";
 import SecondScreen from "@/widgets/SecondScreen/SecondScreen";
 import WhatsNext from "@/widgets/WhatsNext/WhatsNext";
-import dynamic from "next/dynamic";
-
-const DynamicOurTeam = dynamic(() => import("@/widgets/OurTeam/OurTeam"), {
-  loading: () => <MiniLoading className={styles.loading} />,
-});
 
 export const revalidate = 30;
 
@@ -60,7 +54,7 @@ const HomePage = async () => {
   const { kitchens, reviews, workers } = await getHomeInfo();
   return (
     <>
-      <HelloScreen />
+      <MainSlider />
       <Kitchens kitchens={kitchens} />
       <SecondScreen />
       <Correction />
@@ -69,7 +63,7 @@ const HomePage = async () => {
       <Results />
       <LeaveRequestBlock />
       <Reviews reviews={reviews} />
-      <DynamicOurTeam team={workers} />
+      <OurTeam team={workers} />
       <MainArticles />
       <LeaveRequestBlock2 />
     </>

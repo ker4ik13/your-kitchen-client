@@ -9,6 +9,7 @@ export interface ModalProps {
   tag?: string;
   location?: string;
   title?: string;
+  cardTitle?: string;
 }
 export interface ModalButtonProps {
   buttonText?: string;

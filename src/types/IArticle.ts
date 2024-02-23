@@ -1,3 +1,5 @@
+import type { IMeta } from "./IMeta";
+
 export interface IArticle {
   _id: string;
   link: string;
@@ -10,4 +12,6 @@ export interface IArticle {
   author: string;
   createdAt: string;
   updatedAt?: string;
+  meta: IMeta;
+  slug: string;
 }

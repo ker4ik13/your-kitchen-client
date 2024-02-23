@@ -35,6 +35,7 @@ const Reviews = ({ withoutBg, reviews }: ReviewsProps) => {
             slidesPerView={1.6}
             spaceBetween={50}
             itemScope
+            speed={500}
             itemType="https://schema.org/reviews"
             breakpoints={{
               1400: {

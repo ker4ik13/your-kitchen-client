@@ -1,7 +1,5 @@
 "use client";
 
-import "@/shared/styles/swiper-buttons.css";
-import "@/shared/styles/swiper-pagination-top.css";
 import Image from "next/image";
 import { useState } from "react";
 import typeSwiper from "swiper";
@@ -19,10 +17,12 @@ interface Props {
 export const KitchenSlider = ({ photos }: Props) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<typeSwiper | null>(null);
   const handleThumbs = (swiper: typeSwiper) => setThumbsSwiper(swiper);
+  const [swiper, setSwiper] = useState<typeSwiper | null>(null);
 
   return (
     <div className={styles.swiper}>
       <Swiper
+        onInit={(swiper) => setSwiper(swiper)}
         className={styles.slider}
         modules={[Navigation, Pagination, Thumbs]}
         loop
@@ -31,13 +31,20 @@ export const KitchenSlider = ({ photos }: Props) => {
         }
         navigation={{
           enabled: true,
+          prevEl: styles.prevButton,
+          nextEl: styles.nextButton,
         }}
         thumbs={{
           slideThumbActiveClass: styles.activeThumb,
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
         pagination={{
+          horizontalClass: styles.horizontal,
           enabled: true,
+          bulletElement: "button",
+          bulletClass: styles.bullet,
+          bulletActiveClass: styles.bulletActive,
+          clickable: true,
         }}
       >
         {photos.map((photo, index) => (
@@ -51,6 +58,20 @@ export const KitchenSlider = ({ photos }: Props) => {
             />
           </SwiperSlide>
         ))}
+        {photos.length > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={() => swiper?.slidePrev()}
+              className={styles.prevButton}
+            ></button>
+            <button
+              type="button"
+              onClick={() => swiper?.slideNext()}
+              className={styles.nextButton}
+            ></button>
+          </>
+        )}
       </Swiper>
       <Swiper
         modules={[Thumbs, Navigation]}
@@ -76,6 +97,7 @@ export const KitchenSlider = ({ photos }: Props) => {
               src={photo}
               width={100}
               height={100}
+              itemType="image"
               alt={`Кухня ${index + 1}`}
               className={styles.thumbsImage}
             />

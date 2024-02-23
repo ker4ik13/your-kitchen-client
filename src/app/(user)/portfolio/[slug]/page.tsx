@@ -72,8 +72,13 @@ const KitchenPage = async ({ params }: Props) => {
 
   return (
     <>
-      <article className={styles.kitchenPage}>
+      <article
+        className={styles.kitchenPage}
+        itemScope
+        itemType="https://schema.org/Product"
+      >
         <div className={styles.container}>
+          <meta itemProp="brand" content={SITE_NAME} />
           <div className={styles.prevPage}>
             <Link
               href={`/${pagesData.portfolio.name}`}
@@ -90,7 +95,9 @@ const KitchenPage = async ({ params }: Props) => {
               </span>
             </p>
           </div>
-          <h1 className={styles.title}>{kitchen.title}</h1>
+          <h1 className={styles.title} itemProp="name">
+            {kitchen.title}
+          </h1>
           <div className={styles.previewWrapperKitchen}>
             <KitchenSlider photos={kitchen.photos} />
             <div className={styles.betweenWrapper}>
@@ -104,8 +111,18 @@ const KitchenPage = async ({ params }: Props) => {
                   </div>
                 )}
               </div>
-              <div className={styles.priceWrapper}>
-                <p className={styles.price} content={kitchen.price.toString()}>
+              <div
+                className={styles.priceWrapper}
+                itemProp="offers"
+                itemScope
+                itemType="http://schema.org/AggregateOffer"
+              >
+                <meta itemProp="lowPrice" content={kitchen.price.toString()} />
+                <p
+                  className={styles.price}
+                  itemProp="price"
+                  content={kitchen.price.toString()}
+                >
                   <span className={styles.brown}>От </span>
                   {kitchen.price.toLocaleString("ru")}
                   <span>₽</span>
@@ -135,6 +152,7 @@ const KitchenPage = async ({ params }: Props) => {
           </div>
           <div
             className={`${styles.content} ${styles.kitchenContent}`}
+            itemProp="description"
             dangerouslySetInnerHTML={{
               __html: kitchen.description,
             }}
