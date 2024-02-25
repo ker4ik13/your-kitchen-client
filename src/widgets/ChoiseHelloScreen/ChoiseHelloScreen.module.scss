@@ -2,7 +2,7 @@
 
 .helloScreen {
   display: flex;
-  min-height: rem(800);
+  min-height: rem(700);
   max-height: rem(1400);
   height: 100%;
   overflow: hidden;
@@ -33,6 +33,9 @@
     }
   }
 
+  @media screen and (max-width: $max-950) {
+    min-height: rem(850);
+  }
   @media screen and (max-width: $max-700) {
     min-height: rem(800);
   }
@@ -317,7 +320,7 @@
   @media screen and (max-width: $max-1300) {
     right: 0;
     position: static;
-    margin-top: rem(200);
+    margin-top: rem(180);
     padding-inline: rem(40);
     align-self: flex-end;
   }
@@ -328,8 +331,11 @@
   @media screen and (max-width: $max-768) {
     order: 3;
     margin: 0 auto;
-    margin-top: rem(140);
+    margin-top: rem(100);
     margin-bottom: rem(100);
+  }
+  @media screen and (max-width: $max-600) {
+    margin-top: rem(140);
   }
 }
 .ipadImg {

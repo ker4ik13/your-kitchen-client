@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import typeSwiper from "swiper";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { DiscountsHelloScreenSlider } from "../ChoiseHelloScreen/DiscountsHelloScreenSlider";
 import { FurnitureHelloScreenSlider } from "../ChoiseHelloScreen/FurnitureHelloScreenSlider";
@@ -25,15 +25,16 @@ export const MainSlider = () => {
       <div className={styles.firstBlock}>
         <Swiper
           onInit={(swiper) => setSwiper(swiper)}
-          modules={[Navigation, Pagination, Autoplay]}
+          // modules={[Navigation, Pagination, Autoplay]}
+          modules={[Navigation, Pagination]}
           speed={
             typeof window !== "undefined" && window.innerWidth < 768
               ? 900
               : 1250
           }
-          autoplay={{
-            delay: 4000,
-          }}
+          // autoplay={{
+          //   delay: 4000,
+          // }}
           navigation={{
             enabled: true,
             prevEl: styles.prevButton,
