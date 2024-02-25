@@ -20,7 +20,7 @@ export const PricesHelloScreen = ({ openModal }: Props) => {
           priority
           quality={100}
         />
-        <div className={`${styles.container} ${styles.static}`}>
+        <div className={`${styles.container} ${styles.reverseDots}`}>
           <h2 className={`${styles.title} ${styles.boldTitle} ${styles.w840}`}>
             Есть проект - сравните цены!
           </h2>
