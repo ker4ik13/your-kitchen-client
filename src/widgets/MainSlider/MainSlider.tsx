@@ -26,7 +26,11 @@ export const MainSlider = () => {
         <Swiper
           onInit={(swiper) => setSwiper(swiper)}
           modules={[Navigation, Pagination, Autoplay]}
-          speed={1250}
+          speed={
+            typeof window !== "undefined" && window.innerWidth < 768
+              ? 900
+              : 1250
+          }
           autoplay={{
             delay: 4000,
           }}
