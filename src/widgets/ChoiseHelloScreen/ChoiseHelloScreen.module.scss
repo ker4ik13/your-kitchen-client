@@ -280,7 +280,7 @@
 }
 
 .button {
-  position: absolute;
+  position: absolute !important;
   left: rem(20);
   bottom: rem(140);
   z-index: 10;
