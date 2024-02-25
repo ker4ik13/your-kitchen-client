@@ -3,6 +3,7 @@ import bgImage from "@/data/images/prices_hello_screen.jpg";
 import { OrangeButton } from "@/shared/ui";
 import Image from "next/image";
 import styles from "./ChoiseHelloScreen.module.scss";
+import { Icons } from "@/shared/IconsComponents/Icons";
 
 interface Props {
   openModal: () => void;
@@ -29,6 +30,18 @@ export const PricesHelloScreen = ({ openModal }: Props) => {
             с размерами - пришлите информацию для расчета стоимости и получите
             консультанцию дизайнера.
           </p>
+          <div className={styles.asks}>
+            <div className={styles.ask}>
+              <Icons.lamp className={styles.icon} />
+              <p className={styles.askText}>Как улучшить проект?</p>
+            </div>
+            <div className={styles.ask}>
+              <Icons.keys className={styles.icon} />
+              <p className={styles.askText}>
+                Из чего сделать надежную и долговечную кухню?
+              </p>
+            </div>
+          </div>
 
           <OrangeButton className={styles.button} onClick={openModal}>
             Узнать цену
