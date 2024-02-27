@@ -65,11 +65,17 @@ const HomePage = async () => {
       <AllVariants />
       <WhatsNext />
       <Results />
-      <LeaveRequestBlock />
+      <LeaveRequestBlock
+        location='Главная страница, после "Давайте подытожим"'
+        tag="Рассчитать стоимость кухни"
+      />
       <Reviews reviews={reviews} />
       <OurTeam team={workers} />
       <MainArticles />
-      <LeaveRequestBlock2 />
+      <LeaveRequestBlock2
+        location="Главная страница, последняя форма"
+        tag="Рассчитать стоимость кухни"
+      />
     </>
   );
 };

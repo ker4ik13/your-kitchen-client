@@ -166,7 +166,10 @@ const ArticlePage = async ({ params }: Props) => {
             </OrangeButton>
           </div>
         </div>
-        <LeaveRequestBlock2 />
+        <LeaveRequestBlock2
+          location={`Страница статьи ${article.title}`}
+          tag="Рассчитать стоимость кухни"
+        />
       </article>
     </>
   );

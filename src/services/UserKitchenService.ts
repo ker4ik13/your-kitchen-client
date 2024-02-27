@@ -1,4 +1,5 @@
 import { IKitchen } from "@/types/IKitchen";
+import { notFound } from "next/navigation";
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
@@ -53,18 +54,22 @@ export class UserKitchenService {
   }
 
   static async getKitchenBySlug(slug: string): Promise<IKitchen> {
-    const response = await fetch(
-      `${NEXT_PUBLIC_API_URL}/api/kitchens-by-slug/${slug}`,
-    );
+    try {
+      const response = await fetch(
+        `${NEXT_PUBLIC_API_URL}/api/kitchens-by-slug/${slug}`,
+      );
 
-    const jsonKitchen: IKitchen = await response.json();
+      const jsonKitchen: IKitchen = await response.json();
 
-    const returnKitchen = { ...jsonKitchen };
-    const kitchenPhotos = returnKitchen.photos.map((file) => {
-      return `${NEXT_PUBLIC_API_URL}/images/${file}`;
-    });
+      const returnKitchen = { ...jsonKitchen };
+      const kitchenPhotos = returnKitchen.photos.map((file) => {
+        return `${NEXT_PUBLIC_API_URL}/images/${file}`;
+      });
 
-    returnKitchen.photos = kitchenPhotos;
-    return returnKitchen;
+      returnKitchen.photos = kitchenPhotos;
+      return returnKitchen;
+    } catch (error) {
+      return notFound();
+    }
   }
 }

@@ -53,14 +53,14 @@ export default async function page() {
       <FurnitureAdvantages />
       <LeaveRequestMini
         tag="Получить бесплатный эскиз"
-        location="Страница корпусной мебели"
+        location="Страница корпусной мебели, после преимуществ"
       />
       <CustomerChoice />
       <Reviews withoutBg reviews={reviews} />
       <LeaveRequestFile
         full
-        tag="Получить бесплатный эскиз"
-        location="Страница корпусной мебели"
+        tag="Узнать цену"
+        location='Страница корпусной мебели, "Есть проект - сравните цену!"'
       />
       <FourSteps />
       <MainArticles withoutBg />

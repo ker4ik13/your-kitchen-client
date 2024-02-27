@@ -5,13 +5,13 @@ import ipadImg from "@/data/images/ipad_project.webp";
 import { isErrorStyles } from "@/features/isErrorStyles";
 import ClaimService from "@/services/ClaimService";
 import { Icons } from "@/shared/IconsComponents/Icons";
+import { closeModalOnEscape } from "@/shared/helpers/closeModalOnEscape";
 import { OrangeButton } from "@/shared/ui";
 import { ModalProps } from "@/types";
 import { TFormInputsNames } from "@/types/TFormInputs";
 import type { TFormInputsFile } from "@/types/TFormInputsFile";
 import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import ReactInputMask from "react-input-mask";
 import { ThanksModal } from "../ThanksModal";
@@ -31,6 +31,7 @@ export const LeaveRequestFileModal = ({
   cardTitle,
   isOpen,
   setIsOpen,
+  setIsOpenPrivacy,
 }: FileModal) => {
   const {
     register,
@@ -41,6 +42,23 @@ export const LeaveRequestFileModal = ({
   } = useForm<TFormInputsFile>();
   const [filesCount, setFilesCount] = useState(0);
   const [isOpenThanks, setIsOpenThanks] = useState(false);
+
+  const openPrivacy = () => {
+    if (setIsOpenPrivacy) {
+      setIsOpenPrivacy(true);
+      document.body.classList.add("overflow");
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", (event) => {
+      closeModalOnEscape(event, setIsOpen);
+    });
+    return () =>
+      document.removeEventListener("keydown", (event) => {
+        closeModalOnEscape(event, setIsOpen);
+      });
+  }, []);
 
   const onSubmitLeaveRequest: SubmitHandler<TFormInputsFile> = async (data) => {
     const form = new FormData();
@@ -195,9 +213,9 @@ export const LeaveRequestFileModal = ({
                     </OrangeButton>
                     <p className={styles.infoText}>
                       Нажимая на кнопку «Отправить» вы даёте{" "}
-                      <Link href={"#"}>
+                      <button type="button" onClick={openPrivacy}>
                         согласие на обработку персональных данных
-                      </Link>
+                      </button>
                     </p>
                   </div>
                 </form>

@@ -43,13 +43,25 @@ export default function RootLayout({
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff0000" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#433A31" />
+        <script
+          defer
+          type="text/javascript"
+          id="cookieinfo"
+          src="//cookieinfoscript.com/js/cookieinfo.min.js"
+          data-bg="#433a31"
+          data-fg="#FFFFFF"
+          data-moreinfo=""
+          data-linkmsg=""
+          data-divlinkbg="#d3613d"
+          data-divlink="#FFFFFF"
+          data-message="Этот сайт использует сооkiе для хранения данных. Продолжая использовать сайт, Вы даете согласие на работу с этими файлами."
+          data-close-text="Принять и закрыть"
+        ></script>
         {process.env.NODE_ENV === "production" && (
           <>
             <script defer src="https://af.click.ru/af.js?id=12257"></script>
-            <Script
-              async
-              src="https://www.googletagmanager.com/gtag/js?id=G-9PXGLTWQJK"
-            ></Script>
+            async
+            <Script src="https://www.googletagmanager.com/gtag/js?id=G-9PXGLTWQJK"></Script>
             <Script
               id="google-analytics"
               dangerouslySetInnerHTML={{

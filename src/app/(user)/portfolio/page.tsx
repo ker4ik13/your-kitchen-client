@@ -46,7 +46,10 @@ const PortfolioPage = async () => {
       </div>
       <KitchenExamples kitchens={kitchens} />
       <Reviews reviews={reviews} />
-      <LeaveRequestBlock />
+      <LeaveRequestBlock
+        location="Страница портфолио"
+        tag="Рассчитать стоимость кухни"
+      />
     </>
   );
 };

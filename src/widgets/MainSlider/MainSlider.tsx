@@ -1,5 +1,6 @@
 "use client";
 
+import { PrivacyPolicy } from "@/shared/PrivacyPolicy";
 import { useState } from "react";
 import typeSwiper from "swiper";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -9,10 +10,12 @@ import { FurnitureHelloScreenSlider } from "../ChoiseHelloScreen/FurnitureHelloS
 import { KitchensHelloScreen } from "../ChoiseHelloScreen/KitchensHelloScreen";
 import { PricesHelloScreen } from "../ChoiseHelloScreen/PricesHelloScreen";
 import { LeaveRequestFileModal } from "../Modals";
+import { TextModal } from "../Modals/TextModal/TextModal";
 import styles from "./MainSlider.module.scss";
 
 export const MainSlider = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenPrivacy, setIsOpenPrivacy] = useState(false);
   const [swiper, setSwiper] = useState<typeSwiper | null>(null);
   const openModal = () => {
     setIsOpen(true);
@@ -21,7 +24,18 @@ export const MainSlider = () => {
 
   return (
     <>
-      <LeaveRequestFileModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <TextModal
+        isOpen={isOpenPrivacy}
+        setIsOpen={setIsOpenPrivacy}
+        text={PrivacyPolicy}
+        key={"main-privacy"}
+      />
+      <LeaveRequestFileModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        setIsOpenPrivacy={setIsOpenPrivacy}
+        key={"main-modal"}
+      />
       <div className={styles.firstBlock}>
         <Swiper
           onInit={(swiper) => setSwiper(swiper)}

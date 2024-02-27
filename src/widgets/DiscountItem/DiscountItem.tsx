@@ -68,7 +68,7 @@ export const DiscountItem = ({ discount }: Props) => {
         setIsOpenThanks={setIsOpenThanks}
         isOpen={isOpenModal}
         location="Страница акций"
-        tag={`Акция: ${discount.name}`}
+        tag={`Учавствовать в акции: ${discount.name}`}
         title="Оставьте заявку и зафиксируйте участие в акции"
         descriptionText="специалист перезвонит вам и расскажет подробные условия, ответит на вопросы и забронирует ваше участие в текущей акции"
         buttonText="Участвовать в акции"

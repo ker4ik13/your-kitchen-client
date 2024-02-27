@@ -23,6 +23,8 @@ const Kitchens = ({ kitchens }: KitchensProps) => {
         setIsOpen={setIsOpen}
         setIsOpenThanks={setIsOpenThanks}
         buttonText="Получить каталог"
+        location="Главная страница"
+        tag="Получить полный каталог"
       />
       {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <div className={styles.kitchensPage} id="kitchens">

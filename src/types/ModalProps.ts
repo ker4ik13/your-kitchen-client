@@ -10,6 +10,7 @@ export interface ModalProps {
   location?: string;
   title?: string;
   cardTitle?: string;
+  setIsOpenPrivacy?: (isOpen: boolean) => void;
 }
 export interface ModalButtonProps {
   buttonText?: string;

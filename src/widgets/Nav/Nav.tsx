@@ -45,7 +45,7 @@ const Nav = () => {
                 href={pagesLinks.portfolio}
                 className={isActive(pagesLinks.portfolio)}
               >
-                Каталог
+                Кухни
               </Link>
               <Link
                 href={pagesLinks.furniture}
@@ -77,6 +77,12 @@ const Nav = () => {
                 className={isActive(pagesLinks.discounts)}
               >
                 Акции
+              </Link>
+              <Link
+                href={pagesLinks.contacts}
+                className={isActive(pagesLinks.contacts)}
+              >
+                Контакты
               </Link>
 
               {/* <div className={styles.menuWrapper}>

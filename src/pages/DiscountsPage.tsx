@@ -1,6 +1,7 @@
+import bgImage from "@/data/images/bg_discouts.jpg";
 import type { IDiscount } from "@/types/IDiscount";
+import { CenterHelloScreen } from "@/widgets/CenterHelloScreen/CenterHelloScreen";
 import { Discounts } from "@/widgets/Discounts/Discounts";
-import { DiscountsHelloScreen } from "@/widgets/DiscountsHelloScreen/DiscountsHelloScreen";
 import { LeaveRequestMini } from "@/widgets/LeaveRequestMini/LeaveRequestMini";
 import MainArticles from "@/widgets/MainArticles/MainArticles";
 import styles from "./FurniturePage.module.scss";
@@ -14,7 +15,14 @@ interface DiscountsPageProps {
 const DiscountsPage = ({ discounts }: DiscountsPageProps) => {
   return (
     <div className={styles.bg}>
-      <DiscountsHelloScreen />
+      <CenterHelloScreen
+        title="Скидки, акции и подарки"
+        subtitle="Актуальный каталог акций и скидок на кухни и корпусную мебель в Москве. Выгодное предложения на покупку кухонного гарнитура или другой мебели на заказ."
+        bg={bgImage}
+        button={{
+          href: "#discounts",
+        }}
+      />
       {discounts && <Discounts discounts={discounts} />}
       <LeaveRequestMini
         tag="Узнать про акции"

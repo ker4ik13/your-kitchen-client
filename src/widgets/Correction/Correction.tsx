@@ -23,6 +23,8 @@ const Correction = () => {
         isOpen={isOpenModal}
         setIsOpen={setIsOpenModal}
         setIsOpenThanks={setIsOpenThanks}
+        location='Главная страница, блок "Вот как мы это исправим"'
+        tag="Рассчитать стоимость кухни"
       />
       {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <ModalVideo

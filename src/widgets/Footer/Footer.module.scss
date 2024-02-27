@@ -194,3 +194,24 @@
     width: rem(20);
   }
 }
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: rem(4);
+
+  @media screen and (max-width: $max-1000) {
+    align-items: center;
+  }
+}
+.privacyButton {
+  font-size: rem(12);
+  color: #f28c6b;
+  text-decoration: none;
+  border: 0;
+  outline: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

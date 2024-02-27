@@ -3,8 +3,9 @@ import main2 from "@/data/images/main/main2.jpg";
 import main3 from "@/data/images/main/main3.jpg";
 import main4 from "@/data/images/main/main4.jpg";
 import main5 from "@/data/images/main/main5.jpg";
-import AdvantagesPage from "@/pages/AdvantagesPage";
+import { LeaveRequestBlock } from "@/shared/LeaveRequestBlock";
 import { SITE_NAME, pagesData } from "@/shared/constants";
+import Advantages from "@/widgets/Advantages/Advantages";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -28,7 +29,11 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <>
-      <AdvantagesPage />
+      <Advantages />
+      <LeaveRequestBlock
+        location="Страница преимуществ"
+        tag="Рассчитать стоимость кухни"
+      />
     </>
   );
 };

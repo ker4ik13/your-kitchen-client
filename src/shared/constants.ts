@@ -62,6 +62,16 @@ export const pagesData: IPages = {
     url: `${CLIENT_URL}/discounts`,
     type: "website",
   },
+  contacts: {
+    name: `contacts`,
+    title: "Контакты | Твоя кухня",
+    description:
+      "Контакты, адреса офисов и способы связи с мебельной фабрикой Твоя кухня. Телефоны e-mail и др.",
+    keywords:
+      "контакты твоя кухня, мебельная фабрика твоя кухня контакты, реквизиты твоя кухня, адрес офиса фабрики твоя кухня, адрес офиса твоя кухня в москве, фабрика твоя кухня адрес, способы связи твоя кухня, твоя кухня адрес, твоя кухня социальные сети, мебель твоя кухня контакты, твоя кухня москва адрес, твоя кухня телефоны, телефон фабрики твоя кухня, телефон мебельной фабрики твоя кухня, клиентская поддержка твоя кухня, позвонить твоя кухня мебельная фабрика, твоя кухня позвонить, адрес и контакты твоя кухня",
+    url: `${CLIENT_URL}/contacts`,
+    type: "website",
+  },
 };
 
 export const links: ILink = {
@@ -84,6 +94,7 @@ export const pagesLinks = {
   portfolio: "/portfolio",
   advantages: "/preimushestva",
   furniture: "/korpusnaya_mebel",
+  contacts: "/contacts",
   admin: "/admin",
   adminClaims: "/admin/claims",
   adminDiscounts: "/admin/discounts",

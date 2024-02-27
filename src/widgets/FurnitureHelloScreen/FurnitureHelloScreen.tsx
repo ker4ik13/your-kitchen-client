@@ -22,7 +22,8 @@ export const FurnitureHelloScreen = ({ isBold }: Props) => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         setIsOpenThanks={setIsOpenThanks}
-        location="Страница корпусной мебели"
+        location="Страница корпусной мебели, первый блок"
+        tag="Рассчитать стоимость мебели"
         descriptionText={
           <>
             чтобы <span>рассчитать стоимость мебели</span> по телефону или

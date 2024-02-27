@@ -1,9 +1,9 @@
 import ipadImg from "@/data/images/ipad_project.webp";
 import bgImage from "@/data/images/prices_hello_screen.jpg";
+import { Icons } from "@/shared/IconsComponents/Icons";
 import { OrangeButton } from "@/shared/ui";
 import Image from "next/image";
 import styles from "./ChoiseHelloScreen.module.scss";
-import { Icons } from "@/shared/IconsComponents/Icons";
 
 interface Props {
   openModal: () => void;

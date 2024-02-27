@@ -23,6 +23,8 @@ const AllVariants = () => {
         isOpen={isOpenModal}
         setIsOpen={setIsOpenModal}
         setIsOpenThanks={setIsOpenThanks}
+        location='Главная страница, блок "Все варианты"'
+        tag="Рассчитать стоимость кухни"
       />
       {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <div className={styles.allvariants}>

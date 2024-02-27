@@ -355,11 +355,16 @@
   color: #adb6bf;
   margin-top: rem(4);
 
-  & a {
+  & button {
     color: #f28c6b;
     text-decoration: none;
+    border: 0;
+    outline: none;
 
     &:hover {
+      text-decoration: underline;
+    }
+    &:focus {
       text-decoration: underline;
     }
   }

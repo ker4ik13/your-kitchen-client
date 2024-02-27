@@ -37,7 +37,10 @@ const page = async () => {
   return (
     <>
       <Articles articles={articles} />
-      <LeaveRequestBlock />
+      <LeaveRequestBlock
+        location="Страница статей"
+        tag="Рассчитать стоимость кухни"
+      />
     </>
   );
 };

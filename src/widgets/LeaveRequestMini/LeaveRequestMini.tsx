@@ -18,7 +18,7 @@ if (!API_URL) {
   throw new Error("Api url has been not imported from .env");
 }
 
-export type ModalType = "default" | "promotion";
+export type ModalType = "default" | "promotion" | "call";
 
 interface LeaveRequestMiniProps {
   title?: string;
@@ -37,6 +37,8 @@ const getModalType = (type: ModalType): string => {
       return styles.card;
     case "promotion":
       return styles.promotion;
+    case "call":
+      return styles.call;
     default:
       return styles.card;
   }

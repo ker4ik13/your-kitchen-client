@@ -5,14 +5,16 @@ import ipadImg from "@/data/images/ipad_project.webp";
 import { isErrorStyles } from "@/features/isErrorStyles";
 import ClaimService from "@/services/ClaimService";
 import { Icons } from "@/shared/IconsComponents/Icons";
+import { PrivacyPolicy } from "@/shared/PrivacyPolicy";
+import { closeModalOnEscape } from "@/shared/helpers/closeModalOnEscape";
 import { OrangeButton } from "@/shared/ui";
 import { TFormInputsNames } from "@/types/TFormInputs";
 import type { TFormInputsFile } from "@/types/TFormInputsFile";
 import Image from "next/image";
-import Link from "next/link";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import ReactInputMask from "react-input-mask";
+import { TextModal } from "../Modals/TextModal/TextModal";
 import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./LeaveRequestFile.module.scss";
 
@@ -44,6 +46,22 @@ export const LeaveRequestFile = ({
   } = useForm<TFormInputsFile>();
   const [filesCount, setFilesCount] = useState(0);
   const [isOpenThanks, setIsOpenThanks] = useState(false);
+  const [isOpenPrivacy, setIsOpenPrivacy] = useState(false);
+
+  const openPrivacy = () => {
+    setIsOpenPrivacy(true);
+    document.body.classList.add("overflow");
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", (event) => {
+      closeModalOnEscape(event, setIsOpenPrivacy);
+    });
+    return () =>
+      document.removeEventListener("keydown", (event) => {
+        closeModalOnEscape(event, setIsOpenPrivacy);
+      });
+  }, []);
 
   const onSubmitLeaveRequest: SubmitHandler<TFormInputsFile> = async (data) => {
     const form = new FormData();
@@ -75,6 +93,11 @@ export const LeaveRequestFile = ({
 
   return (
     <>
+      <TextModal
+        isOpen={isOpenPrivacy}
+        setIsOpen={setIsOpenPrivacy}
+        text={PrivacyPolicy}
+      />
       {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <div className={`${styles.leaveRequest} ${full ? styles.full : ""}`}>
         <Image
@@ -175,9 +198,9 @@ export const LeaveRequestFile = ({
                   </OrangeButton>
                   <p className={styles.infoText}>
                     Нажимая на кнопку «Отправить» вы даёте{" "}
-                    <Link href={"#"}>
+                    <button type="button" onClick={openPrivacy}>
                       согласие на обработку персональных данных
-                    </Link>
+                    </button>
                   </p>
                 </div>
               </form>
