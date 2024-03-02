@@ -83,7 +83,7 @@ export const KitchensHelloScreen = ({
 
           <OrangeButton
             className={styles.button}
-            href={button && button.href ? button.href : "kitchens"}
+            href={button && button.href ? button.href : "#kitchens"}
           >
             {button && button.text ? button.text : "Подробнее"}
           </OrangeButton>
