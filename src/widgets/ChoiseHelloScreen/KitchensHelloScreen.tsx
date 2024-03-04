@@ -66,15 +66,23 @@ export const KitchensHelloScreen = ({
               </>
             )}
           </div>
-          <h1
-            className={`${styles.title} ${styles.boldTitle} ${styles.w840} ${
-              styles.ptHigh
-            } ${titleLength && titleLength === "980" && styles.w980}`}
-          >
-            {title
-              ? title
-              : "Кухни на заказ от производителя в Москве и Московской области"}
-          </h1>
+          {title ? (
+            <h2
+              className={`${styles.title} ${styles.boldTitle} ${styles.w840} ${
+                styles.ptHigh
+              } ${titleLength && titleLength === "980" && styles.w980}`}
+            >
+              {title}
+            </h2>
+          ) : (
+            <h1
+              className={`${styles.title} ${styles.boldTitle} ${styles.w840} ${
+                styles.ptHigh
+              } ${titleLength && titleLength === "980" && styles.w980}`}
+            >
+              Кухни на заказ от производителя в Москве и Московской области
+            </h1>
+          )}
           <p className={`${styles.subtitle} ${styles.upperSubtitle}`}>
             {description
               ? description
