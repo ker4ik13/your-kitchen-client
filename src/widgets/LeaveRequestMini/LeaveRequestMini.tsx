@@ -3,12 +3,14 @@
 import { isErrorStyles } from "@/features/isErrorStyles";
 import ClaimService from "@/services/ClaimService";
 import { Icons } from "@/shared/IconsComponents/Icons";
+import { PrivacyPolicy } from "@/shared/PrivacyPolicy";
 import { OrangeButton } from "@/shared/ui";
 import { TFormInputsNames, type TFormInputs } from "@/types/TFormInputs";
 import { CreateClaimDto } from "@/types/dtos/CreateClaim.dto";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import ReactInputMask from "react-input-mask";
+import { TextModal } from "../Modals/TextModal/TextModal";
 import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./LeaveRequestMini.module.scss";
 
@@ -60,6 +62,7 @@ export const LeaveRequestMini = ({
   } = useForm<TFormInputs>();
 
   const [isOpenThanks, setIsOpenThanks] = useState(false);
+  const [isOpenPrivacy, setIsOpenPrivacy] = useState(false);
 
   const onSubmitLeaveRequest: SubmitHandler<TFormInputs> = async (data) => {
     const newClaim = new CreateClaimDto({
@@ -79,6 +82,11 @@ export const LeaveRequestMini = ({
 
   return (
     <>
+      <TextModal
+        isOpen={isOpenPrivacy}
+        setIsOpen={setIsOpenPrivacy}
+        text={PrivacyPolicy}
+      />
       {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <div className={styles.leaveRequest}>
         <div className={styles.container}>
@@ -129,13 +137,24 @@ export const LeaveRequestMini = ({
                   />
                   <Icons.phoneGray className={styles.icon} />
                 </div>
-                <OrangeButton
-                  onClick={handleSubmit(onSubmitLeaveRequest)}
-                  className={styles.button}
-                  arrow={button && button.arrow ? button.arrow : undefined}
-                >
-                  {button && button.text ? button.text : "Получить эскиз"}
-                </OrangeButton>
+                <div className={styles.column}>
+                  <OrangeButton
+                    onClick={handleSubmit(onSubmitLeaveRequest)}
+                    className={styles.button}
+                    arrow={button && button.arrow ? button.arrow : undefined}
+                  >
+                    {button && button.text ? button.text : "Получить эскиз"}
+                  </OrangeButton>
+                  <p className={styles.infoText}>
+                    Нажимая на кнопку «Отправить» вы даёте{" "}
+                    <button
+                      type="button"
+                      onClick={() => setIsOpenPrivacy(true)}
+                    >
+                      согласие на обработку персональных данных
+                    </button>
+                  </p>
+                </div>
               </div>
             </form>
             <p className={styles.text}>
