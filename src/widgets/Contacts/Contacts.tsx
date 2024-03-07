@@ -18,7 +18,7 @@ export const Contacts = () => {
             <div className={styles.card}>
               <Icons.rubleWithoutBg className={styles.icon} />
               <p className={styles.cardText}>
-                - встретиться с дизайнером для обсуждения проекта изготовления
+                встретиться с дизайнером для обсуждения проекта изготовления
                 кухни и другой корпусной мебели;
               </p>
             </div>
@@ -26,7 +26,7 @@ export const Contacts = () => {
             <div className={styles.card}>
               <Icons.lamp className={styles.icon} />
               <p className={styles.cardText}>
-                - обсудить с менеджером все детали процесса заключения договора,
+                обсудить с менеджером все детали процесса заключения договора,
                 доставки, сборки, задать все интересующие вас вопросы;
               </p>
             </div>
@@ -34,16 +34,16 @@ export const Contacts = () => {
             <div className={styles.card}>
               <Icons.diamond2 className={styles.icon} />
               <p className={styles.cardText}>
-                - увидеть и оценить качество фасадов, корпусов, столешниц и
-                других материалов используемых в производстве;
+                увидеть и оценить качество фасадов, корпусов, столешниц и других
+                материалов используемых в производстве;
               </p>
             </div>
             <br />
             <div className={styles.card}>
               <Icons.settings className={styles.icon} />
               <p className={styles.cardText}>
-                - ознакомится с договором и сопутствующими документами на
-                доставку и другими этапами выполняемых работ.
+                знакомится с договором и сопутствующими документами на доставку
+                и другими этапами выполняемых работ.
               </p>
             </div>
             <br />
