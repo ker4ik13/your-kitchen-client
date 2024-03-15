@@ -3,7 +3,7 @@ import main2 from "@/data/images/main/main2.jpg";
 import main3 from "@/data/images/main/main3.jpg";
 import main4 from "@/data/images/main/main4.jpg";
 import main5 from "@/data/images/main/main5.jpg";
-import UserArticleService from "@/services/UserArticleService";
+import UserArticleService from "@/services/shared/UserArticleService";
 import { LeaveRequestBlock } from "@/shared/LeaveRequestBlock";
 import { SITE_NAME, pagesData } from "@/shared/constants";
 import Articles from "@/widgets/Articles/Articles";

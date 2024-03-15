@@ -1,6 +1,6 @@
 "use client";
 
-import ArticleService from "@/services/ArticleService";
+import ArticleService from "@/services/admin/ArticleService";
 import { useEffect } from "react";
 
 interface Props {

@@ -1,4 +1,4 @@
-import DiscountService from "@/services/DiscountService";
+import DiscountService from "@/services/admin/DiscountService";
 import type { IDiscount } from "@/types/IDiscount";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 

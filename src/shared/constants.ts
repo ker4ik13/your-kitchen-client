@@ -114,6 +114,11 @@ export const pagesLinks = {
   adminGallery: "/admin/gallery",
   adminGalleryNew: "/admin/gallery/new",
   adminLogin: "/admin/login",
+  client: "/lk",
+  clientLogin: "/lk/login",
+  clientDocuments: "/lk/documents",
+  clientPayment: "/lk/payment",
+  clientSupport: "/lk/support",
 };
 
 interface ILink {

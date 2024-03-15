@@ -1,5 +1,5 @@
 import styles from "@/pages/ArticlePage.module.scss";
-import { UserKitchenService } from "@/services/UserKitchenService";
+import { UserKitchenService } from "@/services/shared/UserKitchenService";
 import { CLIENT_URL, SITE_NAME, pagesData } from "@/shared/constants";
 import { OrangeButton, OrangeButtonModal } from "@/shared/ui";
 import KitchenCard from "@/widgets/Kitchen/KitchenCard";

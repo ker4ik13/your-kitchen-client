@@ -1,6 +1,6 @@
 "use client";
 
-import ClaimService from "@/services/ClaimService";
+import ClaimService from "@/services/admin/ClaimService";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import type { IClaim } from "@/types/IClaim";
 import Link from "next/link";

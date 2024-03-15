@@ -344,3 +344,7 @@
   @include container();
   position: relative;
 }
+.orangeButton {
+  margin: 0 auto;
+  margin-top: rem(10);
+}

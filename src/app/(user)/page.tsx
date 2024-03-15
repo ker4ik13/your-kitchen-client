@@ -24,9 +24,9 @@ export const metadata: Metadata = {
   },
 };
 
-import { UserKitchenService } from "@/services/UserKitchenService";
-import { UserReviewsService } from "@/services/UserReviewsService";
-import { UserWorkerService } from "@/services/UserWorkerService";
+import { UserKitchenService } from "@/services/shared/UserKitchenService";
+import { UserReviewsService } from "@/services/shared/UserReviewsService";
+import { UserWorkerService } from "@/services/shared/UserWorkerService";
 import { LeaveRequestBlock } from "@/shared/LeaveRequestBlock";
 import { LeaveRequestBlock2 } from "@/shared/LeaveRequestBlock2";
 import AllVariants from "@/widgets/AllVariants/AllVariants";

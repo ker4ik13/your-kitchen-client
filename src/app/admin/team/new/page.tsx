@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { isUserHaveRights } from "@/features/isUserHaveRights";
-import { WorkerService } from "@/services/WorkerService";
+import { WorkerService } from "@/services/admin/WorkerService";
 import { IError } from "@/types/IError";
 import { UserRoles } from "@/types/UserRoles";
 

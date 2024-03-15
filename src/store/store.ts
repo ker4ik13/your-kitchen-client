@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { articleReducer } from "./article.slice";
 import { claimsReducer } from "./claims.slice";
+import { clientReducer } from "./client.slice";
 import { discountReducer } from "./discounts.slice";
 import { furnitureReducer } from "./furniture.slice";
 import { kitchensReducer } from "./kitchens.slice";
@@ -12,6 +13,7 @@ import { workerReducer } from "./worker.slice";
 const store = configureStore({
   reducer: {
     user: userReducer,
+    client: clientReducer,
     claims: claimsReducer,
     kitchens: kitchensReducer,
     reviews: reviewReducer,

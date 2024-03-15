@@ -3,7 +3,7 @@
 import requestBgImage from "@/data/images/bg_request_file.webp";
 import ipadImg from "@/data/images/ipad_project.webp";
 import { isErrorStyles } from "@/features/isErrorStyles";
-import ClaimService from "@/services/ClaimService";
+import ClaimService from "@/services/admin/ClaimService";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import { PrivacyPolicy } from "@/shared/PrivacyPolicy";
 import { closeModalOnEscape } from "@/shared/helpers/closeModalOnEscape";

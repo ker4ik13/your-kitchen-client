@@ -4,7 +4,7 @@ import { Texter } from "@/features/Texter";
 import styles from "../../Page.module.scss";
 
 import { isUserHaveRights } from "@/features/isUserHaveRights";
-import KitchenService from "@/services/KitchenService";
+import KitchenService from "@/services/admin/KitchenService";
 import MiniLoading from "@/shared/MiniLoading";
 import { deleteImage } from "@/shared/helpers/deleteImage";
 import {

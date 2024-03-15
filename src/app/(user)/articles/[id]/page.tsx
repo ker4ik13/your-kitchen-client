@@ -1,6 +1,6 @@
 import styles from "@/pages/ArticlePage.module.scss";
-import ArticleService from "@/services/ArticleService";
-import UserArticleService from "@/services/UserArticleService";
+import ArticleService from "@/services/admin/ArticleService";
+import UserArticleService from "@/services/shared/UserArticleService";
 import { LeaveRequestBlock2 } from "@/shared/LeaveRequestBlock2";
 import { ViewArticleComponent } from "@/shared/ViewArticleComponent";
 import { CLIENT_URL, SITE_NAME, pagesData } from "@/shared/constants";

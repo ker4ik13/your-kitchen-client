@@ -1,6 +1,6 @@
 "use client";
 
-import DiscountService from "@/services/DiscountService";
+import DiscountService from "@/services/admin/DiscountService";
 import styles from "../../Page.module.scss";
 
 import { isUserHaveRights } from "@/features/isUserHaveRights";

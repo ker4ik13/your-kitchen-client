@@ -3,7 +3,7 @@
 import { Texter } from "@/features/Texter";
 import styles from "../../Page.module.scss";
 
-import KitchenService from "@/services/KitchenService";
+import KitchenService from "@/services/admin/KitchenService";
 import MiniLoading from "@/shared/MiniLoading";
 import { dropOrChangeHandler } from "@/shared/helpers/dragHandlers";
 import { useDebouncedCallback } from "@/shared/helpers/hooks";

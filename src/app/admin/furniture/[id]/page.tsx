@@ -2,7 +2,7 @@
 
 import styles from "../../Page.module.scss";
 
-import FurnitureService from "@/services/FurnitureService";
+import FurnitureService from "@/services/admin/FurnitureService";
 import MiniLoading from "@/shared/MiniLoading";
 import { dropOrChangeHandler } from "@/shared/helpers/dragHandlers";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";

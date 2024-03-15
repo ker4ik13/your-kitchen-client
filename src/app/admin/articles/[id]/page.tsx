@@ -10,7 +10,7 @@ import { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Texter } from "@/features/Texter";
-import ArticleService from "@/services/ArticleService";
+import ArticleService from "@/services/admin/ArticleService";
 import { useDebouncedCallback } from "@/shared/helpers/hooks";
 import type { IMeta } from "@/types";
 import { type IArticle } from "@/types/IArticle";

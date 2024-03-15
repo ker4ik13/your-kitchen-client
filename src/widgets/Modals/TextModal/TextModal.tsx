@@ -1,6 +1,7 @@
 "use client";
 
 import { closeModalOnEscape } from "@/shared/helpers/closeModalOnEscape";
+import { OrangeButton } from "@/shared/ui";
 import { ReactNode, useEffect } from "react";
 import styles from "./TextModal.module.scss";
 
@@ -8,11 +9,22 @@ interface ModalProps {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   text: string | ReactNode;
+  title?: string;
+  button?: {
+    text: string;
+    onClick?: (...args: unknown[]) => void;
+  };
 }
 const isOpenStyles = (isOpen: boolean) =>
   isOpen ? styles.modal : `${styles.modal} ${styles.hidden}`;
 
-export const TextModal = ({ isOpen, text, setIsOpen }: ModalProps) => {
+export const TextModal = ({
+  isOpen,
+  text,
+  setIsOpen,
+  title,
+  button,
+}: ModalProps) => {
   useEffect(() => {
     document.addEventListener("keydown", (event) =>
       closeModalOnEscape(event, setIsOpen),
@@ -36,7 +48,9 @@ export const TextModal = ({ isOpen, text, setIsOpen }: ModalProps) => {
       >
         <div className={styles.modalInner}>
           <div className={styles.upper}>
-            <div className={styles.name}>{`Политика конфиденциальности`}</div>
+            <div className={styles.name}>
+              {title ? title : "Политика конфиденциальности"}
+            </div>
             <button
               type="button"
               className={styles.closeButton}
@@ -47,6 +61,14 @@ export const TextModal = ({ isOpen, text, setIsOpen }: ModalProps) => {
           </div>
           <div className={styles.description}>{text}</div>
           <div className={styles.lower}></div>
+          {button && (
+            <OrangeButton
+              className={styles.orangeButton}
+              onClick={button.onClick}
+            >
+              {button.text}
+            </OrangeButton>
+          )}
         </div>
       </div>
     </div>

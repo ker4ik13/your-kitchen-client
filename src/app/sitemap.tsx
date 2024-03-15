@@ -1,5 +1,5 @@
-import UserArticleService from "@/services/UserArticleService";
-import { UserKitchenService } from "@/services/UserKitchenService";
+import UserArticleService from "@/services/shared/UserArticleService";
+import { UserKitchenService } from "@/services/shared/UserKitchenService";
 import { CLIENT_URL, pagesData, pagesLinks } from "@/shared/constants";
 
 const siteRoutes = [

@@ -4,7 +4,7 @@ import main3 from "@/data/images/main/main3.jpg";
 import main4 from "@/data/images/main/main4.jpg";
 import main5 from "@/data/images/main/main5.jpg";
 import DiscountsPage from "@/pages/DiscountsPage";
-import UserDiscountService from "@/services/UserDiscountService";
+import UserDiscountService from "@/services/shared/UserDiscountService";
 import { SITE_NAME, pagesData } from "@/shared/constants";
 import { Metadata } from "next";
 

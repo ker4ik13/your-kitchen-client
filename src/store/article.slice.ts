@@ -1,4 +1,4 @@
-import ArticleService from "@/services/ArticleService";
+import ArticleService from "@/services/admin/ArticleService";
 import { type IArticle } from "@/types/IArticle";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 

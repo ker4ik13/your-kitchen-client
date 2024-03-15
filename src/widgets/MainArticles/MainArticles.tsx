@@ -1,6 +1,6 @@
 "use client";
 
-import UserArticleService from "@/services/UserArticleService";
+import UserArticleService from "@/services/shared/UserArticleService";
 import { pagesLinks } from "@/shared/constants";
 import { OrangeButton } from "@/shared/ui";
 import { IArticle } from "@/types/IArticle";

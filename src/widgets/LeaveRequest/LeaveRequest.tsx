@@ -4,7 +4,7 @@ import miniLogo from "@/data/images/logo.webp";
 import phone from "@/data/images/phoneHand.webp";
 import designer from "@/data/team/team2.webp";
 import { isErrorStyles } from "@/features/isErrorStyles";
-import ClaimService from "@/services/ClaimService";
+import ClaimService from "@/services/admin/ClaimService";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import { PrivacyPolicy } from "@/shared/PrivacyPolicy";
 import { links } from "@/shared/constants";
