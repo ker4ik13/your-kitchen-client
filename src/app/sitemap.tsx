@@ -27,6 +27,10 @@ const siteRoutes = [
     link: pagesLinks.discounts,
     lastModify: "2024-02-02T13:08:31.056Z",
   },
+  {
+    link: pagesLinks.contacts,
+    lastModify: new Date(2024, 1, 27, 16, 37).toISOString(),
+  },
 ];
 
 // Получение информции о статьях

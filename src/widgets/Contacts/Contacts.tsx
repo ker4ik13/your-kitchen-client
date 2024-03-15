@@ -94,6 +94,18 @@ export const Contacts = () => {
             </div>
             <br />
             <div className={styles.card}>
+              <Icons.keys className={styles.icon} />
+              <div className={styles.column}>
+                <p className={styles.cardText}>
+                  <b>Производство:</b>
+                </p>
+                <p className={styles.cardText}>
+                  г. Ульяновск, 42 Инженерный проезд, д.6
+                </p>
+              </div>
+            </div>
+            <br />
+            <div className={styles.card}>
               <Icons.phonePlus className={styles.icon} />
               <div className={styles.column}>
                 <p className={styles.cardText}>
@@ -119,6 +131,11 @@ export const Contacts = () => {
             </div>
           </div>
         </div>
+        <p className={styles.lowerText}>
+          Закажите обратный звонок чтобы обсудить детали вашего проекта,
+          оформить выезд дизайнера для проведения замера помещения под кухню или
+          другую корпусную мебель, создать визуализацию и 3D-проект.
+        </p>
       </div>
     </div>
   );

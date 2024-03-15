@@ -66,13 +66,6 @@ const Kitchen = ({ kitchen, link }: KitchenProps) => {
               </div>
             </div>
             <div
-              className={styles.description}
-              itemProp="description"
-              dangerouslySetInnerHTML={{
-                __html: kitchen.description,
-              }}
-            ></div>
-            <div
               className={styles.contentWrapper}
               itemProp="offers"
               itemScope

@@ -20,6 +20,8 @@ export default function robots(): MetadataRoute.Robots {
           `${pagesLinks.furniture}/`,
           pagesLinks.discounts,
           `${pagesLinks.discounts}/`,
+          pagesLinks.contacts,
+          `${pagesLinks.contacts}/`,
         ],
         disallow: [
           `${pagesLinks.admin}/`,

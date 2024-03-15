@@ -125,19 +125,10 @@
     justify-items: center;
     grid-template-areas:
       "one"
-      "two";
-
-    & > a {
-      &:nth-child(3) {
-        display: none;
-      }
-      &:nth-child(4) {
-        display: none;
-      }
-      &:last-child {
-        display: none;
-      }
-    }
+      "two"
+      "three"
+      "four"
+      "five";
   }
 }
 

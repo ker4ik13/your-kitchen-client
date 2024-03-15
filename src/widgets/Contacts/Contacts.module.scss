@@ -260,7 +260,7 @@
   margin-left: rem(-47);
 }
 .icon {
-  max-width: rem(30);
+  max-width: rem(28);
   min-width: rem(28);
   width: 100%;
   fill: transparent;
@@ -284,8 +284,8 @@
   gap: rem(60);
 
   & iframe {
-    min-width: rem(610);
-    max-width: rem(610);
+    min-width: rem(580);
+    max-width: rem(580);
     width: 100%;
     border-radius: rem(8);
   }
@@ -325,4 +325,16 @@
   align-items: center;
   gap: rem(20);
   margin-top: rem(15);
+}
+.lowerText {
+  @include gilroy(400);
+  font-size: rem(24);
+  text-align: center;
+  color: $white;
+  line-height: 1.3;
+  margin-top: rem(40);
+
+  @media screen and (max-width: $max-768) {
+    font-size: rem(18);
+  }
 }
