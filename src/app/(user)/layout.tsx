@@ -60,7 +60,6 @@ export default function RootLayout({
         {process.env.NODE_ENV === "production" && (
           <>
             <script defer src="https://af.click.ru/af.js?id=12257"></script>
-            async
             <Script src="https://www.googletagmanager.com/gtag/js?id=G-9PXGLTWQJK"></Script>
             <Script
               id="google-analytics"
