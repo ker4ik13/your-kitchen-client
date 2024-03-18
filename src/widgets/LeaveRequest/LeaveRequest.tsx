@@ -146,6 +146,9 @@ export const LeaveRequest = ({
                 </>
               )}
             </p>
+            <p className={styles.moreText}>
+              При обращении через сайт дополнительная скидка 3%
+            </p>
             <form className={styles.formWrapper}>
               <div className={styles.inputsWrapper}>
                 <div className={styles.inputWrapper}>
@@ -289,6 +292,9 @@ export const LeaveRequest = ({
                   <br /> Выезд <span>бесплатный</span> и возможен в этот же день
                 </>
               )}
+            </p>
+            <p className={styles.moreText}>
+              При обращении через сайт дополнительная скидка 3%
             </p>
             <form className={styles.formWrapper}>
               <div className={styles.inputsWrapper}>

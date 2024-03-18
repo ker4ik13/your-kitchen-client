@@ -1,66 +1,65 @@
 "use client";
 
+import { pagesLinks } from "@/shared/constants";
 import { OrangeButton } from "@/shared/ui";
 import { IKitchen } from "@/types/IKitchen";
 import { useState } from "react";
 import Kitchen from "../Kitchen/Kitchen";
-import { Modal1 } from "../Modals/Modal1";
-import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./Kitchens.module.scss";
 
 interface KitchensProps {
   kitchens: IKitchen[];
+  moreKitchens: IKitchen[];
 }
 
-const Kitchens = ({ kitchens }: KitchensProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpenThanks, setIsOpenThanks] = useState(false);
+const STEP = 4;
+
+const Kitchens = ({ kitchens, moreKitchens }: KitchensProps) => {
+  const [viewKitchens, setViewKitchens] = useState(kitchens);
+
+  const showMore = () => {
+    const newKitchens = moreKitchens.filter((kitchen) => {
+      return !viewKitchens.some((item) => item._id === kitchen._id);
+    });
+
+    setViewKitchens([...viewKitchens, ...newKitchens.slice(0, STEP)]);
+  };
 
   return (
     <>
-      <Modal1
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        setIsOpenThanks={setIsOpenThanks}
-        buttonText="Получить каталог"
-        location="Главная страница"
-        tag="Получить полный каталог"
-      />
-      {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <div className={styles.kitchensPage} id="kitchens">
         <div className={styles.container}>
           <h3 className={styles.title}>
-            За <span>6</span> лет произвели более 1.5&nbsp;тысяч гарнитуров в
+            За <span>9</span> лет произвели более 1.5&nbsp;тысяч гарнитуров в
             Москве
           </h3>
           <p className={styles.subtitle}>
             <span>Выберите свою:</span> от лофта до классики
           </p>
-          {/* <div className={styles.tabs}>
-          {kitchensArray.map((variable, index) => (
-            <button
-              className={isActive(variable)}
-              key={index}
-              onClick={() => handleSelect(variable)}
-            >
-              {kitchensTranslate[variable]}
-            </button>
-          ))}
-        </div> */}
           <div className={styles.kitchens}>
-            {kitchens.map((kitchen, index) => (
-              <Kitchen kitchen={kitchen} key={index} />
+            {viewKitchens.slice(0, 5).map((kitchen, index) => (
+              <div className={styles.customKitchen} key={index}>
+                <Kitchen kitchen={kitchen} />
+              </div>
             ))}
           </div>
-          <OrangeButton
-            center
-            onClick={() => {
-              setIsOpen(true);
-              document.body.classList.add("overflow");
-            }}
-          >
-            Получить полный каталог
-          </OrangeButton>
+          {viewKitchens.length > 5 && (
+            <div className={styles.moreKitchens}>
+              {viewKitchens.slice(5).map((kitchen, index) => (
+                <div className={styles.kitchenWrapper} key={index}>
+                  <Kitchen kitchen={kitchen} />
+                </div>
+              ))}
+            </div>
+          )}
+          <div className={styles.string}>
+            <OrangeButton href={pagesLinks.portfolio}>
+              Перейти в каталог
+            </OrangeButton>
+            {viewKitchens.length < moreKitchens.length && (
+              <OrangeButton onClick={showMore}>Показать еще</OrangeButton>
+            )}
+          </div>
         </div>
       </div>
     </>

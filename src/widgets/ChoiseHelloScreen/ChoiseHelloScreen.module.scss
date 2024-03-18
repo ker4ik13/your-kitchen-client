@@ -3,15 +3,25 @@
 .helloScreen {
   display: flex;
   min-height: rem(700);
-  max-height: rem(1400);
   height: 100%;
   overflow: hidden;
   padding-top: rem(120);
   position: relative;
+  max-height: rem(700);
+
+  &.miniHeight {
+    padding-top: rem(20);
+    min-height: rem(500);
+    max-height: rem(500);
+
+    @media screen and (max-width: $max-600) {
+      min-height: rem(400);
+      max-height: rem(400);
+    }
+  }
 
   @media (max-width: $max-1300) {
     padding-top: rem(80);
-    min-height: rem(850);
 
     &.furnitureScreen {
       padding-top: rem(140);
@@ -19,9 +29,21 @@
       @media screen and (max-width: $max-600) {
         padding-top: rem(120);
       }
+
+      &.miniHeight {
+        padding-top: rem(20);
+        min-height: rem(500);
+        max-height: rem(500);
+
+        @media screen and (max-width: $max-600) {
+          min-height: rem(400);
+          max-height: rem(400);
+        }
+      }
     }
 
     &.kitchensScreen {
+      max-height: rem(700);
       padding-top: rem(140);
 
       @media screen and (max-width: $max-950) {
@@ -69,6 +91,10 @@
       min-height: rem(780);
     }
   }
+}
+.center {
+  text-align: center;
+  margin: 0 auto;
 }
 .bgImage {
   position: absolute;
@@ -332,10 +358,18 @@
   bottom: rem(140);
   z-index: 10;
 
+  &.centerButton {
+    margin: 0 auto;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  &.lower {
+    bottom: rem(60);
+  }
+
   @media (max-width: $max-768) {
     margin: 0 auto;
-    // margin-top: rem(30);
-    position: absolute;
     left: 50%;
     bottom: rem(90);
     transform: translate(-50%, 0);

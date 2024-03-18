@@ -10,19 +10,19 @@
   cursor: pointer;
   display: block;
 
-  &:first-child {
+  &:nth-child(1n + 1) {
     grid-area: one;
   }
-  &:nth-child(2n) {
+  &:nth-child(2n + 2) {
     grid-area: two;
   }
-  &:nth-child(3n) {
+  &:nth-child(3n + 3) {
     grid-area: three;
   }
-  &:nth-child(4n) {
+  &:nth-child(4n + 4) {
     grid-area: four;
   }
-  &:last-child {
+  &:nth-child(5n + 5) {
     grid-area: five;
   }
 }

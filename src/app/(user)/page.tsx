@@ -24,16 +24,19 @@ export const metadata: Metadata = {
   },
 };
 
+import styles from "@/pages/FurniturePage.module.scss";
 import { UserKitchenService } from "@/services/shared/UserKitchenService";
 import { UserReviewsService } from "@/services/shared/UserReviewsService";
 import { UserWorkerService } from "@/services/shared/UserWorkerService";
 import { LeaveRequestBlock } from "@/shared/LeaveRequestBlock";
 import { LeaveRequestBlock2 } from "@/shared/LeaveRequestBlock2";
 import AllVariants from "@/widgets/AllVariants/AllVariants";
+import { DiscountsHelloScreenSlider } from "@/widgets/ChoiseHelloScreen/DiscountsHelloScreenSlider";
+import { KitchensHelloScreen } from "@/widgets/ChoiseHelloScreen/KitchensHelloScreen";
 import Correction from "@/widgets/Correction/Correction";
 import Kitchens from "@/widgets/Kitchens/Kitchens";
+import { LeaveRequestFile } from "@/widgets/LeaveRequestFile/LeaveRequestFile";
 import MainArticles from "@/widgets/MainArticles/MainArticles";
-import { MainSlider } from "@/widgets/MainSlider/MainSlider";
 import OurTeam from "@/widgets/OurTeam/OurTeam";
 import Results from "@/widgets/Results/Results";
 import Reviews from "@/widgets/Reviews/Reviews";
@@ -46,36 +49,43 @@ const getHomeInfo = async () => {
   const kitchens = await UserKitchenService.getMainKitchens();
   const reviews = await UserReviewsService.getReviews();
   const workers = await UserWorkerService.getWorkers();
+  const moreKitchens = await UserKitchenService.getKitchens();
 
-  return { kitchens, reviews, workers };
+  return { kitchens, reviews, workers, moreKitchens };
 };
 
 const HomePage = async () => {
-  const { kitchens, reviews, workers } = await getHomeInfo();
+  const { kitchens, reviews, workers, moreKitchens } = await getHomeInfo();
   return (
     <>
       <div itemScope itemType="https://schema.org/WebSite">
         <meta itemProp="url" content={pagesData.main.name} />
         <meta itemProp="name" content={SITE_NAME} />
       </div>
-      <MainSlider />
-      <Kitchens kitchens={kitchens} />
-      <SecondScreen />
-      <Correction />
-      <AllVariants />
-      <WhatsNext />
-      <Results />
-      <LeaveRequestBlock
-        location='Главная страница, после "Давайте подытожим"'
-        tag="Рассчитать стоимость кухни"
-      />
-      <Reviews reviews={reviews} />
-      <OurTeam team={workers} />
-      <MainArticles />
-      <LeaveRequestBlock2
-        location="Главная страница, последняя форма"
-        tag="Рассчитать стоимость кухни"
-      />
+      <div className={styles.bg}>
+        <KitchensHelloScreen />
+        <Kitchens kitchens={kitchens} moreKitchens={moreKitchens} />
+        <div className={styles.wrapper}>
+          <LeaveRequestFile location="Главная страница" tag="Сравнить цены" />
+        </div>
+        <SecondScreen />
+        <Correction />
+        <AllVariants />
+        <WhatsNext />
+        <Results />
+        <DiscountsHelloScreenSlider centerText miniHeight />
+        <LeaveRequestBlock
+          location='Главная страница, после "Давайте подытожим"'
+          tag="Рассчитать стоимость кухни"
+        />
+        <Reviews reviews={reviews} />
+        <OurTeam team={workers} />
+        <MainArticles />
+        <LeaveRequestBlock2
+          location="Главная страница, последняя форма"
+          tag="Рассчитать стоимость кухни"
+        />
+      </div>
     </>
   );
 };

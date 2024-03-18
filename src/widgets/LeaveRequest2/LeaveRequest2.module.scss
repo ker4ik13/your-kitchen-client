@@ -14,7 +14,7 @@
   overflow: hidden;
 
   @media (max-width: $max-1100) {
-    min-height: rem(900);
+    min-height: rem(950);
     overflow: hidden;
   }
 }
@@ -47,7 +47,7 @@
   @media (max-width: $max-600) {
     background-image: url("../../data/images/modal-bg.webp");
     min-width: rem(1160);
-    min-height: rem(850);
+    min-height: rem(900);
   }
 }
 .closeButton {
@@ -148,6 +148,32 @@
   @media (max-width: $max-600) {
     margin: 0 auto;
     margin-top: rem(20);
+  }
+  @media (max-width: $max-400) {
+    max-width: rem(300);
+  }
+}
+
+.moreText {
+  margin-left: rem(160);
+  max-width: rem(420);
+  font-size: rem(18);
+  @include gilroy(600);
+  text-wrap: pretty;
+  position: relative;
+  z-index: 2;
+  color: #b79571;
+
+  & span {
+    font-weight: 700;
+  }
+
+  @media (max-width: $max-1100) {
+    margin-left: rem(250);
+  }
+  @media (max-width: $max-600) {
+    margin: 0 auto;
+    max-width: rem(380);
   }
   @media (max-width: $max-400) {
     max-width: rem(300);
