@@ -4,10 +4,11 @@ import { isErrorStyles } from "@/features/isErrorStyles";
 import ClaimService from "@/services/admin/ClaimService";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import { PrivacyPolicy } from "@/shared/PrivacyPolicy";
-import { links } from "@/shared/constants";
+import { links, YANDEX_ANALYTICS } from "@/shared/constants";
 import { OrangeButton } from "@/shared/ui";
 import { TFormInputsNames, type TFormInputs } from "@/types/TFormInputs";
 import { CreateClaimDto } from "@/types/dtos/CreateClaim.dto";
+import { ym } from "next-yandex-metrica";
 import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -58,6 +59,7 @@ export const LeaveRequest2 = ({
     if (result?.status === 201) {
       resetField("firstName");
       setValue("mobilePhone", "");
+      ym(YANDEX_ANALYTICS, "reachGoal", "make-call");
     }
 
     if (isModal && setIsOpen && setIsOpenThanks) {

@@ -6,10 +6,12 @@ import { isErrorStyles } from "@/features/isErrorStyles";
 import ClaimService from "@/services/admin/ClaimService";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import { PrivacyPolicy } from "@/shared/PrivacyPolicy";
+import { YANDEX_ANALYTICS } from "@/shared/constants";
 import { closeModalOnEscape } from "@/shared/helpers/closeModalOnEscape";
 import { OrangeButton } from "@/shared/ui";
 import { TFormInputsNames } from "@/types/TFormInputs";
 import type { TFormInputsFile } from "@/types/TFormInputsFile";
+import { ym } from "next-yandex-metrica";
 import Image from "next/image";
 import { useEffect, useState, type ReactNode } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -88,6 +90,7 @@ export const LeaveRequestFile = ({
       resetField("files");
       setValue("mobilePhone", "");
       setIsOpenThanks(true);
+      ym(YANDEX_ANALYTICS, "reachGoal", "make-call");
     }
   };
 

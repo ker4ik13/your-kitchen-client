@@ -7,10 +7,11 @@ import { isErrorStyles } from "@/features/isErrorStyles";
 import ClaimService from "@/services/admin/ClaimService";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import { PrivacyPolicy } from "@/shared/PrivacyPolicy";
-import { links } from "@/shared/constants";
+import { links, YANDEX_ANALYTICS } from "@/shared/constants";
 import { OrangeButton } from "@/shared/ui";
 import { TFormInputsNames, type TFormInputs } from "@/types/TFormInputs";
 import { CreateClaimDto } from "@/types/dtos/CreateClaim.dto";
+import { ym } from "next-yandex-metrica";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -66,6 +67,7 @@ export const LeaveRequest = ({
     if (result.status === 201) {
       resetField("firstName");
       setValue("mobilePhone", "");
+      ym(YANDEX_ANALYTICS, "reachGoal", "make-call");
 
       if (buttonText) {
         document.body.classList.remove("overflow");

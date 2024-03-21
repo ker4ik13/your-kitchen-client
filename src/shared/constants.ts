@@ -1,5 +1,6 @@
 export const SITE_NAME = "Твоя кухня";
 export const CLIENT_URL = "https://youkuhnya.ru";
+export const YANDEX_ANALYTICS = 94024143;
 
 export const pagesData: IPages = {
   main: {
