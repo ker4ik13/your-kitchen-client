@@ -28,6 +28,7 @@ export default function robots(): MetadataRoute.Robots {
           "/*?*",
           `${pagesLinks.advantages}/*?*`,
           `${pagesLinks.furniture}/*?*`,
+          `${pagesLinks.thankyou}/*?*`,
         ],
       },
       {
@@ -46,12 +47,15 @@ export default function robots(): MetadataRoute.Robots {
           `${pagesLinks.furniture}/`,
           pagesLinks.discounts,
           `${pagesLinks.discounts}/`,
+          pagesLinks.contacts,
+          `${pagesLinks.contacts}/`,
         ],
         disallow: [
           `${pagesLinks.admin}/`,
           "/*?*",
           `${pagesLinks.advantages}/*?*`,
           `${pagesLinks.furniture}/*?*`,
+          `${pagesLinks.thankyou}/*?*`,
         ],
       },
     ],

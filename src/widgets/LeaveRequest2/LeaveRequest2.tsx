@@ -4,12 +4,12 @@ import { isErrorStyles } from "@/features/isErrorStyles";
 import ClaimService from "@/services/admin/ClaimService";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import { PrivacyPolicy } from "@/shared/PrivacyPolicy";
-import { links, YANDEX_ANALYTICS } from "@/shared/constants";
+import { links, pagesLinks } from "@/shared/constants";
 import { OrangeButton } from "@/shared/ui";
 import { TFormInputsNames, type TFormInputs } from "@/types/TFormInputs";
 import { CreateClaimDto } from "@/types/dtos/CreateClaim.dto";
-import { ym } from "next-yandex-metrica";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, type ReactNode } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import ReactInputMask from "react-input-mask";
@@ -20,7 +20,6 @@ interface LeaveRequestProps {
   isModal?: boolean;
   onClick?: (...options: any) => void;
   setIsOpen?: (isOpen: boolean) => void;
-  setIsOpenThanks?: (isOpen: boolean) => void;
   buttonText?: string;
   descriptionText?: string | ReactNode;
   tag?: string;
@@ -31,7 +30,6 @@ export const LeaveRequest2 = ({
   isModal,
   onClick,
   setIsOpen,
-  setIsOpenThanks,
   buttonText,
   descriptionText,
   tag,
@@ -45,6 +43,7 @@ export const LeaveRequest2 = ({
     setValue,
   } = useForm<TFormInputs>();
   const [isOpenPrivacy, setIsOpenPrivacy] = useState(false);
+  const router = useRouter();
 
   const onSubmitLeaveRequest: SubmitHandler<TFormInputs> = async (data) => {
     const newClaim = new CreateClaimDto({
@@ -59,19 +58,18 @@ export const LeaveRequest2 = ({
     if (result?.status === 201) {
       resetField("firstName");
       setValue("mobilePhone", "");
-      ym(YANDEX_ANALYTICS, "reachGoal", "make-call");
+      router.push(pagesLinks.thankyou, {
+        scroll: true,
+      });
     }
 
-    if (isModal && setIsOpen && setIsOpenThanks) {
-      setIsOpenThanks(true);
+    if (isModal && setIsOpen) {
       setIsOpen(false);
-    }
-    if (!isModal && setIsOpenThanks) {
-      setIsOpenThanks(true);
+      document.body.classList.remove("overflow");
     }
   };
 
-  if (isModal && setIsOpen && setIsOpenThanks) {
+  if (isModal && setIsOpen) {
     return (
       <>
         <TextModal

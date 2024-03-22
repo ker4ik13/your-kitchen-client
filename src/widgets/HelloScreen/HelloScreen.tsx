@@ -6,20 +6,13 @@ import { OrangeButton } from "@/shared/ui";
 import Image from "next/image";
 import { useState } from "react";
 import { Modal1 } from "../Modals/Modal1";
-import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./HelloScreen.module.scss";
 
 const HelloScreen = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [isOpenThanks, setIsOpenThanks] = useState(false);
   return (
     <>
-      <Modal1
-        isOpen={isOpenModal}
-        setIsOpen={setIsOpenModal}
-        setIsOpenThanks={setIsOpenThanks}
-      />
-      {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
+      <Modal1 isOpen={isOpenModal} setIsOpen={setIsOpenModal} />
       <div className={styles.helloScreen}>
         <Image
           src={bgImage}

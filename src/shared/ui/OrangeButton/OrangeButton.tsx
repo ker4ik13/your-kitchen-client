@@ -11,6 +11,7 @@ interface ButtonProps {
   onClick?: () => void;
   className?: string;
   arrow?: "left" | "right" | "up" | "down";
+  arrowLocation?: "left" | "right";
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
   center?: boolean;
   prefix?: {
@@ -46,6 +47,7 @@ export const OrangeButton = ({
   center,
   prefix,
   disabled,
+  arrowLocation,
 }: ButtonProps) => {
   if (href) {
     return (
@@ -55,11 +57,16 @@ export const OrangeButton = ({
           styles.button
         } ${className || ""} ${isHaveArrow(arrow)}`}
       >
+        {arrow && arrowLocation === "left" && (
+          <Icons.chevron direction={arrow} />
+        )}
         {(prefix && prefix.location !== "right") ||
           (prefix && prefix.location === "left" && prefix.icon)}
         {children}
         {prefix && prefix.location === "right" && prefix.icon}
-        {arrow && <Icons.chevron direction={arrow} />}
+        {arrow && arrowLocation !== "left" && (
+          <Icons.chevron direction={arrow} />
+        )}
       </Link>
     );
   }
@@ -73,11 +80,12 @@ export const OrangeButton = ({
         styles.button
       } ${className || ""} ${isHaveArrow(arrow)}`}
     >
+      {arrow && arrowLocation === "left" && <Icons.chevron direction={arrow} />}
       {(prefix && prefix.location !== "right") ||
         (prefix && prefix.location === "left" && prefix.icon)}
       {children}
       {prefix && prefix.location === "right" && prefix.icon}
-      {arrow && <Icons.chevron direction={arrow} />}
+      {arrow && arrowLocation !== "left" && <Icons.chevron direction={arrow} />}
     </button>
   );
 };

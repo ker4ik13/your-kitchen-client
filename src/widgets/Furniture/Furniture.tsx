@@ -5,7 +5,6 @@ import type { IFurniture } from "@/types/IFurniture";
 import FurnitureItem from "@/widgets/FurnitureItem/FurnitureItem";
 import { useState } from "react";
 import { Modal1 } from "../Modals/Modal1";
-import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./Furniture.module.scss";
 
 interface FurnitureProps {
@@ -17,14 +16,11 @@ const NO_FURNITURE_TEXT = "Мебели пока что нет";
 
 export const Furniture = ({ title, furniture }: FurnitureProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpenThanks, setIsOpenThanks] = useState(false);
   return (
     <>
-      {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <Modal1
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        setIsOpenThanks={setIsOpenThanks}
         location="Страница корпусной мебели, перед преимуществами"
         tag="Рассчитать стоимость мебели"
         descriptionText={

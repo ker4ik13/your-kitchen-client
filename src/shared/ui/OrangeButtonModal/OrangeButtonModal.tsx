@@ -3,7 +3,6 @@
 import { Icons } from "@/shared/IconsComponents/Icons";
 import type { ModalButtonProps } from "@/types";
 import { Modal2 } from "@/widgets/Modals/Modal2";
-import { ThanksModal } from "@/widgets/Modals/ThanksModal";
 import Link from "next/link";
 import { ButtonHTMLAttributes, useState, type ReactNode } from "react";
 import styles from "./OrangeButton.module.scss";
@@ -81,9 +80,7 @@ export const OrangeButtonModal = ({
         tag={modal.tag}
         isOpen={isOpenModal}
         setIsOpen={setIsOpenModal}
-        setIsOpenThanks={setIsOpenThanks}
       />
-      {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <button
         disabled={disabled}
         type={type || "button"}

@@ -10,23 +10,19 @@ import { OrangeButton } from "@/shared/ui";
 import Image from "next/image";
 import { useState } from "react";
 import { Modal1 } from "../Modals/Modal1";
-import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./AllVariant.module.scss";
 
 const AllVariants = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [isOpenThanks, setIsOpenThanks] = useState(false);
 
   return (
     <>
       <Modal1
         isOpen={isOpenModal}
         setIsOpen={setIsOpenModal}
-        setIsOpenThanks={setIsOpenThanks}
         location='Главная страница, блок "Все варианты"'
         tag="Рассчитать стоимость кухни"
       />
-      {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <div className={styles.allvariants}>
         <div className={styles.container}>
           <div className={styles.titleWrapper}>

@@ -11,7 +11,6 @@ import Image from "next/image";
 import { useState } from "react";
 import { Modal2 } from "../Modals/Modal2";
 import { ModalVideo } from "../Modals/ModalVideo";
-import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./Correction.module.scss";
 const Correction = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -22,11 +21,9 @@ const Correction = () => {
       <Modal2
         isOpen={isOpenModal}
         setIsOpen={setIsOpenModal}
-        setIsOpenThanks={setIsOpenThanks}
         location='Главная страница, блок "Вот как мы это исправим"'
         tag="Рассчитать стоимость кухни"
       />
-      {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <ModalVideo
         isOpen={isOpenVideo}
         setIsOpen={setIsOpenVideo}

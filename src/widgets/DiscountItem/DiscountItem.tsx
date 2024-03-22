@@ -11,7 +11,6 @@ import Image from "next/image";
 import { useState } from "react";
 import { DiscountModal } from "../Modals/DiscountModal";
 import { Modal1 } from "../Modals/Modal1";
-import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./DiscountItem.module.scss";
 
 interface Props {
@@ -38,7 +37,6 @@ const getBgFromDiscountType = (type: DiscountType): string => {
 export const DiscountItem = ({ discount }: Props) => {
   const [isOpenConditions, setIsOpenConditions] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [isOpenThanks, setIsOpenThanks] = useState(false);
 
   // Дата вида 01.01.2021
   const getDate = (date: string) => {
@@ -62,10 +60,8 @@ export const DiscountItem = ({ discount }: Props) => {
 
   return (
     <>
-      {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <Modal1
         setIsOpen={setIsOpenModal}
-        setIsOpenThanks={setIsOpenThanks}
         isOpen={isOpenModal}
         location="Страница акций"
         tag={`Учавствовать в акции: ${discount.name}`}

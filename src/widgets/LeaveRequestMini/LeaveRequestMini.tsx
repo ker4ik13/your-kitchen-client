@@ -4,16 +4,15 @@ import { isErrorStyles } from "@/features/isErrorStyles";
 import ClaimService from "@/services/admin/ClaimService";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import { PrivacyPolicy } from "@/shared/PrivacyPolicy";
-import { YANDEX_ANALYTICS } from "@/shared/constants";
+import { pagesLinks } from "@/shared/constants";
 import { OrangeButton } from "@/shared/ui";
 import { TFormInputsNames, type TFormInputs } from "@/types/TFormInputs";
 import { CreateClaimDto } from "@/types/dtos/CreateClaim.dto";
-import { ym } from "next-yandex-metrica";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import ReactInputMask from "react-input-mask";
 import { TextModal } from "../Modals/TextModal/TextModal";
-import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./LeaveRequestMini.module.scss";
 
 const API_URL: string | undefined = process.env.NEXT_PUBLIC_API_URL;
@@ -63,8 +62,8 @@ export const LeaveRequestMini = ({
     setValue,
   } = useForm<TFormInputs>();
 
-  const [isOpenThanks, setIsOpenThanks] = useState(false);
   const [isOpenPrivacy, setIsOpenPrivacy] = useState(false);
+  const router = useRouter();
 
   const onSubmitLeaveRequest: SubmitHandler<TFormInputs> = async (data) => {
     const newClaim = new CreateClaimDto({
@@ -78,8 +77,9 @@ export const LeaveRequestMini = ({
     if (result?.status === 201) {
       resetField("firstName");
       setValue("mobilePhone", "");
-      setIsOpenThanks(true);
-      ym(YANDEX_ANALYTICS, "reachGoal", "make-call");
+      router.push(pagesLinks.thankyou, {
+        scroll: true,
+      });
     }
   };
 
@@ -90,7 +90,6 @@ export const LeaveRequestMini = ({
         setIsOpen={setIsOpenPrivacy}
         text={PrivacyPolicy}
       />
-      {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <div className={styles.leaveRequest}>
         <div className={styles.container}>
           {/* Карточка */}

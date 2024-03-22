@@ -6,18 +6,17 @@ import { isErrorStyles } from "@/features/isErrorStyles";
 import ClaimService from "@/services/admin/ClaimService";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import { PrivacyPolicy } from "@/shared/PrivacyPolicy";
-import { YANDEX_ANALYTICS } from "@/shared/constants";
+import { pagesLinks } from "@/shared/constants";
 import { closeModalOnEscape } from "@/shared/helpers/closeModalOnEscape";
 import { OrangeButton } from "@/shared/ui";
 import { TFormInputsNames } from "@/types/TFormInputs";
 import type { TFormInputsFile } from "@/types/TFormInputsFile";
-import { ym } from "next-yandex-metrica";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import ReactInputMask from "react-input-mask";
 import { TextModal } from "../Modals/TextModal/TextModal";
-import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./LeaveRequestFile.module.scss";
 
 interface LeaveRequestProps {
@@ -47,8 +46,8 @@ export const LeaveRequestFile = ({
     resetField,
   } = useForm<TFormInputsFile>();
   const [filesCount, setFilesCount] = useState(0);
-  const [isOpenThanks, setIsOpenThanks] = useState(false);
   const [isOpenPrivacy, setIsOpenPrivacy] = useState(false);
+  const router = useRouter();
 
   const openPrivacy = () => {
     setIsOpenPrivacy(true);
@@ -89,8 +88,9 @@ export const LeaveRequestFile = ({
     if (response.status === 201) {
       resetField("files");
       setValue("mobilePhone", "");
-      setIsOpenThanks(true);
-      ym(YANDEX_ANALYTICS, "reachGoal", "make-call");
+      router.push(pagesLinks.thankyou, {
+        scroll: true,
+      });
     }
   };
 
@@ -101,7 +101,6 @@ export const LeaveRequestFile = ({
         setIsOpen={setIsOpenPrivacy}
         text={PrivacyPolicy}
       />
-      {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <div className={`${styles.leaveRequest} ${full ? styles.full : ""}`}>
         <Image
           src={requestBgImage}

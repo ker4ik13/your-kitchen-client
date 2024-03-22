@@ -73,6 +73,14 @@ export const pagesData: IPages = {
     url: `${CLIENT_URL}/contacts`,
     type: "website",
   },
+  thankyou: {
+    name: `thankyou`,
+    title: "Спасибо за обращение | Твоя кухня",
+    description: "",
+    keywords: "",
+    url: `${CLIENT_URL}/thankyou`,
+    type: "website",
+  },
 };
 
 export const links: ILink = {
@@ -96,6 +104,7 @@ export const pagesLinks = {
   advantages: "/preimushestva",
   furniture: "/korpusnaya_mebel",
   contacts: "/contacts",
+  thankyou: "/thankyou",
   admin: "/admin",
   adminClaims: "/admin/claims",
   adminDiscounts: "/admin/discounts",

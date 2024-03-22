@@ -7,11 +7,10 @@ import { isErrorStyles } from "@/features/isErrorStyles";
 import ClaimService from "@/services/admin/ClaimService";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import { PrivacyPolicy } from "@/shared/PrivacyPolicy";
-import { links, YANDEX_ANALYTICS } from "@/shared/constants";
+import { links, pagesLinks } from "@/shared/constants";
 import { OrangeButton } from "@/shared/ui";
 import { TFormInputsNames, type TFormInputs } from "@/types/TFormInputs";
 import { CreateClaimDto } from "@/types/dtos/CreateClaim.dto";
-import { ym } from "next-yandex-metrica";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -25,7 +24,6 @@ interface LeaveRequestProps {
   isModal?: boolean;
   onClick?: (...options: any) => void;
   setIsOpen?: (isOpen: boolean) => void;
-  setIsOpenThanks?: (isOpen: boolean) => void;
   title?: string;
   buttonText?: string;
   descriptionText?: string | ReactNode;
@@ -37,7 +35,6 @@ export const LeaveRequest = ({
   isModal,
   onClick,
   setIsOpen,
-  setIsOpenThanks,
   title,
   buttonText,
   descriptionText,
@@ -67,22 +64,13 @@ export const LeaveRequest = ({
     if (result.status === 201) {
       resetField("firstName");
       setValue("mobilePhone", "");
-      ym(YANDEX_ANALYTICS, "reachGoal", "make-call");
-
-      if (buttonText) {
-        document.body.classList.remove("overflow");
-
-        router.push(
-          "https://drive.google.com/file/d/1MGjzCrXvgawfzvztEZu-CNawy-E4K-Jn/view?usp=drive_link",
-        );
-      }
+      router.push(pagesLinks.thankyou, {
+        scroll: true,
+      });
     }
-    if (isModal && setIsOpen && setIsOpenThanks) {
-      setIsOpenThanks(true);
+    if (isModal && setIsOpen) {
       setIsOpen(false);
-    }
-    if (!isModal && setIsOpenThanks) {
-      setIsOpenThanks(true);
+      document.body.classList.remove("overflow");
     }
   };
 

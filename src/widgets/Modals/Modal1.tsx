@@ -10,7 +10,6 @@ const isOpenStyles = (isOpen: boolean) =>
 export const Modal1 = ({
   isOpen,
   setIsOpen,
-  setIsOpenThanks,
   title,
   buttonText,
   descriptionText,
@@ -39,7 +38,6 @@ export const Modal1 = ({
         isModal={true}
         onClick={(event: any) => event.stopPropagation()}
         setIsOpen={setIsOpen}
-        setIsOpenThanks={setIsOpenThanks}
         buttonText={buttonText}
         descriptionText={descriptionText}
         tag={tag}

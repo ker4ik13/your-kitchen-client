@@ -5,7 +5,6 @@ import { OrangeButton } from "@/shared/ui";
 import Image from "next/image";
 import { useState } from "react";
 import { Modal1 } from "../Modals/Modal1";
-import { ThanksModal } from "../Modals/ThanksModal";
 import styles from "./FurnitureHelloScreen.module.scss";
 
 interface Props {
@@ -14,14 +13,11 @@ interface Props {
 
 export const FurnitureHelloScreen = ({ isBold }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpenThanks, setIsOpenThanks] = useState(false);
   return (
     <>
-      {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <Modal1
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        setIsOpenThanks={setIsOpenThanks}
         location="Страница корпусной мебели, первый блок"
         tag="Рассчитать стоимость мебели"
         descriptionText={

@@ -5,16 +5,17 @@ import ipadImg from "@/data/images/ipad_project.webp";
 import { isErrorStyles } from "@/features/isErrorStyles";
 import ClaimService from "@/services/admin/ClaimService";
 import { Icons } from "@/shared/IconsComponents/Icons";
+import { pagesLinks } from "@/shared/constants";
 import { closeModalOnEscape } from "@/shared/helpers/closeModalOnEscape";
 import { OrangeButton } from "@/shared/ui";
 import { ModalProps } from "@/types";
 import { TFormInputsNames } from "@/types/TFormInputs";
 import type { TFormInputsFile } from "@/types/TFormInputsFile";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import ReactInputMask from "react-input-mask";
-import { ThanksModal } from "../ThanksModal";
 import styles from "./LeaveRequestFileModal.module.scss";
 
 const isOpenStyles = (isOpen: boolean) =>
@@ -41,8 +42,7 @@ export const LeaveRequestFileModal = ({
     resetField,
   } = useForm<TFormInputsFile>();
   const [filesCount, setFilesCount] = useState(0);
-  const [isOpenThanks, setIsOpenThanks] = useState(false);
-
+  const router = useRouter();
   const openPrivacy = () => {
     if (setIsOpenPrivacy) {
       setIsOpenPrivacy(true);
@@ -84,14 +84,16 @@ export const LeaveRequestFileModal = ({
     if (response.status === 201) {
       resetField("files");
       setValue("mobilePhone", "");
-      setIsOpenThanks(true);
       setIsOpen(false);
+      document.body.classList.remove("overflow");
+      router.push(pagesLinks.thankyou, {
+        scroll: true,
+      });
     }
   };
 
   return (
     <>
-      {isOpenThanks && <ThanksModal setIsOpen={setIsOpenThanks} />}
       <div
         className={isOpenStyles(isOpen)}
         onClick={() => {
