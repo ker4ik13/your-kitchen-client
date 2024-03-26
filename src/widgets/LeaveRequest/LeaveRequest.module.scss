@@ -215,7 +215,8 @@
 .moreText {
   margin-left: rem(380);
   max-width: rem(450);
-  @include gilroy(600);
+  @include gilroy(400);
+  font-style: italic;
   text-wrap: pretty;
   position: relative;
   z-index: 2;

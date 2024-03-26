@@ -116,7 +116,6 @@ const KitchenExamples = ({ kitchens }: KitchenExamplesProps) => {
   useEffect(() => {
     const sortedKitchens = sortKitchens(kitchens);
     setScopeKitchens(sortedKitchens);
-    handleShowMore();
   }, [styleValue, typeValue, budgetValue, termValue]);
 
   return (

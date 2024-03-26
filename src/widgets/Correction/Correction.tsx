@@ -9,19 +9,24 @@ import { Icons } from "@/shared/IconsComponents/Icons";
 import { OrangeButton } from "@/shared/ui";
 import Image from "next/image";
 import { useState } from "react";
+import { LeaveRequestDesigner } from "../LeaveRequestDesigner/LeaveRequestDesigner";
 import { Modal2 } from "../Modals/Modal2";
 import { ModalVideo } from "../Modals/ModalVideo";
 import styles from "./Correction.module.scss";
-const Correction = () => {
+
+interface Props {
+  title?: string;
+}
+
+export const Correction = ({ title }: Props) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isOpenVideo, setIsOpenVideo] = useState(false);
-  const [isOpenThanks, setIsOpenThanks] = useState(false);
   return (
     <>
       <Modal2
         isOpen={isOpenModal}
         setIsOpen={setIsOpenModal}
-        location='Главная страница, блок "Вот как мы это исправим"'
+        location='Главная страница, блок "Процесс выбора"'
         tag="Рассчитать стоимость кухни"
       />
       <ModalVideo
@@ -31,7 +36,11 @@ const Correction = () => {
       />
       <div className={styles.correctionPage} id="how-we-work">
         <div className={styles.container}>
-          <h2 className={styles.title1}>Вот как мы это исправим</h2>
+          <h2 className={styles.title1}>
+            {title
+              ? title
+              : "Процесс выбора и этапы при заказе кухонного гарнитура по индивидуальному проекту"}
+          </h2>
 
           {/* Card 01 */}
           <div className={styles.card1}>
@@ -209,10 +218,13 @@ const Correction = () => {
               </div>
             </div>
           </div>
+          <LeaveRequestDesigner
+            location="Главная страница"
+            tag="Выезд дизайнера"
+            noPadding
+          />
         </div>
       </div>
     </>
   );
 };
-
-export default Correction;

@@ -137,7 +137,7 @@ export const LeaveRequest = ({
               )}
             </p>
             <p className={styles.moreText}>
-              При обращении через сайт дополнительная скидка 3%
+              при обращении через сайт дополнительная скидка 3%
             </p>
             <form className={styles.formWrapper}>
               <div className={styles.inputsWrapper}>
@@ -284,7 +284,7 @@ export const LeaveRequest = ({
               )}
             </p>
             <p className={styles.moreText}>
-              При обращении через сайт дополнительная скидка 3%
+              при обращении через сайт дополнительная скидка 3%
             </p>
             <form className={styles.formWrapper}>
               <div className={styles.inputsWrapper}>

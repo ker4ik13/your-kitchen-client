@@ -1,7 +1,6 @@
 "use client";
 
-import requestBgImage from "@/data/images/bg_request_file.webp";
-import ipadImg from "@/data/images/ipad_project.webp";
+import requestBgImage from "@/data/images/leave_request_designer_bg.jpg";
 import { isErrorStyles } from "@/features/isErrorStyles";
 import ClaimService from "@/services/admin/ClaimService";
 import { Icons } from "@/shared/IconsComponents/Icons";
@@ -17,7 +16,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import ReactInputMask from "react-input-mask";
 import { TextModal } from "../Modals/TextModal/TextModal";
-import styles from "./LeaveRequestFile.module.scss";
+import styles from "./LeaveRequestDesigner.module.scss";
 
 interface LeaveRequestProps {
   title?: string;
@@ -27,9 +26,12 @@ interface LeaveRequestProps {
   tag?: string;
   location?: string;
   noPadding?: boolean;
+  tags?: string[];
 }
 
-export const LeaveRequestFile = ({
+const initialTags = ["Бесплатно", "День в день", "В удобное время"];
+
+export const LeaveRequestDesigner = ({
   title,
   buttonText,
   descriptionText,
@@ -37,6 +39,7 @@ export const LeaveRequestFile = ({
   location,
   cardTitle,
   noPadding,
+  tags,
 }: LeaveRequestProps) => {
   const {
     register,
@@ -45,7 +48,6 @@ export const LeaveRequestFile = ({
     setValue,
     resetField,
   } = useForm<TFormInputsFile>();
-  const [filesCount, setFilesCount] = useState(0);
   const [isOpenPrivacy, setIsOpenPrivacy] = useState(false);
   const router = useRouter();
 
@@ -67,12 +69,6 @@ export const LeaveRequestFile = ({
   const onSubmitLeaveRequest: SubmitHandler<TFormInputsFile> = async (data) => {
     const form = new FormData();
 
-    const files: any = [...data.files];
-
-    files.forEach((file: any) => {
-      form.append("files", file);
-    });
-
     form.append("mobilePhone", data.mobilePhone);
     form.append("date", new Date().toISOString());
 
@@ -86,7 +82,6 @@ export const LeaveRequestFile = ({
     const response = await ClaimService.addFileClaim(form);
 
     if (response.status === 201) {
-      resetField("files");
       setValue("mobilePhone", "");
       router.push(pagesLinks.thankyou, {
         scroll: true,
@@ -111,72 +106,52 @@ export const LeaveRequestFile = ({
               draggable={false}
             />
             <div className={styles.left}>
+              <div
+                className={`${styles.tags} ${styles.column} ${styles.upperTags}`}
+              >
+                {tags
+                  ? tags.map((tag, index) => (
+                      <div className={styles.tagWrapper} key={index}>
+                        <p className={styles.tag}>{tag}</p>
+                        <div
+                          className={`${styles.circle} ${
+                            tags.length === index + 1 && styles.last
+                          }`}
+                        ></div>
+                      </div>
+                    ))
+                  : initialTags.map((tag, index) => (
+                      <div className={styles.tagWrapper} key={index}>
+                        <p className={styles.tag}>{tag}</p>
+                        <div
+                          className={`${styles.circle} ${
+                            initialTags.length === index + 1 && styles.last
+                          }`}
+                        ></div>
+                      </div>
+                    ))}
+              </div>
+
               <div className={styles.title}>
-                {title ? title : "Есть проект - сравните цены!"}
+                {title ? title : "Бесплатный выезд дизайнера"}
               </div>
               <div className={styles.description}>
                 {descriptionText
                   ? descriptionText
-                  : "Если у вас есть дизайн проект, эскиз, схема или картинка вашей кухни с размерами - пришлите информацию для расчета стоимости и получите консультанцию дизайнера."}
-              </div>
-              <div className={styles.asks}>
-                <div className={styles.ask}>
-                  <Icons.lamp className={styles.icon} />
-                  <p className={styles.askText}>Как улучшить проект?</p>
-                </div>
-                <div className={styles.ask}>
-                  <Icons.keys className={styles.icon} />
-                  <p className={styles.askText}>
-                    Из чего сделать надежную и долговечную кухню?
-                  </p>
-                </div>
-              </div>
-              <div className={styles.right}>
-                <Image
-                  src={ipadImg}
-                  alt="Проект"
-                  draggable={false}
-                  className={styles.rightImage}
-                />
+                  : "Оформляйте бесплатный выезд нашего специалиста для проведения точных замеров, создания проекта и визуализации будущего кухонного гарнитура"}
               </div>
               <div className={styles.card}>
                 <div className={styles.text}>
                   <p className={styles.cardTitle}>
                     {cardTitle
                       ? cardTitle
-                      : "Загрузите информацию, введите ваш номер телефона и нажмите «Узнать цену»"}
+                      : "Введите ваш номер телефона и нажмите «Оформить»"}
                   </p>
                   <p className={styles.moreText}>
                     при обращении через сайт дополнительная скидка 3%
                   </p>
                 </div>
                 <form className={styles.form} name="request_form">
-                  <div className={styles.columnFileInput}>
-                    <input
-                      type="file"
-                      multiple
-                      accept="image/*, .pdf, .doc, .docx, .xls, .xlsx, .rtf, .txt"
-                      id="file"
-                      {...register("files", {
-                        required: true,
-                        onChange: (event) => {
-                          setFilesCount(event.target.files.length);
-                        },
-                      })}
-                      className={styles.inputFile}
-                    />
-                    <label htmlFor="file">
-                      <div className={styles.labelFile}>
-                        <Icons.file className={styles.inputIconCenter} />
-                      </div>
-                    </label>
-                    <label htmlFor="file" className={styles.labelText}>
-                      {filesCount > 0
-                        ? `Файлов: ${filesCount}`
-                        : "Загрузить файл"}
-                    </label>
-                  </div>
-
                   <div className={styles.inputWrapper}>
                     <ReactInputMask
                       type="tel"
@@ -202,7 +177,7 @@ export const LeaveRequestFile = ({
                       type="submit"
                       onClick={handleSubmit(onSubmitLeaveRequest)}
                     >
-                      {buttonText ? buttonText : "Узнать цену"}
+                      {buttonText ? buttonText : "Оформить"}
                     </OrangeButton>
                     <p className={styles.infoText}>
                       <span>Нажимая на кнопку «Отправить» вы даёте </span>

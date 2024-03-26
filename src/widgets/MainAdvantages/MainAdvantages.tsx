@@ -13,7 +13,7 @@ import comp7 from "@/data/companies/comp7.webp";
 import comp8 from "@/data/companies/comp8.webp";
 import { Icons } from "@/shared/IconsComponents/Icons";
 import Image, { type StaticImageData } from "next/image";
-import styles from "./Advantages.module.scss";
+import styles from "./MainAdvantages.module.scss";
 
 interface ImageCard {
   title: string;
@@ -135,25 +135,25 @@ const companies: StaticImageData[] = [
   comp8,
 ];
 
-const Advantages = () => {
+interface Props {
+  title?: string;
+}
+
+export const MainAdvantages = ({ title }: Props) => {
   return (
     <div className={styles.advantagesPage}>
       <div className={styles.container}>
-        <h1 className={styles.title}>Преимущества мебели «Твоя Кухня»</h1>
+        <h2 className={styles.title}>
+          {title ? title : "Преимущества мебели фабрики «Твоя Кухня»"}
+        </h2>
         <div className={styles.content}>
           <div className={styles.upperText}>
-            <h4>
-              <b>Когда кухонный гарнитур превзошел ожидания</b>
-            </h4>
-            <br />
             <p>
               Заказывая мебель «Твоя кухня», вы становитесь обладателем
               продукции, соответствующей всем вашим пожеланиям, целям
               эксплуатации и отвечающей вашим представлениям об эстетике,
               качестве и функциональности.
             </p>
-            <br />
-            <p>Мы гарантируем каждому покупателю:</p>
             <br />
           </div>
           <div className={styles.cards}>
@@ -224,10 +224,24 @@ const Advantages = () => {
               </p>
             </div>
           </div>
+          <br />
+          <br />
+          <h2 className={styles.title}>Качественные и экологичные материалы</h2>
+          <div className={styles.content}>
+            <div className={`${styles.upperText} ${styles.center}`}>
+              <p>
+                Приобретая кухни фабрики «Твоя кухня», вы получаете
+                гарантированное качество исполнения и материалов от корпуса
+                мебели до элементов декора, подтвержденное соответствующими
+                сертификатами и документами.
+              </p>
+              <br />
+            </div>
+          </div>
           <div className={styles.upperText}>
-            <hr />
             {imageCards.map((card, index) => (
               <>
+                <hr key={`${index}i`} />
                 <div className={styles.imageCard} key={`${index}c`}>
                   <Image
                     src={card.image}
@@ -245,7 +259,6 @@ const Advantages = () => {
                     {card.text}
                   </div>
                 </div>
-                <hr key={`${index}i`} />
               </>
             ))}
           </div>
@@ -254,5 +267,3 @@ const Advantages = () => {
     </div>
   );
 };
-
-export default Advantages;

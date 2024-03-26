@@ -82,7 +82,7 @@ const AdminClaim: FC<AdminClaimProps> = ({ propsClaim }) => {
     }
 
     const response = await ClaimService.updateClaim(claim._id, {
-      firstName: fields.firstName,
+      firstName: fields.firstName || undefined,
       mobilePhone: fields.mobilePhone,
     });
     setClaim(response.data);

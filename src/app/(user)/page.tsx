@@ -33,14 +33,14 @@ import { LeaveRequestBlock2 } from "@/shared/LeaveRequestBlock2";
 import AllVariants from "@/widgets/AllVariants/AllVariants";
 import { DiscountsHelloScreenSlider } from "@/widgets/ChoiseHelloScreen/DiscountsHelloScreenSlider";
 import { KitchensHelloScreen } from "@/widgets/ChoiseHelloScreen/KitchensHelloScreen";
-import Correction from "@/widgets/Correction/Correction";
+import { Correction } from "@/widgets/Correction/Correction";
 import Kitchens from "@/widgets/Kitchens/Kitchens";
 import { LeaveRequestFile } from "@/widgets/LeaveRequestFile/LeaveRequestFile";
+import { MainAdvantages } from "@/widgets/MainAdvantages/MainAdvantages";
 import MainArticles from "@/widgets/MainArticles/MainArticles";
 import OurTeam from "@/widgets/OurTeam/OurTeam";
 import Results from "@/widgets/Results/Results";
 import Reviews from "@/widgets/Reviews/Reviews";
-import SecondScreen from "@/widgets/SecondScreen/SecondScreen";
 import WhatsNext from "@/widgets/WhatsNext/WhatsNext";
 
 export const revalidate = 30;
@@ -65,10 +65,11 @@ const HomePage = async () => {
       <div className={styles.bg}>
         <KitchensHelloScreen />
         <Kitchens kitchens={kitchens} moreKitchens={moreKitchens} />
-        <div className={styles.wrapper}>
+        <div className={styles.darkBg}>
           <LeaveRequestFile location="Главная страница" tag="Сравнить цены" />
         </div>
-        <SecondScreen />
+        <MainAdvantages />
+        {/* <SecondScreen /> */}
         <Correction />
         <AllVariants />
         <WhatsNext />

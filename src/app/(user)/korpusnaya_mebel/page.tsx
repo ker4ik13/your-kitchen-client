@@ -58,7 +58,6 @@ export default async function page() {
       <CustomerChoice />
       <Reviews withoutBg reviews={reviews} />
       <LeaveRequestFile
-        full
         tag="Узнать цену"
         location='Страница корпусной мебели, "Есть проект - сравните цену!"'
       />

@@ -1,6 +1,5 @@
 "use client";
 
-import { pagesLinks } from "@/shared/constants";
 import { OrangeButton } from "@/shared/ui";
 import { IKitchen } from "@/types/IKitchen";
 import { useState } from "react";
@@ -53,9 +52,6 @@ const Kitchens = ({ kitchens, moreKitchens }: KitchensProps) => {
             </div>
           )}
           <div className={styles.string}>
-            <OrangeButton href={pagesLinks.portfolio}>
-              Перейти в каталог
-            </OrangeButton>
             {viewKitchens.length < moreKitchens.length && (
               <OrangeButton onClick={showMore}>Показать еще</OrangeButton>
             )}
