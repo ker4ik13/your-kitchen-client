@@ -1,6 +1,7 @@
 @import "@/shared/styles/_vars";
 
 .correctionPage {
+  padding-top: rem(30);
   padding-bottom: rem(48);
   background: linear-gradient(
     180deg,
@@ -25,6 +26,10 @@
   color: #fff;
   font-size: rem(36);
   text-align: center;
+
+  @media (max-width: $max-768) {
+    font-size: rem(24);
+  }
 }
 .card1 {
   background-color: #2a2623;
