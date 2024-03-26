@@ -59,6 +59,7 @@ export default function RootLayout({
         ></script>
         {process.env.NODE_ENV === "production" && (
           <>
+            <script src="//code.jivo.ru/widget/d1XdJXNdT6" async></script>
             <script defer src="https://af.click.ru/af.js?id=12257"></script>
             <Script src="https://www.googletagmanager.com/gtag/js?id=G-9PXGLTWQJK"></Script>
             <Script

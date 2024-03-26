@@ -80,7 +80,7 @@ export const KitchensHelloScreen = ({
                 styles.ptHigh
               } ${titleLength && titleLength === "980" && styles.w980}`}
             >
-              Кухни на заказ от производителя в Москве и Московской области
+              Кухни на заказ от производителя в Москве и МО
             </h1>
           )}
           <p className={`${styles.subtitle} ${styles.upperSubtitle}`}>

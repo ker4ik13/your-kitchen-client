@@ -27,7 +27,6 @@ export const metadata: Metadata = {
 import styles from "@/pages/FurniturePage.module.scss";
 import { UserKitchenService } from "@/services/shared/UserKitchenService";
 import { UserReviewsService } from "@/services/shared/UserReviewsService";
-import { UserWorkerService } from "@/services/shared/UserWorkerService";
 import { LeaveRequestBlock } from "@/shared/LeaveRequestBlock";
 import { LeaveRequestBlock2 } from "@/shared/LeaveRequestBlock2";
 import AllVariants from "@/widgets/AllVariants/AllVariants";
@@ -38,7 +37,6 @@ import Kitchens from "@/widgets/Kitchens/Kitchens";
 import { LeaveRequestFile } from "@/widgets/LeaveRequestFile/LeaveRequestFile";
 import { MainAdvantages } from "@/widgets/MainAdvantages/MainAdvantages";
 import MainArticles from "@/widgets/MainArticles/MainArticles";
-import OurTeam from "@/widgets/OurTeam/OurTeam";
 import Results from "@/widgets/Results/Results";
 import Reviews from "@/widgets/Reviews/Reviews";
 import WhatsNext from "@/widgets/WhatsNext/WhatsNext";
@@ -48,14 +46,13 @@ export const revalidate = 30;
 const getHomeInfo = async () => {
   const kitchens = await UserKitchenService.getMainKitchens();
   const reviews = await UserReviewsService.getReviews();
-  const workers = await UserWorkerService.getWorkers();
   const moreKitchens = await UserKitchenService.getKitchens();
 
-  return { kitchens, reviews, workers, moreKitchens };
+  return { kitchens, reviews, moreKitchens };
 };
 
 const HomePage = async () => {
-  const { kitchens, reviews, workers, moreKitchens } = await getHomeInfo();
+  const { kitchens, reviews, moreKitchens } = await getHomeInfo();
   return (
     <>
       <div itemScope itemType="https://schema.org/WebSite">
@@ -80,7 +77,6 @@ const HomePage = async () => {
           tag="Рассчитать стоимость кухни"
         />
         <Reviews reviews={reviews} />
-        <OurTeam team={workers} />
         <MainArticles />
         <LeaveRequestBlock2
           location="Главная страница, последняя форма"
