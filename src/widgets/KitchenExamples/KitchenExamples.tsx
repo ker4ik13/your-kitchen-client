@@ -67,6 +67,16 @@ const KitchenExamples = ({ kitchens }: KitchenExamplesProps) => {
   const sortKitchens = (kitchens: IKitchen[]): IKitchen[] => {
     const timeKitchens = [...kitchens];
 
+    if (
+      styleValue.label === "Все" &&
+      typeValue.label === "Все" &&
+      budgetValue.label === "Все" &&
+      termValue.label === "Все"
+    ) {
+      setScopeKitchens(timeKitchens);
+      return timeKitchens;
+    }
+
     // 1. Сортировка по стилю
     const styleSortedKitchens = timeKitchens.filter((kitchen) => {
       if (styleValue.value === "Все") {

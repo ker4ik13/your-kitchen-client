@@ -72,6 +72,7 @@
   line-height: 1.5;
   cursor: text;
   text-wrap: balance;
+  word-break: auto-phrase;
 }
 .description {
   @include gilroy(400);
