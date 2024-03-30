@@ -4,8 +4,12 @@ import { EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./OurTeam.module.scss";
 
+import "@/shared/styles/swiper-my.css";
 import { IWorker } from "@/types/IWorker";
+import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/scss/pagination";
+
 import Worker from "../Worker/Worker";
 
 interface OurTeamProps {
