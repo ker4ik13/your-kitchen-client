@@ -241,6 +241,7 @@ export const LeaveRequest = ({
       <div className={styles.leaveRequest}>
         <div className={styles.container} onClick={onClick}>
           {/* Карточка */}
+
           <div className={styles.card}>
             <Image
               src={phone}

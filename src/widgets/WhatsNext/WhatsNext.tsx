@@ -1,10 +1,10 @@
-import styles from "./WhatsNext.module.scss";
-import man from "@/data/images/working-man.webp";
-import gazeel from "@/data/images/gazeel.webp";
-import three from "@/data/images/three.webp";
 import floor from "@/data/images/floor.webp";
+import gazeel from "@/data/images/gazeel.webp";
 import phone from "@/data/images/phone.webp";
+import three from "@/data/images/three.webp";
+import man from "@/data/images/working-man.webp";
 import Image from "next/image";
+import styles from "./WhatsNext.module.scss";
 
 const cardTexts = [
   {
@@ -27,12 +27,12 @@ const WhatsNext = () => {
             src={man}
             className={styles.workingMan}
             draggable={false}
-            alt='Мужчина'
+            alt="Мужчина"
           />
           <div className={styles.titleWrapper}>
             <p className={styles.text1}>Что будет после дизайн-проекта?</p>
             <h3 className={styles.title}>
-              за <span>21</span> день произведем кухню в полном соответствии с
+              Производство кухни за <span>21</span> день в полном соответствии с
               проектом, которая
             </h3>
             <p className={styles.text3}>
@@ -44,23 +44,23 @@ const WhatsNext = () => {
               <div className={styles.card} key={index}>
                 <div className={styles.circle}>
                   <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='11'
-                    height='11'
-                    viewBox='0 0 11 11'
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="11"
+                    height="11"
+                    viewBox="0 0 11 11"
                     className={styles.plus}
                   >
                     <path
-                      d='M5.06836 1.70508L5.06836 9.70508'
-                      stroke='white'
-                      strokeWidth='2'
-                      strokeLinecap='round'
+                      d="M5.06836 1.70508L5.06836 9.70508"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
                     />
                     <path
-                      d='M1.06836 5.70508L9.06836 5.70508'
-                      stroke='white'
-                      strokeWidth='2'
-                      strokeLinecap='round'
+                      d="M1.06836 5.70508L9.06836 5.70508"
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeLinecap="round"
                     />
                   </svg>
                 </div>
@@ -82,7 +82,7 @@ const WhatsNext = () => {
                   src={gazeel}
                   className={styles.gazeel}
                   draggable={false}
-                  alt='Газель'
+                  alt="Газель"
                 />
                 <p className={styles.price}>
                   <span>0</span>₽
@@ -102,7 +102,7 @@ const WhatsNext = () => {
                   src={three}
                   className={styles.imgDefault}
                   draggable={false}
-                  alt='Доски'
+                  alt="Доски"
                 />
               </div>
               <div className={styles.defaultCard}>
@@ -114,7 +114,7 @@ const WhatsNext = () => {
                   src={floor}
                   className={styles.imgDefault}
                   draggable={false}
-                  alt='Пол'
+                  alt="Пол"
                 />
               </div>
             </div>
@@ -132,7 +132,7 @@ const WhatsNext = () => {
                   src={phone}
                   className={styles.phone}
                   draggable={false}
-                  alt='Телефон'
+                  alt="Телефон"
                 />
               </div>
             </div>

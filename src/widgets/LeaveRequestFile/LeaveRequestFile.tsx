@@ -117,17 +117,27 @@ export const LeaveRequestFile = ({
               <div className={styles.description}>
                 {descriptionText
                   ? descriptionText
-                  : "Если у вас есть дизайн проект, эскиз, схема или картинка вашей кухни с размерами - пришлите информацию для расчета стоимости и получите консультанцию дизайнера."}
+                  : "Если у вас есть дизайн проект, планировка, эскиз, схема, фото или картинка вашей кухни с размерами - пришлите информацию, чтобы рассчитать стоимость."}
               </div>
               <div className={styles.asks}>
                 <div className={styles.ask}>
                   <Icons.lamp className={styles.icon} />
-                  <p className={styles.askText}>Как улучшить проект?</p>
+                  <p className={styles.askText}>
+                    Как оформить и улучшить проект?
+                  </p>
                 </div>
                 <div className={styles.ask}>
                   <Icons.keys className={styles.icon} />
                   <p className={styles.askText}>
                     Из чего сделать надежную и долговечную кухню?
+                  </p>
+                </div>
+                <div className={styles.ask}>
+                  <Icons.house className={styles.icon} />
+
+                  <p className={styles.askText}>
+                    Какие есть варианты и сочетания, примеры? Какая лучше
+                    подойдет в частный дом? Прямая или угловая? Где заказать?
                   </p>
                 </div>
               </div>

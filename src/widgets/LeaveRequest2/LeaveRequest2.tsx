@@ -24,6 +24,10 @@ interface LeaveRequestProps {
   descriptionText?: string | ReactNode;
   tag?: string;
   location?: string;
+  before?: {
+    title?: string;
+    subtitle?: string;
+  };
 }
 
 export const LeaveRequest2 = ({
@@ -34,6 +38,7 @@ export const LeaveRequest2 = ({
   descriptionText,
   tag,
   location,
+  before,
 }: LeaveRequestProps) => {
   const {
     register,
@@ -215,6 +220,12 @@ export const LeaveRequest2 = ({
       <div className={styles.leaveRequest}>
         <div className={styles.container} onClick={onClick}>
           {/* Карточка */}
+          {before && before.title && (
+            <h3 className={styles.beforeTitle}>{before.title}</h3>
+          )}
+          {before && before.subtitle && (
+            <p className={styles.beforeSubtitle}>{before.subtitle}</p>
+          )}
           <div className={styles.card}>
             <div className={styles.wrapper}>
               <p className={styles.minus}>—</p>
