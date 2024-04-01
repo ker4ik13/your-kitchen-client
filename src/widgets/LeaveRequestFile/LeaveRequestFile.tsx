@@ -209,7 +209,6 @@ export const LeaveRequestFile = ({
                   <div className={styles.columnInput}>
                     <OrangeButton
                       className={styles.button}
-                      type="submit"
                       onClick={handleSubmit(onSubmitLeaveRequest)}
                     >
                       {buttonText ? buttonText : "Узнать цену"}

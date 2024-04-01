@@ -354,6 +354,7 @@
 .button {
   min-width: rem(230);
   font-size: rem(12);
+  @include orange-gradient();
 
   @media screen and (max-width: $max-800) {
     max-width: rem(350);
