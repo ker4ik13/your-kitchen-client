@@ -51,7 +51,7 @@ export const Contacts = () => {
         </div>
         <div className={styles.map}>
           <iframe
-            src="https://yandex.ru/map-widget/v1/org/tvoya_kukhnya/192446974752/?ll=37.670115%2C55.719815&z=15"
+            src="https://yandex.ru/map-widget/v1/?lang=ru_RU&scroll=true&source=constructor-api&um=constructor%3Ad66f7eaf9a8447cb43b64b598a5c4463dffa981e89572461d273a5661a32c9a6"
             width="610"
             height="400"
             allowFullScreen
