@@ -32,6 +32,9 @@ const Kitchens = ({ kitchens, moreKitchens }: KitchensProps) => {
             За <span>9</span> лет произвели более 1.5&nbsp;тысяч гарнитуров в
             Москве
           </h3>
+          <p className={styles.subtitle2}>
+            Мы воплощаем в жизнь модные дизайнерские решения и необычные идеи.
+          </p>
           <p className={styles.subtitle}>
             <span>Выберите свою:</span> от лофта до классики
           </p>

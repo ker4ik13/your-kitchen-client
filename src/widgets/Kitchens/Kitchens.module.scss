@@ -52,6 +52,19 @@
     }
   }
 }
+.subtitle2 {
+  margin: 0 auto;
+  margin-top: rem(15);
+  @include gilroy(600);
+  color: #fff;
+  text-align: center;
+  letter-spacing: rem(0.4);
+  font-size: rem(18);
+
+  & span {
+    @include gilroy(700);
+  }
+}
 .subtitle {
   margin: 0 auto;
   margin-top: rem(15);
