@@ -34,7 +34,7 @@ import { DiscountsHelloScreenSlider } from "@/widgets/ChoiseHelloScreen/Discount
 import { KitchensHelloScreen } from "@/widgets/ChoiseHelloScreen/KitchensHelloScreen";
 import { Correction } from "@/widgets/Correction/Correction";
 import Kitchens from "@/widgets/Kitchens/Kitchens";
-import { LeaveRequestFile } from "@/widgets/LeaveRequestFile/LeaveRequestFile";
+import { LeaveRequestDesigner } from "@/widgets/LeaveRequestDesigner/LeaveRequestDesigner";
 import { MainAdvantages } from "@/widgets/MainAdvantages/MainAdvantages";
 import MainArticles from "@/widgets/MainArticles/MainArticles";
 import Results from "@/widgets/Results/Results";
@@ -63,7 +63,10 @@ const HomePage = async () => {
         <KitchensHelloScreen />
         <Kitchens kitchens={kitchens} moreKitchens={moreKitchens} />
         <div className={styles.darkBg}>
-          <LeaveRequestFile location="Главная страница" tag="Сравнить цены" />
+          <LeaveRequestDesigner
+            location="Главная страница"
+            tag="Выезд дизайнера"
+          />
         </div>
         <MainAdvantages />
         {/* <SecondScreen /> */}

@@ -38,6 +38,7 @@ export default function ContactsPage() {
         subtitle="Адрес офиса и способы связи с мебельной фабрикой «Твоя кухня»"
         title="Контакты"
         bg={officeBg}
+        miniHeight
       />
       <Contacts />
       <LeaveRequestMini

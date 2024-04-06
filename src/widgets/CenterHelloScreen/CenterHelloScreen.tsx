@@ -12,11 +12,20 @@ interface Props {
   button?: {
     href: string;
   };
+  miniHeight?: boolean;
 }
 
-export const CenterHelloScreen = ({ subtitle, title, bg, button }: Props) => {
+export const CenterHelloScreen = ({
+  subtitle,
+  title,
+  bg,
+  button,
+  miniHeight,
+}: Props) => {
   return (
-    <div className={styles.helloScreen}>
+    <div
+      className={`${styles.helloScreen} ${miniHeight ? styles.miniHeight : ""}`}
+    >
       <Image
         src={bg ? bg : bgImage}
         className={styles.bgImage}

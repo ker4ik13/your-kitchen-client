@@ -10,6 +10,7 @@ import { OrangeButton } from "@/shared/ui";
 import Image from "next/image";
 import { useState } from "react";
 import { LeaveRequestDesigner } from "../LeaveRequestDesigner/LeaveRequestDesigner";
+import { LeaveRequestFile } from "../LeaveRequestFile/LeaveRequestFile";
 import { Modal2 } from "../Modals/Modal2";
 import { ModalVideo } from "../Modals/ModalVideo";
 import styles from "./Correction.module.scss";
@@ -218,10 +219,10 @@ export const Correction = ({ title }: Props) => {
               </div>
             </div>
           </div>
-          <LeaveRequestDesigner
-            location="Главная страница"
-            tag="Выезд дизайнера"
+          <LeaveRequestFile
             noPadding
+            location="Главная страница"
+            tag="Сравнить цены"
           />
         </div>
       </div>

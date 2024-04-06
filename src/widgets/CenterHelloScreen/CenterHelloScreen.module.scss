@@ -15,6 +15,23 @@
     padding-top: rem(150);
   }
 
+  &.miniHeight {
+    min-height: rem(380);
+    max-height: rem(380);
+    padding-top: rem(80);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & .divider {
+      margin-top: rem(20);
+    }
+
+    & .subtitle {
+      margin-top: rem(20);
+    }
+  }
+
   overflow: hidden;
 }
 .bgImage {

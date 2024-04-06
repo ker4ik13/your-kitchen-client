@@ -117,7 +117,7 @@ export const LeaveRequestFile = ({
               <div className={styles.description}>
                 {descriptionText
                   ? descriptionText
-                  : "Если у вас есть дизайн проект, планировка, эскиз, схема, фото или картинка вашей кухни с размерами - пришлите информацию, чтобы рассчитать стоимость."}
+                  : "Если у вас есть дизайн проект, планировка, эскиз, схема, фото или картинка вашей мебели с размерами - пришлите информацию, чтобы рассчитать стоимость."}
               </div>
               <div className={styles.asks}>
                 <div className={styles.ask}>
@@ -129,7 +129,7 @@ export const LeaveRequestFile = ({
                 <div className={styles.ask}>
                   <Icons.keys className={styles.icon} />
                   <p className={styles.askText}>
-                    Из чего сделать надежную и долговечную кухню?
+                    Из чего сделать надежную и долговечную мебель?
                   </p>
                 </div>
                 <div className={styles.ask}>
