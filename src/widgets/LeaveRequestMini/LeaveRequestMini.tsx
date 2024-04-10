@@ -32,6 +32,10 @@ interface LeaveRequestMiniProps {
     arrow?: "left" | "right" | "up" | "down";
   };
   type?: ModalType;
+  before?: {
+    title?: string;
+    subtitle?: string;
+  };
 }
 
 const getModalType = (type: ModalType): string => {
@@ -53,6 +57,7 @@ export const LeaveRequestMini = ({
   location,
   button,
   type = "default",
+  before,
 }: LeaveRequestMiniProps) => {
   const {
     register,
@@ -93,6 +98,12 @@ export const LeaveRequestMini = ({
       <div className={styles.leaveRequest}>
         <div className={styles.container}>
           {/* Карточка */}
+          {before && before.title && (
+            <h3 className={styles.beforeTitle}>{before.title}</h3>
+          )}
+          {before && before.subtitle && (
+            <p className={styles.beforeSubtitle}>{before.subtitle}</p>
+          )}
           <div className={getModalType(type)}>
             <div className={styles.wrapper}>
               <p className={styles.minus}>—</p>

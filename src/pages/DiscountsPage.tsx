@@ -16,12 +16,10 @@ const DiscountsPage = ({ discounts }: DiscountsPageProps) => {
   return (
     <div className={styles.bg}>
       <CenterHelloScreen
+        miniHeight
         title="Скидки, акции и подарки"
         subtitle="Актуальный каталог акций и скидок на кухни и корпусную мебель в Москве. Выгодное предложения на покупку кухонного гарнитура или другой мебели на заказ."
         bg={bgImage}
-        button={{
-          href: "#discounts",
-        }}
       />
       {discounts && <Discounts discounts={discounts} />}
       <LeaveRequestMini
@@ -33,6 +31,11 @@ const DiscountsPage = ({ discounts }: DiscountsPageProps) => {
           arrow: "right",
         }}
         type="promotion"
+        before={{
+          title: "Вы в поисках где купить кухню по акции?",
+          subtitle:
+            "Мы изготавливаем современные стильные кухни по индивидуальным размерам, как дорогие, так и недорогие проекты, в Москве и МО. Рассчитать стоимость, узнать цены и получить скидку вы можете, отправив заявку через наш сайт.",
+        }}
       />
       <MainArticles withoutBg />
     </div>
