@@ -77,15 +77,12 @@ export const LeaveRequestMini = ({
       location,
       tag,
     });
-    const result = await ClaimService.addClaim(newClaim);
-
-    if (result?.status === 201) {
-      resetField("firstName");
-      setValue("mobilePhone", "");
-      router.push(pagesLinks.thankyou, {
-        scroll: true,
-      });
-    }
+    await ClaimService.addClaim(newClaim);
+    resetField("firstName");
+    setValue("mobilePhone", "");
+    router.push(pagesLinks.thankyou, {
+      scroll: true,
+    });
   };
 
   return (
