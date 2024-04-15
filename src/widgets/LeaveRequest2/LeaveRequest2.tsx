@@ -60,13 +60,11 @@ export const LeaveRequest2 = ({
 
     const result = await ClaimService.addClaim(newClaim);
 
-    if (result?.status === 201) {
-      resetField("firstName");
-      setValue("mobilePhone", "");
-      router.push(pagesLinks.thankyou, {
-        scroll: true,
-      });
-    }
+    resetField("firstName");
+    setValue("mobilePhone", "");
+    router.push(pagesLinks.thankyou, {
+      scroll: true,
+    });
 
     if (isModal && setIsOpen) {
       setIsOpen(false);

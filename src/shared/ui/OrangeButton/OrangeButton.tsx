@@ -19,7 +19,22 @@ interface ButtonProps {
     location?: "left" | "right";
   };
   disabled?: boolean;
+  variant?: "orange" | "transparent" | "white";
 }
+
+const getButtonStyles = (
+  variant: "transparent" | "orange" | "white" = "orange",
+) => {
+  switch (variant) {
+    case "white":
+      return styles.white;
+    case "transparent":
+      return styles.transparent;
+    case "orange":
+    default:
+      return styles.orange;
+  }
+};
 
 const isHaveArrow = (arrow: string | undefined): string => {
   if (arrow) {
@@ -48,6 +63,7 @@ export const OrangeButton = ({
   prefix,
   disabled,
   arrowLocation,
+  variant = "orange",
 }: ButtonProps) => {
   if (href) {
     return (
@@ -55,7 +71,7 @@ export const OrangeButton = ({
         href={href}
         className={`${isCenter(center)} ${isHaveArrow(prefix?.location)} ${
           styles.button
-        } ${className || ""} ${isHaveArrow(arrow)}`}
+        } ${getButtonStyles(variant)} ${className || ""} ${isHaveArrow(arrow)}`}
       >
         {arrow && arrowLocation === "left" && (
           <Icons.chevron direction={arrow} />
@@ -78,7 +94,7 @@ export const OrangeButton = ({
       onClick={onClick}
       className={`${isCenter(center)} ${isHaveArrow(prefix?.location)} ${
         styles.button
-      } ${className || ""} ${isHaveArrow(arrow)}`}
+      } ${getButtonStyles(variant)} ${className || ""} ${isHaveArrow(arrow)}`}
     >
       {arrow && arrowLocation === "left" && <Icons.chevron direction={arrow} />}
       {(prefix && prefix.location !== "right") ||

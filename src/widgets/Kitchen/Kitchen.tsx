@@ -13,15 +13,16 @@ import styles from "./Kitchen.module.scss";
 interface KitchenProps {
   kitchen: IKitchen;
   link?: string;
+  flex?: boolean;
 }
 
-const Kitchen = ({ kitchen, link }: KitchenProps) => {
+const Kitchen = ({ kitchen, link, flex }: KitchenProps) => {
   return (
     <>
       <Link
         itemScope
         itemType="https://schema.org/Product"
-        className={styles.kitchen}
+        className={`${styles.kitchen} ${flex ? styles.flex : ""}`}
         href={
           link
             ? link
