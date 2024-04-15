@@ -61,7 +61,12 @@ const HomePage = async () => {
       </div>
       <div className={styles.bg}>
         <KitchensHelloScreen />
-        <Kitchens kitchens={kitchens} moreKitchens={moreKitchens} />
+        {/* <Stocks withoutBg /> */}
+        <Kitchens
+          kitchens={kitchens}
+          moreKitchens={moreKitchens}
+          threeKitchens
+        />
         <div className={styles.darkBg}>
           <LeaveRequestDesigner
             location="Главная страница"

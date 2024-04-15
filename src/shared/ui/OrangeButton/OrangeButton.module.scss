@@ -45,4 +45,13 @@
     filter: grayscale(100%);
     cursor: not-allowed;
   }
+  &.white {
+    background: $white !important;
+    color: #d4623e;
+  }
+
+  &.transparent {
+    background: transparent !important;
+    outline-color: $white;
+  }
 }

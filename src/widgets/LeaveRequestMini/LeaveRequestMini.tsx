@@ -24,6 +24,9 @@ if (!API_URL) {
 export type ModalType = "default" | "promotion" | "call";
 
 interface LeaveRequestMiniProps {
+  isModal?: boolean;
+  onClick?: (...options: any) => void;
+  setIsOpen?: (isOpen: boolean) => void;
   title?: string;
   tag?: string;
   location?: string;
@@ -54,10 +57,13 @@ const getModalType = (type: ModalType): string => {
 export const LeaveRequestMini = ({
   title,
   tag,
+  onClick,
+  setIsOpen,
   location,
   button,
   type = "default",
   before,
+  isModal,
 }: LeaveRequestMiniProps) => {
   const {
     register,
@@ -83,7 +89,105 @@ export const LeaveRequestMini = ({
     router.push(pagesLinks.thankyou, {
       scroll: true,
     });
+
+    if (isModal && setIsOpen) {
+      setIsOpen(false);
+      document.body.classList.remove("overflow");
+    }
   };
+
+  if (isModal && setIsOpen) {
+    return (
+      <>
+        <TextModal
+          isOpen={isOpenPrivacy}
+          setIsOpen={setIsOpenPrivacy}
+          text={PrivacyPolicy}
+        />
+        <div className={styles.leaveRequest}>
+          <div className={styles.container} onClick={onClick}>
+            {/* Карточка */}
+            {before && before.title && (
+              <h3 className={styles.beforeTitle}>{before.title}</h3>
+            )}
+            {before && before.subtitle && (
+              <p className={styles.beforeSubtitle}>{before.subtitle}</p>
+            )}
+            <div className={getModalType(type)}>
+              <div className={styles.wrapper}>
+                <p className={styles.minus}>—</p>
+                <h3 className={styles.title}>
+                  {title ? title : "Получите бесплатный эскиз вашего проекта"}
+                </h3>
+              </div>
+
+              <form className={styles.formWrapper2}>
+                <div className={styles.inputsWrapper2}>
+                  <div className={styles.inputWrapper}>
+                    <input
+                      type="text"
+                      autoComplete="given-name"
+                      className={isErrorStyles(
+                        TFormInputsNames.firstName,
+                        errors,
+                        styles,
+                      )}
+                      placeholder="Ваше имя"
+                      {...register("firstName", {
+                        required: "Введите ваше имя",
+                        minLength: 2,
+                      })}
+                    />
+                    <Icons.user className={styles.icon} />
+                  </div>
+                  <div className={styles.inputWrapper}>
+                    <ReactInputMask
+                      type="tel"
+                      autoComplete="tel"
+                      mask="+7 999 999-99-99"
+                      maskChar={null}
+                      className={isErrorStyles(
+                        TFormInputsNames.mobilePhone,
+                        errors,
+                        styles,
+                      )}
+                      placeholder="Ваш телефон"
+                      {...register("mobilePhone", {
+                        required: "Введите ваш телефон",
+                        minLength: 16,
+                      })}
+                    />
+                    <Icons.phoneGray className={styles.icon} />
+                  </div>
+                  <div className={styles.column}>
+                    <OrangeButton
+                      onClick={handleSubmit(onSubmitLeaveRequest)}
+                      className={styles.button}
+                      arrow={button && button.arrow ? button.arrow : undefined}
+                    >
+                      {button && button.text ? button.text : "Получить эскиз"}
+                    </OrangeButton>
+                    <p className={styles.infoText}>
+                      Нажимая на кнопку «Отправить» вы даёте{" "}
+                      <button
+                        type="button"
+                        onClick={() => setIsOpenPrivacy(true)}
+                      >
+                        согласие на обработку персональных данных
+                      </button>
+                    </p>
+                  </div>
+                </div>
+              </form>
+              <p className={styles.text}>
+                Менеджер свяжется с вами в течение <span>15 минут</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>

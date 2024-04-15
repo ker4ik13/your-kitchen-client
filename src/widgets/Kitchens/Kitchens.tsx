@@ -9,17 +9,20 @@ import styles from "./Kitchens.module.scss";
 interface KitchensProps {
   kitchens: IKitchen[];
   moreKitchens: IKitchen[];
+  threeKitchens?: boolean;
 }
 
-const STEP = 4;
+const STEP = 6;
 
-const Kitchens = ({ kitchens, moreKitchens }: KitchensProps) => {
+const Kitchens = ({ kitchens, moreKitchens, threeKitchens }: KitchensProps) => {
   const [viewKitchens, setViewKitchens] = useState(kitchens);
+  const [sliceNumber, setSliceNumber] = useState(9);
 
   const showMore = () => {
     const newKitchens = moreKitchens.filter((kitchen) => {
       return !viewKitchens.some((item) => item._id === kitchen._id);
     });
+    setSliceNumber((prev) => prev + STEP);
 
     setViewKitchens([...viewKitchens, ...newKitchens.slice(0, STEP)]);
   };
@@ -39,21 +42,11 @@ const Kitchens = ({ kitchens, moreKitchens }: KitchensProps) => {
             <span>Выберите свою:</span> от лофта до классики
           </p>
           <div className={styles.kitchens}>
-            {viewKitchens.slice(0, 5).map((kitchen, index) => (
-              <div className={styles.customKitchen} key={index}>
-                <Kitchen kitchen={kitchen} />
-              </div>
+            {viewKitchens.slice(0, sliceNumber).map((kitchen, index) => (
+              <Kitchen kitchen={kitchen} key={index} flex={threeKitchens} />
             ))}
           </div>
-          {viewKitchens.length > 5 && (
-            <div className={styles.moreKitchens}>
-              {viewKitchens.slice(5).map((kitchen, index) => (
-                <div className={styles.kitchenWrapper} key={index}>
-                  <Kitchen kitchen={kitchen} />
-                </div>
-              ))}
-            </div>
-          )}
+
           <div className={styles.string}>
             {viewKitchens.length < moreKitchens.length && (
               <OrangeButton onClick={showMore}>Показать еще</OrangeButton>
