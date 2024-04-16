@@ -32,8 +32,8 @@ const Kitchens = ({ kitchens, moreKitchens, threeKitchens }: KitchensProps) => {
       <div className={styles.kitchensPage} id="kitchens">
         <div className={styles.container}>
           <h3 className={styles.title}>
-            За <span>9</span> наша фабрика произвела более 1.5&nbsp;тысяч
-            гарнитуров в&nbsp;Москве
+            За <span>9</span> лет фабрика &quot;Твоя кухня&quot; произвела более
+            1.5&nbsp;тысяч гарнитуров в&nbsp;Москве
           </h3>
           <p className={styles.subtitle2}>
             Мы воплощаем в жизнь модные дизайнерские решения и необычные идеи.
