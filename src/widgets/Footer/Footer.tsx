@@ -144,21 +144,32 @@ const Footer = () => {
                 <Icons.vk className={styles.footerDownIcon} />
               </Link>
             </div>
-            <div className={styles.footerDownText}>
-              <div
-                itemProp="address"
-                itemScope
-                itemType="http://schema.org/PostalAddress"
-              >
-                <span itemProp="addressLocality"> г. Москва,</span>
-                <span itemProp="streetAddress">
-                  ул. Новоостаповская д. 6Б.
-                </span>{" "}
-                <span itemProp="postalCode" content="115088"></span>
+            <div className={styles.column}>
+              <div className={styles.footerDownText}>
+                <div
+                  itemProp="address"
+                  itemScope
+                  itemType="http://schema.org/PostalAddress"
+                >
+                  <span itemProp="addressLocality"> г. Москва,</span>
+                  <span itemProp="streetAddress">
+                    ул. Новоостаповская д. 6Б.
+                  </span>{" "}
+                  <span itemProp="postalCode" content="115088"></span>
+                </div>
+                <time itemProp="openingHours" dateTime="Mo-Su 10:00-20:00">
+                  Мы работаем 10:00 - 20:00 / Без выходных
+                </time>
               </div>
-              <time itemProp="openingHours" dateTime="Mo-Su 10:00-20:00">
-                Мы работаем 10:00 - 20:00 / Без выходных
-              </time>
+              <div className={styles.footerDownText}>
+                <div
+                  itemProp="address"
+                  itemScope
+                  itemType="http://schema.org/PostalAddress"
+                >
+                  <p>ООО «ТК», ИНН 9701160947, ОГРН 1207700295824</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

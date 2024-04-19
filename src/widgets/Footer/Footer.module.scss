@@ -148,7 +148,8 @@
 }
 .footerDown {
   background-color: #1d1b1b;
-  padding: rem(10) 0;
+  padding: rem(20) 0;
+  padding-bottom: rem(30);
 }
 .downContainer {
   @include container();

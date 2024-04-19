@@ -4,8 +4,7 @@ import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./PreviewPhotos.module.scss";
 // import Swiper and modules styles
-import "@/shared/styles/swiper-my.css";
-import type { IKitchen } from "@/types/IKitchen";
+import "@/shared/styles/swiper-contacts.css";
 import Image from "next/image";
 import { useState } from "react";
 import typeSwiper from "swiper";
@@ -18,13 +17,13 @@ const isOpenStyles = (isOpen: boolean) =>
 
 interface PreviewPhotosProps {
   isOpen: boolean;
-  kitchen: IKitchen;
+  photos: string[];
   closePreview: () => void;
 }
 
 const PreviewPhotos = ({
   isOpen,
-  kitchen,
+  photos,
   closePreview,
 }: PreviewPhotosProps) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<typeSwiper | null>(null);
@@ -58,8 +57,8 @@ const PreviewPhotos = ({
             >
               ×
             </button>
-            {kitchen &&
-              kitchen.photos.map((photo, index) => (
+            {photos &&
+              photos.map((photo, index) => (
                 <SwiperSlide className={styles.previewSlide} key={index}>
                   <Image
                     src={photo || ""}
@@ -97,8 +96,8 @@ const PreviewPhotos = ({
             },
           }}
         >
-          {kitchen &&
-            kitchen.photos.map((photo, index) => (
+          {photos &&
+            photos.map((photo, index) => (
               <SwiperSlide className={styles.thumbsSlide} key={index}>
                 <Image
                   src={photo || ""}

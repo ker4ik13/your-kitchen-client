@@ -9,6 +9,7 @@ import { LeaveRequestBlock } from "@/shared/LeaveRequestBlock";
 import { SITE_NAME, pagesData } from "@/shared/constants";
 import KitchenExamples from "@/widgets/KitchenExamples/KitchenExamples";
 import Reviews from "@/widgets/Reviews/Reviews";
+import { Stocks } from "@/widgets/Stocks/Stocks";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -45,6 +46,7 @@ const PortfolioPage = async () => {
         <meta itemProp="name" content={SITE_NAME} />
       </div>
       <KitchenExamples kitchens={kitchens} />
+      <Stocks location="Страница портфолио, блок акций" />
       <Reviews reviews={reviews} />
       <LeaveRequestBlock
         location="Страница портфолио"
