@@ -135,8 +135,8 @@
   color: #b79571;
   font-size: rem(54);
   position: absolute;
-  top: rem(70);
-  right: rem(20);
+  top: rem(30);
+  right: rem(50);
   z-index: 10;
   border: 0;
   outline: none;
@@ -148,20 +148,21 @@
     color: darken(#b79571, 10%);
   }
 
-  @media (max-width: $max-1000) {
-    top: rem(120);
-    right: 40%;
-    transform: translate(50%, 0);
+  @media (max-width: $max-950) {
+    top: rem(90);
+    right: rem(30);
   }
-  @media (max-width: $max-600) {
+  @media (max-width: $max-800) {
+    top: rem(130);
+    right: rem(30);
+  }
+  @media (max-width: $max-650) {
     top: rem(70);
-    right: 37%;
-    transform: translate(50%, 0);
+    right: rem(30);
   }
   @media (max-width: $max-450) {
-    top: rem(70);
-    right: 39%;
-    transform: translate(50%, 0);
+    top: rem(130);
+    right: rem(30);
   }
 }
 .minus {

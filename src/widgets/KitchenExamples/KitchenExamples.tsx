@@ -49,8 +49,10 @@ interface KitchenExamplesProps {
   kitchens: IKitchen[];
 }
 
+const STEP = 9;
+
 const KitchenExamples = ({ kitchens }: KitchenExamplesProps) => {
-  const [sliceNumber, setSliceNumber] = useState(8);
+  const [sliceNumber, setSliceNumber] = useState(STEP);
 
   const [scopeKitchens, setScopeKitchens] = useState<IKitchen[]>(
     kitchens || [],
@@ -113,13 +115,13 @@ const KitchenExamples = ({ kitchens }: KitchenExamplesProps) => {
       );
     });
 
-    setSliceNumber(8);
+    setSliceNumber(STEP);
     return termSortedKitchens;
   };
 
   const handleShowMore = () => {
     if (sliceNumber < scopeKitchens.length) {
-      setSliceNumber((prev) => prev + 8);
+      setSliceNumber((prev) => prev + STEP);
     }
   };
 

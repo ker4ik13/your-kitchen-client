@@ -11,6 +11,7 @@ import styles from "./Stocks.module.scss";
 interface Props {
   stocks?: IStock[];
   withoutBg?: boolean;
+  location?: string;
 }
 
 const getStockVariant = (
@@ -27,7 +28,7 @@ const getStockVariant = (
   }
 };
 
-export const Stocks = ({ stocks, withoutBg }: Props) => {
+export const Stocks = ({ stocks, withoutBg, location }: Props) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [selectedStock, setSelectedStock] = useState<IStock | null>(null);
 
@@ -45,7 +46,7 @@ export const Stocks = ({ stocks, withoutBg }: Props) => {
         title="Оставить контакты для связи специалиста"
         buttonText="Отправить"
         tag={selectedStock?.title}
-        location="Главная страница, блок с акциями"
+        location={location}
       />
       <div className={`${styles.stocks} ${withoutBg ? styles.withoutBg : ""}`}>
         <div className={styles.container}>

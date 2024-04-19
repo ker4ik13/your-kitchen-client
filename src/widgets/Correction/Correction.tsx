@@ -9,7 +9,6 @@ import { Icons } from "@/shared/IconsComponents/Icons";
 import { OrangeButton } from "@/shared/ui";
 import Image from "next/image";
 import { useState } from "react";
-import { LeaveRequestDesigner } from "../LeaveRequestDesigner/LeaveRequestDesigner";
 import { LeaveRequestFile } from "../LeaveRequestFile/LeaveRequestFile";
 import { Modal2 } from "../Modals/Modal2";
 import { ModalVideo } from "../Modals/ModalVideo";
@@ -33,7 +32,10 @@ export const Correction = ({ title }: Props) => {
       <ModalVideo
         isOpen={isOpenVideo}
         setIsOpen={setIsOpenVideo}
-        videoUrl="https://rutube.ru/video/ff3d0a32ad30b9b0344f3717337e0e05"
+        videoUrl={
+          "https://www.youtube.com/embed/6NvsnUlSqCs?si=ovdG5x7EbD6zdpQG"
+        }
+        videoType="youtube"
       />
       <div className={styles.correctionPage} id="how-we-work">
         <div className={styles.container}>

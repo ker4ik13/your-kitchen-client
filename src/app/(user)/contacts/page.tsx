@@ -9,6 +9,7 @@ import { SITE_NAME, pagesData } from "@/shared/constants";
 import { CenterHelloScreen } from "@/widgets/CenterHelloScreen/CenterHelloScreen";
 import { Contacts } from "@/widgets/Contacts/Contacts";
 import { LeaveRequestMini } from "@/widgets/LeaveRequestMini/LeaveRequestMini";
+import { PhotoSlider } from "@/widgets/PhotoSlider/PhotoSlider";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -41,6 +42,10 @@ export default function ContactsPage() {
         miniHeight
       />
       <Contacts />
+      <PhotoSlider
+        title='Производство мебельной фабрики "Твоя кухня"'
+        subtitle="Адрес: г.&nbsp;Ульяновск, 42 Инженерный проезд, д.&nbsp;6"
+      />
       <LeaveRequestMini
         tag="Заказать обратный звонок"
         location="Страница контактов"

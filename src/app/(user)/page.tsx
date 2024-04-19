@@ -61,7 +61,6 @@ const HomePage = async () => {
       </div>
       <div className={styles.bg}>
         <KitchensHelloScreen />
-        {/* <Stocks withoutBg /> */}
         <Kitchens
           kitchens={kitchens}
           moreKitchens={moreKitchens}

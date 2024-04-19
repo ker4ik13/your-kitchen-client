@@ -113,6 +113,16 @@ export const LeaveRequestMini = ({
             {before && before.subtitle && (
               <p className={styles.beforeSubtitle}>{before.subtitle}</p>
             )}
+            <button
+              type="button"
+              className={styles.closeButton}
+              onClick={() => {
+                setIsOpen(false);
+                document.body.classList.remove("overflow");
+              }}
+            >
+              ×
+            </button>
             <div className={getModalType(type)}>
               <div className={styles.wrapper}>
                 <p className={styles.minus}>—</p>

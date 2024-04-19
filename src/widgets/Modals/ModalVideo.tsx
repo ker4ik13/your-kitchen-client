@@ -6,12 +6,14 @@ interface ModalVideoProps {
   videoUrl: string;
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  videoType?: "youtube" | "rutube";
 }
 
 export const ModalVideo = ({
   videoUrl,
   isOpen,
   setIsOpen,
+  videoType = "rutube",
 }: ModalVideoProps) => {
   const parseUrl = videoUrl.split("/");
 
@@ -42,7 +44,11 @@ export const ModalVideo = ({
             ×
           </button>
           <iframe
-            src={`${parseUrl[0]}//${parseUrl[2]}/play/embed/${parseUrl[4]}`}
+            src={
+              videoType === "rutube"
+                ? `${parseUrl[0]}//${parseUrl[2]}/play/embed/${parseUrl[4]}`
+                : videoUrl
+            }
             allowFullScreen
             className={styles.iframe}
           ></iframe>
