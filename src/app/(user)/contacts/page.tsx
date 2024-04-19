@@ -44,7 +44,7 @@ export default function ContactsPage() {
       <Contacts />
       <PhotoSlider
         title='Производство мебельной фабрики "Твоя кухня"'
-        subtitle="Адрес: г.&nbsp;Ульяновск, 42 Инженерный проезд, д.&nbsp;6"
+        subtitle="адрес: г.&nbsp;Ульяновск, 42 Инженерный проезд, д.&nbsp;6"
       />
       <LeaveRequestMini
         tag="Заказать обратный звонок"
