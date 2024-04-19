@@ -3,7 +3,11 @@ import { links } from "@/shared/constants";
 import Link from "next/link";
 import styles from "./Contacts.module.scss";
 
-export const Contacts = () => {
+interface Props {
+  title?: string;
+}
+
+export const Contacts = ({ title }: Props) => {
   return (
     <div className={styles.contactsPage}>
       <div className={styles.container}>
@@ -49,6 +53,7 @@ export const Contacts = () => {
             <br />
           </div>
         </div>
+        <h3 className={styles.title}>{title ? title : "Офис в Москве:"}</h3>
         <div className={styles.map}>
           <iframe
             src="https://yandex.ru/map-widget/v1/?lang=ru_RU&scroll=true&source=constructor-api&um=constructor%3Ad66f7eaf9a8447cb43b64b598a5c4463dffa981e89572461d273a5661a32c9a6"
@@ -69,7 +74,6 @@ export const Contacts = () => {
                 </p>
               </div>
             </div>
-            <br />
             <div className={styles.card}>
               <Icons.phoneWithoutBg className={styles.icon} />
               <div className={styles.column}>
@@ -93,7 +97,6 @@ export const Contacts = () => {
                 </p>
               </div>
             </div>
-            <br />
             <div className={styles.card}>
               <Icons.keys className={styles.icon} />
               <div className={styles.column}>
@@ -109,7 +112,6 @@ export const Contacts = () => {
                 </p>
               </div>
             </div>
-            <br />
             <div className={styles.card}>
               <Icons.phonePlus className={styles.icon} />
               <div className={styles.column}>
@@ -130,6 +132,9 @@ export const Contacts = () => {
                     target="_blank"
                   >
                     <Icons.splashWhatsapp className={styles.navIcon} />
+                  </Link>
+                  <Link aria-label="VK" href={links.vk} target="_blank">
+                    <Icons.vk className={styles.navIcon} />
                   </Link>
                 </div>
               </div>

@@ -52,7 +52,6 @@
   @include container();
   max-height: 70vh;
   height: 100%;
-  width: 100%;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -77,6 +76,7 @@
   padding: 0 rem(30);
 }
 .previewImg {
+  width: 80%;
   height: 100%;
   object-fit: contain;
   -o-object-fit: contain;
@@ -87,6 +87,10 @@
   -ms-user-select: none;
   user-select: none;
   border-radius: rem(6);
+
+  @media screen and (max-width: $max-768) {
+    width: 95%;
+  }
 }
 .thumbsSlider {
   position: fixed;
