@@ -43,6 +43,7 @@ export default function RootLayout({
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff0000" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#433A31" />
+        <meta name="color-scheme" content="only light" />
         <script
           defer
           type="text/javascript"
