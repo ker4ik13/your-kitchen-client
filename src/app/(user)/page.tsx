@@ -39,6 +39,7 @@ import { MainAdvantages } from "@/widgets/MainAdvantages/MainAdvantages";
 import MainArticles from "@/widgets/MainArticles/MainArticles";
 import Results from "@/widgets/Results/Results";
 import Reviews from "@/widgets/Reviews/Reviews";
+import { Stocks } from "@/widgets/Stocks/Stocks";
 import WhatsNext from "@/widgets/WhatsNext/WhatsNext";
 
 export const revalidate = 30;
@@ -61,6 +62,7 @@ const HomePage = async () => {
       </div>
       <div className={styles.bg}>
         <KitchensHelloScreen />
+        <Stocks location="Главная страница, блок акций" />
         <Kitchens
           kitchens={kitchens}
           moreKitchens={moreKitchens}

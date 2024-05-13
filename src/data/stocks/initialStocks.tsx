@@ -9,8 +9,9 @@ import stock6Img from "./stock6.webp";
 
 export const initialStocks: IStock[] = [
   {
-    title: "Только до 30 апреля!",
-    description: "Монтаж и сборка кухонного гарнитура в подарок",
+    title: "Холодильник за 0 руб",
+    description:
+      "В мае 2024 года дарим холодильник одного из брендов: Gorenje, KRONA, Maunfeld, Zigmund & Shtain, Haier.",
     rightPhoto: stock1Img,
     button: {
       text: "Бесплатно",
@@ -36,6 +37,7 @@ export const initialStocks: IStock[] = [
   {
     title: "Платим 3000₽ за рекомендацию",
     rightPhoto: stock4Img,
+    variant: "transparent",
     button: {
       text: "Отправить контакты",
       variant: "white",
